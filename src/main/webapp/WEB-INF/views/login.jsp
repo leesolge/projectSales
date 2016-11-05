@@ -9,7 +9,7 @@
 	</head>
 	
 	<body>
-		<c:url value="/j_spring_security_check" var="loginURL"></c:url>
+		<c:url value="/hello" var="loginURL"></c:url>
 		<form action="${loginURL}" method="post">
 			<fieldset>
 				<ul id="loginBox">

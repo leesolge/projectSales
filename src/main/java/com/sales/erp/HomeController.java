@@ -39,7 +39,7 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/hello")
 	public String hello(Model model) {
 		
 		String hello = "Hello Sales Team";
