@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="sales" />
+		<property name="password" value="oracle" />
+	</bean>
+
+	<security:http auto-config="true" use-expressions="true">
+	
+		<security:intercept-url pattern="/loginform" access=""/>
 		
-	<security:http auto-config="true" use-expressions="true" >	   
-		<security:form-login login-page="/login"
-		 authentication-failure-url="/loginfail" />
+		<security:form-login login-page="/loginform"
+			login-processing-url="/login" 
+			username-parameter="id"
+			password-parameter="pwd"
+			default-target-url="/loginsuc"
+			authentication-failure-url="/loginfail" />
 		<security:logout logout-success-url="/" />
-		
-		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/employee/**" access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/admin/**"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/employee/**"
+			access="isAuthenticated()" />
 	</security:http>
 
-    <security:authentication-manager>
-    	<security:authentication-provider>
-    	<!-- JDBC 연동코드 -->
-    	
-    	<security:jdbc-user-service
-			data-source-ref="dataSource"
-			users-by-username-query="SELECT EMPNO AS USERID, PWD AS PASSWD, 1 ENABLED FROM SMEMBER
-										WHERE EMPNO=?"
-			authorities-by-username-query="SELECT EMPNO, AUTH FROM SMEMBER WHERE EMPNO=?" />                   
-    	
-    	</security:authentication-provider>
-    </security:authentication-manager>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>    
+	<bean id="SMemberUserDetailsService" class="com.sales.erp.smember.SMemberUserDetailsService" />
+	<bean id="SMemberAuthenticationProvider" class="com.sales.erp.smember.SMemberAuthenticationProvider" />
+
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider 	ref="SMemberAuthenticationProvider" />
+	</security:authentication-manager>
 
 </beans>

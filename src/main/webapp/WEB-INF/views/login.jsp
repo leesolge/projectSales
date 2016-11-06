@@ -9,14 +9,14 @@
 	</head>
 	
 	<body>
-		<c:url value="/hello" var="loginURL"></c:url>
+		<c:url value="/login" var="loginURL"></c:url>
 		<form action="${loginURL}" method="post">
 			<fieldset>
 				<ul id="loginBox">
 					<li><label for="id">아이디</label>
-					<input name="j_username" class="text" /></li>
+					<input name="id" class="text" /></li>
 					<li><label for="pwd">비밀번호</label>
-					<input type="password" name="j_password" class="text" /></li>
+					<input type="password" name="pwd" class="text" /></li>
 				</ul>
 				<p>
 					<input type="submit" id="btnLogin" value="" />
