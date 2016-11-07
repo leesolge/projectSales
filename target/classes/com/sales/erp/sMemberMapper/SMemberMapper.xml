@@ -16,4 +16,17 @@
     <select id="selectSMember" resultType="com.sales.erp.smember.SMemberVO">
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
+	
+	<select id="Admin_Ok_SMember" resultType="com.sales.erp.smember.SMemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH='ROLE_EE'
+	</select>
+	
+	<select id="Admin_Approved_Members" resultType="com.sales.erp.smember.SMemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH='ROLE_ADMIN' OR AUTH='ROLE_EMPLOYEE'
+	</select>
+	
+	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
+    <update id="Update_Approve_Member" parameterType="com.sales.erp.smember.SMemberVO" >    
+    	UPDATE SMEMBER SET AUTH='ROLE_EMPLOYEE' WHERE EMPNO=#{empno}        
+    </update>
 </mapper>

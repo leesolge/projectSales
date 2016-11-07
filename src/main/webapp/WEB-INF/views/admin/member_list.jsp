@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
-<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <html>
 
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -35,6 +35,7 @@
 		</ul>
 	</div>
 
+
 	<div class="w3-container w3-row ">
 		<div class="w3-accordion w3-col  w3-light-grey" style="width: 15%">
 			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
@@ -52,6 +53,39 @@
 			<div id="Demo2" class="w3-accordion-content w3-container">
 				<p>Some other text..</p>
 			</div>
+		</div>
+
+		<div class="w3-col w3-right" style="width: 80%">
+			<table class="w3-table w3-centered">
+				<tr>
+					<td>EMPNO</td>
+					<td>NAME</td>
+					<td>PWD</td>
+					<td>GENDER</td>
+					<td>ADDRESS</td>
+					<td>PHONE</td>
+					<td>EMAIL</td>
+					<td>AUTH</td>
+					<td>ACCOUNT</td>
+					<td>TEAM</td>
+				</tr>
+
+				<!-- result는 contoller의 addObject로 부터 가져온다. -->
+				<c:forEach items="${result}" var="member">
+					<tr>
+						<td>${member.empno}</td>
+						<td>${member.name}</td>
+						<td>${member.pwd}</td>
+						<td>${member.gender}</td>
+						<td>${member.address}</td>
+						<td>${member.phone}</td>
+						<td>${member.email}</td>
+						<td>${member.auth}</td>
+						<td>${member.account}</td>
+						<td>${member.team}</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
 

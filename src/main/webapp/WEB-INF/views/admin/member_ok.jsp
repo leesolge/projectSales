@@ -37,13 +37,14 @@
 
 
 	<div class="w3-container w3-row ">
-		<div class="w3-accordion w3-light-grey" style="width: 15%">
+		<div class="w3-accordion w3-col  w3-light-grey" style="width: 15%">
 			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 				<button onclick="myFunction('Demo1')"
 					class="w3-btn-block w3-left-align">관리자 메뉴</button>
 				<div id="Demo1" class="w3-accordion-content w3-container">
-					<a href="member_ok">가입 승인</a> <a href="#">Link 2</a> <a href="#">Link
-						3</a>
+					<a href="member_ok">가입 승인</a>
+					<a href="member_list">사원 명부</a>
+					<a href="#">Link3</a>
 				</div>
 			</sec:authorize>
 
@@ -57,9 +58,18 @@
 		<div class="w3-col w3-right" style="width: 80%">
 			<table class="w3-table w3-centered">
 				<tr>
-					<td>id</td>
-					<td>email</td>
-					<td>phone</td>
+					<td>EMPNO</td>
+					<td>NAME</td>
+					<td>PWD</td>
+					<td>GENDER</td>
+					<td>ADDRESS</td>
+					<td>PHONE</td>
+					<td>EMAIL</td>
+					<td>AUTH</td>
+					<td>ACCOUNT</td>
+					<td>TEAM</td>
+					<td>APPROVE</td>
+					<td>CANCEL</td>
 				</tr>
 
 				<!-- result는 contoller의 addObject로 부터 가져온다. -->
@@ -67,7 +77,16 @@
 					<tr>
 						<td>${member.empno}</td>
 						<td>${member.name}</td>
+						<td>${member.pwd}</td>
 						<td>${member.gender}</td>
+						<td>${member.address}</td>
+						<td>${member.phone}</td>
+						<td>${member.email}</td>
+						<td>${member.auth}</td>
+						<td>${member.account}</td>
+						<td>${member.team}</td>
+						<td><input type="button" value="Approve"  class="w3-btn w3-round-large"  onclick="location.href='Approve?empno=' ${member.empno}"></td>
+						<td><input type="button" value="Cancel"  class="w3-btn w3-round-large"  onclick="location.href='Cancel'""></td>
 					</tr>
 				</c:forEach>
 			</table>
