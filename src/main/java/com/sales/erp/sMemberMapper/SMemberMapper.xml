@@ -10,7 +10,7 @@
 	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
     <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
         INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
-        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, '남자', null, null, null, #{phone},	null,	#{auth},	null, #{account},	#{team})
+        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, null, #{account}, #{team})
     </insert>
     
     <select id="selectSMember" resultType="com.sales.erp.smember.SMemberVO">

@@ -16,11 +16,10 @@ public class SMemberDAOImpl implements SMemberDAO {
 
 	@Override
 	public ArrayList<SMemberVO> getSMembers() {
-		ArrayList<SMemberVO> member = new ArrayList<SMemberVO>();
-		
+		ArrayList<SMemberVO> member = new ArrayList<SMemberVO>();	
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-
 		member = memberMapper.selectAllSMember();
+		
 		return member;
 	}
 	
