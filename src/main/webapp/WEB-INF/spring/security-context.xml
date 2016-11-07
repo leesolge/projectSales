@@ -18,11 +18,11 @@
 	
 		<security:intercept-url pattern="/loginform" access=""/>
 		
-		<security:form-login login-page="/loginform"
+		<security:form-login login-page="/home"
 			login-processing-url="/login" 
 			username-parameter="id"
 			password-parameter="pwd"
-			default-target-url="/loginsuc"
+			default-target-url="/main"
 			authentication-failure-url="/loginfail" />
 		<security:logout logout-success-url="/" />
 
