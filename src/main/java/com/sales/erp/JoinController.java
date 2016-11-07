@@ -1,9 +1,8 @@
 package com.sales.erp;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,15 +30,24 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value = "/JoinSMember", method = RequestMethod.POST)
-	public ModelAndView JoinSMember(HttpServletRequest request) {
-
+	public ModelAndView JoinSMember(HttpServletRequest request) throws Exception {
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String birth = year + "-" + month + "-" + day;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		SMemberVO member = new SMemberVO();
-		member.setName((String) request.getParameter("name"));
-		member.setPwd((String) request.getParameter("pwd"));
-		member.setPhone((String) request.getParameter("phone"));
+		member.setPwd(request.getParameter("pwd"));
+		member.setName(request.getParameter("name"));
+		member.setGender(request.getParameter("gender"));
+		member.setBirth(sdf.parse(birth));
+		member.setAddress(request.getParameter("address"));
+		member.setPhone(request.getParameter("phone"));
+		member.setEmail(request.getParameter("email"));
 		member.setAuth("ROLE_EE");
-		member.setAccount("12345");
-		member.setTeam("영업부");
+		member.setAccount(request.getParameter("account"));
+		member.setTeam(request.getParameter("team"));
 
 		sMemberDAOImpl.insertMember(member);
 
