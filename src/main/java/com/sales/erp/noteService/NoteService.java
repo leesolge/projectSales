@@ -1,9 +1,10 @@
 package com.sales.erp.noteService;
 
-import java.util.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,7 +21,22 @@ public class NoteService {
 	@Autowired
 	private NoteDAO dao;
 	
-	public ModelAndView noteLists() throws ParseException{
+	public ModelAndView viewNoteContent(int noteNum){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		
+		System.out.println(noteNum);
+		NoteVO vo = dao.viewNote(noteNum);
+		if(vo.getReceiver().equals(empno)&&vo.getCheck()==0){
+			dao.checkNote(noteNum);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		
+		return mav;
+	}
+	
+	public ModelAndView noteLists(){
 		ArrayList<NoteVO> sendList;
 		ArrayList<NoteVO> receiveList;
 		ModelAndView mav = new ModelAndView();

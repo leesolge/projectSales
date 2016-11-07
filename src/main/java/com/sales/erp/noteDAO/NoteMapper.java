@@ -10,4 +10,6 @@ public interface NoteMapper extends Serializable{
 
 	 ArrayList<NoteVO> selectSend(String empno);
 	 ArrayList<NoteVO> selectReceive(String empno);
+	 NoteVO viewNote(int noteNum);
+	 void checkNote(int noteNum);
 }

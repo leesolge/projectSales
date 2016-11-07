@@ -4,12 +4,20 @@
 
 <mapper namespace="com.sales.erp.noteDAO.NoteMapper">
 	<select id="selectReceive" parameterType="java.lang.String" resultType="com.sales.erp.noteVO.NoteVO">
-		SELECT * FROM NOTEDB WHERE RECEIVER = #{empno}
+		SELECT * FROM NOTEDB WHERE RECEIVER = #{empno} AND CHECKS = 0
 	</select>
 	
 	<select id="selectSend" parameterType="java.lang.String" resultType="com.sales.erp.noteVO.NoteVO">
-		SELECT * FROM NOTEDB WHERE SENDER = #{empno}
+		SELECT * FROM NOTEDB WHERE SENDER = #{empno} AND CHECKS = 0
 	</select>
+	
+	<select id="viewNote" parameterType="java.lang.Integer" resultType="com.sales.erp.noteVO.NoteVO">
+		SELECT * FROM NOTEDB WHERE NOTENUM = #{noteNum}
+	</select>
+	
+	<update id="checkNote" parameterType="java.lang.Integer">
+		UPDATE NOTEDB SET CHECKS=1 WHERE NOTENUM = #{noteNum}
+	</update>
 	<!-- 
     <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
         INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)

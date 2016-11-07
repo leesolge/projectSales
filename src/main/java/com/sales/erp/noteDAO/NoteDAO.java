@@ -16,16 +16,25 @@ public class NoteDAO {
 	private SqlSession sqlSession;
 	
 	public ArrayList<NoteVO> selectSend(String empno){
-		ArrayList<NoteVO> sendList = new ArrayList<NoteVO>();
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
-		sendList = noteMapper.selectSend(empno);
+		ArrayList<NoteVO> sendList = noteMapper.selectSend(empno);
 		return sendList;
 	}
 	
 	public ArrayList<NoteVO> selectReceive(String empno){
-		ArrayList<NoteVO> sendList = new ArrayList<NoteVO>();
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
-		sendList = noteMapper.selectReceive(empno);
-		return sendList;
+		ArrayList<NoteVO> receiveList = noteMapper.selectReceive(empno);
+		return receiveList;
+	}
+	
+	public NoteVO viewNote(int noteNum){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		NoteVO vo = noteMapper.viewNote(noteNum);
+		return vo;
+	}
+	
+	public void checkNote(int noteNum){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		noteMapper.checkNote(noteNum);
 	}
 }
