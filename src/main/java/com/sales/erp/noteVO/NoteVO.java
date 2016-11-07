@@ -1,8 +1,9 @@
 package com.sales.erp.noteVO;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class NoteVO {
+	private String change;
 	private long notenum;
 	private Date senddate;
 	private String sender;
@@ -10,6 +11,14 @@ public class NoteVO {
 	private String title;
 	private String content;
 	private int check;
+	
+	public String getChange() {
+		return change;
+	}
+
+	public void setChange(String change) {
+		this.change = change;
+	}
 	
 	public long getNotenum() {
 		return notenum;
