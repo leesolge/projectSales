@@ -28,8 +28,10 @@
 
 		<security:intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/employee/**"
+			<security:intercept-url pattern="/main"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/**"
+			access="permitAll" />
 	</security:http>
 
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>    
