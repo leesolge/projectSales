@@ -1,15 +1,19 @@
 package com.sales.erp;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.smember.JoinVO;
 import com.sales.erp.smember.SMemberVO;
 import com.sales.erp.smemberDao.SMemberDAOImpl;
 
@@ -30,25 +34,50 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value = "/JoinSMember", method = RequestMethod.POST)
-	public ModelAndView JoinSMember(HttpServletRequest request) throws Exception {
-		String year = request.getParameter("year");
-		String month = request.getParameter("month");
-		String day = request.getParameter("day");
+	public ModelAndView JoinSMember(JoinVO vo) throws Exception {
+		MultipartFile uploadfile = vo.getFile();
+        if (uploadfile != null) {
+            String fileName = uploadfile.getOriginalFilename();
+            try {
+                File file = new File("C:/sales/sales/src/main/webapp/resources/portraits/" + fileName);
+	            int count = 0;
+                while(file.exists()) {           	
+	                	int indexes = fileName.lastIndexOf(".");
+	                	System.out.println("순서 = "+indexes);
+	                	String extension = fileName.substring(indexes);
+	                	System.out.println("확장자 = "+extension);
+	                	String newFileName = fileName.substring(0, indexes) + count + extension;
+	                	System.out.println("새 파일 이름 = "+newFileName);
+	                	fileName = newFileName;
+	                	file = new File("C:/sales/sales/src/main/webapp/resources/portraits/" + newFileName);
+	                	count++;
+	                }
+	               vo.setPortrait(fileName);
+	               uploadfile.transferTo(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+		String year = vo.getYear();
+		String month = vo.getMonth();
+		String day = vo.getDay();
 		String birth = year + "-" + month + "-" + day;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		SMemberVO member = new SMemberVO();
-		member.setPwd(request.getParameter("pwd"));
-		member.setName(request.getParameter("name"));
-		member.setGender(request.getParameter("gender"));
+		member.setPwd(vo.getPwd());
+		member.setName(vo.getName());
+		member.setGender(vo.getGender());
 		member.setBirth(sdf.parse(birth));
-		member.setAddress(request.getParameter("address"));
-		member.setPhone(request.getParameter("phone"));
-		member.setEmail(request.getParameter("email"));
+		member.setAddress(vo.getAddress());
+		member.setPhone(vo.getPhone());
+		member.setEmail(vo.getEmail());
 		member.setAuth("ROLE_EE");
-		member.setAccount(request.getParameter("account"));
-		member.setTeam(request.getParameter("team"));
-
+		member.setAccount(vo.getAccount());
+		member.setTeam(vo.getTeam());
+		member.setPortrait(vo.getPortrait());
+		
 		sMemberDAOImpl.insertMember(member);
 
 		ModelAndView mav = new ModelAndView();
@@ -57,4 +86,5 @@ public class JoinController {
 		mav.setViewName("sMemberList");
 		return mav;
 	}
+	
 }

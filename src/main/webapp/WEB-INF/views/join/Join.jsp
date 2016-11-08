@@ -8,12 +8,15 @@
 		<div class="w3-col w3-left" style="width:30%"><p></p></div>
 		<div class="w3-col w3-right" style="width:30%"><p></p></div>
 		<div class="w3-rest w3-container" align="center">
-			<form method="post" action="JoinSMember">
+			<form method="post" action="JoinSMember" enctype="multipart/form-data">
 				<h4>Join</h4>
 				<table class="w3-table w3-bordered w3-border w3-centered">
 					<tr>
+						<td><input type="file" name="file"></td>
+					</tr>		
+					<tr>
 						<td><input type="text" name="name" placeholder="Name"></td>
-					</tr>					
+					</tr>				
 					<tr>
 						<td><input type="password" name="pwd" placeholder="Pwd"></td>
 					</tr>
