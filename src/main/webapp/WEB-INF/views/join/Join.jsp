@@ -5,15 +5,10 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
 	<div class="w3-row ">
-		<div class="w3-col w3-left" style="width: 25%">
-			<p></p>
-		</div>
-		<div class="w3-col w3-right" style="width: 25%">
-			<p></p>
-		</div>
+		<div class="w3-col w3-left" style="width:30%"><p></p></div>
+		<div class="w3-col w3-right" style="width:30%"><p></p></div>
 		<div class="w3-rest w3-container" align="center">
 			<form method="post" action="JoinSMember">
-						
 				<h4>Join</h4>
 				<table class="w3-table w3-bordered w3-border w3-centered">
 					<tr>
@@ -31,16 +26,19 @@
 					<tr>
 						<td>
 						<select name="year">
-							<option value="1950">1950</option>
-							<option value="1949">1949</option>
+							<c:forEach var="year" begin="1950" end="2000">
+								<option value="${year }">${year}</option>
+							</c:forEach>
 						</select>
 						<select name="month">
-							<option value="1">1</option>
-							<option value="2">2</option>
+							<c:forEach var="month" begin="1" end="12">
+								<option value="${month}">${month}</option>
+							</c:forEach>
 						</select>
 						<select name="day">
-							<option value="30">30</option>
-							<option value="30">31</option>
+							<c:forEach var="day" begin="1" end="31">
+								<option value="${day}">${day}</option>
+							</c:forEach>
 						</select>
 						</td>
 					</tr>
@@ -67,7 +65,7 @@
 					</tr>
 				</table>
 				<input type="submit" name="confirm" value="회원가입">
-				<input type="reset" name="reset" value="다시쓰기"><br>
+				<input type="reset" name="reset" value="다시쓰기">
 				<input type="button" value="취소" onclick="redirect:home"> 
 			</form>
 		</div>

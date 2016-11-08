@@ -116,7 +116,7 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Spring security dependencies -->
+		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -141,28 +141,28 @@
 			<version>3.2.5.RELEASE</version>
 		</dependency>
 
-		<!-- Spring jdbc -->
+		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.0.4.RELEASE</version>
 		</dependency>
 
-		<!-- ojdbc6 -->
+		<!-- OJDBC6 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.1.0.7.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<!-- JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.1.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/taglibs/standard -->
+		<!-- Tablibs -->
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -181,6 +181,27 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+
+		<!-- FileUpload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
+		
+		<!--Codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+			
+		<!-- IO -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
 		</dependency>
 
 		<!-- Test -->
