@@ -27,7 +27,7 @@ public class NoteService {
 		String empno = auth.getName();
 		
 		NoteVO vo = dao.viewNote(noteNum);
-		if(vo.getReceiver().equals(empno)&&vo.getCheck()==0){
+		if(vo.getReceiver().equals(empno)&&vo.getChecks()==0){
 			dao.checkNote(noteNum);
 		}
 		
@@ -48,9 +48,9 @@ public class NoteService {
 		int pageSize = 10;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
-		String pageNum = (String) request.getAttribute("pageNum");
-		String field = (String) request.getAttribute("field");
-		String keyword = (String) request.getAttribute("keyword");
+		String pageNum = (String) request.getParameter("pageNum");
+		String field = (String) request.getParameter("field");
+		String keyword = (String) request.getParameter("keyword");
 		if(pageNum==null||pageNum.equals("")){
 			pageNum="1";
 		}
@@ -60,14 +60,24 @@ public class NoteService {
 		if(keyword==null||keyword.equals("")){
 			keyword="";
 		}
+		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
 		int count = dao.countReceiveAll(empno);
-		int start = count-((pageSize-(pageSize-1))*Integer.parseInt(pageNum));
-		int end = count-(pageSize*(Integer.parseInt(pageNum)-1));
+		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
+		int start = end -(pageSize-1);
+		if(end>count){
+			end = count;
+		}
+		if(start<1){
+			start = 1;
+		}
+		int max;
+		if(count%pageSize==0){
+			max = count/pageSize;
+		}else{
+			max = (count/pageSize)+1;
+		}
 		NoteSearchVO svo = new NoteSearchVO();
-		System.out.println(empno);
-		System.out.println(start);
-		System.out.println(end);
 		svo.setEmpno(empno);
 		svo.setField(field);
 		svo.setKeyword(newkeyword);
@@ -89,6 +99,7 @@ public class NoteService {
 		mav.addObject("pageNum", pageNum);
 		mav.addObject("field", field);
 		mav.addObject("keyword", keyword);
+		mav.addObject("max", max);
 		return mav;
 	}
 	
@@ -100,9 +111,11 @@ public class NoteService {
 		int pageSize = 10;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
-		String pageNum = (String) request.getAttribute("pageNum");
-		String field = (String) request.getAttribute("field");
-		String keyword = (String) request.getAttribute("keyword");
+		String pageNum = (String) request.getParameter("pageNum");
+		String field = (String) request.getParameter("field");
+		String keyword = (String) request.getParameter("keyword");
+		System.out.println(field);
+		System.out.println(keyword);
 		if(pageNum==null||pageNum.equals("")){
 			pageNum="1";
 		}
@@ -112,14 +125,24 @@ public class NoteService {
 		if(keyword==null||keyword.equals("")){
 			keyword="";
 		}
+		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
 		int count = dao.countSendAll(empno);
-		int start = count-((pageSize-(pageSize-1))*Integer.parseInt(pageNum));
-		int end = count-(pageSize*(Integer.parseInt(pageNum)-1));
+		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
+		int start = end -(pageSize-1);
+		if(end>count){
+			end = count;
+		}
+		if(start<1){
+			start = 1;
+		}
+		int max;
+		if(count%pageSize==0){
+			max = count/pageSize;
+		}else{
+			max = (count/pageSize)+1;
+		}
 		NoteSearchVO svo = new NoteSearchVO();
-		System.out.println(empno);
-		System.out.println(start);
-		System.out.println(end);
 		svo.setEmpno(empno);
 		svo.setField(field);
 		svo.setKeyword(newkeyword);
@@ -141,10 +164,10 @@ public class NoteService {
 		mav.addObject("pageNum", pageNum);
 		mav.addObject("field", field);
 		mav.addObject("keyword", keyword);
+		mav.addObject("max", max);
 		return mav;
 	}
 	
-	/*확인하지 않은 쪽지 보여주기*/
 	public ModelAndView sendRecieve(){
 		ArrayList<NoteVO> sendList;
 		ArrayList<NoteVO> receiveList;

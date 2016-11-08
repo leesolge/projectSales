@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Title</title>
 		<style type="text/css">
 			h4 {
 				text-align: center;
@@ -20,6 +19,7 @@
 				padding: 10px;
 			}
 		</style>
+		<title>Title</title>
 	</head>
 	
 	<body>

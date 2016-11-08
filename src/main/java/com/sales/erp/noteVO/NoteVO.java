@@ -10,7 +10,7 @@ public class NoteVO {
 	private String receiver;
 	private String title;
 	private String content;
-	private int check;
+	private int checks;
 	private int deleted;
 	
 	public int getDeleted() {
@@ -77,12 +77,12 @@ public class NoteVO {
 		this.content = content;
 	}
 	
-	public int getCheck() {
-		return check;
+	public int getChecks() {
+		return checks;
 	}
 	
-	public void setCheck(int check) {
-		this.check = check;
+	public void setChecks(int checks) {
+		this.checks = checks;
 	}
 	
 }

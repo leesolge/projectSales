@@ -5,7 +5,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Title</title>
+	<script type="text/javascript">
+		function jumpPage(id){
+			var name=id;
+			document.forms[name].submit();
+		}
+	</script>
 		<style type="text/css">
 			h4 {
 				text-align: center;
@@ -20,6 +25,7 @@
 				padding: 10px;
 			}
 		</style>
+		<title>Title</title>
 	</head>
 	
 	<body>
@@ -41,38 +47,74 @@
 		</c:if>
 	</div>
 	<br>
-	
+	${pageNum}
 	<div class="pageWrap">
-		<div class="page" id="back">&nbsp;<c:if test="${pageNum>=2}"><a href="rdetail?pageNum=${pageNum-1}">이전</a></c:if></div>
-		<div class="page" id="1">&nbsp;<c:if test="${pageNum>=3}"><a href="rdetail?pageNum=${pageNum-2}">${pageNum-2}</a></c:if></div>
-		<div class="page" id="2">&nbsp;<c:if test="${pageNum>=3}"><a href="rdetail?pageNum=${pageNum-1}">${pageNum-1}</a></c:if></div>
-		<div class="page" id="3">&nbsp;${pageNum}</div>
-		<div class="page" id="4">&nbsp;<c:if test="${max>pageNum&&max>=pageNum+1}"><a href="rdetail?pageNum=${pageNum+1}">${pageNum+1}</a></c:if></div>
-		<div class="page" id="5">&nbsp;<c:if test="${max>pageNum&&max>=pageNum+2}"><a href="rdetail?pageNum=${pageNum+2}">${pageNum+2}</a></c:if></div>
-		<div class="page" id="go">&nbsp;<c:if test="${max>pageNum}"><a href="rdetail?pageNum=${pageNum+1}">다음</a></c:if></div>
+		<div class="page" id="back">
+			<form action="/erp/note/rdetail" name="minus1" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum-1}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('minus1')">이전</a></c:if></div>
+			
+		<div class="page" id="1">
+			<form action="/erp/note/rdetail" name="minus2" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum-2}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${pageNum>=3}"><a href="javascript:jumpPage('minus2')">${pageNum-2}</a></c:if></div>
+		<div class="page" id="2">
+			<form action="/erp/note/rdetail" name="minus" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum-1}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('minus')">${pageNum-1}</a></c:if></div>
+		<div class="page" id="3">${pageNum}</div>
+		<div class="page" id="4">
+			<form action="/erp/note/rdetail" name="plus1" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum+1}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('plus1')">${pageNum+1}</a></c:if></div>
+		<div class="page" id="5">
+			<form action="/erp/note/rdetail" name="plus2" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum+2}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('plus2')">${pageNum+2}</a></c:if></div>
+		<div class="page" id="go">
+			<form action="/erp/note/rdetail" name="plus" method="post">
+				<input type="hidden" name="pageNum" value="${pageNum+1}">
+				<input type="hidden" name="field" value="${field}">
+				<input type="hidden" name="keyword" value="${keyword}">
+			</form>
+			<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('plus')">다음</a></c:if></div>
 	</div>
 	
 	<div>
 	<form action="rdetail" method="post">
 		<select name="field">
-			<option value="">선택</option>
-			<c:if test="${field==sender}">
-				<option value="sender" selected="selected">작성자</option>
-			</c:if>
-			<c:if test="${field!=sender}">
-				<option value="sender">작성자</option>
-			</c:if>
-			<c:if test="${field==title}">
+			<c:if test="${field=='title'}">
 				<option value="title" selected="selected">제목</option>
 			</c:if>
-			<c:if test="${field!=title}">
+			<c:if test="${field!='title'}">
 				<option value="title">제목</option>
 			</c:if>
-			<c:if test="${field==content}">
+			<c:if test="${field=='content'}">
 				<option value="content" selected="selected">내용</option>
 			</c:if>
-			<c:if test="${field!=content}">
+			<c:if test="${field!='content'}">
 				<option value="content">내용</option>
+			</c:if>
+			<c:if test="${field=='sender'}">
+				<option value="sender" selected="selected">작성자</option>
+			</c:if>
+			<c:if test="${field!='sender'}">
+				<option value="sender">작성자</option>
 			</c:if>
 		</select>&nbsp;
 		<input name="keyword" type="text" size="10" value="${keyword}">
