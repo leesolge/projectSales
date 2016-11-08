@@ -85,8 +85,8 @@
 						<td>${member.auth}</td>
 						<td>${member.account}</td>
 						<td>${member.team}</td>
-						<td><input type="button" value="Approve"  class="w3-btn w3-round-large"  onclick="location.href='Approve?empno=' ${member.empno}"></td>
-						<td><input type="button" value="Cancel"  class="w3-btn w3-round-large"  onclick="location.href='Cancel'""></td>
+						<td><input type="button" value="Approve"  class="w3-btn w3-round-large"  onclick="window.location='Approve?empno=${member.empno}'"></td>
+						<td><input type="button" value="Cancel"  class="w3-btn w3-round-large"  onclick="window.location='Cancel'""></td>
 					</tr>
 				</c:forEach>
 			</table>
