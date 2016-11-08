@@ -42,18 +42,19 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value = "/Approve")
-	public String JoinSMember(HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/admin/Approve")
+	public String Approve(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 
 		sMemberDAOImpl.Update_Approve_Member(empno);
-		return "redirect:admin/member_ok";
+		return "redirect:/admin/member_ok";
 	}
 	
 	//
-	@RequestMapping(value = "/Cancel")
-	public String Cancel(Model model) {
+	@RequestMapping(value = "/admin/Cancel")
+	public String Cancel(HttpServletRequest request) throws Exception {
 
-		return "member_ok";
+	//	String empno = request.getParameter("empno");
+		return "redirect:/admin/member_ok";
 	}
 }

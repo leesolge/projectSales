@@ -41,4 +41,4 @@ NOCACHE;
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
 VALUES('100', 'oracle', '관리자', '없음', date '1985-9-25', date '2010-3-27', '회사', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_ADMIN', null, '01-4829-333-2201', '관리팀');
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
-VALUES(to_char(numregister.nextval), 'oracle', '병신', '남', date '1985-9-25', date '2010-4-27', '우리동네', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', '영업1팀');
+VALUES(to_char(numregister.nextval), 'oracle', '천재', '남', date '1985-9-25', date '2010-4-27', '우리동네', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', '영업1팀');

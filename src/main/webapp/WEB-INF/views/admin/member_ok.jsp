@@ -40,9 +40,9 @@
 					<td>${member.account}</td>
 					<td>${member.team}</td>
 					<td><input type="button" value="Approve"	class="w3-btn w3-round-large"
-						onclick="window.location='/erp/Approve?empno=${member.empno}'"></td>
-					<td><input type="button" value="Cancel"
-						class="w3-btn w3-round-large" onclick="window.location='Cancel'""></td>
+						onclick="window.location='/erp/admin/Approve?empno=${member.empno}'"></td>
+					<td><input type="button" value="Cancel" class="w3-btn w3-round-large"
+						onclick="window.location='/erp/admin/Cancel?empno=${member.empno}'"></td>
 				</tr>
 			</c:forEach>
 		</table>

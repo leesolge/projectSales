@@ -24,6 +24,7 @@
 				<td>AUTH</td>
 				<td>ACCOUNT</td>
 				<td>TEAM</td>
+				<td>CONTENT</td>
 			</tr>
 
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
@@ -39,6 +40,8 @@
 					<td>${member.auth}</td>
 					<td>${member.account}</td>
 					<td>${member.team}</td>
+					<td><input type="button" value="Content"	class="w3-btn w3-round-large"
+						onclick="window.location='/erp/admin/Content?empno=${member.empno}'"></td>
 				</tr>
 			</c:forEach>
 		</table>
