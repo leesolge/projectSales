@@ -14,7 +14,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views//template/footer.jsp" />
 	</definition>
 	
-	<definition name="admin/member_list"  extends="View_Template">
-		<put-attribute name="body"  value="/WEB-INF/views/admin/member_list.jsp" />
+	<definition name="admin/*"  extends="View_Template">
+		<put-attribute name="body"  value="/WEB-INF/views/admin/{1}.jsp" />
+	</definition>
+	<definition name="main/*"  extends="View_Template">
+		<put-attribute name="body"  value="/WEB-INF/views/main/{1}.jsp" />
 	</definition>
 </tiles-definitions>

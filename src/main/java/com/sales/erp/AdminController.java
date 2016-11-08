@@ -19,7 +19,7 @@ public class AdminController {
 	@Autowired
 	private SMemberDAOImpl sMemberDAOImpl;	
 	
-	@RequestMapping("/member_ok")
+	@RequestMapping("/admin/member_ok")
 	public ModelAndView member_ok(Model model) {
 		ModelAndView result = new ModelAndView();
 
@@ -30,7 +30,7 @@ public class AdminController {
 		return result;
 	}
 	
-	@RequestMapping("/member_list")
+	@RequestMapping("/admin/member_list")
 	public ModelAndView member_list(Model model) {
 		ModelAndView result = new ModelAndView();
 
@@ -43,16 +43,11 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "/Approve")
-	public ModelAndView JoinSMember(HttpServletRequest request) throws Exception {
+	public String JoinSMember(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 
 		sMemberDAOImpl.Update_Approve_Member(empno);
-
-		ModelAndView mav = new ModelAndView();
-		List<SMemberVO> memberList = sMemberDAOImpl.getSMembers();
-		mav.addObject("result", memberList);
-		mav.setViewName("/admin/member_ok");
-		return mav;
+		return "redirect:admin/member_ok";
 	}
 	
 	//
