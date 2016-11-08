@@ -83,7 +83,7 @@ public class JoinController {
 		ModelAndView mav = new ModelAndView();
 		List<SMemberVO> memberList = sMemberDAOImpl.getSMembers();
 		mav.addObject("result", memberList);
-		mav.setViewName("sMemberList");
+		mav.setViewName("home");
 		return mav;
 	}
 	
