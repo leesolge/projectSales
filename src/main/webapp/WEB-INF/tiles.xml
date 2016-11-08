@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+      "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+		
+<tiles-definitions>
+	<definition name="View_Template" template="/WEB-INF/views/template/View_Template.jsp">
+		<put-attribute name="title"  value="Spring Tiles Example" />
+		<put-attribute name="header" value="/WEB-INF/views//template/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views//template/footer.jsp" />
+	</definition>
+	
+	<definition name="admin/member_list"  extends="View_Template">
+		<put-attribute name="body"  value="/WEB-INF/views/admin/member_list.jsp" />
+	</definition>
+</tiles-definitions>

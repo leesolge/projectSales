@@ -1,6 +1,5 @@
 package com.sales.erp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.smember.SMemberVO;
@@ -44,7 +42,7 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value = "/Approve", method = RequestMethod.POST)
+	@RequestMapping(value = "/Approve")
 	public ModelAndView JoinSMember(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 
@@ -53,7 +51,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 		List<SMemberVO> memberList = sMemberDAOImpl.getSMembers();
 		mav.addObject("result", memberList);
-		mav.setViewName("member_ok");
+		mav.setViewName("/admin/member_ok");
 		return mav;
 	}
 	
