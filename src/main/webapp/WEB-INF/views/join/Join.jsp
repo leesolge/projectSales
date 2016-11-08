@@ -57,9 +57,9 @@
 					<tr>
 						<td>
 						<select name="team">
-							<option value="여기">여기</option>
-							<option value="저기">저기</option>
-							<option value="외기러기">외기러기</option>
+							<option value="영업1팀">영업1팀</option>
+							<option value="영업2팀">영업2팀</option>
+							<option value="자재팀">자재팀</option>
 						</select>
 						</td>
 					</tr>

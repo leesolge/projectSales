@@ -44,6 +44,18 @@ public class NoteDAO {
 	}
 	
 	public ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo){
-		return null;
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.selectReceiveAll(vo);
 	}
+	
+	public int countSendAll(String empno){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.countSendAll(empno);
+	}
+	
+	public ArrayList<NoteVO> selectSendAll(NoteSearchVO vo){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.selectSendAll(vo);
+	}
+	
 }

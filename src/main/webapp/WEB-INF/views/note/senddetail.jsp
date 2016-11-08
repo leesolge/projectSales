@@ -23,7 +23,7 @@
 	</head>
 	
 	<body>
-	<h4>받은 쪽지</h4>
+	<h4>보낸 쪽지</h4>
 	<div class="wrapper">
 		<c:if test="${list==null}">
 		</c:if>

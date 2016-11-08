@@ -1,7 +1,7 @@
 select * from notedb;
 select * from SMEMBER;
 update notedb set deleted = 0;
-SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS FROM NOTEDB WHERE RECEIVER='100') where title like '%%' and r>=1 and r<=5 ORDER BY R DESC
+SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE RECEIVER='100') WHERE title like '%%' AND R >= 1 AND R <= 2 AND DELETED=0 ORDER BY R DESC
 alter table notedb add deleted number;
 100 300301
 create table notedb(

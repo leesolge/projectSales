@@ -30,10 +30,20 @@ public class NoteController {
 		return mav;
 	}
 	
-	@RequestMapping("/note/detail")
-	public ModelAndView viewDetail(@RequestParam("pageNum") String pageNum, @RequestParam("field") String field, @RequestParam("keyword") String keyword){
-		ModelAndView mav = nos.receiveLists(pageNum, field, keyword);
+	@RequestMapping("/note/rdetail")
+	public ModelAndView viewRdetail(HttpServletRequest request){
+		
+		ModelAndView mav = nos.receiveLists(request);
 		mav.setViewName("/note/receivedetail");
 		return mav;
 	}
+	
+	@RequestMapping("/note/sdetail")
+	public ModelAndView viewSdetail(HttpServletRequest request){
+		
+		ModelAndView mav = nos.sendLists(request);
+		mav.setViewName("/note/senddetail");
+		return mav;
+	}
+	
 }
