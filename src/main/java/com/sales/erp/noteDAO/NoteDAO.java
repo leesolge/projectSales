@@ -37,4 +37,13 @@ public class NoteDAO {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		noteMapper.checkNote(noteNum);
 	}
+	
+	public int countReceiveAll(int empno){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.countReceiveAll(empno);
+	}
+	
+	public ArrayList<NoteVO> selectReceiveAll(int empno){
+		return null;
+	}
 }

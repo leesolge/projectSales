@@ -25,11 +25,15 @@ public class NoteService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
 		
-		System.out.println(noteNum);
 		NoteVO vo = dao.viewNote(noteNum);
 		if(vo.getReceiver().equals(empno)&&vo.getCheck()==0){
 			dao.checkNote(noteNum);
 		}
+		
+		Date date = vo.getSenddate();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		String change = sdf.format(date);
+		vo.setChange(change);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
 		
@@ -37,6 +41,27 @@ public class NoteService {
 	}
 	
 	public ModelAndView noteLists(){
+		ArrayList<NoteVO> list;
+		ModelAndView mav = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		int empno = Integer.parseInt(auth.getName());
+		
+		int count = dao.countReceiveAll(empno);
+		list = dao.selectReceiveAll(empno);
+		
+		for(NoteVO vo:list){
+			Date date = vo.getSenddate();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+			String change = sdf.format(date);
+			vo.setChange(change);
+		}
+		
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		return mav;
+	}
+	
+	public ModelAndView detailRecieve(){
 		ArrayList<NoteVO> sendList;
 		ArrayList<NoteVO> receiveList;
 		ModelAndView mav = new ModelAndView();
@@ -62,7 +87,5 @@ public class NoteService {
 		mav.addObject("sendList", sendList);
 		mav.addObject("receiveList", receiveList);
 		return mav;
-		
-		
 	}
 }

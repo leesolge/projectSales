@@ -1,5 +1,8 @@
 select * from notedb;
 select * from SMEMBER;
+update notedb set deleted = 0;
+SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS FROM NOTEDB) ORDER BY R DESC
+alter table notedb add deleted number;
 100 300301
 create table notedb(
 	notenum number primary key,
@@ -8,7 +11,8 @@ create table notedb(
 	receiver varchar(20),
 	title varchar(200),
 	content varchar(2000),
-	checks number
+	checks number,
+	deleted number
 );
 
 create sequence noteseq

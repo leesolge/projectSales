@@ -15,9 +15,19 @@
 		SELECT * FROM NOTEDB WHERE NOTENUM = #{noteNum}
 	</select>
 	
+	<select id="countReceiveAll" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM NOTEDB WHERE RECEIVER = #{noteNum}
+	</select>
+	
+	<select id="selectReceiveAll" parameterType="java.lang.Integer" resultType="com.sales.erp.noteVO.NoteVO">
+		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS FROM NOTEDB WHERE RECEIVER = #{noteNum}) ORDER BY R DESC
+	</select>
+	
 	<update id="checkNote" parameterType="java.lang.Integer">
 		UPDATE NOTEDB SET CHECKS=1 WHERE NOTENUM = #{noteNum}
 	</update>
+	
+	
 	<!-- 
     <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
         INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)

@@ -11,7 +11,16 @@ public class NoteVO {
 	private String title;
 	private String content;
 	private int check;
+	private int deleted;
 	
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
+
 	public String getChange() {
 		return change;
 	}
