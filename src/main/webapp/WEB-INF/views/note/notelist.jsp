@@ -42,7 +42,7 @@
 	</div>
 	<br>
 	<center><button onclick="location.reload()">새로 고침</button>
-	<button onclick="location.replace('detail?pn=1')">목록 보기</button>
+	<button onclick="location.replace('rdetail?pageNum=1')">목록 보기</button>
 	<button onclick="location.replace('write')">쪽지 쓰기</button></center>
 	
 	<h4>확인받지 않은 쪽지</h4><br>

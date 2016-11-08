@@ -18,7 +18,7 @@ public class NoteController {
 	
 	@RequestMapping("/note/list")
 	public ModelAndView selectNotes(){
-		ModelAndView mav = nos.noteLists();
+		ModelAndView mav = nos.sendRecieve();
 		mav.setViewName("/note/notelist");
 		return mav;
 	}
@@ -27,6 +27,13 @@ public class NoteController {
 	public ModelAndView viewNote(@RequestParam("noteNum") int noteNum){
 		ModelAndView mav = nos.viewNoteContent(noteNum);
 		mav.setViewName("/note/notecontent");
+		return mav;
+	}
+	
+	@RequestMapping("/note/detail")
+	public ModelAndView viewDetail(@RequestParam("pageNum") String pageNum, @RequestParam("field") String field, @RequestParam("keyword") String keyword){
+		ModelAndView mav = nos.receiveLists(pageNum, field, keyword);
+		mav.setViewName("/note/receivedetail");
 		return mav;
 	}
 }

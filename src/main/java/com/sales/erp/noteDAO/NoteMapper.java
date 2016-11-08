@@ -3,8 +3,8 @@ package com.sales.erp.noteDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.sales.erp.noteVO.NoteSearchVO;
 import com.sales.erp.noteVO.NoteVO;
-import com.sales.erp.smember.SMemberVO;
 
 public interface NoteMapper extends Serializable{
 
@@ -12,6 +12,6 @@ public interface NoteMapper extends Serializable{
 	 ArrayList<NoteVO> selectReceive(String empno);
 	 NoteVO viewNote(int noteNum);
 	 void checkNote(int noteNum);
-	 int countReceiveAll(int empno);
-	 ArrayList<NoteVO> selectReceiveAll(int empno);
+	 int countReceiveAll(String empno);
+	 ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo);
 }

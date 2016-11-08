@@ -25,15 +25,15 @@
 	<body>
 	<h4>확인하지 않은 쪽지</h4><br>
 	<div class="wrapper">
-		<c:if test="${receiveList==null}">
+		<c:if test="${list==null}">
 		</c:if>
-		<c:if test="${receiveList!=null}">
-			<c:forEach var="receive" items="${receiveList}">
+		<c:if test="${list!=null}">
+			<c:forEach var="list" items="${list}">
 				<div>
-					<a href="view?noteNum=${receive.notenum}">
-						<c:out value="${receive.sender}" />&nbsp;
-						<c:out value="${receive.title}" />&nbsp;
-						<c:out value="${receive.change}" />&nbsp;
+					<a href="view?noteNum=${list.notenum}">
+						<c:out value="${list.sender}" />&nbsp;
+						<c:out value="${list.title}" />&nbsp;
+						<c:out value="${list.change}" />&nbsp;
 					</a>
 				</div>
 				<br>
@@ -43,16 +43,13 @@
 	<br>
 	
 	<div class="pageWrap">
-		<div id="back"></div>
-		<div id="1"></div>
-		<div id="2"></div>
-		<div id="3"></div>
-		<div id="4"></div>
-		<div id="5"></div>
-		<div id="go"></div>
-		
-		
-	
+		<div id="back"><c:if test="${pageNum>=2}"><a href="rdetail?pageNum=${pageNum-1}">이전</a></c:if></div>
+		<div id="1"><c:if test="${pageNum>=3}"><a href="rdetail?pageNum=${pageNum-2}">${pageNum-2}</a></c:if></div>
+		<div id="2"><c:if test="${pageNum>=3}"><a href="rdetail?pageNum=${pageNum-1}">${pageNum-1}</a></c:if></div>
+		<div id="3">${pageNum}</div>
+		<div id="4"><c:if test="${max>pageNum&&max>=pageNum+1}"><a href="rdetail?pageNum=${pageNum+1}">${pageNum+1}</a></c:if></div>
+		<div id="5"><c:if test="${max>pageNum&&max>=pageNum+2}"><a href="rdetail?pageNum=${pageNum+2}">${pageNum+2}</a></c:if></div>
+		<div id="go"><c:if test="${max>pageNum}"><a href="rdetail?pageNum=${pageNum+1}">다음</a></c:if></div>
 	</div>
 	
 	

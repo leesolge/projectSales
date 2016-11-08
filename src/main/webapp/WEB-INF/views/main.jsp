@@ -29,7 +29,7 @@
 		<ul class="w3-navbar w3-blue-grey w3-large w3-center">
 			<li style="width: 10%"><a href="home">Main</a></li>
 			<li style="width: 10%"><a href="sMemberList">MemberList</a></li>
-			<li style="width: 10%"><a href="#">a</a></li>
+			<li style="width: 10%"><a href="note/list">쪽지</a></li>
 			<li style="width: 10%"><a href="#">a</a></li>
 			<li style="width: 10%"><a href="#">a</a></li>
 		</ul>

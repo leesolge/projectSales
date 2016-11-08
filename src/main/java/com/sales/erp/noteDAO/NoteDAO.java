@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.noteVO.NoteSearchVO;
 import com.sales.erp.noteVO.NoteVO;
-import com.sales.erp.smemberDao.SMemberMapper;
 
 @Repository
 public class NoteDAO {
@@ -38,12 +38,12 @@ public class NoteDAO {
 		noteMapper.checkNote(noteNum);
 	}
 	
-	public int countReceiveAll(int empno){
+	public int countReceiveAll(String empno){
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.countReceiveAll(empno);
 	}
 	
-	public ArrayList<NoteVO> selectReceiveAll(int empno){
+	public ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo){
 		return null;
 	}
 }

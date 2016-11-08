@@ -15,12 +15,12 @@
 		SELECT * FROM NOTEDB WHERE NOTENUM = #{noteNum}
 	</select>
 	
-	<select id="countReceiveAll" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM NOTEDB WHERE RECEIVER = #{noteNum}
+	<select id="countReceiveAll" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM NOTEDB WHERE RECEIVER = #{empno}
 	</select>
 	
-	<select id="selectReceiveAll" parameterType="java.lang.Integer" resultType="com.sales.erp.noteVO.NoteVO">
-		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS FROM NOTEDB WHERE RECEIVER = #{noteNum}) ORDER BY R DESC
+	<select id="selectReceiveAll" parameterType="com.sales.erp.noteVO.NoteVO" resultType="com.sales.erp.noteVO.NoteVO">
+		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS FROM NOTEDB WHERE RECEIVER='${empno}') WHERE ${field} LIKE '%${keyword}%' AND R<![CDATA[>=]]>${start} AND R<![CDATA[<=]]>${end} ORDER BY R DESC
 	</select>
 	
 	<update id="checkNote" parameterType="java.lang.Integer">
