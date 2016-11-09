@@ -31,8 +31,9 @@ public class NoteController {
 	}
 	
 	@RequestMapping("/note/write")
-	public ModelAndView writeForm(@RequestParam("pageCheck") String pageCheck){
-		ModelAndView mav = nos.receiverCheck(pageCheck);
+	public ModelAndView writeForm(@RequestParam("pageCheck") String pageCheck, @RequestParam("rec") String rec){
+		System.out.println(pageCheck+"  "+rec);
+		ModelAndView mav = nos.receiverCheck(pageCheck, rec);
 		mav.setViewName("/note/write");
 		return mav;
 	}

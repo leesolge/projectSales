@@ -5,21 +5,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script type="text/javascript">
-		function jumpPage(pn){
-			var jumping = document.jump;
-			jumping.pageNum.value=pn;
-			jumping.submit();
-		}
-		function content(pc, vl){
-			var cont = document.cont;
-			cont.pageCheck.value=pc;
-			cont.notenum.value=vl;
-			cont.submit();
-		}
-	</script>
+		<script type="text/javascript">
+			function jumpPage(pn){
+				var jumping = document.jump;
+				jumping.pageNum.value=pn;
+				jumping.submit();
+			}
+			function writePage(receive){
+				var writes = document.write;
+				writes.rec.value=receive;
+				writes.submit();
+			}
+			function content(vl){
+				var cont = document.cont;
+				cont.notenum.value=vl;
+				cont.submit();
+			}
+		</script>
 		<style type="text/css">
 			h4 {
+				text-align: center;
+			}
+			table {
+				margin: auto;
+			}
+			td {
 				text-align: center;
 			}
 			.center{
@@ -32,19 +42,21 @@
 			.wrapper{
 				border: 1px solid black;
 				width: 50%;
-				height: 500px;
+				height: 400px;
 				/* overflow-y: scroll; */
 				margin: auto;
 				box-shadow: 3px 3px 6px #adadad;
 				padding: 10px;
+				text-align: center;
 			}
 		</style>
-		<title>Title</title>
+		<title>받은 쪽지함</title>
 	</head>
 	
 	<body>
 	<form action="/erp/note/write" name="write" method="post">
 		<input type="hidden" name="pageCheck" value="receive">
+		<input type="hidden" name="rec" value="0">
 	</form>
 	<form action="/erp/note/rdetail" name="jump" method="post">
 			<input type="hidden" name="pageNum" value="0">
@@ -52,7 +64,7 @@
 			<input type="hidden" name="keyword" value="${keyword}">
 		</form>
 	<form action="/erp/note/view" name="cont" method="post">
-		<input type="hidden" name="pageCheck" value="0">
+		<input type="hidden" name="pageCheck" value="receive">
 		<input type="hidden" name="notenum" value="0">
 	</form>
 	
@@ -61,18 +73,21 @@
 		<c:if test="${list==null}">
 		</c:if>
 		<c:if test="${list!=null}">
-			<c:forEach var="list" items="${list}">
-				<div>
-				<c:if test="${list.checks==0}"><b></c:if>
-					<a href="javascript:content('receive', '${list.notenum}')">
-						<c:out value="${list.sender}" />&nbsp;
-						<c:out value="${list.title}" />&nbsp;
-						<c:out value="${list.change}" />&nbsp;
-					</a>
-				<c:if test="${list.checks==0}"></b></c:if>
-				</div>
-				<br>
-			</c:forEach>
+			<table>
+				<tr>
+					<td>받은 날짜</td><td>발신인</td><td>수신인</td><td>제목</td>
+				</tr>
+				<c:forEach var="list" items="${list}">
+					<tr>
+						<td><c:out value="${list.change}" /></td>
+						<td><a href="javascript:writePage('${list.sender}')"><c:out value="${list.sender}" /></a></td>
+						<td><c:out value="${list.receiver}" /></td>
+						<td><c:if test="${list.checks==0}"><b></c:if>
+						<a href="javascript:content('${list.notenum}')"><c:out value="${list.title}" /></a>
+						<c:if test="${list.checks==0}"></b></c:if></td>
+					</tr>
+				</c:forEach>
+			</table>
 		</c:if>
 	</div>
 	<br>
@@ -118,7 +133,7 @@
 	
 	<p align="center">
 		<button onclick="location.reload()">새로 고침</button>
-		<button onclick="javascript:jumpPage('write')">쪽지 쓰기</button>
+		<button onclick="javascript:writePage('0')">쪽지 쓰기</button>
 		<button onclick="location='/erp/note/list'">첫 페이지</button>
 	</p>
 	

@@ -19,4 +19,5 @@ public interface NoteMapper extends Serializable{
 	 ArrayList<NoteVO> selectSendAll(NoteSearchVO vo);
 	 ArrayList<SMemberVO> receiverCheck(String empno);
 	 void writePro(NoteVO vo);
+	 SMemberVO getNameTeamAuth(String empno);
 }

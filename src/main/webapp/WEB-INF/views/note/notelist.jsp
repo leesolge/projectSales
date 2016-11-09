@@ -5,66 +5,117 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Title</title>
+		<script type="text/javascript">
+			function jumpPage(wh){
+				var name=wh;
+				document.forms[name].submit();
+			}
+			function writePage(receive){
+				var writes = document.write;
+				writes.rec.value=receive;
+				writes.submit();
+			}
+			function content(vl){
+				var cont = document.cont;
+				cont.notenum.value=vl;
+				cont.submit();
+			}
+		</script>
+		<title>쪽지</title>
 		<style type="text/css">
 			h4 {
 				text-align: center;
 			}
+			table {
+				margin: auto;
+			}
+			td {
+				text-align: center;
+			}
+			.center{
+				margin: auto;
+				text-align: center;
+			}
+			.paging{
+				width: 40px;
+			}
 			.wrapper{
-				border: 1px solid black; 
-				width: 20%;
-				height: 250px;
+				border: 1px solid black;
+				width: 30%;
+				height: 200px;
 				overflow-y: scroll;
 				margin: auto;
 				box-shadow: 3px 3px 6px #adadad;
 				padding: 10px;
-			}
-			.inside{
+				text-align: center;
 			}
 		</style>
 	</head>
 	
 	<body>
-	<h4>확인하지 않은 쪽지</h4><br>
-	<div class="wrapper">
-		<c:if test="${receiveList==null}">
-		</c:if>
-		<c:if test="${receiveList!=null}">
-			<c:forEach var="receive" items="${receiveList}">
-				<div class="inside">
-				<c:if test="${receive.checks==0}"><b></c:if>
-					<a href="view?noteNum=${receive.notenum}">
-						<c:out value="${receive.change}" />&nbsp;<br>
-						<c:out value="${receive.sender}" />&nbsp;
-						<c:out value="${receive.title}" />&nbsp;
-					</a>
-				<c:if test="${receive.checks==0}"></b></c:if>
-				</div>
-			</c:forEach>
-		</c:if>
-	</div>
-	<center><button onclick="location.reload()">새로 고침</button>
-	<button onclick="location='/erp/note/rdetail'">목록 보기</button></center>
+	<form action="/erp/note/write" name="write" method="post">
+		<input type="hidden" name="pageCheck" value="etc">
+		<input type="hidden" name="rec" value="0">
+	</form>
+	<form action="/erp/note/sdetail" name="sd" method="post">
+	</form>
+	<form action="/erp/note/rdetail" name="rd" method="post">
+	</form>
+	<form action="/erp/note/view" name="cont" method="post">
+		<input type="hidden" name="pageCheck" value="etc">
+		<input type="hidden" name="notenum" value="0">
+	</form>
 	
-	<h4>확인받지 않은 쪽지</h4><br>
+	<h4>최근 받은 쪽지</h4>
 	<div class="wrapper">
-		<c:if test="${sendList==null}">
-		</c:if>
-		<c:if test="${sendList!=null}">
-			<c:forEach var="send" items="${sendList}">
-				<div class="inside">
-				<c:if test="${send.checks==0}"><b></c:if>
-					<a href="view?noteNum=${send.notenum}">
-						<c:out value="${send.change}" />&nbsp;<br>
-						<c:out value="${send.sender}" />&nbsp;
-						<c:out value="${send.title}" />&nbsp;
-					</a>
-				<c:if test="${send.checks==0}"></b></c:if>
-				</div>
+		<table>
+			<c:forEach var="receive" items="${receiveList}">
+				<tr>
+					<td colspan="2"><c:out value="${receive.change}" /></td>
+				</tr>
+				<tr>
+					<td><a href="javascript:writePage('${receive.sender}')"><c:out value="${receive.sender}" /></a></td>
+					<td><c:out value="${receive.receiver}" /></td>
+				</tr>
+				<tr><td colspan="2">
+				<c:if test="${receive.checks==0}"><b></c:if>
+					<a href="javascript:content('${receive.notenum}')"><c:out value="${receive.title}" /></a>
+				<c:if test="${receive.checks==0}"></b></c:if></td>
+				</tr>
+				<tr><td colspan="2">&nbsp;</td></tr>
 			</c:forEach>
-		</c:if>
+		</table>
 	</div>
-	<center><button onclick="location.reload()">새로 고침</button>
-	<button onclick="location='/erp/note/sdetail'">목록 보기</button></center>
+	<div class="center">
+		<button onclick="location.reload()">새로 고침</button>
+		<button onclick="jumpPage('rd')">목록 보기</button>
+	</div>
+	
+	<br>
+	<br>
+	<h4>최근 보낸 쪽지</h4>
+	<div class="wrapper">
+		<table>
+			<c:forEach var="send" items="${sendList}">
+				<tr>
+					<td colspan="2"><c:out value="${send.change}" /></td>
+				</tr>
+				<tr>
+					<td><c:out value="${send.sender}" /></td>
+					<td><a href="javascript:writePage('${send.receiver}')"><c:out value="${send.receiver}" /></a></td>
+				</tr>
+				<tr><td colspan="2">
+				<c:if test="${send.checks==0}"><b></c:if>
+					<a href="javascript:content('${send.notenum}')"><c:out value="${send.title}" /></a>
+				<c:if test="${send.checks==0}"></b></c:if></td>
+				</tr>
+				<tr><td colspan="2">&nbsp;</td></tr>
+			</c:forEach>
+		</table>
+	</div>
+	<div class="center">
+		<button onclick="location.reload()">새로 고침</button>
+		<button onclick="jumpPage('sd')">목록 보기</button>
+	</div>
 	</body>
 </html>

@@ -68,5 +68,11 @@ public class NoteDAO implements NoteMapper{
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.receiverCheck(empno);
 	}
+
+	public SMemberVO getNameTeamAuth(String empno) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.getNameTeamAuth(empno);
+	}
+	
 	
 }

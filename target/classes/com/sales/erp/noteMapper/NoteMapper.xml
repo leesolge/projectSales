@@ -39,6 +39,10 @@
 		SELECT EMPNO, NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO!=#{empno} AND AUTH!='ROLE_EE' ORDER BY TEAM, AUTH
 	</select>	
 	
+	<select id="getNameTeamAuth" parameterType="java.lang.String" resultType="com.sales.erp.smember.SMemberVO">
+		SELECT EMPNO, NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
 	<insert id="writePro" parameterType="com.sales.erp.noteVO.NoteVO">
 		INSERT INTO NOTEDB (NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED)
 		VALUES(NOTESEQ.NEXTVAL, SYSDATE, #{sender}, #{receiver}, #{title}, #{content}, 0, 0)

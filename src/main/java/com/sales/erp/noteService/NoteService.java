@@ -35,17 +35,34 @@ public class NoteService {
 		dao.writePro(vo);
 		if(vo.getPageCheck().equals("receive")){
 			mav.setViewName("redirect:/note/rdetail");
-		}else{
+		}else if(vo.getPageCheck().equals("send")){
 			mav.setViewName("redirect:/note/sdetail");
+		}else if(vo.getPageCheck().equals("etc")){
+			mav.setViewName("redirect:/note/list");
 		}
 		return mav;
 	}
 	
-	public ModelAndView receiverCheck(String pageCheck){
+	public ModelAndView receiverCheck(String pageCheck, String rec){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
-		
 		ModelAndView mav = new ModelAndView();
+		SMemberVO senderVo = dao.getNameTeamAuth(empno);
+		if(rec.equals("0")){
+		}else{
+			SMemberVO receiverVo = dao.getNameTeamAuth(rec);
+			if(receiverVo.getAuth().equals("ROLE_EMPLOYEE")){
+				receiverVo.setAuth("사원");
+			}
+			if(receiverVo.getAuth().equals("ROLE_MANAGER")){
+				receiverVo.setAuth("팀장");
+			}
+			if(receiverVo.getAuth().equals("ROLE_ADMIN")){
+				receiverVo.setAuth("관리자");
+			}
+		mav.addObject("receiverVo", receiverVo);
+		}
+		
 		ArrayList<SMemberVO> receiverList = dao.receiverCheck(empno);
 		System.out.println(receiverList);
 		for(SMemberVO svo:receiverList){
@@ -61,6 +78,8 @@ public class NoteService {
 		}
 		mav.addObject("list", receiverList);
 		mav.addObject("pageCheck", pageCheck);
+		mav.addObject("rec", rec);
+		mav.addObject("senderName", senderVo.getName());
 		mav.addObject("id", empno);
 		return mav;
 	}
