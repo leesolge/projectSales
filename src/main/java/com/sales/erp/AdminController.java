@@ -1,21 +1,13 @@
 package com.sales.erp;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sales.erp.smember.JoinVO;
 import com.sales.erp.smember.SMemberVO;
 import com.sales.erp.smemberDao.SMemberDAOImpl;
 
@@ -28,8 +20,9 @@ public class AdminController {
 	@RequestMapping("/admin/member_ok")
 	public ModelAndView member_ok(Model model) {
 		ModelAndView result = new ModelAndView();
-
+		int count = sMemberDAOImpl.Count_Ok_Member();
 		List<SMemberVO> memberList = sMemberDAOImpl.Admin_Ok_Members();
+		result.addObject("count", count);
 		result.addObject("result", memberList);
 		result.setViewName("admin/member_ok");
 
@@ -39,8 +32,9 @@ public class AdminController {
 	@RequestMapping("/admin/member_list")
 	public ModelAndView member_list(Model model) {
 		ModelAndView result = new ModelAndView();
-
+		int count = sMemberDAOImpl.Count_Approved_Member();
 		List<SMemberVO> memberList = sMemberDAOImpl.Admin_Approved_Members();
+		result.addObject("count", count);
 		result.addObject("result", memberList);
 		result.setViewName("admin/member_list");
 
@@ -55,7 +49,6 @@ public class AdminController {
 		return "redirect:/admin/member_ok";
 	}
 
-	//
 	@RequestMapping(value = "/admin/Cancel")
 	public String Cancel(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");

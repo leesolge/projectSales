@@ -3,15 +3,12 @@
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-
 <body>
-
-	<div class="w3-container">
+	<div class="w3-container" align="center">
+	<b>[${count }건]</b>
 		<table class="w3-table w3-centered">
 			<tr>
 				<td>EMPNO</td>
@@ -40,8 +37,9 @@
 					<td>${member.auth}</td>
 					<td>${member.account}</td>
 					<td>${member.team}</td>
-					<td><input type="button" value="Content"	class="w3-btn w3-round-large"
-						onclick="window.location='/erp/admin/member_info?empno=${member.empno}'"></td>
+					<td>
+					<input type="button" value="Content" class="w3-btn w3-round-large" onclick="window.location='/erp/admin/member_info?empno=${member.empno}'">
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

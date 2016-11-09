@@ -13,15 +13,6 @@ public class SMemberDAOImpl implements SMemberDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-
-	@Override
-	public ArrayList<SMemberVO> getSMembers() {
-		ArrayList<SMemberVO> member = new ArrayList<SMemberVO>();	
-		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-		member = memberMapper.selectAllSMember();
-		
-		return member;
-	}
 	
 	@Override
 	public void insertMember(SMemberVO member) {
@@ -71,5 +62,21 @@ public class SMemberDAOImpl implements SMemberDAO {
 	public void Admin_Update_SMember(SMemberVO vo) {
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
 		memberMapper.Admin_Update_SMember(vo);	
+	}
+
+	@Override
+	public int Count_Approved_Member() {
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);	
+		int count = memberMapper.Count_Approved_Member();
+		
+		return count;
+	}
+
+	@Override
+	public int Count_Ok_Member() {
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);	
+		int count = memberMapper.Count_Ok_Member();
+		
+		return count;
 	} 	
 }

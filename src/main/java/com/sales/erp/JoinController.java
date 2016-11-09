@@ -3,8 +3,6 @@ package com.sales.erp;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.sales.erp.smember.JoinVO;
 import com.sales.erp.smember.SMemberVO;
 import com.sales.erp.smemberDao.SMemberDAOImpl;
@@ -43,11 +40,8 @@ public class JoinController {
 	            int count = 0;
                 while(file.exists()) {           	
 	                	int indexes = fileName.lastIndexOf(".");
-	                	System.out.println("순서 = "+indexes);
 	                	String extension = fileName.substring(indexes);
-	                	System.out.println("확장자 = "+extension);
 	                	String newFileName = fileName.substring(0, indexes) + count + extension;
-	                	System.out.println("새 파일 이름 = "+newFileName);
 	                	fileName = newFileName;
 	                	file = new File("C:/sales/sales/src/main/webapp/resources/portraits/" + newFileName);
 	                	count++;
@@ -81,8 +75,6 @@ public class JoinController {
 		sMemberDAOImpl.insertMember(member);
 
 		ModelAndView mav = new ModelAndView();
-		List<SMemberVO> memberList = sMemberDAOImpl.getSMembers();
-		mav.addObject("result", memberList);
 		mav.setViewName("home");
 		return mav;
 	}

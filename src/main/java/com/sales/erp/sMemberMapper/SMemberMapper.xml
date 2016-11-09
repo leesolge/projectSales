@@ -3,10 +3,6 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sales.erp.smemberDao.SMemberMapper">
-	<select id="selectAllSMember" resultType="com.sales.erp.smember.SMemberVO">
-		SELECT * FROM SMEMBER
-	</select>
-	
 	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
     <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
         INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
@@ -37,4 +33,12 @@
     <update id="Admin_Update_SMember" parameterType="com.sales.erp.smember.SMemberVO" >    
     	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}        
     </update>
+    
+    <select id="Count_Approved_Member" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE'
+    </select>
+    
+    <select id="Count_Ok_Member" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE'
+    </select>
 </mapper>

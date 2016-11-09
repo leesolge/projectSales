@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import com.sales.erp.smember.SMemberVO;
 
 public interface SMemberMapper extends Serializable{
-
-	 ArrayList<SMemberVO> selectAllSMember();		//select
-	 public void insertMember(SMemberVO member);
-	 SMemberVO selectSMember(String empno);		//select one person
-	 ArrayList<SMemberVO>  Admin_Ok_SMember();		//select waiting ok person
-	 ArrayList<SMemberVO>  Admin_Approved_Members();		//select Approved person
-	 public void Update_Approve_Member(String empno);
-	 public void Update_Cancel_Member(String empno);
-	 
-	 public void Admin_Update_SMember(SMemberVO vo);
+	
+	ArrayList<SMemberVO> selectAllSMember();		//select
+	public void insertMember(SMemberVO member);
+	SMemberVO selectSMember(String empno);		//select one person
+	ArrayList<SMemberVO>  Admin_Ok_SMember();		//select waiting ok person
+	ArrayList<SMemberVO>  Admin_Approved_Members();		//select Approved person
+	public void Update_Approve_Member(String empno);
+	public void Update_Cancel_Member(String empno);
+	public void Admin_Update_SMember(SMemberVO vo);
+	public int Count_Approved_Member();
+	public int Count_Ok_Member();
 }
