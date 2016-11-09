@@ -9,6 +9,30 @@
 		<li style="width: 15%"><a href="/erp/main">Main</a></li>		
 		<li style="width: 15%"><a href="/erp/note/list">쪽지</a></li>
 		
+		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">		
+		<li class="w3-dropdown-hover" style="width: 15%">
+			<a href="#">개인 메뉴<i class="fa fa-caret-down"></i>	</a>
+			<div class="w3-dropdown-content w3-blue-grey w3-card-4">
+				<a href="#">팀원 명부</a> 
+				<a href="#">승인대기</a>
+				<a href="#">진행업무</a>  
+				<a href="#">요청</a>
+			</div>
+		</li>
+		</sec:authorize>
+		
+		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">		
+		<li class="w3-dropdown-hover" style="width: 15%">
+			<a href="#">팀 메뉴<i class="fa fa-caret-down"></i>	</a>
+			<div class="w3-dropdown-content w3-blue-grey w3-card-4">
+				<a href="#">팀원 명부</a> 
+				<a href="#">승인대기</a>
+				<a href="#">진행업무</a>  
+				<a href="#">요청</a>
+			</div>
+		</li>
+		</sec:authorize>
+		
 		<sec:authorize access="hasAuthority('ROLE_ADMIN')">		
 		<li class="w3-dropdown-hover" style="width: 15%">
 			<a href="#">관리자 메뉴<i class="fa fa-caret-down"></i>	</a>
@@ -19,8 +43,6 @@
 			</div>
 		</li>
 		</sec:authorize>
-		
-		<li style="width: 10%"><a href="#">a</a></li>
 	</ul>
 </div>
 
