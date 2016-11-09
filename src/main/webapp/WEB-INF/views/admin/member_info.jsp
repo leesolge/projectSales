@@ -24,27 +24,32 @@
 				<td>AUTH</td>
 				<td>ACCOUNT</td>
 				<td>TEAM</td>
-				<td>CONTENT</td>
 			</tr>
 
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
-			<c:forEach items="${result}" var="member">
-				<tr>
-					<td>${member.empno}</td>
-					<td>${member.name}</td>
-					<td>${member.pwd}</td>
-					<td>${member.gender}</td>
-					<td>${member.address}</td>
-					<td>${member.phone}</td>
-					<td>${member.email}</td>
-					<td>${member.auth}</td>
-					<td>${member.account}</td>
-					<td>${member.team}</td>
-					<td><input type="button" value="Content"	class="w3-btn w3-round-large"
-						onclick="window.location='/erp/admin/member_info?empno=${member.empno}'"></td>
-				</tr>
-			</c:forEach>
+
+			<tr>
+				<td>${vo.empno}</td>
+				<td>${vo.name}</td>
+				<td>${vo.pwd}</td>
+				<td>${vo.gender}</td>
+				<td>${vo.address}</td>
+				<td>${vo.phone}</td>
+				<td>${vo.email}</td>
+				<td>${vo.auth}</td>
+				<td>${vo.account}</td>
+				<td>${vo.team}</td>
+			</tr>
+
 		</table>
+		<div class="w3-container w3-center">
+			<img src="/erp/resources/portraits/${vo.portrait}" height="300">
+		</div>
+
+		<input type="button" value="정보수정" class="w3-btn w3-round-large"
+			onclick="window.location='/erp/admin/member_update?empno=${vo.empno}'"> 
+		<input type="button" value="퇴사" class="w3-btn w3-round-large"
+			onclick="window.location='/erp/admin/member_delete?empno=${vo.empno}'">
 	</div>
 </body>
 </html>

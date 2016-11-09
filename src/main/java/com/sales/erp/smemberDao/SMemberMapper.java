@@ -13,4 +13,7 @@ public interface SMemberMapper extends Serializable{
 	 ArrayList<SMemberVO>  Admin_Ok_SMember();		//select waiting ok person
 	 ArrayList<SMemberVO>  Admin_Approved_Members();		//select Approved person
 	 public void Update_Approve_Member(String empno);
+	 public void Update_Cancel_Member(String empno);
+	 
+	 public void Admin_Update_SMember(SMemberVO vo);
 }

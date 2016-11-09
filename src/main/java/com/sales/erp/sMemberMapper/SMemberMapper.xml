@@ -29,4 +29,12 @@
     <update id="Update_Approve_Member" parameterType="com.sales.erp.smember.SMemberVO" >    
     	UPDATE SMEMBER SET AUTH='ROLE_EMPLOYEE' WHERE EMPNO=#{empno}        
     </update>
+    
+   <delete id="Update_Cancel_Member" parameterType="com.sales.erp.smember.SMemberVO" >    
+    	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
+    </delete>
+    
+    <update id="Admin_Update_SMember" parameterType="com.sales.erp.smember.SMemberVO" >    
+    	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}        
+    </update>
 </mapper>

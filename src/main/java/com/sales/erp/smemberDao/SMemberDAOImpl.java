@@ -51,5 +51,25 @@ public class SMemberDAOImpl implements SMemberDAO {
 	public void Update_Approve_Member(String empno) {
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
 		memberMapper.Update_Approve_Member(empno);
-	} 
+	}
+	
+	@Override
+	public void Update_Cancel_Member(String empno) {
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
+		memberMapper.Update_Cancel_Member(empno);
+	}
+
+	@Override
+	public SMemberVO selectSMember(String empno) {
+		SMemberVO vo = new SMemberVO();
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
+		vo = memberMapper.selectSMember(empno);
+		return vo;
+	}
+
+	@Override
+	public void Admin_Update_SMember(SMemberVO vo) {
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
+		memberMapper.Admin_Update_SMember(vo);	
+	} 	
 }
