@@ -1,20 +1,27 @@
 package com.sales.erp.noteController;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import com.sales.erp.noteService.NoteService;
+import com.sales.erp.noteVO.NoteVO;
 
 @Controller
 public class NoteController {
 	
 	@Autowired
 	private NoteService nos;
+	
+	@RequestMapping("/note/writes")
+	public ModelAndView writePro(HttpServletRequest request){
+		ModelAndView mav = nos.writePro(request);
+		return mav;
+	}
 	
 	@RequestMapping("/note/list")
 	public ModelAndView selectNotes(){
@@ -23,9 +30,16 @@ public class NoteController {
 		return mav;
 	}
 	
+	@RequestMapping("/note/write")
+	public ModelAndView writeForm(@RequestParam("pageCheck") String pageCheck){
+		ModelAndView mav = nos.receiverCheck(pageCheck);
+		mav.setViewName("/note/write");
+		return mav;
+	}
+	
 	@RequestMapping("/note/view")
-	public ModelAndView viewNote(@RequestParam("noteNum") int noteNum){
-		ModelAndView mav = nos.viewNoteContent(noteNum);
+	public ModelAndView viewNote(@RequestParam("notenum") int notenum, @RequestParam("pageCheck") String pageCheck){
+		ModelAndView mav = nos.viewNoteContent(notenum, pageCheck);
 		mav.setViewName("/note/notecontent");
 		return mav;
 	}

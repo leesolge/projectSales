@@ -9,11 +9,14 @@
 	</head>
 	
 	<body>
+		${pageCheck}<br>
 		${vo.notenum}<br>
 		${vo.senddate}<br>
 		${vo.sender}<br>
 		${vo.receiver}<br>
 		${vo.title}<br>
 		${vo.content}<br>
+		
+		
 	</body>
 </html>

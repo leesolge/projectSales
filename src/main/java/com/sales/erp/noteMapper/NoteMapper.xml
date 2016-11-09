@@ -4,11 +4,11 @@
 
 <mapper namespace="com.sales.erp.noteDAO.NoteMapper">
 	<select id="selectReceive" parameterType="java.lang.String" resultType="com.sales.erp.noteVO.NoteVO">
-		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE RECEIVER = #{empno} ORDER BY SENDDATE DESC) WHERE DELETED=0 AND R<![CDATA[>=]]>1 AND R<![CDATA[<=]]>10
+		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM (SELECT * FROM NOTEDB WHERE RECEIVER=#{empno} ORDER BY SENDDATE DESC) WHERE DELETED=0) WHERE R<![CDATA[>=]]>1 AND R<![CDATA[<=]]>10
 	</select>
 	
 	<select id="selectSend" parameterType="java.lang.String" resultType="com.sales.erp.noteVO.NoteVO">
-		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE SENDER = #{empno} ORDER BY SENDDATE DESC) WHERE DELETED=0 AND R<![CDATA[>=]]>1 AND R<![CDATA[<=]]>10
+		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM (SELECT * FROM NOTEDB WHERE SENDER=#{empno} ORDER BY SENDDATE DESC) WHERE DELETED=0) WHERE R<![CDATA[>=]]>1 AND R<![CDATA[<=]]>10
 	</select>
 	
 	<select id="viewNote" parameterType="java.lang.Integer" resultType="com.sales.erp.noteVO.NoteVO">
@@ -35,7 +35,14 @@
 		UPDATE NOTEDB SET CHECKS=1 WHERE NOTENUM = #{noteNum}
 	</update>
 	
+	<select id="receiverCheck" parameterType="java.lang.String" resultType="com.sales.erp.smember.SMemberVO">
+		SELECT EMPNO, NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO!=#{empno} AND AUTH!='ROLE_EE' ORDER BY TEAM, AUTH
+	</select>	
 	
+	<insert id="writePro" parameterType="com.sales.erp.noteVO.NoteVO">
+		INSERT INTO NOTEDB (NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED)
+		VALUES(NOTESEQ.NEXTVAL, SYSDATE, #{sender}, #{receiver}, #{title}, #{content}, 0, 0)
+	</insert>
 	<!-- 
     <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
         INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)

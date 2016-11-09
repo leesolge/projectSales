@@ -3,6 +3,7 @@ package com.sales.erp.noteVO;
 import java.util.Date;
 
 public class NoteVO {
+	private String pageCheck;
 	private String change;
 	private long notenum;
 	private Date senddate;
@@ -12,6 +13,14 @@ public class NoteVO {
 	private String content;
 	private int checks;
 	private int deleted;
+	
+	public String getPageCheck() {
+		return pageCheck;
+	}
+
+	public void setPageCheck(String pageCheck) {
+		this.pageCheck = pageCheck;
+	}
 	
 	public int getDeleted() {
 		return deleted;

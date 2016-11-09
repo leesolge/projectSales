@@ -8,13 +8,19 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.noteVO.NoteSearchVO;
 import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.smember.SMemberVO;
 
 @Repository
-public class NoteDAO {
+public class NoteDAO implements NoteMapper{
 
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public void writePro(NoteVO vo) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		noteMapper.writePro(vo);
+	}
+
 	public ArrayList<NoteVO> selectSend(String empno){
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		ArrayList<NoteVO> sendList = noteMapper.selectSend(empno);
@@ -56,6 +62,11 @@ public class NoteDAO {
 	public ArrayList<NoteVO> selectSendAll(NoteSearchVO vo){
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.selectSendAll(vo);
+	}
+	
+	public ArrayList<SMemberVO> receiverCheck(String empno) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.receiverCheck(empno);
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.sales.erp.noteVO.NoteSearchVO;
 import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.smember.SMemberVO;
 
 public interface NoteMapper extends Serializable{
 
@@ -16,4 +17,6 @@ public interface NoteMapper extends Serializable{
 	 int countSendAll(String empno);
 	 ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo);
 	 ArrayList<NoteVO> selectSendAll(NoteSearchVO vo);
+	 ArrayList<SMemberVO> receiverCheck(String empno);
+	 void writePro(NoteVO vo);
 }

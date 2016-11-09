@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sales.erp.noteDAO.NoteDAO;
 import com.sales.erp.noteVO.NoteSearchVO;
 import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.smember.SMemberVO;
 
 @Service
 public class NoteService {
@@ -22,13 +23,55 @@ public class NoteService {
 	@Autowired
 	private NoteDAO dao;
 	
-	public ModelAndView viewNoteContent(int noteNum){
+	public ModelAndView writePro(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		NoteVO vo = new NoteVO();
+		vo.setPageCheck(request.getParameter("pageCheck"));
+		vo.setSender(request.getParameter("sender"));
+		vo.setReceiver(request.getParameter("receiver"));
+		vo.setTitle(request.getParameter("title"));
+		vo.setContent(request.getParameter("content"));
+		
+		dao.writePro(vo);
+		if(vo.getPageCheck().equals("receive")){
+			mav.setViewName("redirect:/note/rdetail");
+		}else{
+			mav.setViewName("redirect:/note/sdetail");
+		}
+		return mav;
+	}
+	
+	public ModelAndView receiverCheck(String pageCheck){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
 		
-		NoteVO vo = dao.viewNote(noteNum);
+		ModelAndView mav = new ModelAndView();
+		ArrayList<SMemberVO> receiverList = dao.receiverCheck(empno);
+		System.out.println(receiverList);
+		for(SMemberVO svo:receiverList){
+			if(svo.getAuth().equals("ROLE_EMPLOYEE")){
+				svo.setAuth("사원");
+			}
+			if(svo.getAuth().equals("ROLE_MANAGER")){
+				svo.setAuth("팀장");
+			}
+			if(svo.getAuth().equals("ROLE_ADMIN")){
+				svo.setAuth("관리자");
+			}
+		}
+		mav.addObject("list", receiverList);
+		mav.addObject("pageCheck", pageCheck);
+		mav.addObject("id", empno);
+		return mav;
+	}
+	
+	public ModelAndView viewNoteContent(int notenum, String pageCheck){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		
+		NoteVO vo = dao.viewNote(notenum);
 		if(vo.getReceiver().equals(empno)&&vo.getChecks()==0){
-			dao.checkNote(noteNum);
+			dao.checkNote(notenum);
 		}
 		
 		Date date = vo.getSenddate();
@@ -37,7 +80,7 @@ public class NoteService {
 		vo.setChange(change);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
-		
+		mav.addObject("pageCheck", pageCheck);
 		return mav;
 	}
 	/*받은 쪽지만 가져오기*/
@@ -65,9 +108,6 @@ public class NoteService {
 		int count = dao.countReceiveAll(empno);
 		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
 		int start = end -(pageSize-1);
-		if(end>count){
-			end = count;
-		}
 		if(start<1){
 			start = 1;
 		}
@@ -85,7 +125,6 @@ public class NoteService {
 		svo.setEnd(end);
 		
 		list = dao.selectReceiveAll(svo);
-		
 		if(list!=null){
 			for(NoteVO nvo:list){
 				Date date = nvo.getSenddate();
@@ -130,9 +169,6 @@ public class NoteService {
 		int count = dao.countSendAll(empno);
 		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
 		int start = end -(pageSize-1);
-		if(end>count){
-			end = count;
-		}
 		if(start<1){
 			start = 1;
 		}
