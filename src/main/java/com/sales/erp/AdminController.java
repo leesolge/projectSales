@@ -1,13 +1,17 @@
 package com.sales.erp;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sales.erp.email.SimpleRegistrationNotifier;
 import com.sales.erp.smember.SMemberVO;
 import com.sales.erp.smemberDao.SMemberDAOImpl;
 
@@ -16,6 +20,9 @@ public class AdminController {
 
 	@Autowired
 	private SMemberDAOImpl sMemberDAOImpl;
+	
+	@Autowired
+	private SimpleRegistrationNotifier simpleRegistrationNotifier;
 
 	@RequestMapping("/admin/member_ok")
 	public ModelAndView member_ok(Model model) {
@@ -53,6 +60,9 @@ public class AdminController {
 	public String Cancel(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 
+		SMemberVO	vo = sMemberDAOImpl.selectSMember(empno);
+		simpleRegistrationNotifier.sendMail(vo);
+		
 		sMemberDAOImpl.Update_Cancel_Member(empno);
 		return "redirect:/admin/member_ok";
 	}
