@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="sec"
@@ -11,45 +10,80 @@
 
 <body>
 
-	<div class="w3-container">
-		<table class="w3-table w3-centered">
+	<div class="w3-container w3-center">
+		<h1>사원 정보</h1>
+		<hr>
+
+		<table class="w3-table w3-centered" style="border: 1px solid #ddd">
 			<tr>
-				<td>EMPNO</td>
-				<td>NAME</td>
-				<td>PWD</td>
-				<td>GENDER</td>
-				<td>ADDRESS</td>
-				<td>PHONE</td>
-				<td>EMAIL</td>
-				<td>AUTH</td>
-				<td>ACCOUNT</td>
-				<td>TEAM</td>
+				<td rowspan="6"><img
+					src="/erp/resources/portraits/${vo.portrait}" width="100%"></td>
+				<th> EMPNO</th>
+				<td>${vo.empno}</td>
+				<th>NAME</th>
+				<td>${vo.name}</td>
 			</tr>
 
-			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 
 			<tr>
-				<td>${vo.empno}</td>
-				<td>${vo.name}</td>
+				<th>PASSWORD</th>
 				<td>${vo.pwd}</td>
+				<th>GENDER</th>
 				<td>${vo.gender}</td>
+			</tr>
+
+			<tr>
+				<th>ADDRESS</th>
 				<td>${vo.address}</td>
+				<th>PHONE</th>
 				<td>${vo.phone}</td>
+			</tr>
+
+			<tr>
+				<th>EMAIL</th>
 				<td>${vo.email}</td>
+				<th>AUTH</th>
 				<td>${vo.auth}</td>
+			</tr>
+
+			<tr>
+				<th>ACCOUNT</th>
 				<td>${vo.account}</td>
+				<th>TEAM</th>
 				<td>${vo.team}</td>
 			</tr>
 
+			<tr>
+				<th>BIRTH</th>
+				<td>${vo.birth}</td>
+				<th>JOINDATE</th>
+				<td>${vo.join}</td>
+			</tr>
 		</table>
-		<div class="w3-container w3-center">
-			<img src="/erp/resources/portraits/${vo.portrait}" height="300">
+		<div>
+			<p></p>
 		</div>
 
-		<input type="button" value="정보수정" class="w3-btn w3-round-large"
-			onclick="window.location='/erp/admin/member_update?empno=${vo.empno}'"> 
-		<input type="button" value="퇴사" class="w3-btn w3-round-large"
-			onclick="window.location='/erp/admin/member_delete?empno=${vo.empno}'">
+		<div align="center">
+			<table class="w3-table w3-centered " style="width: 20%;">
+				<tr>
+					<td><input type="button" value="정보수정"
+						class="w3-btn w3-round-large"
+						onclick="window.location='/erp/admin/member_update?empno=${vo.empno}'">
+					</td>
+					<td><input type="button" value="퇴사"
+						class="w3-btn w3-round-large"
+						onclick="window.location='/erp/admin/Cancel?empno=${vo.empno}'">
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
+
+	<div>
+		<p></p>
 	</div>
 </body>
 </html>
