@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     
+<mapper namespace="com.sales.erp.boardDAO.BoardMapper">
+	<!-- 글 가져오기 -->
+	<!-- <select id="getBoardList" parameterType="java.util.HashMap" resultType="com.sales.erp.boardVO.BoardVO"> -->
+	<select id="getBoardList" parameterType="java.util.HashMap" resultType="com.sales.erp.boardVO.BoardVO">
+		select * from
+	 		(select A.*,ROWNUM r from 
+	 		 	(select * from salesBoard order by parent desc, sort) A
+	 	 	)
+ 	 	where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} <!-- where sal <= 1000 -->
+	</select>
+	
+	<select id="getBoardCount" resultType="java.lang.Integer">
+ 	select count(*) from salesBoard
+	</select>
+	
+	<!-- 글쓰기 -->
+	<!-- <insert id="insertBoard" parameterType="com.sales.erp.boardVO.BoardVO">
+		insert into board(num, name, title, content, regdate, parent, sort, tab)
+		values( (select NVL(max(num),0)+1 from board), #{name},#{title},#{content},
+		SYSDATE,(select NVL(max(num),0)+1 from board),0,0)
+	</insert> -->
+	
+	<insert id="insertBoard" parameterType="com.sales.erp.boardVO.BoardVO">
+		INSERT INTO SALESBOARD(NUM, NAME, TITLE, CONTENT, REGDATE, PARENT, SORT, TAB)
+		VALUES(TO_CHAR(NUMREG.NEXTVAL), #{name},#{title},#{content},
+		SYSDATE,TO_CHAR(NUMREG.NEXTVAL),0,0)
+	</insert>
+	
+	<!-- 글 하나 가져오기 -->
+	<select id="getBoard" parameterType="java.lang.Integer" resultType="com.sales.erp.boardVO.BoardVO">
+		select * from salesBoard where num = #{num}
+	</select>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterType="java.lang.Integer">
+		delete from salesBoard where num=#{num}
+	</delete>
+	
+	<!-- 글 수정 -->
+	<update id="updateBoard" parameterType="com.sales.erp.boardVO.BoardVO">
+		update salesBoard set name=#{name}, title=#{title}, content=#{content}, regDate=sysdate
+		where num=#{num}
+	</update>
+	
+</mapper>
+
