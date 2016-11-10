@@ -17,9 +17,9 @@ public class ProductDAO {
 		ArrayList<ProductVO> pvo = proMapper.selectAll();
 		return pvo;
 	}
-	public ArrayList<ProductVO> selectOne(String procode){
+	public ProductVO selectOne(String procode){
 		ProductMapper proMapper = sqlSession.getMapper(ProductMapper.class);
-		ArrayList<ProductVO> pvo = proMapper.selectOne(procode);
+		ProductVO pvo = proMapper.selectOne(procode);
 		return pvo;
 	}
 	public void insertPro(ProductVO vo){

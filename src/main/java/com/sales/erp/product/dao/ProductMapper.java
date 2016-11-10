@@ -8,7 +8,7 @@ import com.sales.erp.product.vo.ProductVO;
 public interface ProductMapper extends Serializable{
 	
 	ArrayList<ProductVO> selectAll();
-	ArrayList<ProductVO> selectOne(String procode);
+	ProductVO selectOne(String procode);
 	public void insertPro(ProductVO vo);
 	public void deletePro(String procode);
 }

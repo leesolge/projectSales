@@ -42,12 +42,14 @@
 						<td>${list.proexpla}</td>
 						<td><input type="button" value="Content"
 							class="w3-btn w3-round-large"
-							onclick="window.location='/erp/admin/member_info?empno=${member.empno}'"> <!-- 멤버콘텐츠 보는 경로 -->
+							
+							onclick="window.location='/erp/product/productInfo?procode=${list.procode}'"> <!-- 멤버콘텐츠 보는 경로 -->
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
 			<hr>
+		</div>
 		</div>
 </body>
 

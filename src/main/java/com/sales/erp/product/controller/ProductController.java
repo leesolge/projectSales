@@ -1,5 +1,7 @@
 package com.sales.erp.product.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,15 @@ public class ProductController {
 	public ModelAndView selectOneProduct(@RequestParam("procode") String procode){
 		ModelAndView mav = proservice.selectOne(procode);
 		mav.setViewName("/product/productList");
+		return mav;
+	}
+	
+	@RequestMapping("/product/productInfo")
+	public ModelAndView proInfo(HttpServletRequest request) {
+		String procode = request.getParameter("procode");
+		System.out.println(procode);
+		ModelAndView mav = proservice.selectOne(procode);
+		mav.setViewName("/product/productInfo");
 		return mav;
 	}
 	

@@ -24,8 +24,9 @@ public class ProductService {
 	}
 	
 	public ModelAndView selectOne(String procode){
-		ArrayList<ProductVO> pvo = pdao.selectOne(procode);
+		ProductVO pvo = pdao.selectOne(procode);
 	    ModelAndView mav = new ModelAndView();
+	    System.out.println(pvo);
 	    mav.addObject("proList", pvo);
 	    return mav;
 	}
