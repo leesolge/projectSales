@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.dao.NoteDAO;
@@ -22,6 +23,48 @@ public class NoteService {
 	
 	@Autowired
 	private NoteDAO dao;
+
+	public ModelAndView deleteN(HttpServletRequest request){
+		RedirectView rv = null;
+		String pageCheck = request.getParameter("pageCheck");
+		if(pageCheck.equals("receive")){
+			rv = new RedirectView("/erp/note/rdetail");
+			rv.setExposeModelAttributes(false);
+		}else if(pageCheck.equals("send")){
+			rv = new RedirectView("/erp/note/sdetail");
+			rv.setExposeModelAttributes(false);
+		}else if(pageCheck.equals("etc")){
+			rv = new RedirectView("/erp/note/list");
+			rv.setExposeModelAttributes(false);
+		}else if(pageCheck.equals("rbin")){
+			
+		}else if(pageCheck.equals("sbin")){
+			
+		}
+		ModelAndView mav = new ModelAndView(rv);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		
+		mav.addObject("pageCheck", pageCheck);
+		int notenum = Integer.parseInt(request.getParameter("notenum"));
+		mav.addObject("notenum", notenum);
+		String receiver = request.getParameter("receiver");
+		System.out.println(empno);
+		System.out.println(receiver);
+		if(empno.equals(receiver)){
+			dao.deleteOne(notenum);
+		}
+		if(!pageCheck.equals("etc")){
+			String pageNum = request.getParameter("pageNum");
+			String field = request.getParameter("field");
+			String keyword = request.getParameter("keyword");
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("field", field);
+			mav.addObject("keyword", keyword);
+		}
+		return mav;
+	}
 	
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();

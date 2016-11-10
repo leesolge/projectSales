@@ -20,6 +20,13 @@
 				cont.notenum.value=vl;
 				cont.submit();
 			}
+			function del(){
+				if (confirm("쪽지는 업무 상 증빙자료로 활용될 수 있습니다.\n정말 지우시겠습니까?") == true){    //확인
+					document.forms['de'].submit();
+				}else{
+				    return;
+				}
+			}
 		</script>
 		<title>쪽지 보기</title>
 	</head>
@@ -38,6 +45,16 @@
 			<input type="hidden" name="keyword" value="${keyword}">
 		</c:if>
 		<input type="hidden" name="receiver" value="${svo.empno}">
+	</form>
+	<form action="/erp/note/notedel" name="de" method="post">
+		<input type="hidden" name="pageCheck" value="${pageCheck}">
+		<input type="hidden" name="notenum" value="${notenum}">
+		<c:if test="${pageCheck!='etc'}">
+			<input type="hidden" name="pageNum" value="${pageNum}">
+			<input type="hidden" name="field" value="${field}">
+			<input type="hidden" name="keyword" value="${keyword}">
+		</c:if>
+		<input type="hidden" name="receiver" value="${rvo.empno}">
 	</form>
 	<form action="/erp/note/sdetail" name="sd" method="post">
 		<input type="hidden" name="pageNum" value="${pageNum}">
@@ -69,7 +86,7 @@
 		내용 : ${vo.content}<br>
 	<hr>
 		<c:if test="${empno==rvo.empno}"><button onclick="javascript:jumpPage('rp')">답장하기</button></c:if>
-		<button onclick="javascript:jumpPage('${ad}')">목록 보기</button>
-		
+		<button onclick="javascript:jumpPage('${ad}')">목록보기</button>
+		<c:if test="${empno==rvo.empno}"><button onclick="javascript:del()">쪽지삭제</button></c:if>
 	</body>
 </html>

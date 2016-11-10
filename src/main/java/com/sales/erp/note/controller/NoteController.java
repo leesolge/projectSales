@@ -17,6 +17,12 @@ public class NoteController {
 	@Autowired
 	private NoteService nos;
 	
+	@RequestMapping("/note/notedel")
+	public ModelAndView deleteNote(HttpServletRequest request){
+		ModelAndView mav = nos.deleteN(request);
+		return mav;
+	}
+	
 	@RequestMapping("/note/reply")
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = nos.reply(request);

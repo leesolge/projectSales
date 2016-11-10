@@ -16,6 +16,11 @@ public class NoteDAO implements NoteMapper{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public void deleteOne(int noteNum) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		noteMapper.deleteOne(noteNum);
+	}
+
 	public void writePro(NoteVO vo) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		noteMapper.writePro(vo);

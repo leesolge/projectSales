@@ -3,6 +3,10 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sales.erp.note.dao.NoteMapper">
+	<update id="deleteOne" parameterType="java.lang.Integer">
+		UPDATE NOTEDB SET DELETED=1 WHERE NOTENUM = #{noteNum}
+	</update>
+	
 	<select id="selectReceive" parameterType="java.lang.String" resultType="com.sales.erp.note.vo.NoteVO">
 		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM (SELECT * FROM NOTEDB WHERE RECEIVER=#{empno} ORDER BY SENDDATE DESC) WHERE DELETED=0) WHERE R<![CDATA[>=]]>1 AND R<![CDATA[<=]]>10
 	</select>
