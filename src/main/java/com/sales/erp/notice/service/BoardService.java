@@ -1,4 +1,4 @@
-package com.sales.erp.boardService;
+package com.sales.erp.notice.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.boardDAO.BoardDAO;
-import com.sales.erp.boardVO.BoardVO;
+import com.sales.erp.notice.dao.BoardDAO;
+import com.sales.erp.notice.vo.BoardVO;
 
 @Service
 public class BoardService{

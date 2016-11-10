@@ -1,4 +1,4 @@
-package com.sales.erp.boardVO;
+package com.sales.erp.notice.vo;
 
 import java.util.Date;
 

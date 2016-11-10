@@ -1,10 +1,10 @@
-package com.sales.erp.boardDAO;
+package com.sales.erp.notice.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.sales.erp.boardVO.BoardVO;
+import com.sales.erp.notice.vo.BoardVO;
 
 public interface BoardMapper extends Serializable {
 	

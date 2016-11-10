@@ -9,6 +9,6 @@ import com.sales.erp.member.dao.MemberDAOImpl;
 public class ManagerController {
 
 	@Autowired
-	private MemberDAOImpl sMemberDAOImpl;
+	private MemberDAOImpl MemberDAOImpl;
 
 }

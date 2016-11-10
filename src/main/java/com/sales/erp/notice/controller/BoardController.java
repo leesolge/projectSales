@@ -1,17 +1,15 @@
-package com.sales.erp.boardController;
+package com.sales.erp.notice.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.boardService.BoardService;
-import com.sales.erp.boardVO.BoardVO;
+import com.sales.erp.notice.service.BoardService;
+import com.sales.erp.notice.vo.BoardVO;
 
 @Controller
 public class BoardController {
