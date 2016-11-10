@@ -3,9 +3,9 @@ package com.sales.erp.note.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
-import com.sales.erp.smember.SMemberVO;
 
 public interface NoteMapper extends Serializable{
 
@@ -17,7 +17,7 @@ public interface NoteMapper extends Serializable{
 	 int countSendAll(String empno);
 	 ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo);
 	 ArrayList<NoteVO> selectSendAll(NoteSearchVO vo);
-	 ArrayList<SMemberVO> receiverCheck(String empno);
+	 ArrayList<MemberVO> receiverCheck(String empno);
 	 void writePro(NoteVO vo);
-	 SMemberVO getNameTeamAuth(String empno);
+	 MemberVO getNameTeamAuth(String empno);
 }

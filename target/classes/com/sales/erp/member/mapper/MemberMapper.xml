@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.member.dao.MemberMapper">
+	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
+    <insert id="insertMember" parameterType="com.sales.erp.member.vo.MemberVO" >
+        INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
+        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, #{portrait}, #{account}, #{team})
+    </insert>
+    
+    <select id="selectMember" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
+	<select id="Admin_Ok_Member" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH='ROLE_EE'
+	</select>
+	
+	<select id="Admin_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
+	</select>
+	
+	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
+    <update id="Update_Approve_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	UPDATE SMEMBER SET AUTH='ROLE_EMPLOYEE' WHERE EMPNO=#{empno}        
+    </update>
+    
+   <delete id="Update_Cancel_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
+    </delete>
+    
+    <update id="Admin_Update_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}         
+    </update>
+    
+    <select id="Count_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
+    </select>
+    
+    <select id="Count_Ok_Member" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE'
+    </select>
+</mapper>

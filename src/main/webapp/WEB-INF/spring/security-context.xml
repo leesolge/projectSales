@@ -41,12 +41,12 @@
 	</security:http>
 
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>    
-	<bean id="SMemberUserDetailsService" class="com.sales.erp.smember.SMemberUserDetailsService" />
-	<bean id="SMemberAuthenticationProvider" class="com.sales.erp.smember.SMemberAuthenticationProvider" />
+	<!-- <bean id="MemberUserDetailsService" class="com.sales.erp.member.vo.MemberUserDetailsService" /> -->
+	<bean id="MemberAuthenticationProvider" class="com.sales.erp.member.vo.MemberAuthenticationProvider" />
 
 
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider 	ref="SMemberAuthenticationProvider" />
+		<security:authentication-provider ref="MemberAuthenticationProvider" />
 	</security:authentication-manager>
 
 </beans>

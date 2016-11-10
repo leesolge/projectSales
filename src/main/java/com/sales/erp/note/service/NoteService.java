@@ -12,10 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.dao.NoteDAO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
-import com.sales.erp.smember.SMemberVO;
 
 @Service
 public class NoteService {
@@ -41,8 +41,8 @@ public class NoteService {
 		String empno = auth.getName();
 		mav.addObject("sender", empno);
 		
-		SMemberVO sendervo = dao.getNameTeamAuth(empno);
-		SMemberVO receivervo = dao.getNameTeamAuth(receiver);
+		MemberVO sendervo = dao.getNameTeamAuth(empno);
+		MemberVO receivervo = dao.getNameTeamAuth(receiver);
 		
 		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
 			sendervo.setAuth("사원");
@@ -97,10 +97,10 @@ public class NoteService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
 		ModelAndView mav = new ModelAndView();
-		SMemberVO senderVo = dao.getNameTeamAuth(empno);
+		MemberVO senderVo = dao.getNameTeamAuth(empno);
 		if(rec.equals("0")){
 		}else{
-			SMemberVO receiverVo = dao.getNameTeamAuth(rec);
+			MemberVO receiverVo = dao.getNameTeamAuth(rec);
 			if(receiverVo.getAuth().equals("ROLE_EMPLOYEE")){
 				receiverVo.setAuth("사원");
 			}
@@ -113,9 +113,9 @@ public class NoteService {
 		mav.addObject("receiverVo", receiverVo);
 		}
 		
-		ArrayList<SMemberVO> receiverList = dao.receiverCheck(empno);
+		ArrayList<MemberVO> receiverList = dao.receiverCheck(empno);
 		System.out.println(receiverList);
-		for(SMemberVO svo:receiverList){
+		for(MemberVO svo:receiverList){
 			if(svo.getAuth().equals("ROLE_EMPLOYEE")){
 				svo.setAuth("사원");
 			}
@@ -156,8 +156,8 @@ public class NoteService {
 		if(vo.getReceiver().equals(empno)&&vo.getChecks()==0){
 			dao.checkNote(notenum);
 		}
-		SMemberVO sendervo = dao.getNameTeamAuth(vo.getSender());
-		SMemberVO receivervo = dao.getNameTeamAuth(vo.getReceiver());
+		MemberVO sendervo = dao.getNameTeamAuth(vo.getSender());
+		MemberVO receivervo = dao.getNameTeamAuth(vo.getReceiver());
 		
 		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
 			sendervo.setAuth("사원");

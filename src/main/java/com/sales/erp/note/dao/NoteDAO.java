@@ -6,9 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
-import com.sales.erp.smember.SMemberVO;
 
 @Repository
 public class NoteDAO implements NoteMapper{
@@ -64,12 +64,12 @@ public class NoteDAO implements NoteMapper{
 		return noteMapper.selectSendAll(vo);
 	}
 	
-	public ArrayList<SMemberVO> receiverCheck(String empno) {
+	public ArrayList<MemberVO> receiverCheck(String empno) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.receiverCheck(empno);
 	}
 
-	public SMemberVO getNameTeamAuth(String empno) {
+	public MemberVO getNameTeamAuth(String empno) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.getNameTeamAuth(empno);
 	}

@@ -35,11 +35,11 @@
 		UPDATE NOTEDB SET CHECKS=1 WHERE NOTENUM = #{noteNum}
 	</update>
 	
-	<select id="receiverCheck" parameterType="java.lang.String" resultType="com.sales.erp.smember.SMemberVO">
+	<select id="receiverCheck" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT EMPNO, NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO!=#{empno} AND AUTH!='ROLE_EE' ORDER BY TEAM, AUTH
 	</select>	
 	
-	<select id="getNameTeamAuth" parameterType="java.lang.String" resultType="com.sales.erp.smember.SMemberVO">
+	<select id="getNameTeamAuth" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT EMPNO, NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
 	
