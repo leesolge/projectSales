@@ -34,6 +34,8 @@
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')" />
 			<security:intercept-url pattern="/main"
 			access="isAuthenticated()" />
+			<security:intercept-url pattern="/note/**"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/**"
 			access="permitAll" />
 	</security:http>
