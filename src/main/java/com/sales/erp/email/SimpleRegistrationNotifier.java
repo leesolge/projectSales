@@ -17,9 +17,9 @@ public class SimpleRegistrationNotifier implements RegistrationNotifier {
 	@Override
 	public void sendMail(SMemberVO vo) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setSubject("[Simple] 됬다고!!");
+		message.setSubject("[승인거부]죄송합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 거부되었습니다.");
 		message.setFrom("anzolee@naver.com");
-		message.setText("이건 실험용입니다.");
+		message.setText("다음기회에....");
 		message.setTo(vo.getEmail());
 		try {
 			mailSender.send(message);
