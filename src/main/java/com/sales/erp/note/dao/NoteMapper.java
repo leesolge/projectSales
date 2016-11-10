@@ -1,10 +1,10 @@
-package com.sales.erp.noteDAO;
+package com.sales.erp.note.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.sales.erp.noteVO.NoteSearchVO;
-import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.note.vo.NoteSearchVO;
+import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.smember.SMemberVO;
 
 public interface NoteMapper extends Serializable{

@@ -1,4 +1,4 @@
-package com.sales.erp.noteDAO;
+package com.sales.erp.note.dao;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.noteVO.NoteSearchVO;
-import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.note.vo.NoteSearchVO;
+import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.smember.SMemberVO;
 
 @Repository

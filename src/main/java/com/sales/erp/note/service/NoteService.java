@@ -1,4 +1,4 @@
-package com.sales.erp.noteService;
+package com.sales.erp.note.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.noteDAO.NoteDAO;
-import com.sales.erp.noteVO.NoteSearchVO;
-import com.sales.erp.noteVO.NoteVO;
+import com.sales.erp.note.dao.NoteDAO;
+import com.sales.erp.note.vo.NoteSearchVO;
+import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.smember.SMemberVO;
 
 @Service
@@ -22,6 +22,52 @@ public class NoteService {
 	
 	@Autowired
 	private NoteDAO dao;
+	
+	public ModelAndView reply(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		String pageCheck = request.getParameter("pageCheck");
+		mav.addObject("pageCheck", pageCheck);
+		int notenum = Integer.parseInt(request.getParameter("notenum"));
+		mav.addObject("notenum", notenum);
+		String pageNum = request.getParameter("pageNum");
+		mav.addObject("pageNum", pageNum);
+		String field = request.getParameter("field");
+		mav.addObject("field", field);
+		String keyword = request.getParameter("keyword");
+		mav.addObject("keyword", keyword);
+		String receiver = request.getParameter("receiver");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		mav.addObject("sender", empno);
+		
+		SMemberVO sendervo = dao.getNameTeamAuth(empno);
+		SMemberVO receivervo = dao.getNameTeamAuth(receiver);
+		
+		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
+			sendervo.setAuth("사원");
+		}
+		if(sendervo.getAuth().equals("ROLE_MANAGER")){
+			sendervo.setAuth("팀장");
+		}
+		if(sendervo.getAuth().equals("ROLE_ADMIN")){
+			sendervo.setAuth("관리자");
+		}
+		
+		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")){
+			receivervo.setAuth("사원");
+		}
+		if(receivervo.getAuth().equals("ROLE_MANAGER")){
+			receivervo.setAuth("팀장");
+		}
+		if(receivervo.getAuth().equals("ROLE_ADMIN")){
+			receivervo.setAuth("관리자");
+		}
+		mav.addObject("svo", sendervo);
+		mav.addObject("rvo", receivervo);
+		
+		return mav;
+	}
 	
 	public ModelAndView writePro(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
@@ -39,6 +85,10 @@ public class NoteService {
 			mav.setViewName("redirect:/note/sdetail");
 		}else if(vo.getPageCheck().equals("etc")){
 			mav.setViewName("redirect:/note/list");
+		}else if(vo.getPageCheck().equals("rbin")){
+			
+		}else if(vo.getPageCheck().equals("sbin")){
+			
 		}
 		return mav;
 	}
@@ -84,22 +134,60 @@ public class NoteService {
 		return mav;
 	}
 	
-	public ModelAndView viewNoteContent(int notenum, String pageCheck){
+	public ModelAndView viewNoteContent(HttpServletRequest request){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String pageCheck = request.getParameter("pageCheck");
+		int notenum = Integer.parseInt(request.getParameter("notenum"));
+		
+		if(pageCheck.equals("receive")||pageCheck.equals("send")){
+			String pageNum = request.getParameter("pageNum");
+			mav.addObject("pageNum", pageNum);
+			String field = request.getParameter("field");
+			mav.addObject("field", field);
+			String keyword = request.getParameter("keyword");
+			mav.addObject("keyword", keyword);
+		}
 		
 		NoteVO vo = dao.viewNote(notenum);
 		if(vo.getReceiver().equals(empno)&&vo.getChecks()==0){
 			dao.checkNote(notenum);
+		}
+		SMemberVO sendervo = dao.getNameTeamAuth(vo.getSender());
+		SMemberVO receivervo = dao.getNameTeamAuth(vo.getReceiver());
+		
+		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
+			sendervo.setAuth("사원");
+		}
+		if(sendervo.getAuth().equals("ROLE_MANAGER")){
+			sendervo.setAuth("팀장");
+		}
+		if(sendervo.getAuth().equals("ROLE_ADMIN")){
+			sendervo.setAuth("관리자");
+		}
+		
+		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")){
+			receivervo.setAuth("사원");
+		}
+		if(receivervo.getAuth().equals("ROLE_MANAGER")){
+			receivervo.setAuth("팀장");
+		}
+		if(receivervo.getAuth().equals("ROLE_ADMIN")){
+			receivervo.setAuth("관리자");
 		}
 		
 		Date date = vo.getSenddate();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
 		String change = sdf.format(date);
 		vo.setChange(change);
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("svo", sendervo);
+		mav.addObject("rvo", receivervo);
 		mav.addObject("pageCheck", pageCheck);
+		mav.addObject("empno", empno);
 		return mav;
 	}
 	/*받은 쪽지만 가져오기*/

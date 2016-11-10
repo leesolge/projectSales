@@ -66,6 +66,9 @@
 	<form action="/erp/note/view" name="cont" method="post">
 		<input type="hidden" name="pageCheck" value="send">
 		<input type="hidden" name="notenum" value="0">
+		<input type="hidden" name="pageNum" value="${pageNum}">
+		<input type="hidden" name="field" value="${field}">
+		<input type="hidden" name="keyword" value="${keyword}">
 	</form>
 	
 	<h4>보낸 쪽지</h4>

@@ -1,4 +1,4 @@
-package com.sales.erp.noteVO;
+package com.sales.erp.note.vo;
 
 public class NoteSearchVO {
 	private String empno;
