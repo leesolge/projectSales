@@ -10,19 +10,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.dao.MemberDAOImpl;
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.member.vo.SendMail;
 import com.sales.erp.member.vo.MemberSearch;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	private MemberDAOImpl sMemberDAOImpl;
-
+	private MemberDAOImpl memberDAOImpl;
+	
+	@Autowired
+	private SendMail mail;
+	
 	@RequestMapping("/admin/member_ok")
 	public ModelAndView member_ok() {
 		ModelAndView result = new ModelAndView();
-		int count = sMemberDAOImpl.Count_Ok_Member();
-		List<MemberVO> memberList = sMemberDAOImpl.Admin_Ok_Member();
+		int count = memberDAOImpl.Count_Ok_Member();
+		List<MemberVO> memberList = memberDAOImpl.Admin_Ok_Member();
 		result.addObject("count", count);
 		result.addObject("result", memberList);
 		result.setViewName("admin/member_ok");
@@ -47,8 +51,8 @@ public class AdminController {
 	    search.setField(field);
 	    search.setWord("%" + word + "%");  
 		ModelAndView result = new ModelAndView();
-		int count = sMemberDAOImpl.Count_Approved_Member(search);
-		List<MemberVO> memberList = sMemberDAOImpl.Admin_Approved_Member(search);
+		int count = memberDAOImpl.Count_Approved_Member(search);
+		List<MemberVO> memberList = memberDAOImpl.Admin_Approved_Member(search);
 		result.addObject("field", field);
 		result.addObject("word", word);
 		result.addObject("count", count);
@@ -61,7 +65,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/Approve")
 	public String Approve(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
-		sMemberDAOImpl.Update_Approve_Member(empno);
+		memberDAOImpl.Update_Approve_Member(empno);
 		
 		return "redirect:/admin/member_ok";
 	}
@@ -69,7 +73,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/Cancel")
 	public String Cancel(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
-		sMemberDAOImpl.Update_Cancel_Member(empno);
+		MemberVO vo = memberDAOImpl.selectMember(empno);
+		mail.sendMail(vo);
+		memberDAOImpl.Update_Cancel_Member(empno);
 		
 		return "redirect:/admin/member_ok";
 	}
@@ -78,7 +84,7 @@ public class AdminController {
 	public ModelAndView member_info(HttpServletRequest request) {
 		String empno = request.getParameter("empno");
 		ModelAndView result = new ModelAndView();
-		MemberVO vo = sMemberDAOImpl.selectMember(empno);
+		MemberVO vo = memberDAOImpl.selectMember(empno);
 		result.addObject("vo", vo);
 		result.setViewName("admin/member_info");
 
@@ -89,7 +95,7 @@ public class AdminController {
 	public ModelAndView member_update(HttpServletRequest request) {
 		String empno = request.getParameter("empno");
 		ModelAndView result = new ModelAndView();
-		MemberVO vo = sMemberDAOImpl.selectMember(empno);
+		MemberVO vo = memberDAOImpl.selectMember(empno);
 		result.addObject("vo", vo);
 		result.setViewName("admin/member_update");
 
@@ -105,7 +111,7 @@ public class AdminController {
 		vo.setEmpno(empno);
 		vo.setAuth(auth);
 		vo.setTeam(team);
-		sMemberDAOImpl.Admin_Update_Member(vo);
+		memberDAOImpl.Admin_Update_Member(vo);
 		
 		return "redirect:/admin/member_list";
 	}

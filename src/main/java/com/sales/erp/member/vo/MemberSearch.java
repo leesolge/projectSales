@@ -2,7 +2,15 @@ package com.sales.erp.member.vo;
 
 public class MemberSearch {
 	private String field, word;
+	private int totalCount, startPage, endPage;
+	private boolean prev, next;
 
+	private int displayPageNum = 10;
+	
+	private Paging page;
+	
+	
+	
 	public String getField() {
 		return field;
 	}
