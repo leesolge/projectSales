@@ -14,3 +14,17 @@ create table product(
 select * from PRODUCT;
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
 values('1004','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('1005','asd','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('1006','erwqwr','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('6121','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('10084','qtwer','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('1009','qwt','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('2104','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
+values('3412','땡땡땡','1000','2000','1000',null,'짱이에요짱');
