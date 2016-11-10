@@ -56,5 +56,39 @@
 			<input type="submit" name="submit" value="검색"> 
 		</form>
 	</div>
+	<table>
+	<tr>
+		<td align="center">
+			<c:if test="${pg > block}">
+				[<a href="/erp/admin/member_list?pg=1&field=${field}&word=${word}">◀◀</a>]
+				[<a href="/erp/admin/member_list?pg=${fromPage-1}&field=${field}&word=${word}">◀</a>
+			</c:if>
+			<c:if test="${pg<=block}">
+				[<span>◀◀</span>]
+				[<span>◀</span>]
+			</c:if>
+			
+			<!-- 블록 범위 찍기 -->
+			<c:forEach begin="${fromPage}" end="${toPage}" var="i">
+				<c:if test="${i==pg}">[${i}]</c:if>
+				<c:if test="${i!=pg}">
+					[<a href="/erp/admin/member_list?pg=${i}&field=${field}&word=${word}">${i}</a>]
+				</c:if>
+			</c:forEach>
+			
+			<!-- 다음, 이후 -->
+			<c:if test="${toPage<allPage}">
+				[<a href="/erp/admin/member_list?pg=${toPage+1}&field=${field}&word=${word}">▶</a>]
+				[<a href="/erp/admin/member_list?pg=${allPage}&field=${field}&word=${word}">▶▶</a>]
+			</c:if>
+			<c:if test="${toPage>=allPage}">
+				[<span>▶</span>]
+				[<span>▶▶</span>]
+			
+			</c:if>
+		
+		</td>
+	</tr>
+	</table>
 </body>
 </html>

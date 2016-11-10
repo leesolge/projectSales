@@ -2,14 +2,23 @@ package com.sales.erp.member.vo;
 
 public class MemberSearch {
 	private String field, word;
-	private int totalCount, startPage, endPage;
-	private boolean prev, next;
+	private int start, end;
+	
+	public int getStart() {
+		return start;
+	}
 
-	private int displayPageNum = 10;
-	
-	private Paging page;
-	
-	
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	
 	public String getField() {
 		return field;

@@ -36,27 +36,58 @@ public class AdminController {
 
 	@RequestMapping("/admin/member_list")
 	public ModelAndView member_list(HttpServletRequest request) {
+		
+		int pg = 1;
+		String strPg = request.getParameter("pg");
 		String field = request.getParameter("field");
 		String word = request.getParameter("word");
 		
 		if(field == null || field.equals("")){
 	        field = "name";
 	    }
-	    
 	    if(word == null || word.equals("")){
 	        word = "";
 	    }    
-	    
-	    MemberSearch search = new MemberSearch();
+		if(strPg != null){
+			pg = Integer.parseInt(strPg);
+		}
+		
+		MemberSearch search = new MemberSearch();
+		
+		int rowSize = 10;
+		int start = (pg*rowSize)-(rowSize-1);
+		int end = pg*rowSize;
+		
+		int block = 10; //한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] >>
+		int fromPage = ((pg-1)/block*block)+1; //보여줄 페이지의 시작
+		//((1-1)/10*10)
+		int toPage = ((pg-1)/block*block)+block; //보여줄 페이지의 끝
+
+		System.out.println(start + " " + end);
 	    search.setField(field);
-	    search.setWord("%" + word + "%");  
+	    search.setWord("%" + word + "%");
+	    search.setEnd(end);
+	    search.setStart(start);
+	    int count = memberDAOImpl.Count_Approved_Member(search);
+	    int allPage = (int) Math.ceil(count/(double)rowSize);
+		if(toPage > allPage) {
+			toPage = allPage;
+		}
 		ModelAndView result = new ModelAndView();
-		int count = memberDAOImpl.Count_Approved_Member(search);
+		
 		List<MemberVO> memberList = memberDAOImpl.Admin_Approved_Member(search);
+		System.out.println(memberList);
 		result.addObject("field", field);
 		result.addObject("word", word);
 		result.addObject("count", count);
+		result.addObject("start", start);
+		result.addObject("end", end);
 		result.addObject("result", memberList);
+		result.addObject("pg", pg);
+		result.addObject("allPage", allPage);
+		result.addObject("block", block);
+		result.addObject("fromPage", fromPage);
+		result.addObject("toPage", toPage);
 		result.setViewName("admin/member_list");
 
 		return result;

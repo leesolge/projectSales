@@ -22,7 +22,9 @@
 	</select>
 	
 	<select id="Admin_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
-		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
+		<![CDATA[
+		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE ${field} LIKE #{word} AND AUTH NOT LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R >= #{start} AND R <= #{end}
+		]]>
 	</select>
 	
 	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
