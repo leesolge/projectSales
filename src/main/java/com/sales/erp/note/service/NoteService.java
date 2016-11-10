@@ -29,13 +29,15 @@ public class NoteService {
 		mav.addObject("pageCheck", pageCheck);
 		int notenum = Integer.parseInt(request.getParameter("notenum"));
 		mav.addObject("notenum", notenum);
-		String pageNum = request.getParameter("pageNum");
-		mav.addObject("pageNum", pageNum);
-		String field = request.getParameter("field");
-		mav.addObject("field", field);
-		String keyword = request.getParameter("keyword");
-		mav.addObject("keyword", keyword);
 		String receiver = request.getParameter("receiver");
+		if(!pageCheck.equals("etc")){
+			String pageNum = request.getParameter("pageNum");
+			String field = request.getParameter("field");
+			String keyword = request.getParameter("keyword");
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("field", field);
+			mav.addObject("keyword", keyword);
+		}
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
@@ -186,6 +188,7 @@ public class NoteService {
 		mav.addObject("vo", vo);
 		mav.addObject("svo", sendervo);
 		mav.addObject("rvo", receivervo);
+		mav.addObject("notenum", notenum);
 		mav.addObject("pageCheck", pageCheck);
 		mav.addObject("empno", empno);
 		return mav;

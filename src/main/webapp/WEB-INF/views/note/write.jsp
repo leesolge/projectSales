@@ -6,9 +6,42 @@
 <html>
 	<head>
 		<title>Title</title>
+		<script type="text/javascript">
+			function jumpPage(wh){
+				var name=wh;
+				document.forms[name].submit();
+			}
+			function writePage(receive){
+				var writes = document.write;
+				writes.rec.value=receive;
+				writes.submit();
+			}
+			function content(vl){
+				var cont = document.cont;
+				cont.notenum.value=vl;
+				cont.submit();
+			}
+		</script>
 	</head>
 	
 	<body>
+	<c:if test="${pageCheck=='receive'}"><c:set var="ad" value="rd"/></c:if>
+	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
+	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>
+	${ad}
+	<form action="/erp/note/sdetail" name="sd" method="post">
+		<input type="hidden" name="pageNum" value="${pageNum}">
+		<input type="hidden" name="field" value="${field}">
+		<input type="hidden" name="keyword" value="${keyword}">
+	</form>
+	<form action="/erp/note/rdetail" name="rd" method="post">
+		<input type="hidden" name="pageNum" value="${pageNum}">
+		<input type="hidden" name="field" value="${field}">
+		<input type="hidden" name="keyword" value="${keyword}">
+	</form>
+	<form action="/erp/note/list" name="li" method="post">
+	</form>
+	
 		<div style="margin: auto;">
 			<form action="/erp/note/writes" method="post">
 				<input type="hidden" name="pageCheck" value="${pageCheck}">
@@ -37,8 +70,7 @@
 					</tr>
 					<tr>
 						<td><input type="submit" value="전송"></td>
-						<td><input
-						 type="reset" value="리셋"></td>
+						<td><button onclick="javascript:jumpPage('${ad}')">목록 보기</button></td>
 					</tr>
 				</table>
 			</form>

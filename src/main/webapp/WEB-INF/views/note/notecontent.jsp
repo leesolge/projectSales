@@ -29,9 +29,15 @@
 	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
 	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>
 	${ad}
-	<form action="/erp/note/write" name="write" method="post">
-		<input type="hidden" name="pageCheck" value="etc">
-		<input type="hidden" name="rec" value="0">
+	<form action="/erp/note/reply" name="rp" method="post">
+		<input type="hidden" name="pageCheck" value="${pageCheck}">
+		<input type="hidden" name="notenum" value="${notenum}">
+		<c:if test="${pageCheck!='etc'}">
+			<input type="hidden" name="pageNum" value="${pageNum}">
+			<input type="hidden" name="field" value="${field}">
+			<input type="hidden" name="keyword" value="${keyword}">
+		</c:if>
+		<input type="hidden" name="receiver" value="${svo.empno}">
 	</form>
 	<form action="/erp/note/sdetail" name="sd" method="post">
 		<input type="hidden" name="pageNum" value="${pageNum}">
