@@ -43,6 +43,15 @@
 			</div>
 		</li>
 		</sec:authorize>
+		
+		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">		
+		<li class="w3-dropdown-hover" style="width: 15%">
+			<a href="#">상품 메뉴<i class="fa fa-caret-down"></i>	</a>
+			<div class="w3-dropdown-content w3-blue-grey w3-card-4">
+				<a href="/erp/product/list">상품 정보</a> 
+			</div>
+		</li>
+		</sec:authorize>
 	</ul>
 </div>
 

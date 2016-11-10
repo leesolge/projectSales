@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,9 +16,9 @@
 		IMAGE : <input type="file" name="file"><br><hr>
 	    EXPLA : <input type="text" name="proexpla"><br><hr>
 	    
-	    <input type="submit" name="confirm" value="Ãß°¡¿Ï·á">
-		<input type="reset" name="reset" value="´Ù½Ã¾²±â">
-		<input type="button" value="Ãë¼Ò" onclick="redirect:/product/produtList"> 
+	    <input type="submit" name="confirm" value="ì¶”ê°€ì™„ë£Œ">
+		<input type="reset" name="reset" value="ë‹¤ì‹œì“°ê¸°">
+		<input type="button" value="ì·¨ì†Œ" onclick="redirect:/product/produtList"> 
 	</form>
 </body>
 </html>
