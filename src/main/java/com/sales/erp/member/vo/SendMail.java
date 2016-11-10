@@ -12,11 +12,11 @@ public class SendMail {
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(MemberVO vo) {
+	public void sendMail(MemberVO vo, String subject, String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setSubject("[승인거부]죄송합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 거부되었습니다.");
+		message.setSubject(subject);
 		message.setFrom("anzolee@naver.com");
-		message.setText("다음기회에....");
+		message.setText(text);
 		message.setTo(vo.getEmail());
 		try {
 			mailSender.send(message);

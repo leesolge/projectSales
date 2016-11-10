@@ -1,16 +1,23 @@
---EMPNO    = ID 역할 및 사번
+DROP TABLE SMEMBER;
+SELECT * FROM SMEMBER;
+
+SELECT EMPNO AS USERID, PWD AS PASSWD, 1 ENABLED FROM SMEMBER
+                              WHERE EMPNO=100;
+SELECT EMPNO, AUTH FROM SMEMBER WHERE EMPNO=100;
+SELECT EMPNO AS USERID, PWD AS PASSWD, 1 ENABLED FROM SMEMBER
+--EMPNO      = ID 역할 및 사번
 --PWD      = 비밀번호
---NAME     = 이름
+--NAME      = 이름
 --GENDER   = 성별
---BIRTH    = 생일
---JOIN     = 입사일
---ADDRESS  = 주소
---PHONE    = 전화번호
---EMAIL    = 이메일
---AUTH     = 권한
---PORTRAIT = 증명사진
---ACCOUNT  = 계좌번호
---TEAM     = 팀
+--BIRTH      = 생일
+--JOIN      = 입사일
+--ADDRESS   = 주소
+--PHONE      = 전화번호
+--EMAIL      = 이메일
+--AUTH      = 권한
+--PORTRAIT   = 증명사진
+--ACCOUNT   = 계좌번호
+--TEAM      = 팀
 CREATE TABLE SMEMBER(
    EMPNO VARCHAR2(10) PRIMARY KEY,
    PWD VARCHAR2(30) NOT NULL,
@@ -31,5 +38,10 @@ CREATE SEQUENCE NUMREGISTER
 START WITH 300300
 NOCACHE;
 
+SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME='천재' AND EMAIL= 'leesolge@gmail.com' )
+
+SELECT * FROM SMEMBER WHERE NAME='천재' AND EMAIL= 'leesolge@gmail.com' AND AUTH NOT LIKE 'ROLE_EE' AND MIN(EMPNO)
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
 VALUES('100', 'oracle', '관리자', '없음', date '1985-9-25', date '2010-3-27', '회사', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_ADMIN', null, '01-4829-333-2201', '관리팀');
+INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
+VALUES(to_char(numregister.nextval), 'oracle', '천재', '남', date '1985-9-25', date '2010-4-27', '우리동네', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', '영업1팀');

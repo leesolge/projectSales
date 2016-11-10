@@ -3,6 +3,9 @@ package com.sales.erp.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sales.erp.member.dao.MemberDAOImpl;
 import com.sales.erp.member.vo.MemberJoinVO;
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.member.vo.SendMail;
 
 @Controller
 public class JoinController {
 	
 	@Autowired
-	private MemberDAOImpl sMemberDAOImpl;	
+	private MemberDAOImpl memberDAOImpl;	
+	
+	@Autowired
+	private SendMail mail;
 	
 	@RequestMapping("/join")	
 	public String Join() {		
@@ -72,10 +79,64 @@ public class JoinController {
 		member.setTeam(vo.getTeam());
 		member.setPortrait(vo.getPortrait());
 		
-		sMemberDAOImpl.insertMember(member);
+		memberDAOImpl.insertMember(member);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("home");
+		mav.addObject("member", member);
+		mav.setViewName("/join/joinSuccess");
+		return mav;
+	}
+	 
+	
+	
+	@RequestMapping("/confirmID")	
+	public String confirmID() {		
+		return "/join/confirmID";
+	}
+	
+	@RequestMapping(value="/ConfirmID_Member", method=RequestMethod.POST)	
+	public ModelAndView ConfirmID_Member(HttpServletRequest request) {		
+		
+		MemberVO member = new MemberVO ();
+		member.setName(request.getParameter("name"));
+		member.setEmail(request.getParameter("email"));
+		
+		ModelAndView mav = new ModelAndView();
+		member = memberDAOImpl.ConfirmID_Member(member);
+		if(member != null){
+			String subject = "[ID확인]" + member.getName() + "님의 ID요청 확인메일입니다.";
+			String text = "귀하의 아이디는 [ " + member.getEmpno() + " ]입니다.";
+			mail.sendMail(member, subject, text);
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Success");
+			return mav;
+		}
+		else{
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Fail");
+			return mav;
+		}		
+	}
+	
+	@RequestMapping("/confirmPWD")	
+	public String confirmPWD() {		
+		return "/join/confirmPWD";
+	}
+	
+	@RequestMapping(value="/ConfirmPWD_Member", method=RequestMethod.POST)	
+	public ModelAndView ConfirmPWD_Member(HttpServletRequest request) {		
+		
+		MemberVO member = new MemberVO ();
+		member.setEmpno(request.getParameter("empno"));
+		member.setName(request.getParameter("name"));
+		member.setEmail(request.getParameter("email"));
+		
+		ModelAndView mav = new ModelAndView();
+		MemberVO vo = memberDAOImpl.ConfirmID_Member(member);
+		String subject = "[ID확인]" + vo.getName() + "님의 ID요청확인 메일입니다.";
+		String text = "귀하의 아이디는 [ " + vo.getEmpno() + " ]입니다.";
+		mail.sendMail(vo, subject, text);
+		memberDAOImpl.Update_Cancel_Member(member.getEmpno());
 		return mav;
 	}
 	

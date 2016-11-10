@@ -42,6 +42,12 @@
 						<td><input type="submit" value="로그인" class="w3-btn w3-round-large" ></td>					
 						<td><input type="button" value="회원가입"  class="w3-btn w3-round-large"  onclick="location.href='join'""></td>
 					</tr>				
+					<tr>
+					<td colspan="2"><a href="/erp/confirmID">아이디 찾기</a></td> 
+					</tr>
+					<tr>
+					<td colspan="2"><a href="/erp/confirmPWD">비밀번호 찾기</a></td>
+					</tr>
 				</table>
 			</form>
 		</div>

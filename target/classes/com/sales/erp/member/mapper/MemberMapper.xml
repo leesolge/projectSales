@@ -13,6 +13,10 @@
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
 	
+	 <select id="ConfirmID_Member" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME=#{name} AND EMAIL= #{email} )
+	</select>
+	
 	<select id="Admin_Ok_Member" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE AUTH='ROLE_EE'
 	</select>

@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.member.vo.MemberSearch;
+import com.sales.erp.member.vo.MemberVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -83,4 +83,11 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return count;
 	} 	
+	
+	@Override
+	public MemberVO ConfirmID_Member(MemberVO member){
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
+		MemberVO vo = memberMapper.ConfirmID_Member(member);
+		return vo;
+	}
 }

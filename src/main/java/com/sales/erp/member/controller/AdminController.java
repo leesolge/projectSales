@@ -74,7 +74,9 @@ public class AdminController {
 	public String Cancel(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 		MemberVO vo = memberDAOImpl.selectMember(empno);
-		mail.sendMail(vo);
+		String subject = "[승인거부]죄송합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 거부되었습니다.";
+		String text = "다음 기회에 도전해 주십시요";
+		mail.sendMail(vo, subject, text);
 		memberDAOImpl.Update_Cancel_Member(empno);
 		
 		return "redirect:/admin/member_ok";

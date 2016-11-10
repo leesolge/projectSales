@@ -17,4 +17,5 @@ public interface MemberMapper extends Serializable{
 	public void Admin_Update_Member(MemberVO vo); // 사원정보 수정
 	public int Count_Approved_Member(MemberSearch vo); // 사원 수
 	public int Count_Ok_Member(); // 승인 대기자 수
+	public MemberVO ConfirmID_Member(MemberVO vo);//ID 찾기
 }

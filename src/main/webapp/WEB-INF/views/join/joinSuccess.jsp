@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
 	${member.name }님 회원가입 감사합니다.
-	귀하의 아이디는 ${member.empno } 입니다.
-	로그인후 사용해주시기 바랍니다.
+	승인될때 까지 기다려 주시기 바랍니다.
+	아이디는 입력하신 메일로 발송됩니다.
 </body>
 </html>
