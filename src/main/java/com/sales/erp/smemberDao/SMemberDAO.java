@@ -14,6 +14,6 @@ public interface SMemberDAO {
 	public void Update_Approve_Member(String empno); // 가입승인
 	public void Update_Cancel_Member(String empno); // 반려, 사원정보 삭제
 	public void Admin_Update_Member(SMemberVO vo); // 사원정보 수정
-	public int Count_Approved_Member(); // 사원 수
+	public int Count_Approved_Member(SearchMember vo); // 사원 수
 	public int Count_Ok_Member(); // 승인 대기자 수
 }

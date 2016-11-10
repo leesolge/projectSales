@@ -45,9 +45,8 @@ public class AdminController {
 	    SearchMember search = new SearchMember();
 	    search.setField(field);
 	    search.setWord("%" + word + "%");  
-	    
 		ModelAndView result = new ModelAndView();
-		int count = sMemberDAOImpl.Count_Approved_Member();
+		int count = sMemberDAOImpl.Count_Approved_Member(search);
 		List<SMemberVO> memberList = sMemberDAOImpl.Admin_Approved_Member(search);
 		result.addObject("field", field);
 		result.addObject("word", word);

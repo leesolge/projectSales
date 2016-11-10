@@ -45,16 +45,16 @@
 			</tr>
 			</c:forEach>
 		</table>
+		<form action="/erp/admin/member_list" name="search" method="post">
+			<select name="field">
+	   			<c:if test="${field == 'name'}"><option value="name" selected="selected">이름</option></c:if>
+	   			<c:if test="${field != 'name'}"><option value="name">이름</option></c:if>
+	   			<c:if test="${field == 'team'}"><option value="team" selected="selected">소속</option></c:if>
+	   			<c:if test="${Field != 'team'}"><option value="team">소속</option></c:if>
+			</select>
+			<input type="text" name="word" placeholder="검색어" value="${word}"/>
+			<input type="submit" name="submit" value="검색"> 
+		</form>
 	</div>
-	<form action="/erp/admin/member_list" name="search" method="post">
-		<select name="field">
-   			<c:if test="${field == 'name'}"><option value="name" selected="selected">이름</option></c:if>
-   			<c:if test="${field != 'name'}"><option value="name">이름</option></c:if>
-   			<c:if test="${field == 'team'}"><option value="team" selected="selected">소속</option></c:if>
-   			<c:if test="${Field != 'team'}"><option value="team">소속</option></c:if>
-		</select>
-		<input type="text" name="word" placeholder="검색어" value="${word}"/>
-		<input type="submit" name="submit" value="검색"> 
-	</form>
 </body>
 </html>

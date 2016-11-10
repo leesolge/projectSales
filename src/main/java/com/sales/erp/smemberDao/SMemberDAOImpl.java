@@ -69,9 +69,9 @@ public class SMemberDAOImpl implements SMemberDAO {
 	}
 
 	@Override
-	public int Count_Approved_Member() {
+	public int Count_Approved_Member(SearchMember vo) {
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);	
-		int count = memberMapper.Count_Approved_Member();
+		int count = memberMapper.Count_Approved_Member(vo);
 		
 		return count;
 	}
