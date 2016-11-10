@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 </head>
@@ -12,8 +12,8 @@
 		NAME : <input type="text" name="proname"><br><hr>
 		AMOUNT : <input type="text" name="proamount"><br><hr>
 	    SELLPRICE : <input type="text" name="sellprice"><br><hr>
-		ORIGINPRICE : <input type="text" name="originprice"><br><hr>
-		IMAGE : <input type="file" name="file"><br><hr>
+		ORIGINPRICE : <input type="text" name="originprice" ><br><hr>
+		IMAGE : <input type="file" name="file" required><br><hr>
 	    EXPLA : <input type="text" name="proexpla"><br><hr>
 	    
 	    <input type="submit" name="confirm" value="추가완료">

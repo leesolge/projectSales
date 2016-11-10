@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -24,7 +24,7 @@ td {
 <body>
 		<h2>PRODUCT INFO</h2>
 		<br>
-		<table width="400" border="1" align="center">
+		<table>
 			<tr>
 				<td>CODE</td>
 				<td>NAME</td>
@@ -36,7 +36,7 @@ td {
 			</tr>
 		</table>
 		<hr>
-		<table width="400" border="1" align="center">
+		<table>
 			<c:forEach items="${proList}" var="list">
 				<tr>
 					<td>${list.procode}</td>
@@ -51,7 +51,7 @@ td {
 		</table>
 		<hr>
 	<form method="post" action="/erp/product/list">
-		<table width="500" border="0" align="center">
+		<table>
 			<tr>
 				<td align="center" valign="bottom"><h4>제품코드</h4></td>
 				<td align="center"><input type="text" size="30" name="procode"></td>

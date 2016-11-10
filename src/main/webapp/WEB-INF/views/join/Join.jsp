@@ -12,7 +12,7 @@
 				<h4>Join</h4>
 				<table class="w3-table w3-bordered w3-border w3-centered">
 					<tr>
-						<td><input type="file" name="file"></td>
+						<td><input type="file" name="file" required></td>
 					</tr>		
 					<tr>
 						<td><input type="text" name="name" placeholder="Name"></td>

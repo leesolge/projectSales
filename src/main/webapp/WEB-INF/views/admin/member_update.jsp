@@ -14,7 +14,7 @@
 		<h1>사원 정보 수정</h1>
 		<hr>
 
-		<form method="post" action="Admin_Update_SMember"">
+		<form method="post" action="Admin_Update_Member"">
 			<table class="w3-table w3-centered" style="border: 1px solid #ddd">
 				<tr>
 					<td rowspan="6"><img

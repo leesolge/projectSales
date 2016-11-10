@@ -5,44 +5,56 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
+<head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+</head>
 <body>
 	<div class="w3-container" align="center">
 	<b>[${count }건]</b>
 		<table class="w3-table w3-centered">
 			<tr>
-				<td>EMPNO</td>
-				<td>NAME</td>
-				<td>PWD</td>
-				<td>GENDER</td>
-				<td>ADDRESS</td>
-				<td>PHONE</td>
-				<td>EMAIL</td>
-				<td>AUTH</td>
-				<td>ACCOUNT</td>
-				<td>TEAM</td>
-				<td>CONTENT</td>
+				<th>EMPNO</th>
+				<th>NAME</th>
+				<th>PWD</th>
+				<th>GENDER</th>
+				<th>ADDRESS</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>AUTH</th>
+				<th>ACCOUNT</th>
+				<th>TEAM</th>
+				<th>CONTENT</th>
 			</tr>
 
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 			<c:forEach items="${result}" var="member">
-				<tr>
-					<td>${member.empno}</td>
-					<td>${member.name}</td>
-					<td>${member.pwd}</td>
-					<td>${member.gender}</td>
-					<td>${member.address}</td>
-					<td>${member.phone}</td>
-					<td>${member.email}</td>
-					<td>${member.auth}</td>
-					<td>${member.account}</td>
-					<td>${member.team}</td>
-					<td>
-					<input type="button" value="Content" class="w3-btn w3-round-large" onclick="window.location='/erp/admin/member_info?empno=${member.empno}'">
-					</td>
-				</tr>
+			<tr>
+				<td>${member.empno}</td>
+				<td>${member.name}</td>
+				<td>${member.pwd}</td>
+				<td>${member.gender}</td>
+				<td>${member.address}</td>
+				<td>${member.phone}</td>
+				<td>${member.email}</td>
+				<td>${member.auth}</td>
+				<td>${member.account}</td>
+				<td>${member.team}</td>
+				<td>
+				<input type="button" value="Content" class="w3-btn w3-round-large" onclick="window.location='/erp/admin/member_info?empno=${member.empno}'">
+				</td>
+			</tr>
 			</c:forEach>
 		</table>
 	</div>
+	<form action="/erp/admin/member_list" name="search" method="post">
+		<select name="field">
+   			<c:if test="${field == 'name'}"><option value="name" selected="selected">이름</option></c:if>
+   			<c:if test="${field != 'name'}"><option value="name">이름</option></c:if>
+   			<c:if test="${field == 'team'}"><option value="team" selected="selected">소속</option></c:if>
+   			<c:if test="${Field != 'team'}"><option value="team">소속</option></c:if>
+		</select>
+		<input type="text" name="word" placeholder="검색어" value="${word}"/>
+		<input type="submit" name="submit" value="검색"> 
+	</form>
 </body>
 </html>

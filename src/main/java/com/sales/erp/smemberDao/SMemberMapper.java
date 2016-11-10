@@ -2,19 +2,18 @@ package com.sales.erp.smemberDao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import com.sales.erp.smember.SMemberVO;
+import com.sales.erp.smember.SearchMember;
 
 public interface SMemberMapper extends Serializable{
 	
-	ArrayList<SMemberVO> selectAllSMember();		//select
-	public void insertMember(SMemberVO member);
-	SMemberVO selectSMember(String empno);		//select one person
-	ArrayList<SMemberVO>  Admin_Ok_SMember();		//select waiting ok person
-	ArrayList<SMemberVO>  Admin_Approved_Members();		//select Approved person
-	public void Update_Approve_Member(String empno);
-	public void Update_Cancel_Member(String empno);
-	public void Admin_Update_SMember(SMemberVO vo);
-	public int Count_Approved_Member();
-	public int Count_Ok_Member();
+	public void insertMember(SMemberVO member); // 회원등록
+	public SMemberVO selectMember(String empno); // empno에 따른 개인정보 추출
+	public ArrayList<SMemberVO> Admin_Ok_Member(); // 승인대기 목록
+	public ArrayList<SMemberVO> Admin_Approved_Member(SearchMember vo); // 사원목록
+	public void Update_Approve_Member(String empno); // 가입승인
+	public void Update_Cancel_Member(String empno); // 반려, 사원정보 삭제
+	public void Admin_Update_Member(SMemberVO vo); // 사원정보 수정
+	public int Count_Approved_Member(); // 사원 수
+	public int Count_Ok_Member(); // 승인 대기자 수
 }

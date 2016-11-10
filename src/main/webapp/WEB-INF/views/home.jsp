@@ -25,8 +25,8 @@
 	</div>
 	
 	<div class="w3-row ">
-		<div class="w3-col w3-left" style="width: 40%">			<p></p>		</div>
-		<div class="w3-col w3-right" style="width: 40%">			<p></p>		</div>
+		<div class="w3-col w3-left" style="width: 40%"><p></p></div>
+		<div class="w3-col w3-right" style="width: 40%"><p></p></div>
 		<div class="w3-rest w3-container" align="center">
 			<form action="${loginURL}" method="post">
 				
@@ -40,7 +40,7 @@
 					
 					<tr>						
 						<td><input type="submit" value="로그인" class="w3-btn w3-round-large" ></td>					
-						<td><input type="button" value="회원가입"  class="w3-btn w3-round-large"  onclick="location.href='Join'""></td>
+						<td><input type="button" value="회원가입"  class="w3-btn w3-round-large"  onclick="location.href='join'""></td>
 					</tr>				
 				</table>
 			</form>

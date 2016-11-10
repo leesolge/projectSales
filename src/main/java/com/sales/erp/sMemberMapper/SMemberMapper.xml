@@ -9,16 +9,16 @@
         VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, #{portrait}, #{account}, #{team})
     </insert>
     
-    <select id="selectSMember" resultType="com.sales.erp.smember.SMemberVO">
+    <select id="selectMember" resultType="com.sales.erp.smember.SMemberVO">
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
 	
-	<select id="Admin_Ok_SMember" resultType="com.sales.erp.smember.SMemberVO">
+	<select id="Admin_Ok_Member" resultType="com.sales.erp.smember.SMemberVO">
 		SELECT * FROM SMEMBER WHERE AUTH='ROLE_EE'
 	</select>
 	
-	<select id="Admin_Approved_Members" resultType="com.sales.erp.smember.SMemberVO">
-		SELECT * FROM SMEMBER WHERE AUTH='ROLE_ADMIN' OR AUTH='ROLE_MANAGER' OR AUTH='ROLE_EMPLOYEE' 
+	<select id="Admin_Approved_Member" parameterType="com.sales.erp.smember.SearchMember" resultType="com.sales.erp.smember.SMemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
 	</select>
 	
 	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
@@ -30,7 +30,7 @@
     	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
     </delete>
     
-    <update id="Admin_Update_SMember" parameterType="com.sales.erp.smember.SMemberVO" >    
+    <update id="Admin_Update_Member" parameterType="com.sales.erp.smember.SMemberVO" >    
     	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}        
     </update>
     

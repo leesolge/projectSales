@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sales.erp.smember.SMemberVO;
+import com.sales.erp.smember.SearchMember;
 
 @Repository
 public class SMemberDAOImpl implements SMemberDAO {
@@ -21,19 +22,28 @@ public class SMemberDAOImpl implements SMemberDAO {
 	} 
 	
 	@Override
-	public ArrayList<SMemberVO> Admin_Ok_Members() {
+	public SMemberVO selectMember(String empno) {
+		SMemberVO vo = new SMemberVO();
+		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
+		vo = memberMapper.selectMember(empno);
+		
+		return vo;
+	}
+	
+	@Override
+	public ArrayList<SMemberVO> Admin_Ok_Member() {
 		ArrayList<SMemberVO> member = new ArrayList<SMemberVO>();	
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-		member = memberMapper.Admin_Ok_SMember();
+		member = memberMapper.Admin_Ok_Member();
 		
 		return member;
 	}
 	
 	@Override
-	public ArrayList<SMemberVO> Admin_Approved_Members() {
+	public ArrayList<SMemberVO> Admin_Approved_Member(SearchMember vo) {
 		ArrayList<SMemberVO> member = new ArrayList<SMemberVO>();	
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-		member = memberMapper.Admin_Approved_Members();
+		member = memberMapper.Admin_Approved_Member(vo);
 		
 		return member;
 	}
@@ -50,18 +60,12 @@ public class SMemberDAOImpl implements SMemberDAO {
 		memberMapper.Update_Cancel_Member(empno);
 	}
 
-	@Override
-	public SMemberVO selectSMember(String empno) {
-		SMemberVO vo = new SMemberVO();
-		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-		vo = memberMapper.selectSMember(empno);
-		return vo;
-	}
+
 
 	@Override
-	public void Admin_Update_SMember(SMemberVO vo) {
+	public void Admin_Update_Member(SMemberVO vo) {
 		SMemberMapper memberMapper = sqlSession.getMapper(SMemberMapper.class);
-		memberMapper.Admin_Update_SMember(vo);	
+		memberMapper.Admin_Update_Member(vo);	
 	}
 
 	@Override

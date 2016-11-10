@@ -1,23 +1,23 @@
 DROP TABLE SMEMBER;
 SELECT * FROM SMEMBER;
-
+SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND name LIKE 'dd'
 SELECT EMPNO AS USERID, PWD AS PASSWD, 1 ENABLED FROM SMEMBER
 										WHERE EMPNO=100;
 SELECT EMPNO, AUTH FROM SMEMBER WHERE EMPNO=100;
 SELECT EMPNO AS USERID, PWD AS PASSWD, 1 ENABLED FROM SMEMBER
---EMPNO		= ID ¿ªÇÒ ¹× »ç¹ø
---PWD		= ºñ¹Ð¹øÈ£
---NAME		= ÀÌ¸§
---GENDER	= ¼ºº°
---BIRTH		= »ýÀÏ
---JOIN		= ÀÔ»çÀÏ
---ADDRESS	= ÁÖ¼Ò
---PHONE		= ÀüÈ­¹øÈ£
---EMAIL		= ÀÌ¸ÞÀÏ
---AUTH		= ±ÇÇÑ
---PORTRAIT	= Áõ¸í»çÁø
---ACCOUNT	= °èÁÂ¹øÈ£
---TEAM		= ÆÀ
+--EMPNO		= ID ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+--PWD		= ï¿½ï¿½Ð¹ï¿½È£
+--NAME		= ï¿½Ì¸ï¿½
+--GENDER	= ï¿½ï¿½ï¿½ï¿½
+--BIRTH		= ï¿½ï¿½ï¿½ï¿½
+--JOIN		= ï¿½Ô»ï¿½ï¿½ï¿½
+--ADDRESS	= ï¿½Ö¼ï¿½
+--PHONE		= ï¿½ï¿½È­ï¿½ï¿½È£
+--EMAIL		= ï¿½Ì¸ï¿½ï¿½ï¿½
+--AUTH		= ï¿½ï¿½ï¿½ï¿½
+--PORTRAIT	= ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+--ACCOUNT	= ï¿½ï¿½ï¿½Â¹ï¿½È£
+--TEAM		= ï¿½ï¿½
 CREATE TABLE SMEMBER(
 	EMPNO VARCHAR2(10) PRIMARY KEY,
 	PWD VARCHAR2(30) NOT NULL,
@@ -39,6 +39,6 @@ START WITH 300300
 NOCACHE;
 
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
-VALUES('100', 'oracle', '°ü¸®ÀÚ', '¾øÀ½', date '1985-9-25', date '2010-3-27', 'È¸»ç', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_ADMIN', null, '01-4829-333-2201', '°ü¸®ÆÀ');
+VALUES('100', 'oracle', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½', date '1985-9-25', date '2010-3-27', 'È¸ï¿½ï¿½', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_ADMIN', null, '01-4829-333-2201', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
-VALUES(to_char(numregister.nextval), 'oracle', 'º´½Å', '³²', date '1985-9-25', date '2010-4-27', '¿ì¸®µ¿³×', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', '¿µ¾÷1ÆÀ');
+VALUES(to_char(numregister.nextval), 'oracle', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½', date '1985-9-25', date '2010-4-27', 'ï¿½ì¸®ï¿½ï¿½ï¿½ï¿½', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', 'ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½');

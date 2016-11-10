@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,17 +19,17 @@ public class JoinController {
 	@Autowired
 	private SMemberDAOImpl sMemberDAOImpl;	
 	
-	@RequestMapping("/Join")	
-	public String Join(Model model) {		
-		return "/join/Join";
+	@RequestMapping("/join")	
+	public String Join() {		
+		return "/join/join";
 	}
 	
 	@RequestMapping("/home")	
-	public String home(Model model) {		
+	public String home() {		
 		return "home";
 	}
 	
-	@RequestMapping(value = "/JoinSMember", method = RequestMethod.POST)
+	@RequestMapping(value="/JoinSMember", method=RequestMethod.POST)
 	public ModelAndView JoinSMember(JoinVO vo) throws Exception {
 		MultipartFile uploadfile = vo.getFile();
         if (uploadfile != null) {
