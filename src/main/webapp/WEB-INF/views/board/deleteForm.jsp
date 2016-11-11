@@ -34,7 +34,7 @@
 		<td colspan="2" align="left">
 			<!-- <input type="button" value="삭제" onclick="deletepro()"/> -->
 			<input type="submit" value="삭제"/>
-			<input type="button" value="취소"/>
+			<input type="reset" value="취소"/>
 		</td>
 	</tr>
 </table>

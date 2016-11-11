@@ -10,6 +10,23 @@
 </head>
 <body>
 	<h1>공지사항</h1>
+		<div class="w3-row ">
+			<div class="w3-container w3-center">
+			총 <c:out value="${total}"/>개의 게시물이 있습니다.
+			</div>
+			<div class="w3-col w3-left" style="width: 30%">
+				<form action="/erp/board/list" name="search" method="post">
+					<select name="field">
+			   			<c:if test="${field == 'name'}"><option value="name" selected="selected">이름</option></c:if>
+			   			<c:if test="${field != 'name'}"><option value="name">이름</option></c:if>
+			   			<c:if test="${field == 'title'}"><option value="title" selected="selected">제목</option></c:if>
+			   			<c:if test="${Field != 'title'}"><option value="title">제목</option></c:if>
+					</select>
+					<input type="text" name="word" placeholder="검색어" value="${word}"/>
+					<input type="submit" name="submit" value="검색"> 
+				</form>
+			</div>
+		</div>
 	<table width="600" cellpadding="3">
 		<tr>
 			<th width="50">번호</th>

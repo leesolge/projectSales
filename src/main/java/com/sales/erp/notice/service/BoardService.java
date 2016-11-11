@@ -1,16 +1,16 @@
 package com.sales.erp.notice.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.member.vo.MemberSearch;
 import com.sales.erp.notice.dao.BoardDAO;
+import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
 
 @Service
@@ -20,21 +20,36 @@ public class BoardService{
 	private BoardDAO dao;
 	
 	public ModelAndView getBoardList(HttpServletRequest request){
+		
 		ModelAndView mav=new ModelAndView();
 		
 		int pg=1;
+		
 		String strPg =request.getParameter("pg");
-		if(strPg!=null){
-			pg=Integer.parseInt(strPg);
+		String field = request.getParameter("field");
+		String word = request.getParameter("word");
+		
+		if(field == null || field.equals("")){
+	        field = "name";
+	    }
+	    if(word == null || word.equals("")){
+	        word = "";
+	    }    
+		if(strPg != null){
+			pg = Integer.parseInt(strPg);
 		}
+		
+		BoardSearch search = new BoardSearch();
+		search.setField(field);
+	    search.setWord("%" + word + "%");
+	    
 		int rowSize=10;
 		int start=(pg*rowSize)-(rowSize-1);
 		int end=pg*rowSize;
 		
-		int total=dao.getBoardCount(); //총 게시물수
+		int total=dao.getBoardCount(search); //총 게시물수
 		System.out.println("시작 : "+start +" 끝:"+end);
 		System.out.println("글의 수 : " +total);
-		
 		
 		int allPage = (int) Math.ceil(total/(double)rowSize); //페이지수
 		System.out.println("페이지수 : "+ allPage);
@@ -43,17 +58,20 @@ public class BoardService{
 		int fromPage=((pg-1)/block*block)+1; //보여줄 페이지의 시작
 		//((1-1)/10*10)
 		int toPage=((pg-1)/block*block)+block; //보여줄 페이지의 끝
+		
+	    search.setEnd(end);
+	    search.setStart(start);
+		System.out.println(field);
 		if(toPage>allPage){
 			toPage=allPage;
 		}
 		
-		HashMap map=new HashMap();
-		//BoardVO vo = new BoardVO();
 		
-		map.put("start", start);
-		map.put("end", end);
-		
-		ArrayList<BoardVO> list= dao.getBoardList(map);  ////////////
+		ArrayList<BoardVO> list= dao.getBoardList(search);  ////////////
+		System.out.println(list);
+		mav.addObject("total", total);
+		mav.addObject("start", start);
+		mav.addObject("end", end);
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
 		mav.addObject("allPage", allPage);

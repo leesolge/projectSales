@@ -5,16 +5,20 @@
 <mapper namespace="com.sales.erp.notice.dao.BoardMapper">
 	<!-- 글 가져오기 -->
 	<!-- <select id="getBoardList" parameterType="java.util.HashMap" resultType="com.sales.erp.boardVO.BoardVO"> -->
-	<select id="getBoardList" parameterType="java.util.HashMap" resultType="com.sales.erp.notice.vo.BoardVO">
-		select * from
+	<select id="getBoardList" parameterType="com.sales.erp.notice.vo.BoardSearch" resultType="com.sales.erp.notice.vo.BoardVO">
+		<!-- select * from
 	 		(select A.*,ROWNUM r from 
-	 		 	(select * from salesBoard order by parent desc, sort) A
+	 		 	(select * from salesBoard WHERE ${field} LIKE #{word} orders by parent desc, sort) A
 	 	 	)
- 	 	where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} <!-- where sal <= 1000 -->
+ 	 	where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} --> <!-- where sal <= 1000 -->
+ 	 	select * from (select rownum r, d.* from (select * from SALESBOARD where ${field} like #{word} order by num desc) d) where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} order by r desc 
+ 	 	<!-- <![CDATA[
+ 	 	SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SALESBOARD WHERE ${field} LIKE #{word}) A) WHERE R >= #{start} AND R <= #{end}
+		]]> -->
 	</select>
 	
-	<select id="getBoardCount" resultType="java.lang.Integer">
- 	select count(*) from salesBoard
+	<select id="getBoardCount" parameterType="com.sales.erp.notice.vo.BoardSearch" resultType="java.lang.Integer">
+ 		select count(*) from salesBoard where ${field} LIKE #{word} 
 	</select>
 	
 	<!-- 글쓰기 -->

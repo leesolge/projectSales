@@ -1,11 +1,12 @@
 package com.sales.erp.notice.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
 
 
@@ -20,9 +21,9 @@ public class BoardDAO {
 		ArrayList<BoardVO> list=boardMapper.getBoardList(vo);
 		return list;
 	}*/
-	public ArrayList<BoardVO> getBoardList(HashMap map) {
+	public ArrayList<BoardVO> getBoardList(BoardSearch search) {
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
-		return boardDAO.getBoardList(map);
+		return boardDAO.getBoardList(search);
 	}
 	
 	/*public int getBoardCount(){
@@ -30,9 +31,9 @@ public class BoardDAO {
 	return boardDAO.getBoardCount();
 	}*/
 	
-	public int getBoardCount() {
+	public int getBoardCount(BoardSearch search) {
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
-		return boardDAO.getBoardCount();
+		return boardDAO.getBoardCount(search);
 	}
 	
 	public void insertBoard(BoardVO vo){
