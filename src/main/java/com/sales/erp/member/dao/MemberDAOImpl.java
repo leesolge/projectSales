@@ -31,10 +31,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public ArrayList<MemberVO> Admin_Ok_Member() {
+	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo) {
 		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		member = memberMapper.Admin_Ok_Member();
+		member = memberMapper.Admin_Ok_Member(vo);
 		
 		return member;
 	}

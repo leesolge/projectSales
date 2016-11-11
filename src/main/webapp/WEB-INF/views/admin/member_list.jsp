@@ -9,8 +9,17 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 </head>
 <body>
+	<!-- Title -->
+	<div class="w3-container" align="left">
+	<h1>사원명부</h1>
+	</div>
+	
+	
 	<div class="w3-container" align="center">
-	<b>[${count }건]</b>
+		<!-- Count -->
+		<b>[${count }건]</b>
+		
+		<!-- List -->
 		<table class="w3-table w3-centered">
 			<tr>
 				<th>EMPNO</th>
@@ -25,7 +34,6 @@
 				<th>TEAM</th>
 				<th>CONTENT</th>
 			</tr>
-
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 			<c:forEach items="${result}" var="member">
 			<tr>
@@ -45,6 +53,38 @@
 			</tr>
 			</c:forEach>
 		</table>
+		
+		<!-- Page -->
+		<table>
+		<tr>
+			<td align="center">
+				<c:if test="${pg > block}">
+					[<a href="/erp/admin/member_list?pg=1&field=${field}&word=${word}">◀◀</a>]
+					[<a href="/erp/admin/member_list?pg=${fromPage - 1}&field=${field}&word=${word}">◀</a>
+				</c:if>
+				<c:if test="${pg <= block}">
+					[<span>◀◀</span>]
+					[<span>◀</span>]
+				</c:if>
+				<c:forEach begin="${fromPage}" end="${toPage}" var="i">
+					<c:if test="${i == pg}">[${i}]</c:if>
+					<c:if test="${i != pg}">
+						[<a href="/erp/admin/member_list?pg=${i}&field=${field}&word=${word}">${i}</a>]
+					</c:if>
+				</c:forEach>
+				<c:if test="${toPage < allPage}">
+					[<a href="/erp/admin/member_list?pg=${toPage + 1}&field=${field}&word=${word}">▶</a>]
+					[<a href="/erp/admin/member_list?pg=${allPage}&field=${field}&word=${word}">▶▶</a>]
+				</c:if>
+				<c:if test="${toPage >= allPage}">
+					[<span>▶</span>]
+					[<span>▶▶</span>]
+				</c:if>
+			</td>
+		</tr>
+		</table>
+		
+		<!-- Search -->
 		<form action="/erp/admin/member_list" name="search" method="post">
 			<select name="field">
 	   			<c:if test="${field == 'name'}"><option value="name" selected="selected">이름</option></c:if>
@@ -56,39 +96,5 @@
 			<input type="submit" name="submit" value="검색"> 
 		</form>
 	</div>
-	<table>
-	<tr>
-		<td align="center">
-			<c:if test="${pg > block}">
-				[<a href="/erp/admin/member_list?pg=1&field=${field}&word=${word}">◀◀</a>]
-				[<a href="/erp/admin/member_list?pg=${fromPage-1}&field=${field}&word=${word}">◀</a>
-			</c:if>
-			<c:if test="${pg<=block}">
-				[<span>◀◀</span>]
-				[<span>◀</span>]
-			</c:if>
-			
-			<!-- 블록 범위 찍기 -->
-			<c:forEach begin="${fromPage}" end="${toPage}" var="i">
-				<c:if test="${i==pg}">[${i}]</c:if>
-				<c:if test="${i!=pg}">
-					[<a href="/erp/admin/member_list?pg=${i}&field=${field}&word=${word}">${i}</a>]
-				</c:if>
-			</c:forEach>
-			
-			<!-- 다음, 이후 -->
-			<c:if test="${toPage<allPage}">
-				[<a href="/erp/admin/member_list?pg=${toPage+1}&field=${field}&word=${word}">▶</a>]
-				[<a href="/erp/admin/member_list?pg=${allPage}&field=${field}&word=${word}">▶▶</a>]
-			</c:if>
-			<c:if test="${toPage>=allPage}">
-				[<span>▶</span>]
-				[<span>▶▶</span>]
-			
-			</c:if>
-		
-		</td>
-	</tr>
-	</table>
 </body>
 </html>

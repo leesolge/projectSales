@@ -17,8 +17,10 @@
 		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME=#{name} AND EMAIL= #{email} )
 	</select>
 	
-	<select id="Admin_Ok_Member" resultType="com.sales.erp.member.vo.MemberVO">
-		SELECT * FROM SMEMBER WHERE AUTH='ROLE_EE'
+	<select id="Admin_Ok_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R>=#{start} AND R<=#{end}
+		]]>
 	</select>
 	
 	<select id="Admin_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
