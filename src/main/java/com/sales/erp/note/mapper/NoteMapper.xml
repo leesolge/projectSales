@@ -54,7 +54,7 @@
 	
 	<select id="adminSelectCount" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="java.lang.Integer">
 		<![CDATA[
-		SELECT * FROM (SELECT ROWNUM C, D.* FROM (
+		SELECT COUNT(*) FROM (SELECT ROWNUM C, D.* FROM (
 		SELECT * FROM
 		(SELECT N.NOTENUM AS NOTENUM, N.SENDDATE AS SENDDATE,
 		N.SENDER AS SENDER, S.NAME AS SNAME, S.TEAM AS STEAM,

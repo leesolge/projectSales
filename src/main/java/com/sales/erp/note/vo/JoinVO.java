@@ -1,30 +1,40 @@
 package com.sales.erp.note.vo;
 
+import java.util.Date;
+
 public class JoinVO {
-	String notenum;
-	String senddate;
-	String sender;
-	String sname;
-	String steam;
-	String sauth;
-	String receiver;
-	String rname;
-	String rteam;
-	String rauth;
-	String title;
-	String content;
-	String checks;
-	String deleted;
+	private String notenum;
+	private Date senddate;
+	private String sender;
+	private String sname;
+	private String steam;
+	private String sauth;
+	private String receiver;
+	private String rname;
+	private String rteam;
+	private String rauth;
+	private String title;
+	private String content;
+	private String checks;
+	private String deleted;
+	private String change;
+	
+	public String getChange() {
+		return change;
+	}
+	public void setChange(String change) {
+		this.change = change;
+	}
 	public String getNotenum() {
 		return notenum;
 	}
 	public void setNotenum(String notenum) {
 		this.notenum = notenum;
 	}
-	public String getSenddate() {
+	public Date getSenddate() {
 		return senddate;
 	}
-	public void setSenddate(String senddate) {
+	public void setSenddate(Date senddate) {
 		this.senddate = senddate;
 	}
 	public String getSender() {

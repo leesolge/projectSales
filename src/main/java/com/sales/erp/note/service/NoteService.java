@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.dao.NoteDAO;
+import com.sales.erp.note.vo.JoinVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
 
@@ -24,6 +25,87 @@ public class NoteService {
 	@Autowired
 	private NoteDAO dao;
 
+	public ModelAndView adminSelectAll(HttpServletRequest request){
+		ArrayList<JoinVO> list;
+		ModelAndView mav = new ModelAndView();
+		int pageSize = 6;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		String pageNum = (String) request.getParameter("pageNum");
+		String field = (String) request.getParameter("field");
+		String keyword = (String) request.getParameter("keyword");
+		if(pageNum==null||pageNum.equals("")){
+			pageNum="1";
+		}
+		if(field==null||field.equals("")){
+			field="title";
+		}
+		if(keyword==null||keyword.equals("")){
+			keyword="";
+		}
+		System.out.println(pageNum);
+		String newkeyword="%"+keyword+"%";
+		NoteSearchVO svo = new NoteSearchVO();
+		svo.setEmpno(empno);
+		svo.setField(field);
+		svo.setKeyword(newkeyword);
+		
+		int count = dao.adminSelectCount(svo);
+		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
+		int start = end -(pageSize-1);
+		if(start<1){
+			start = 1;
+		}
+		int max;
+		if(count%pageSize==0){
+			max = count/pageSize;
+		}else{
+			max = (count/pageSize)+1;
+		}
+		System.out.println("count : "+count);
+		System.out.println(start);
+		System.out.println(end);
+		svo.setStart(start);
+		svo.setEnd(end);
+		
+		list = dao.adminSelectAll(svo);
+		
+		if(list!=null){
+			for(JoinVO nvo:list){
+				Date date = nvo.getSenddate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+				String change = sdf.format(date);
+				nvo.setChange(change);
+				if(nvo.getRauth().equals("ROLE_EMPLOYEE")){
+					nvo.setRauth("사원");
+				}
+				if(nvo.getRauth().equals("ROLE_MANAGER")){
+					nvo.setRauth("팀장");
+				}
+				if(nvo.getRauth().equals("ROLE_ADMIN")){
+					nvo.setRauth("관리자");
+				}
+				if(nvo.getSauth().equals("ROLE_EMPLOYEE")){
+					nvo.setSauth("사원");
+				}
+				if(nvo.getSauth().equals("ROLE_MANAGER")){
+					nvo.setSauth("팀장");
+				}
+				if(nvo.getSauth().equals("ROLE_ADMIN")){
+					nvo.setSauth("관리자");
+				}
+			}
+		}
+		System.out.println(list);
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("field", field);
+		mav.addObject("keyword", keyword);
+		mav.addObject("max", max);
+		return mav;
+	}
+	
 	public ModelAndView deleteN(HttpServletRequest request){
 		RedirectView rv = null;
 		String pageCheck = request.getParameter("pageCheck");
