@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.note.vo.JoinVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
 
@@ -16,6 +17,16 @@ public class NoteDAO implements NoteMapper{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public ArrayList<JoinVO> adminSelectAll(NoteSearchVO vo) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.adminSelectAll(vo);
+	}
+
+	public int adminSelectCount(NoteSearchVO vo) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.adminSelectCount(vo);
+	}
+
 	public void deleteOne(int noteNum) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		noteMapper.deleteOne(noteNum);

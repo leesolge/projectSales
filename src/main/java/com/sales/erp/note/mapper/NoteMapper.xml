@@ -51,13 +51,39 @@
 		INSERT INTO NOTEDB (NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED)
 		VALUES(NOTESEQ.NEXTVAL, SYSDATE, #{sender}, #{receiver}, #{title}, #{content}, 0, 0)
 	</insert>
-	<!-- 
-    <insert id="insertMember" parameterType="com.sales.erp.smember.SMemberVO" >
-        INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
-        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, '남자', null, null, null, #{phone},	null,	#{auth},	null, #{account},	#{team})
-    </insert>
-    
-    <select id="selectSMember" resultType="com.sales.erp.smember.SMemberVO">
-		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
-	</select> -->
+	
+	<select id="adminSelectCount" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT * FROM (SELECT ROWNUM C, D.* FROM (
+		SELECT * FROM
+		(SELECT N.NOTENUM AS NOTENUM, N.SENDDATE AS SENDDATE,
+		N.SENDER AS SENDER, S.NAME AS SNAME, S.TEAM AS STEAM,
+		S.AUTH AS SAUTH, N.RECEIVER AS RECEIVER, R.NAME AS RNAME,
+		R.TEAM AS RTEAM, R.AUTH AS RAUTH, N.TITLE AS TITLE,
+		N.CONTENT AS CONTENT, N.CHECKS AS CHECKS,
+		N.DELETED AS DELETED FROM NOTEDB N,
+		(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+		(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) R
+		WHERE N.SENDER=S.EMPNO AND N.RECEIVER=R.EMPNO
+		AND DELETED=1 ORDER BY SENDDATE ASC)) D
+		WHERE ${field} LIKE #{keyword} ORDER BY C DESC)]]>
+	</select>
+	
+	<select id="adminSelectAll" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="com.sales.erp.note.vo.JoinVO">
+		<![CDATA[
+		SELECT * FROM (SELECT ROWNUM C, D.* FROM (
+		SELECT * FROM
+		(SELECT N.NOTENUM AS NOTENUM, N.SENDDATE AS SENDDATE,
+		N.SENDER AS SENDER, S.NAME AS SNAME, S.TEAM AS STEAM,
+		S.AUTH AS SAUTH, N.RECEIVER AS RECEIVER, R.NAME AS RNAME,
+		R.TEAM AS RTEAM, R.AUTH AS RAUTH, N.TITLE AS TITLE,
+		N.CONTENT AS CONTENT, N.CHECKS AS CHECKS,
+		N.DELETED AS DELETED FROM NOTEDB N,
+		(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+		(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) R
+		WHERE N.SENDER=S.EMPNO AND N.RECEIVER=R.EMPNO
+		AND DELETED=1 ORDER BY SENDDATE ASC)) D
+		WHERE ${field} LIKE #{keyword} ORDER BY C DESC) WHERE C>=#{start} AND C<=#{end}]]>
+	</select>
+	
 </mapper>

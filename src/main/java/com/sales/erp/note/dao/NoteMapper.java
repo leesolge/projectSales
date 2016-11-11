@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.note.vo.JoinVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
 
@@ -20,4 +21,7 @@ public interface NoteMapper extends Serializable{
 	ArrayList<MemberVO> receiverCheck(String empno);
 	void writePro(NoteVO vo);
 	MemberVO getNameTeamAuth(String empno);
+	int adminSelectCount(NoteSearchVO vo);
+	ArrayList<JoinVO> adminSelectAll(NoteSearchVO vo);
+
 }
