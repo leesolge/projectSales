@@ -49,9 +49,9 @@ public class NoteDAO implements NoteMapper{
 		noteMapper.checkNote(noteNum);
 	}
 	
-	public int countReceiveAll(String empno){
+	public int countReceiveAll(NoteSearchVO vo){
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
-		return noteMapper.countReceiveAll(empno);
+		return noteMapper.countReceiveAll(vo);
 	}
 	
 	public ArrayList<NoteVO> selectReceiveAll(NoteSearchVO vo){
@@ -59,9 +59,9 @@ public class NoteDAO implements NoteMapper{
 		return noteMapper.selectReceiveAll(vo);
 	}
 	
-	public int countSendAll(String empno){
+	public int countSendAll(NoteSearchVO vo){
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
-		return noteMapper.countSendAll(empno);
+		return noteMapper.countSendAll(vo);
 	}
 	
 	public ArrayList<NoteVO> selectSendAll(NoteSearchVO vo){

@@ -19,20 +19,20 @@
 		SELECT * FROM NOTEDB WHERE NOTENUM = #{noteNum}
 	</select>
 	
-	<select id="countReceiveAll" parameterType="java.lang.String" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM NOTEDB WHERE RECEIVER = #{empno} AND DELETED=0
+	<select id="countReceiveAll" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE RECEIVER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND DELETED=0 ORDER BY R DESC
 	</select>
 	
-	<select id="countSendAll" parameterType="java.lang.String" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM NOTEDB WHERE SENDER = #{empno} AND DELETED=0
+	<select id="countSendAll" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE SENDER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND DELETED=0 ORDER BY R DESC
 	</select>
 	
 	<select id="selectReceiveAll" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="com.sales.erp.note.vo.NoteVO">
-		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE RECEIVER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND R<![CDATA[>=]]>#{start} AND R<![CDATA[<=]]>#{end} AND DELETED=0 ORDER BY R DESC
+		<![CDATA[SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM (SELECT * FROM NOTEDB WHERE RECEIVER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND DELETED=0 ORDER BY R DESC)WHERE R>=#{start} AND R<=#{end}]]>
 	</select>
 	
 	<select id="selectSendAll" parameterType="com.sales.erp.note.vo.NoteSearchVO" resultType="com.sales.erp.note.vo.NoteVO">
-		SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM NOTEDB WHERE SENDER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND R<![CDATA[>=]]>#{start} AND R<![CDATA[<=]]>#{end} AND DELETED=0 ORDER BY R DESC
+		<![CDATA[SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE, SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED FROM (SELECT * FROM NOTEDB WHERE SENDER=#{empno} ORDER BY SENDDATE) WHERE ${field} LIKE #{keyword} AND DELETED=0 ORDER BY R DESC)WHERE R>=#{start} AND R<=#{end}]]>
 	</select>
 
 	<update id="checkNote" parameterType="java.lang.Integer">

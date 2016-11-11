@@ -258,7 +258,13 @@ public class NoteService {
 		}
 		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
-		int count = dao.countReceiveAll(empno);
+		NoteSearchVO svo = new NoteSearchVO();
+		svo.setEmpno(empno);
+		svo.setField(field);
+		svo.setKeyword(newkeyword);
+		
+		int count = dao.countReceiveAll(svo);
+		
 		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
 		int start = end -(pageSize-1);
 		if(start<1){
@@ -270,10 +276,6 @@ public class NoteService {
 		}else{
 			max = (count/pageSize)+1;
 		}
-		NoteSearchVO svo = new NoteSearchVO();
-		svo.setEmpno(empno);
-		svo.setField(field);
-		svo.setKeyword(newkeyword);
 		svo.setStart(start);
 		svo.setEnd(end);
 		
@@ -319,7 +321,12 @@ public class NoteService {
 		}
 		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
-		int count = dao.countSendAll(empno);
+		NoteSearchVO svo = new NoteSearchVO();
+		svo.setEmpno(empno);
+		svo.setField(field);
+		svo.setKeyword(newkeyword);
+		
+		int count = dao.countSendAll(svo);
 		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
 		int start = end -(pageSize-1);
 		if(start<1){
@@ -331,10 +338,9 @@ public class NoteService {
 		}else{
 			max = (count/pageSize)+1;
 		}
-		NoteSearchVO svo = new NoteSearchVO();
-		svo.setEmpno(empno);
-		svo.setField(field);
-		svo.setKeyword(newkeyword);
+		System.out.println("count : "+count);
+		System.out.println(start);
+		System.out.println(end);
 		svo.setStart(start);
 		svo.setEnd(end);
 		
