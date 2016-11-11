@@ -43,7 +43,16 @@
 		</div>
 
 	</div>
-
+		<div align="right">
+			<table class="w3-table w3-centered " style="width: 20%;">
+				<tr>
+					<td><input type="button" value="정보수정"
+						class="w3-btn w3-round-large"
+						onclick="window.location='/erp/product/updateForm?procode=${proList.procode}'">
+					</td>
+				</tr>
+			</table>
+		</div>
 
 	<div>
 		<p></p>

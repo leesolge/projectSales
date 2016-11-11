@@ -26,7 +26,6 @@ public class ProductService {
 	public ModelAndView selectOne(String procode){
 		ProductVO pvo = pdao.selectOne(procode);
 	    ModelAndView mav = new ModelAndView();
-	    System.out.println(pvo);
 	    mav.addObject("proList", pvo);
 	    return mav;
 	}
@@ -61,6 +60,10 @@ public class ProductService {
 	
 	public void deletePro(String procode){
 		pdao.deletePro(procode);
+	}
+	
+	public void updatePro(ProductVO vo){
+	    pdao.updatePro(vo);
 	}
 }
 

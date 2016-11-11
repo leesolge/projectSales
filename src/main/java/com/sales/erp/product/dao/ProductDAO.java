@@ -30,6 +30,9 @@ public class ProductDAO {
 		ProductMapper proMapper =sqlSession.getMapper(ProductMapper.class);
 		proMapper.deletePro(procode);
 		}
-	
+	public void updatePro(ProductVO vo){
+		ProductMapper proMapper = sqlSession.getMapper(ProductMapper.class);
+		proMapper.updatePro(vo);
+	}
 	
 }

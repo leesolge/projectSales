@@ -28,3 +28,6 @@ insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,pro
 values('2104','땡땡땡','1000','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
 values('3412','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+
+UPDATE PRODUCT SET PROCODE='1000', PRONAME='2132',PROAMOUNT='1236',SELLPRICE='1004',
+  		ORIGINPRICE='1004',PROEXPLA='1004'  WHERE PROCODE='1005'    

@@ -11,4 +11,5 @@ public interface ProductMapper extends Serializable{
 	ProductVO selectOne(String procode);
 	public void insertPro(ProductVO vo);
 	public void deletePro(String procode);
+	public void updatePro(ProductVO vo);
 }

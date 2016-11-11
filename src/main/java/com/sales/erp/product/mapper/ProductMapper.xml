@@ -17,4 +17,8 @@
   	<delete id="deletePro" parameterType="java.lang.String">
  		DELETE FROM PRODUCT WHERE PROCODE= #{procode}
   	</delete>
+  	<update id="updatePro" parameterType="com.sales.erp.product.vo.ProductVO">
+  		UPDATE PRODUCT SET PRONAME=#{proname},PROAMOUNT=#{proamount},
+  		SELLPRICE=#{sellprice},ORIGINPRICE=#{originprice},PROEXPLA=#{proexpla}  WHERE PROCODE=#{procode}       
+  	</update>
   </mapper>

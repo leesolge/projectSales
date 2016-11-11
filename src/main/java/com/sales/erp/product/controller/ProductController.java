@@ -34,7 +34,6 @@ public class ProductController {
 	@RequestMapping("/product/productInfo")
 	public ModelAndView proInfo(HttpServletRequest request) {
 		String procode = request.getParameter("procode");
-		System.out.println(procode);
 		ModelAndView mav = proservice.selectOne(procode);
 		mav.setViewName("/product/productInfo");
 		return mav;
@@ -59,11 +58,24 @@ public class ProductController {
 		mav.setViewName("/product/deleteForm");
 		return mav;
 	}
-	@RequestMapping( value ="/product/delete", method = RequestMethod.POST)
+	@RequestMapping(value ="/product/delete", method = RequestMethod.POST)
 	public String deletePro(@RequestParam("procode") String procode){
 		proservice.deletePro(procode);
 		return "redirect:/product/list";
 	}
 	
+	@RequestMapping("/product/updateForm")
+	public ModelAndView updateProForm(HttpServletRequest request){
+		String procode = request.getParameter("procode");
+		ModelAndView mav = proservice.selectOne(procode);
+		mav.setViewName("/product/productUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value="/product/update", method = RequestMethod.POST)
+	public String updatePro(ProductVO vo){
+		proservice.updatePro(vo);
+	    return "redirect:/product/list";
+	}
 	
 }
