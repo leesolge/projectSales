@@ -13,8 +13,6 @@
 			<div class="w3-col w3-right" style="width: 20%">
 				<button class="w3-btn w3-round-large"
 					onclick="location='/erp/product/insert'">추가</button>
-				<button class="w3-btn w3-round-large"
-					onclick="location='/erp/product/delete'">삭제</button>
 			</div>
 			<div class="w3-col w3-left" style="width: 30%">
 				<input class="w3-input w3-border w3-padding" type="text"

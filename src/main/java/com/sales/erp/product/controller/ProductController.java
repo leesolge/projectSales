@@ -53,14 +53,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/product/delete")
-	public ModelAndView deletePro(){
-		ModelAndView  mav = new ModelAndView();
-		mav.setViewName("/product/deleteForm");
-		return mav;
-	}
-	@RequestMapping(value ="/product/delete", method = RequestMethod.POST)
-	public String deletePro(@RequestParam("procode") String procode){
-		proservice.deletePro(procode);
+	public String deletePro(HttpServletRequest request){
+		proservice.deletePro(request.getParameter("procode"));
 		return "redirect:/product/list";
 	}
 	

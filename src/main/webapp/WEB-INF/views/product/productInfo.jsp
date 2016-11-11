@@ -50,6 +50,11 @@
 						class="w3-btn w3-round-large"
 						onclick="window.location='/erp/product/updateForm?procode=${proList.procode}'">
 					</td>
+			
+					<td><input type="button" value="정보삭제"
+						class="w3-btn w3-round-large"
+						onclick="window.location='/erp/product/delete?procode=${proList.procode}'">
+					</td>
 				</tr>
 			</table>
 		</div>
