@@ -13,6 +13,10 @@
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
 	
+	<update id="updateMember" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	UPDATE SMEMBER SET NAME=#{name}, PWD=#{pwd}, ADDRESS=#{address}, PHONE=#{phone}, EMAIL=#{email}, ACCOUNT=#{account} WHERE EMPNO=#{empno}         
+    </update>
+	
 	 <select id="ConfirmID_Member" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME=#{name} AND EMAIL= #{email} )
 	</select>

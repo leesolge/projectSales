@@ -8,7 +8,7 @@
 		<div class="w3-col w3-left" style="width:30%"><p></p></div>
 		<div class="w3-col w3-right" style="width:30%"><p></p></div>
 		<div class="w3-rest w3-container" align="center">
-			<form method="post" action="JoinSMember" enctype="multipart/form-data">
+			<form method="post" action="JoinMember" enctype="multipart/form-data">
 				<h4>Join</h4>
 				<table class="w3-table w3-bordered w3-border w3-centered">
 					<tr>

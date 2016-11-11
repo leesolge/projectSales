@@ -37,7 +37,7 @@ public class JoinController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/JoinSMember", method=RequestMethod.POST)
+	@RequestMapping(value="/JoinMember", method=RequestMethod.POST)
 	public ModelAndView JoinSMember(MemberJoinVO vo) throws Exception {
 		MultipartFile uploadfile = vo.getFile();
         if (uploadfile != null) {
@@ -139,5 +139,4 @@ public class JoinController {
 		memberDAOImpl.Update_Cancel_Member(member.getEmpno());
 		return mav;
 	}
-	
 }

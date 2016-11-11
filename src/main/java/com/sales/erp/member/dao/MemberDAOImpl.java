@@ -31,6 +31,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public void updateMember(MemberVO vo) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.updateMember(vo);
+	}
+	
+	@Override
 	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo) {
 		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
@@ -59,8 +65,6 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.Update_Cancel_Member(empno);
 	}
-
-
 
 	@Override
 	public void Admin_Update_Member(MemberVO vo) {

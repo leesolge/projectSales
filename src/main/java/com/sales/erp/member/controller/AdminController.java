@@ -100,7 +100,6 @@ public class AdminController {
 	    search.setEnd(end);
 	    search.setStart(start);
 	    
-	    
 	    int count = memberDAOImpl.Count_Approved_Member(search);
 	    
 	    int allPage = (int) Math.ceil(count / (double)rowSize);
@@ -169,7 +168,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/Admin_Update_Member", method=RequestMethod.POST)
-	public String Admin_Update_SMember(HttpServletRequest request) {
+	public String Admin_Update_Member(HttpServletRequest request) {
 		String empno = request.getParameter("empno");
 		String auth = request.getParameter("auth");
 		String team = request.getParameter("team");
