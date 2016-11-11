@@ -84,10 +84,10 @@
 				${make.change}
 				</div>
 				<div class="title">
-				수신인 :&nbsp;${make.steam}&nbsp;${make.sname}&nbsp;${make.sauth}
+				수신인 :&nbsp;${make.rteam}&nbsp;${make.rname}&nbsp;${make.rauth}
 				</div>
 				<div class="title">
-				발신인 :&nbsp;${make.rteam}&nbsp;${make.rname}&nbsp;${make.rauth}
+				발신인 :&nbsp;${make.steam}&nbsp;${make.sname}&nbsp;${make.sauth}
 				</div>
 				<div class="title">
 				제목 :&nbsp;${make.title}
@@ -128,11 +128,17 @@
 			<c:if test="${field!='content'}">
 				<option value="content">내용</option>
 			</c:if>
-			<c:if test="${field=='sender'}">
-				<option value="sender" selected="selected">작성자</option>
+			<c:if test="${field=='sname'}">
+				<option value="sname" selected="selected">발신인</option>
 			</c:if>
-			<c:if test="${field!='sender'}">
-				<option value="sender">작성자</option>
+			<c:if test="${field!='sname'}">
+				<option value="sname">발신인</option>
+			</c:if>
+			<c:if test="${field=='rname'}">
+				<option value="rname" selected="selected">수신인</option>
+			</c:if>
+			<c:if test="${field!='rname'}">
+				<option value="rname">수신인</option>
 			</c:if>
 		</select>&nbsp;
 		<input name="keyword" type="text" size="10" value="${keyword}">
