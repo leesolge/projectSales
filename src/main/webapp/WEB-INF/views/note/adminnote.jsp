@@ -11,6 +11,16 @@
 					jumping.pageNum.value=pn;
 					jumping.submit();
 				}
+				function reNote(pn, nn){
+					var jumping = document.res;
+					jumping.pageNum.value=pn;
+					jumping.notenum.value=nn;
+					if (confirm("해당 쪽지를 복구하시겠습니까?") == true){
+						jumping.submit();
+					}else{
+					    return;
+					}
+				}
 				function writePage(receive){
 					var writes = document.write;
 					writes.rec.value=receive;
@@ -74,6 +84,12 @@
 			<input type="hidden" name="field" value="${field}">
 			<input type="hidden" name="keyword" value="${keyword}">
 	</form>
+	<form action="/erp/admin/restorenote" name="res" method="post">
+			<input type="hidden" name="pageNum" value="0">
+			<input type="hidden" name="notenum" value="0">
+			<input type="hidden" name="field" value="${field}">
+			<input type="hidden" name="keyword" value="${keyword}">
+	</form>
 	
 	
 	
@@ -96,6 +112,7 @@
 				${make.content}
 				</div>
 				<div class="title">
+				<button onclick="javascript:reNote('${pageNum-1}', '${make.notenum}')">복구</button>
 				</div>
 			</div>
 		</c:forEach>

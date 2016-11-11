@@ -17,6 +17,12 @@ public class NoteController {
 	@Autowired
 	private NoteService nos;
 	
+	@RequestMapping("/admin/restorenote")
+	public ModelAndView restoreNote(HttpServletRequest request){
+		ModelAndView mav = nos.restore(request);
+		return mav;
+	}
+	
 	@RequestMapping("/admin/note")
 	public ModelAndView adminNoteSelect(HttpServletRequest request){
 		ModelAndView mav = nos.adminSelectAll(request);

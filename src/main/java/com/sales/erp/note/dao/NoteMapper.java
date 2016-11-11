@@ -10,6 +10,7 @@ import com.sales.erp.note.vo.NoteVO;
 
 public interface NoteMapper extends Serializable{
 	void deleteOne(int noteNum);
+	void restoreOne(int noteNum);
 	ArrayList<NoteVO> selectSend(String empno);
 	ArrayList<NoteVO> selectReceive(String empno);
 	NoteVO viewNote(int noteNum);

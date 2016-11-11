@@ -17,6 +17,11 @@ public class NoteDAO implements NoteMapper{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public void restoreOne(int noteNum) {
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		noteMapper.restoreOne(noteNum);
+	}
+
 	public ArrayList<JoinVO> adminSelectAll(NoteSearchVO vo) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		return noteMapper.adminSelectAll(vo);

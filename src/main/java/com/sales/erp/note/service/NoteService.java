@@ -25,6 +25,23 @@ public class NoteService {
 	@Autowired
 	private NoteDAO dao;
 
+	public ModelAndView restore(HttpServletRequest request){
+		RedirectView rv = null;
+		rv = new RedirectView("/erp/admin/note");
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
+		String pageCheck = request.getParameter("pageCheck");
+		String pageNum = request.getParameter("pageNum");
+		String notenum = request.getParameter("notenum");
+		String field = request.getParameter("field");
+		String keyword = request.getParameter("keyword");
+		dao.restoreOne(Integer.parseInt(notenum));
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("field", field);
+		mav.addObject("keyword", keyword);
+		return mav;
+	}
+	
 	public ModelAndView adminSelectAll(HttpServletRequest request){
 		ArrayList<JoinVO> list;
 		ModelAndView mav = new ModelAndView();
