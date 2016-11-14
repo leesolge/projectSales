@@ -11,7 +11,7 @@
 <body>
 	<h1>공지사항</h1>
 		<div class="w3-row ">
-			<div class="w3-container w3-center">
+			<div class="w3-col w3-center">
 			총 <c:out value="${total}"/>개의 게시물이 있습니다.
 			</div>
 			<div class="w3-col w3-left" style="width: 30%">

@@ -12,7 +12,8 @@ function board_update(){
 }
 function board_delete(){
 	//alert("삭제");
-	location.href="/erp/board/deleteForm?num=${b.num}";
+	/* location.href="/erp/board/deleteForm?num=${b.num}"; */
+	location.href="/erp/board/delete?num=${b.num}";
 }
 function board_reply(){
 	//alert("답변");
@@ -27,7 +28,45 @@ function board_reply(){
 
 <%-- <a href="/erp/board/list?pg=${pg}">리스트</a> --%>
 <a href="/erp/board/list?">리스트</a>
-<table width="500">
+<table width="800"> 
+	<tr>
+		<th>날짜</th>
+		<td name="regDate" maxlength="50" size="65">
+			${b.regDate}	
+		</td>
+	</tr>
+	
+	<tr>
+		<th>이름</th>
+		<td name="name" maxlength="50" size="65" >
+			${b.name}	
+		</td>
+	</tr>
+	
+	<tr>
+		<th>제목</th>
+		<td name="title" maxlength="50" size="65">
+			${b.title}
+		</td>
+	</tr>
+	
+	<tr>
+		<th>내용</th>
+		<td>		
+			<textarea name="content" rows="5" cols="65" readonly="readonly">${b.content}</textarea>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="4" align="right">
+			<input type="button" value="수정" onclick="board_update()"/>
+			<input type="button" value="삭제" onclick="board_delete()"/>
+			<!-- <input type="button" value="답변" onclick="board_reply()"/> -->
+		</td>
+	</tr>
+</table>
+
+<%-- <table width="500">
 
 	<tr>
 		<th colspan="4">
@@ -54,6 +93,6 @@ function board_reply(){
 		</td>
 	</tr>
 
-</table>
+</table> --%>
 </body>
 </html>

@@ -46,12 +46,12 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/board/deleteForm")
+	/*@RequestMapping("/board/deleteForm")
 	public ModelAndView deleteForm(){
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("/board/deleteForm");
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping("/board/delete")
 	public String delete(@RequestParam("num") int num){

@@ -1,11 +1,13 @@
 select * from salesBoard;
-	
+
+drop table salesBoard;
+
 CREATE TABLE salesBoard
   (
   num NUMBER, 
   NAME VARCHAR2(50), 
   title  VARCHAR2(50), 
-  content  VARCHAR2(50), 
+  content  VARCHAR2(500), 
   regdate  date,
   parent  NUMBER, 
   SORT  NUMBER, 

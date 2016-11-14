@@ -28,10 +28,11 @@
 <body>
 <h1>글 수정</h1>
 <form name="writeForm" action="update" method="post">
-<table width="600">
+<table width="800">
 	<tr>
-		<th>이름 ${b.name}</th>
+		<th>이름</th>
 		<td>
+			${b.name}	
 			<%-- <input type="hidden" name="pg" value="${pg}"/> --%>
 			<input type="hidden" name="num" value="${b.num}"/>
 			<input type="hidden" name="name" value="${b.name}"/>
@@ -48,14 +49,14 @@
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea name="content" rows="5" cols="50">${b.content}</textarea>
+			<textarea name="content" rows="5" cols="65">${b.content}</textarea>
 		</td>
 	</tr>
 	
 	<tr>
 		<td colspan="2">
 			<input type="button" value="수정" onclick="board_update()"/>
-			<input type="reset" value="취소"/>
+			<input type="button" value="취소" onclick="location.href='/erp/board/list';"/>
 		</td>
 	</tr>
 </table>

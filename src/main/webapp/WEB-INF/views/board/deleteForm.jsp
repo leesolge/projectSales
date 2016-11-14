@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글삭제</title>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	function deletepro(){
 		if(document.f.num.value==""){
 			alert("글번호를 입력해주세요!");
@@ -15,7 +15,7 @@
 		}
 	}
 
-</script> -->
+</script>
 </head>
 <body>
 <h1>글 삭제</h1>
@@ -42,4 +42,4 @@
 
 </form>
 </body>
-</html>
+</html> --%>

@@ -24,9 +24,11 @@
 </head>
 <body>
 <h1>글쓰기</h1>
-<a href="/erp/board/list?pg=${pg}">리스트</a>
+<div class="w3-col w3-center">
+<a href="/erp/board/list">리스트</a>
+</div>
 <form name="writeForm" action="write" method="post">
-		<table width="600">
+		<table width="800">
 			<tr>
 				<th>이름</th>
 				<td>
@@ -37,14 +39,14 @@
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="title" maxlength="50" size="65"/>
+					<input type="text" name="title" maxlength="50" size="72"/>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea name="content" rows="5" cols="50"></textarea>
+					<textarea name="content" rows="10" cols="72"></textarea>
 				</td>	
 			</tr>
 			

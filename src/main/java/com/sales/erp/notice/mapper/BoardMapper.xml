@@ -11,7 +11,7 @@
 	 		 	(select * from salesBoard WHERE ${field} LIKE #{word} orders by parent desc, sort) A
 	 	 	)
  	 	where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} --> <!-- where sal <= 1000 -->
- 	 	select * from (select rownum r, d.* from (select * from SALESBOARD where ${field} like #{word} order by num desc) d) where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} order by r desc 
+ 	 	select * from (select rownum r, d.* from (select * from SALESBOARD where ${field} like #{word} order by regDate desc) d) where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} order by r asc 
  	 	<!-- <![CDATA[
  	 	SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SALESBOARD WHERE ${field} LIKE #{word}) A) WHERE R >= #{start} AND R <= #{end}
 		]]> -->
