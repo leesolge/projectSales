@@ -15,38 +15,41 @@
 	</bean>
 
 	<security:http auto-config="true" use-expressions="true">
-	
-		<security:intercept-url pattern="/loginform" access=""/>
-		
+
+		<security:intercept-url pattern="/loginform"
+			access="" />
+
 		<security:form-login login-page="/home"
-			login-processing-url="/login" 
-			username-parameter="id"
-			password-parameter="pwd"
-			default-target-url="/main"
+			login-processing-url="/login" username-parameter="id"
+			password-parameter="pwd" default-target-url="/main"
 			authentication-failure-url="/loginfail" />
 		<security:logout logout-success-url="/" />
 
 		<security:intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />
-			<security:intercept-url pattern="/manager/**"
+		<security:intercept-url pattern="/manager/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" />
-			<security:intercept-url pattern="/employee/**"
+		<security:intercept-url pattern="/employee/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')" />
-			<security:intercept-url pattern="/main"
+		<security:intercept-url pattern="/transact/**"
+			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" />
+		<security:intercept-url pattern="/main"
 			access="isAuthenticated()" />
-			<security:intercept-url pattern="/note/**"
+		<security:intercept-url pattern="/note/**"
 			access="isAuthenticated()" />
-		<security:intercept-url pattern="/**"
-			access="permitAll" />
+		<security:intercept-url pattern="/**" access="permitAll" />
 	</security:http>
 
-	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>    
-	<!-- <bean id="MemberUserDetailsService" class="com.sales.erp.member.vo.MemberUserDetailsService" /> -->
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<!-- <bean id="MemberUserDetailsService" class="com.sales.erp.member.vo.MemberUserDetailsService" 
+		/> -->
 	<bean id="MemberAuthenticationProvider" class="com.sales.erp.member.vo.MemberAuthenticationProvider" />
 
 
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider ref="MemberAuthenticationProvider" />
+		<security:authentication-provider
+			ref="MemberAuthenticationProvider" />
 	</security:authentication-manager>
 
 </beans>

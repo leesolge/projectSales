@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.transact.dao.TransactMapper">
+
+	<select id="selectList" resultType="com.sales.erp.transact.vo.TransactVO">
+		SELECT * FROM TRANSACT
+		<where>
+			<if test="category != null">
+				CATEGORY = #{category}
+			</if>
+			<if test="team != null">
+				AND TEAM = #{team}
+			</if>
+		</where>
+	</select>
+</mapper>

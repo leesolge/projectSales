@@ -47,6 +47,7 @@
 					<td><select name="auth">
 							<option class="w3-text-red" value="${vo.auth}"  selected>${vo.auth}</option>
 							<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+							<option value="ROLE_BUDGET">ROLE_BUDGET</option>
 							<option value="ROLE_MANAGER">ROLE_MANAGER</option>
 							<option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
 							<option value="ROLE_EE">ROLE_EE</option>

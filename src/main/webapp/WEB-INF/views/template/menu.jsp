@@ -7,7 +7,7 @@
 	<sec:authorize access="isAuthenticated()">
 		<ul class="w3-navbar w3-blue-grey w3-large w3-center">
 			<li style="width: 15%"><a href="/erp/main">Main</a></li>
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
+			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
 			<li class="w3-dropdown-hover" style="width: 15%">
 			<a href="#">개인메뉴<i class="fa fa-caret-down"></i></a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
@@ -27,6 +27,17 @@
 				</div>
 			</li>
 			</sec:authorize>
+			
+			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
+			<li class="w3-dropdown-hover" style="width: 15%">
+			<a href="#">자재관리<i class="fa fa-caret-down"></i></a>
+				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
+					<a href="/erp/transact/transactlist_default">거래내역</a> 
+					<a href="#">메뉴1</a> 
+				</div>
+			</li>
+			</sec:authorize>
+			
 			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 			<li class="w3-dropdown-hover" style="width: 15%">
 			<a href="#">관리자메뉴<i class="fa fa-caret-down"></i></a>
