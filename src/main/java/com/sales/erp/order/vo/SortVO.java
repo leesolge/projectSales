@@ -3,24 +3,23 @@ package com.sales.erp.order.vo;
 import java.util.Date;
 
 public class SortVO {
-	/*private Date firstdate;
-	private Date seconddate;*/
+	private String firstdate;
+	private String seconddate;
 	private String product;
 	private String emp;
 	
-	
-	/*public Date getFirstdate() {
+	public String getFirstdate() {
 		return firstdate;
 	}
-	public void setFirstdate(Date firstdate) {
+	public void setFirstdate(String firstdate) {
 		this.firstdate = firstdate;
 	}
-	public Date getSeconddate() {
+	public String getSeconddate() {
 		return seconddate;
 	}
-	public void setSeconddate(Date seconddate) {
+	public void setSeconddate(String seconddate) {
 		this.seconddate = seconddate;
-	}*/
+	}
 	public String getProduct() {
 		return product;
 	}

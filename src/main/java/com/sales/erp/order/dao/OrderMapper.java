@@ -12,4 +12,5 @@ public interface OrderMapper extends Serializable{
 
 	ArrayList<ProductVO> selectProductAll();
 	void insertOrder(OrderVO vo);
+	ArrayList<OrderJoinVO> ab();
 }

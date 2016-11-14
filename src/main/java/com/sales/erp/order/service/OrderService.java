@@ -23,6 +23,36 @@ public class OrderService {
 	@Autowired
 	private OrderDAO dao;
 	
+	public ModelAndView adminOrder(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		ArrayList<OrderJoinVO> list = dao.ab();
+		ArrayList<ProductVO> plist = dao.selectProductAll();
+		
+		String firstdate = request.getParameter("firstdate");
+		String seconddate = request.getParameter("seconddate");
+		String product = request.getParameter("product");
+		String emp = request.getParameter("emp");
+		if(firstdate==null||firstdate.equals("")){
+			firstdate = "none";
+		}else{
+			firstdate = firstdate.replace("-", "")+"000000";
+		}
+		if(seconddate==null||seconddate.equals("")){
+			seconddate = "none";
+		}else{
+			firstdate = seconddate.replace("-", "")+"235959";
+		}
+		if(product==null||product.equals("")){
+			seconddate = "none";
+		}
+		if(emp==null||emp.equals("")){
+			emp = "";
+		}
+		mav.addObject("plist", plist);
+		mav.addObject("alist", list);
+		return mav;
+	}
+	
 	public ModelAndView registForm(){
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

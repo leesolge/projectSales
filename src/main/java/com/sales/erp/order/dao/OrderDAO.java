@@ -31,4 +31,10 @@ public class OrderDAO implements OrderMapper{
 		mapper.insertOrder(vo);
 	}
 
+	public ArrayList<OrderJoinVO> ab() {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.ab();
+	}
+	
+
 }

@@ -17,6 +17,13 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
+	@RequestMapping("/admin/order")
+	public ModelAndView adminOrder(HttpServletRequest request){
+		ModelAndView mav = os.adminOrder(request);
+		mav.setViewName("order/adminlist");
+		return mav;
+	}
+	
 	@RequestMapping("/order/regist")
 	public ModelAndView registForm(){
 		ModelAndView mav = os.registForm();
