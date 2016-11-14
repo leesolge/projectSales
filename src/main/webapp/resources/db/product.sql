@@ -1,4 +1,4 @@
-
+drop table product;
 create table product(
 
 	procode varchar2(20) primary key,
@@ -13,21 +13,21 @@ create table product(
 
 select * from PRODUCT;
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('1004','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+values('1004','천사채','4000','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('1005','asd','1000','2000','1000',null,'짱이에요짱');
+values('1005','천오복분자','5000','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('1006','erwqwr','1000','2000','1000',null,'짱이에요짱');
+values('1006','천육포','7000','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('6121','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+values('6121','이일팔구','2500','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('10084','qtwer','1000','2000','1000',null,'짱이에요짱');
+values('10084','팔사세요','8700','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('1009','qwt','1000','2000','1000',null,'짱이에요짱');
+values('1009','천구과자','23400','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('2104','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+values('2104','공사삽','7700','2000','1000',null,'짱이에요짱');
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
-values('3412','땡땡땡','1000','2000','1000',null,'짱이에요짱');
+values('3412','이리오게','9900','2000','1000',null,'짱이에요짱');
 
 UPDATE PRODUCT SET PROCODE='1000', PRONAME='2132',PROAMOUNT='1236',SELLPRICE='1004',
   		ORIGINPRICE='1004',PROEXPLA='1004'  WHERE PROCODE='1005'    

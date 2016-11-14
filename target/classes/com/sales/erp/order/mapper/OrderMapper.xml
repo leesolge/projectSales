@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.order.dao.OrderMapper">
+	
+	<select id="selectProductAll" resultType="com.sales.erp.product.vo.ProductVO">
+		SELECT * FROM PRODUCT
+	</select>
+	
+	<insert id="insertOrder" parameterType="com.sales.erp.order.vo.OrderVO">
+		INSERT INTO ORDERS (ID, EMPNO, PROCODE, PROAMOUNT, REGDATE, CUSTOMER, ADDRESS, CHECKS, DELETED)
+		VALUES (#{empno}||'o'||TO_CHAR(ORDERID.NEXTVAL), #{empno}, #{procode}, #{proamount}, SYSDATE, #{customer}, #{address}, 0, 0)
+	</insert>
+	
+</mapper>

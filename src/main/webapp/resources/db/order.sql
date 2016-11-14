@@ -1,7 +1,73 @@
+drop table orders;
 select * from orders;
-
 create table orders(
-	empno varchar(20) primary key,
-	procode varchar(20) not null,
-	proamount varchar(10) not null,
+	id varchar2(50) primary key,
+	empno varchar2(20),
+	procode varchar2(20),
+	proamount number,
+	regdate date,
+	customer varchar2(30),
+	address varchar2(300),
+	checks number,
+	deleted number	
 )
+
+create sequence orderid
+start with 1
+nocache
+INSERT INTO ORDERS (ID, EMPNO, PROCODE, PROAMOUNT, REGDATE, CUSTOMER, ADDRESS, CHECKS, DELETED)
+		VALUES ('100'||'o'||TO_CHAR(ORDERID.NEXTVAL), '100', '1000', '123', SYSDATE, #{customer}, #{address}, 0, 0)
+
+SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+	   S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+	   O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+	   ((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+	   ((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT*0.4) AS ALLOWANCE,
+	   O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+	   O.DELETED AS DELETED
+	   FROM ORDERS O, 
+	   (SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+	   (SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+	   WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE
+
+	   SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+		   O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+		   ((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+		   O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+		   O.DELETED AS DELETED
+		   FROM ORDERS O, 
+		   (SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+		   (SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+		   WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE
+		   
+		   AND O.PROCODE='1004'
+		   AND O.EMPNO='100'
+
+		   <!-- <if test="firstdate!=null">
+		   AND O.REGDATE<![CDATA[>=]]>#{firstdate}
+		   </if>
+		   <if test="seconddate!=null">
+		   AND O.REGDATE<![CDATA[>=]]>#{seconddate}
+		   </if> -->
+		   <if test="product!=null or product!=''">
+		   AND O.PROCODE=#{procode, jdbcType=VARCHAR}
+		   </if>
+		   <if test="emp!=null or emp!=''">
+		   AND O.EMP=#{emp, jdbcType=VARCHAR}
+		   </if>
+		   and o.regdate>='2016-11-01'
+		   and o.regdate<=to_date('20161114235959', 'YYYY-MM-DD HH24MISS')
+		   
+		   SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+		   S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+		   O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+		   ((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+		   O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+		   O.DELETED AS DELETED
+		   FROM ORDERS O, 
+		   (SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+		   (SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+		   WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE
+		   AND O.PROCODE='1004'
+		   AND O.EMPNO='100'
