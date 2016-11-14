@@ -35,7 +35,6 @@
 	<c:if test="${pageCheck=='receive'}"><c:set var="ad" value="rd"/></c:if>
 	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
 	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>
-	${ad}
 	<form action="/erp/note/reply" name="rp" method="post">
 		<input type="hidden" name="pageCheck" value="${pageCheck}">
 		<input type="hidden" name="notenum" value="${notenum}">
@@ -83,7 +82,9 @@
 		발신자 : ${svo.team} ${svo.name} ${svo.auth}<br>
 		수신자 : ${rvo.team} ${rvo.name} ${rvo.auth}<br>
 		제목 : ${vo.title}<br>
-		내용 : ${vo.content}<br>
+		내용<br>
+		<textarea rows="5" cols="20" readonly="readonly">${vo.content}</textarea>
+		<br>
 	<hr>
 		<c:if test="${empno==rvo.empno}"><button onclick="javascript:jumpPage('rp')">답장하기</button></c:if>
 		<button onclick="javascript:jumpPage('${ad}')">목록보기</button>
