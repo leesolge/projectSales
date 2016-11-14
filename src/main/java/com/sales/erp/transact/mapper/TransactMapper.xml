@@ -4,7 +4,8 @@
 
 <mapper namespace="com.sales.erp.transact.dao.TransactMapper">
 
-	<select id="selectList" resultType="com.sales.erp.transact.vo.TransactVO">
+	<select id="selectList" parameterType="com.sales.erp.transact.vo.TransactSearchVO"
+		resultType="com.sales.erp.transact.vo.TransactVO">
 		SELECT * FROM TRANSACT
 		<where>
 			<if test="category != null">
@@ -13,6 +14,21 @@
 			<if test="team != null">
 				AND TEAM = #{team}
 			</if>
+			<if test="procode != null">
+				AND PROCODE = #{procode}
+			</if>
 		</where>
+		ORDER BY ID DESC
 	</select>
+
+	<select id="get_procode" resultType="java.lang.String">
+		SELECT PROCODE FROM PRODUCT
+		ORDER BY PROCODE
+	</select>
+
+	<select id="get_team" resultType="java.lang.String">
+		SELECT TEAM FROM SMEMBER WHERE
+		TEAM LIKE '영업%' GROUP BY TEAM ORDER BY TEAM
+	</select>
+
 </mapper>

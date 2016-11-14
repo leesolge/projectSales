@@ -18,8 +18,10 @@ public class TransactController {
 	private TransactService trs;
 	
 	@RequestMapping("/transact/transactlist_default")
-	public String transactlist_default(){
-		return "/transact/transactlist_default";
+	public ModelAndView transactlist_default(){
+		ModelAndView mav = trs.takeOptions();
+		mav.setViewName( "/transact/transactlist_default");
+		return mav;
 	}
 
 	@RequestMapping("/transact/transactlist")
