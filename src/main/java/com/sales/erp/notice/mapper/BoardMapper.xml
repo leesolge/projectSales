@@ -50,5 +50,9 @@
 		where num=#{num}
 	</update>
 	
+	<select id="getNameTeamAuth" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
 </mapper>
 

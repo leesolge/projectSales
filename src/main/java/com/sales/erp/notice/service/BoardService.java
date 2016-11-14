@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.member.vo.MemberSearch;
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.dao.BoardDAO;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
@@ -79,6 +81,17 @@ public class BoardService{
 		mav.addObject("fromPage", fromPage);
 		mav.addObject("toPage", toPage);
 		
+		return mav;
+	}
+	
+	public ModelAndView sendWriteForm(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		
+		ModelAndView mav = new ModelAndView();
+		MemberVO senderVo = dao.getNameTeamAuth(empno);
+		
+		mav.addObject("senderVo", senderVo);		
 		return mav;
 	}
 	

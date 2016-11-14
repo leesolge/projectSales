@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.notice.service.BoardService;
-import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
 
 @Controller
@@ -28,13 +27,17 @@ public class BoardController {
 	
 	@RequestMapping("/board/writeForm")
 	public ModelAndView writeForm(){
-		ModelAndView mav=new ModelAndView();
+		ModelAndView mav = boardService.sendWriteForm();
 		mav.setViewName("/board/writeForm");
 		return mav;
 	}
 	
 	@RequestMapping(value="/board/write", method= RequestMethod.POST)
-	public String write(BoardVO vo){
+	public String write(HttpServletRequest request){
+		BoardVO vo = new BoardVO();
+		vo.setName(request.getParameter("name"));
+		vo.setTitle(request.getParameter("title"));
+		vo.setContent(request.getParameter("content"));
 		boardService.insertBoard(vo);
 		return "redirect:/board/list";
 	}

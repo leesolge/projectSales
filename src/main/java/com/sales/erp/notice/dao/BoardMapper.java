@@ -3,6 +3,7 @@ package com.sales.erp.notice.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
 
@@ -19,5 +20,9 @@ public interface BoardMapper extends Serializable {
 	public int deleteBoard(int num); //삭제
 
 	int updateBoard(BoardVO vo); //수정
+
+	MemberVO getNameTeamAuth(String empno);
+
+	public BoardVO sendWriteForm(BoardVO vo);
 	
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.note.dao.NoteMapper;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
 
@@ -54,5 +56,15 @@ public class BoardDAO {
 	public int updateBoard(BoardVO vo) {
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
 		return boardDAO.updateBoard(vo);
+	}
+	
+	public BoardVO sendWriteForm(BoardVO vo){
+		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
+		return boardDAO.sendWriteForm(vo);
+	}
+	
+	public MemberVO getNameTeamAuth(String empno) {
+		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
+		return boardDAO.getNameTeamAuth(empno);
 	}
 }
