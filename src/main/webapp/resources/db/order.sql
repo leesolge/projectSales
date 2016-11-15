@@ -1,3 +1,6 @@
+UPDATE ORDERS SET DELETED=0 where id='300316o25'
+UPDATE NOTEDB SET DELETED=0 WHERE NOTENUM = #{noteNum}
+select * from orders where id='300316o25'
 			SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
 			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
@@ -16,7 +19,6 @@
 			
 select * from orders
 SELECT TEAM FROM SMEMBER WHERE AUTH!='ROLE_ADMIN' GROUP BY TEAM ORDER BY TEAM
-
 select * from smember
 select * from orders;
 create table orders(
@@ -30,7 +32,7 @@ create table orders(
 	checks number,
 	deleted number	
 )
-
+SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE TEAM!='관리팀' ORDER BY TEAM, AUTH DESC
 create sequence orderid
 start with 1
 nocache

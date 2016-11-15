@@ -28,6 +28,75 @@ public class OrderService {
 	@Autowired
 	private OrderDAO dao;
 	
+	public ModelAndView modifyPro(HttpServletRequest request){
+		RedirectView rv = null;
+		rv = new RedirectView("/erp/admin/order");
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
+		OrderVO vo = new OrderVO();
+		vo.setEmpno(request.getParameter("empno"));
+		vo.setProcode(request.getParameter("procode"));
+		vo.setProamount(request.getParameter("proamount"));
+		vo.setCustomer(request.getParameter("customer"));
+		vo.setAddress(request.getParameter("address"));
+		vo.setId(request.getParameter("id"));
+		dao.modifyPro(vo);
+		return mav;
+	}
+	
+	public OrderVO selectOneOrder(String id){
+		TestVO vo = new TestVO();
+		vo.setTests(id);
+		OrderVO ovo = dao.selectOneOrder(vo); 
+		return ovo;
+	}
+	
+	public ModelAndView canclePro(String id){
+		TestVO vo = new TestVO();
+		vo.setTests(id);
+		dao.cancleOne(vo);
+		RedirectView rv = null;
+		rv = new RedirectView("/erp/admin/order");
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
+		return mav;
+	}
+	
+	public ModelAndView adminRegistPro(HttpServletRequest request){
+		OrderVO vo = new OrderVO();
+		vo.setEmpno(request.getParameter("empno"));
+		vo.setProcode(request.getParameter("procode"));
+		vo.setProamount(request.getParameter("proamount"));
+		vo.setCustomer(request.getParameter("customer"));
+		vo.setAddress(request.getParameter("address"));
+		dao.insertOrder(vo);
+		RedirectView rv = null;
+		rv = new RedirectView("/erp/admin/order");
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
+		return mav;
+	}
+	
+	public ModelAndView adminRegistForm(){
+		ModelAndView mav = new ModelAndView();
+		ArrayList<MemberVO> mlist = dao.memberForReg(); 
+		for(MemberVO vo:mlist){
+			if(vo.getAuth().equals("ROLE_EMPLOYEE")){
+				vo.setAuth("사원");
+			}
+			if(vo.getAuth().equals("ROLE_MANAGER")){
+				vo.setAuth("팀장");
+			}
+			if(vo.getAuth().equals("ROLE_ADMIN")){
+				vo.setAuth("관리자");
+			}
+		}
+		ArrayList<ProductVO> plist = dao.selectProductAll();
+		mav.addObject("mlist", mlist);
+		mav.addObject("plist", plist);
+		return mav;
+	}
+	
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		ArrayList<ProductVO> plist = dao.selectProductAll();

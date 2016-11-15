@@ -17,4 +17,8 @@ public interface OrderMapper extends Serializable{
 	ArrayList<OrderJoinVO> adminSelectOrders(TestVO vo);
 	ArrayList<TeamVO> selectTeam();
 	ArrayList<MemberVO> teamMember(TeamVO vo);
+	ArrayList<MemberVO> memberForReg();
+	void cancleOne(TestVO vo);
+	OrderVO selectOneOrder(TestVO vo);
+	void modifyPro(OrderVO vo);
 }

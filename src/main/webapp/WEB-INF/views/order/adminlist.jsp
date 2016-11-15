@@ -4,12 +4,51 @@
 
 <!DOCTYPE html>
 <html>
+	<script type="text/javascript">
+	function morders(pn){
+		var jumping = document.mord;
+		jumping.orderid.value=pn;
+		jumping.submit();
+	}
+	function dorders(pn){
+		if (confirm("해당 수주를 정말 취소하시겠습니까?") == true){
+			var jumping = document.dord;
+			jumping.orderid.value=pn;
+			jumping.submit();
+		}else{
+		    return;
+		}
+	}
+	function corders(pn){
+		var jumping = document.cord;
+		jumping.orderid.value=pn;
+		jumping.submit();
+	}
+	function worders(){
+		var jumping = document.write;
+		jumping.submit();
+	}
+	</script>
 	<head>
 		<title>Title</title>
 	</head>
 	
 	<body>
-		<form action="/erp/admin/order" method="get">
+	<form name="mord" action="/erp/admin/morder" method="post">
+		<input name="orderid" type="hidden" value="0">
+	</form>
+	
+	<form name="dord" action="/erp/admin/dorder" method="post">
+		<input name="orderid" type="hidden" value="0">
+	</form>
+	
+	<form name="cord" action="/erp/admin/corder" method="post">
+		<input name="orderid" type="hidden" value="0">
+	</form>
+	<form name="write" action="/erp/admin/worder" method="post">
+	</form>
+	
+		<form action="/erp/admin/order" method="post">
 			<input name="firstdate" type="date">&nbsp;
 			<input name="seconddate" type="date">&nbsp;
 			<select name="product">
@@ -43,6 +82,9 @@
 				<td>직원 수당</td>
 				<td>고객명</td>
 				<td>고객 주소</td>
+				<td>수정</td>
+				<td>취소</td>
+				<td>판매 확정</td>
 			</tr>
 			<c:forEach var="alist" items="${alist}">
 				<tr>
@@ -59,8 +101,11 @@
 					<td>${alist.allowance}</td>
 					<td>${alist.customer}</td>
 					<td>${alist.address}</td>
+					<td><button onclick="javascript:morders('${alist.id}')">수정</button></td>
+					<td><button onclick="javascript:dorders('${alist.id}')">취소</button></td>
 				</tr>
 			</c:forEach>
 		</table>
+		<button onclick="javascript:worders()">등록</button>
 	</body>
 </html>

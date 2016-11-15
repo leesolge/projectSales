@@ -19,6 +19,26 @@ public class OrderDAO implements OrderMapper{
 	@Autowired
 	private SqlSession sqlSession;
 
+	public void modifyPro(OrderVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		mapper.modifyPro(vo);
+	}
+
+	public OrderVO selectOneOrder(TestVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.selectOneOrder(vo);
+	}
+
+	public void cancleOne(TestVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		mapper.cancleOne(vo);
+	}
+
+	public ArrayList<MemberVO> memberForReg() {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.memberForReg();
+	}
+
 	public ArrayList<TeamVO> selectTeam() {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		return mapper.selectTeam();
@@ -28,8 +48,6 @@ public class OrderDAO implements OrderMapper{
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		return mapper.teamMember(vo);
 	}
-
-
 
 	public ArrayList<ProductVO> selectProductAll() {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
