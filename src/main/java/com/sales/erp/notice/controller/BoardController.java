@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentVO;
 
 @Controller
 public class BoardController {
@@ -44,17 +45,31 @@ public class BoardController {
 	
 	@RequestMapping("/board/read")
 	public ModelAndView read(HttpServletRequest request){
-		ModelAndView mav=boardService.getBoard(request);  //글 읽기
-		mav.setViewName("/board/read");
+		
+		
+		ModelAndView mav=boardService.getBoard(request);  //글 읽기4
+		String num=request.getParameter("num");
+		mav.addObject("comments", boardService.commentList(num));
+		/*mav.setViewName("/board/read");*/
 		return mav;
 	}
 	
-	/*@RequestMapping("/board/deleteForm")
-	public ModelAndView deleteForm(){
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("/board/deleteForm");
-		return mav;
-	}*/
+	//커맨트쓰기
+	@RequestMapping(value="/board/comment", method=RequestMethod.POST)
+	public ModelAndView comment(HttpServletRequest request){
+		String num=request.getParameter("num");
+		String name=request.getParameter("name");
+		String comments=request.getParameter("comments");
+		CommentVO vo=new CommentVO();
+		vo.setNum(num);
+		vo.setName(name);
+		vo.setComments(comments);
+		
+		boardService.insertComment(vo);
+		
+		return new ModelAndView("redirect:/board/read?num="+num);
+	}
+	
 	
 	@RequestMapping("/board/delete")
 	public String delete(@RequestParam("num") int num){

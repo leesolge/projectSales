@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentVO;
 
 public interface BoardMapper extends Serializable {
 	
@@ -24,5 +25,9 @@ public interface BoardMapper extends Serializable {
 	MemberVO getNameTeamAuth(String empno);
 
 	public BoardVO sendWriteForm(BoardVO vo);
+
+	ArrayList<CommentVO> commentList(String num);
+
+	public void insertComment(CommentVO vo);
 	
 }

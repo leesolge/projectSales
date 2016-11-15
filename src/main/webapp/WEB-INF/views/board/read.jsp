@@ -66,33 +66,27 @@ function board_reply(){
 	</tr>
 </table>
 
-<%-- <table width="500">
-
-	<tr>
-		<th colspan="4">
-			${b.title}
-		</th>
-	</tr>
-	
-	<tr>
-		<td width="20%"><!-- 이름 -->${b.name}</td>
-		<td width="15%">${b.regDate}</td>
-	</tr>
-	
-	<tr>
-		<td colspan="4">
-			<textarea rows="10" cols="60" readonly="readonly">${b.content}</textarea>
-		</td>
-	</tr>
-	
-	<tr>
-		<td colspan="4" align="right">
-			<input type="button" value="수정" onclick="board_update()"/>
-			<input type="button" value="삭제" onclick="board_delete()"/>
-			<!-- <input type="button" value="답변" onclick="board_reply()"/> -->
-		</td>
-	</tr>
-
-</table> --%>
+<form action="/erp/board/comment" method="post">
+	<input type="hidden" name="num" value="${b.num}">
+	<table border="1">
+		<tr>
+			<td>이름 : </td>
+			<td><input type="text" name="name"/></td>
+			<td>댓글 : </td>
+			<td><input type="text" name="comments"></td>
+			<td><input type="submit" name="Button" value="쓰기"></td>
+		</tr>
+	</table>
+</form>
+	<!-- 달려있는 커맨트 보기 -->
+		<table width="789" border="1">
+			<c:forEach var="comments" items="${comments}">
+				<tr>
+					<td width="42" align="center">*</td>
+					<td width="86">${comments.name}</td>
+					<td width="639">${comments.comments}</td>
+				</tr>
+			</c:forEach>
+		</table>
 </body>
 </html>

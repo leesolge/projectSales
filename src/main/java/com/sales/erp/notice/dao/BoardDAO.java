@@ -10,6 +10,7 @@ import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.dao.NoteMapper;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentVO;
 
 
 @Repository
@@ -66,5 +67,15 @@ public class BoardDAO {
 	public MemberVO getNameTeamAuth(String empno) {
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
 		return boardDAO.getNameTeamAuth(empno);
+	}
+
+	public ArrayList<CommentVO> commentList(String num) {
+		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
+		return boardDAO.commentList(num);
+	}
+
+	public void insertComment(CommentVO vo) {
+		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
+		boardDAO.insertComment(vo);
 	}
 }

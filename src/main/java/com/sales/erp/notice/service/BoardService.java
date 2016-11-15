@@ -14,6 +14,7 @@ import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.dao.BoardDAO;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentVO;
 
 @Service
 public class BoardService{
@@ -116,7 +117,12 @@ public class BoardService{
 		int result=dao.updateBoard(vo);
 		return result;
 	}
-	
-	
 
+	public ArrayList<CommentVO> commentList(String num) {
+		return dao.commentList(num);
+	}
+
+	public void insertComment(CommentVO vo) {
+		dao.insertComment(vo);
+	}
 }

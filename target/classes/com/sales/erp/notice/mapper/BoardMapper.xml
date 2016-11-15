@@ -54,5 +54,15 @@
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
 	</select>
 	
+	<!-- 커맨트 조회 -->
+	<select id="commentList" parameterType="java.lang.String" resultType="com.sales.erp.notice.vo.CommentVO">
+		select * from bComment where num=#{num}
+	</select>
+	
+	<!-- 커맨트 입력 -->
+	<select id="insertComment" resultType="com.sales.erp.notice.vo.CommentVO">
+		insert into bComment(num, name, comments) values(#{num},#{name},#{comments})
+	</select>
+	
 </mapper>
 
