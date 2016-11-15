@@ -6,7 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.order.vo.OrderVO;
+import com.sales.erp.order.vo.TeamVO;
 import com.sales.erp.order.vo.TestVO;
 import com.sales.erp.product.vo.ProductVO;
 
@@ -15,6 +18,18 @@ public class OrderDAO implements OrderMapper{
 
 	@Autowired
 	private SqlSession sqlSession;
+
+	public ArrayList<TeamVO> selectTeam() {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.selectTeam();
+	}
+
+	public ArrayList<MemberVO> teamMember(TeamVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.teamMember(vo);
+	}
+
+
 
 	public ArrayList<ProductVO> selectProductAll() {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
@@ -26,7 +41,7 @@ public class OrderDAO implements OrderMapper{
 		mapper.insertOrder(vo);
 	}
 
-	public ArrayList<ProductVO> adminSelectOrders(TestVO vo) {
+	public ArrayList<OrderJoinVO> adminSelectOrders(TestVO vo) {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		return mapper.adminSelectOrders(vo);
 	}

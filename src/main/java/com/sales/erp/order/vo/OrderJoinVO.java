@@ -3,13 +3,6 @@ package com.sales.erp.order.vo;
 import java.util.Date;
 
 public class OrderJoinVO {
-	/*O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
-	   S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
-	   O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
-	   ((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
-	   O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
-	   O.DELETED AS DELETED
-	   FROM ORDERS O, */
 		private Date regdate;
 		private String id;
 		private String empno;
@@ -20,10 +13,25 @@ public class OrderJoinVO {
 		private String proname;
 		private int proamount;
 		private String profit;
+		private double allowance;
 		private String customer;
 		private String address;
 		private int checks;
 		private int deleted;
+		private String changes;
+		
+		public double getAllowance() {
+			return allowance;
+		}
+		public void setAllowance(double allowance) {
+			this.allowance = allowance;
+		}
+		public String getChanges() {
+			return changes;
+		}
+		public void setChanges(String changes) {
+			this.changes = changes;
+		}
 		public Date getRegdate() {
 			return regdate;
 		}

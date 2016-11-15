@@ -8,6 +8,14 @@
 		SELECT * FROM PRODUCT
 	</select>
 	
+	<select id="selectTeam" resultType="com.sales.erp.order.vo.TeamVO">
+		SELECT TEAM FROM SMEMBER WHERE AUTH!='ROLE_ADMIN' GROUP BY TEAM ORDER BY TEAM
+	</select>
+	
+	<select id="teamMember" parameterType="com.sales.erp.order.vo.TeamVO" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT EMPNO, NAME, AUTH FROM SMEMBER WHERE TEAM=#{team} ORDER BY AUTH DESC
+	</select>
+	
 	<select id="adminSelectOrders" parameterType="com.sales.erp.order.vo.TestVO" resultType="com.sales.erp.order.vo.OrderJoinVO">
 		SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
@@ -18,7 +26,7 @@
 			FROM ORDERS O, 
 			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
 			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
-			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE ${tests}
+			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=0 ${tests}
 	</select> 
 	
 	<insert id="insertOrder" parameterType="com.sales.erp.order.vo.OrderVO">
