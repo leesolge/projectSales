@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.sales.erp.order.dao.OrderDAO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.order.vo.OrderVO;
-import com.sales.erp.order.vo.SortVO;
+import com.sales.erp.order.vo.TestVO;
 import com.sales.erp.product.vo.ProductVO;
 
 @Service
@@ -25,7 +25,6 @@ public class OrderService {
 	
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		ArrayList<OrderJoinVO> list = dao.ab();
 		ArrayList<ProductVO> plist = dao.selectProductAll();
 		
 		String firstdate = request.getParameter("firstdate");
@@ -33,21 +32,32 @@ public class OrderService {
 		String product = request.getParameter("product");
 		String emp = request.getParameter("emp");
 		if(firstdate==null||firstdate.equals("")){
-			firstdate = "none";
+			firstdate = "";
 		}else{
 			firstdate = firstdate.replace("-", "")+"000000";
+			firstdate = "AND O.REGDATE>=TO_DATE('"+firstdate+"', 'YYYYMMDDHH24MISS') ";
 		}
 		if(seconddate==null||seconddate.equals("")){
-			seconddate = "none";
+			seconddate = "";
 		}else{
-			firstdate = seconddate.replace("-", "")+"235959";
+			seconddate = seconddate.replace("-", "")+"235959";
+			seconddate = "AND O.REGDATE<=TO_DATE('"+seconddate+"', 'YYYYMMDDHH24MISS') ";
 		}
 		if(product==null||product.equals("")){
-			seconddate = "none";
+			product = "";
+		}else{
+			product = "AND O.PROCODE='"+product+"' ";
 		}
 		if(emp==null||emp.equals("")){
 			emp = "";
+		}else{
+			emp = "AND O.EMPNO='"+emp+"' ";
 		}
+		TestVO vo = new TestVO();
+		vo.setTests(firstdate+seconddate+product+emp);
+		System.out.println(vo.getTests());
+		ArrayList<ProductVO> list = dao.adminSelectOrders(vo);
+		System.out.println(list);
 		mav.addObject("plist", plist);
 		mav.addObject("alist", list);
 		return mav;
