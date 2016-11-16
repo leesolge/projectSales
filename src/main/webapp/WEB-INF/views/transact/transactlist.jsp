@@ -5,6 +5,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+
 </head>
 <body>
 		<div class="w3-container w3-center">
@@ -39,8 +43,8 @@
 							</c:forEach>
 					</select></td>
 					
-					<td><input type="date" name="start_date"></td>
-					<td><input type="date" name="end_date"></td>
+					<td><input type="text" name="start_date" id="start_date"></td>
+					<td><input type="text" name="end_date" id="end_date"></td>
 					<td rowspan="2"><input type="submit" class="w3-btn" value="조회"></td>
 				</tr>
 			</table>
@@ -72,4 +76,30 @@
 		</c:forEach>
 	</table>
 </body>
+<script>
+	$(function() {
+		$("#start_date").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					changeMonth : true, // 월변경가능
+					changeYear : true, // 년변경가능
+					showMonthAfterYear : true
+				// 년 뒤에 월표시
+				});
+		$("#end_date").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					changeMonth : true, // 월변경가능
+					changeYear : true, // 년변경가능
+					showMonthAfterYear : true
+				// 년 뒤에 월표시
+				});
+	});
+</script>
 </html>

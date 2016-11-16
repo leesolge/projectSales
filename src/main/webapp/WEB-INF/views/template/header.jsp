@@ -13,6 +13,7 @@
 						<a href="/erp/schedule/calendarForm">스케줄관리</a>
 						<a href="/erp/my_Info">내정보</a>
 						<a href="/erp/note/list">쪽지</a>
+						<a href="/erp/employee/buy_request_list">수주요청</a>
 					</div>
 				</li>
 			</sec:authorize>

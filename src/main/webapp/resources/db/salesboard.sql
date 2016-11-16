@@ -2,16 +2,16 @@ select * from salesBoard;
 
 drop table salesBoard;
 
-CREATE TABLE salesBoard
+CREATE TABLE SALESBOARD
   (
-  num NUMBER, 
+  NUM NUMBER, 
   NAME VARCHAR2(50), 
-  title  VARCHAR2(50), 
-  content  VARCHAR2(500), 
-  regdate  date,
-  parent  NUMBER, 
+  TITLE  VARCHAR2(50), 
+  CONTENT  VARCHAR2(500), 
+  REGDATE  DATE,
+  PARENT  NUMBER, 
   SORT  NUMBER, 
-  tab  NUMBER
+  TAB  NUMBER
   );
 
 CREATE SEQUENCE NUMREG

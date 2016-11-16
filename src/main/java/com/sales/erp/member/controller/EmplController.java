@@ -55,9 +55,10 @@ public class EmplController {
             try {
                 File file = new File("C:/sales/sales/src/main/webapp/resources/portraits/" + fileName);
 	            int count = 0;
-                while(file.exists()) {           	
-	                	int indexes = fileName.lastIndexOf(".");
-	                	String extension = fileName.substring(indexes);
+	            int indexes = fileName.lastIndexOf(".");
+	            String extension = fileName.substring(indexes);
+	            
+                while(file.exists()) {
 	                	String newFileName = fileName.substring(0, indexes) + count + extension;
 	                	fileName = newFileName;
 	                	file = new File("C:/sales/sales/src/main/webapp/resources/portraits/" + newFileName);
@@ -71,5 +72,17 @@ public class EmplController {
         }
 		memberDAOImpl.updateMember(vo);
 		return "main/main";
+	}
+	
+	@RequestMapping("/employee/buy_request_list")
+	public ModelAndView buy_request_list(HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		MemberVO vo = memberDAOImpl.selectMember(empno);
+		ModelAndView result = new ModelAndView();
+		result.addObject("vo", vo);
+		result.setViewName("empl/buy_request_list");
+
+		return result;
 	}
 }
