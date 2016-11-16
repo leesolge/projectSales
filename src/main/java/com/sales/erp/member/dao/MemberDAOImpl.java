@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.member.vo.MemberJoinVO;
 import com.sales.erp.member.vo.MemberSearch;
 import com.sales.erp.member.vo.MemberVO;
 
@@ -31,7 +32,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public void updateMember(MemberVO vo) {
+	public void updateMember(MemberJoinVO vo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.updateMember(vo);
 	}

@@ -6,9 +6,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MemberJoinVO {
 
-	private String pwd, name, gender, address, phone, email, auth, portrait, account, team, year, month, day;
+	private String empno, pwd, name, gender, address, phone, email, auth, portrait, account, team, year, month, day;
 	private Date join;
 	private MultipartFile file;
+
+	public String getEmpno() {
+		return empno;
+	}
+
+	public void setEmpno(String empno) {
+		this.empno = empno;
+	}
 
 	public String getYear() {
 		return year;

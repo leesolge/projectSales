@@ -13,10 +13,10 @@
 	<div class="w3-container w3-center">
 		<h1>정보 수정</h1>
 		<hr>
-		<form method="post" action="/erp/employee/Empl_Update_Member">
+		<form method="post" action="/erp/employee/Empl_Update_Member" enctype="multipart/form-data">
 			<table class="w3-table w3-centered" style="border: 1px solid #ddd">
 				<tr>
-					<td rowspan="6">
+					<td rowspan="5">
 					<img src="/erp/resources/portraits/${vo.portrait}" width="100%"></td>
 					<th>EMPNO</th>
 					<td><input type="hidden" name="empno" value="${vo.empno}"></td>
@@ -54,6 +54,7 @@
 				</tr>
 
 				<tr>
+					<td><input type="file" name="file"></td>
 					<th>BIRTH</th>
 					<td>${vo.birth}</td>
 					<th>JOINDATE</th>
@@ -77,10 +78,7 @@
 				</table>
 			</div>
 		</form>
-
 	</div>
-
-
 	<div>
 		<p></p>
 	</div>

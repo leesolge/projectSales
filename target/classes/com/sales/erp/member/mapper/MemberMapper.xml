@@ -14,7 +14,7 @@
 	</select>
 	
 	<update id="updateMember" parameterType="com.sales.erp.member.vo.MemberVO" >    
-    	UPDATE SMEMBER SET NAME=#{name}, PWD=#{pwd}, ADDRESS=#{address}, PHONE=#{phone}, EMAIL=#{email}, ACCOUNT=#{account} WHERE EMPNO=#{empno}         
+    	UPDATE SMEMBER SET NAME=#{name}, PWD=#{pwd}, ADDRESS=#{address}, PHONE=#{phone}, EMAIL=#{email}, ACCOUNT=#{account}, PORTRAIT=#{portrait} WHERE EMPNO=#{empno}         
     </update>
 	
 	 <select id="ConfirmID_Member" resultType="com.sales.erp.member.vo.MemberVO">

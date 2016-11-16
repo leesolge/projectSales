@@ -1,16 +1,18 @@
 package com.sales.erp.member.dao;
 
 import java.util.ArrayList;
+
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.member.vo.MemberJoinVO;
 import com.sales.erp.member.vo.MemberSearch;
+import com.sales.erp.member.vo.MemberVO;
 
 @Repository
 public interface MemberDAO {
 	public void insertMember(MemberVO member); // 회원등록
 	public MemberVO selectMember(String empno); // empno에 따른 개인정보 추출
-	public void updateMember(MemberVO vo); // 사원정보 수정
+	public void updateMember(MemberJoinVO vo); // 사원정보 수정
 	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo); // 승인대기 목록
 	public ArrayList<MemberVO> Admin_Approved_Member(MemberSearch vo); // 사원목록
 	public void Update_Approve_Member(String empno); // 가입승인
