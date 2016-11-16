@@ -17,6 +17,12 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
+	@RequestMapping("/admin/corder")
+	public ModelAndView orderCheck(@RequestParam("orderid") String orderid){
+		ModelAndView mav = os.orderCheck(orderid);
+		return mav;
+	}
+	
 	@RequestMapping("/admin/modifyPro")
 	public ModelAndView modifyPro(HttpServletRequest request){
 		ModelAndView mav = os.modifyPro(request);
