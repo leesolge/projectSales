@@ -56,12 +56,12 @@
 	
 	<!-- 커맨트 조회 -->
 	<select id="commentList" parameterType="java.lang.String" resultType="com.sales.erp.notice.vo.CommentVO">
-		select * from bComment where num=#{num}
+		select * from bComment where num=#{num} order by regDate desc
 	</select>
 	
 	<!-- 커맨트 입력 -->
 	<select id="insertComment" resultType="com.sales.erp.notice.vo.CommentVO">
-		insert into bComment(num, name, comments) values(#{num},#{name},#{comments})
+		insert into bComment(num, name, comments, regDate) values(#{num},#{name},#{comments},sysdate)
 	</select>
 	
 </mapper>

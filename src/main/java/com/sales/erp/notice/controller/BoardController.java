@@ -1,5 +1,9 @@
 package com.sales.erp.notice.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.note.vo.JoinVO;
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
 import com.sales.erp.notice.vo.CommentVO;
@@ -45,11 +50,22 @@ public class BoardController {
 	
 	@RequestMapping("/board/read")
 	public ModelAndView read(HttpServletRequest request){
-		
-		
-		ModelAndView mav=boardService.getBoard(request);  //글 읽기4
 		String num=request.getParameter("num");
-		mav.addObject("comments", boardService.commentList(num));
+		ArrayList<CommentVO> comments = boardService.commentList(num);
+		
+		if(comments!=null){
+			for(CommentVO vo:comments){
+				Date date = vo.getRegDate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+				String change = sdf.format(date);
+				vo.setChange(change);
+			}
+		}
+		
+		ModelAndView mav=boardService.getBoard(request);  //글 읽기
+		
+		mav.addObject("comments", comments);
+		/*mav.addObject("comments", boardService.commentList(num));*/
 		/*mav.setViewName("/board/read");*/
 		return mav;
 	}

@@ -85,6 +85,7 @@ function board_reply(){
 					<td width="42" align="center">*</td>
 					<td width="86">${comments.name}</td>
 					<td width="639">${comments.comments}</td>
+					<td width="220" align="center">${comments.change}</td>
 				</tr>
 			</c:forEach>
 		</table>
