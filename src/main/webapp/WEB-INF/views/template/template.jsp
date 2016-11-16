@@ -50,18 +50,10 @@
 			<tiles:insertAttribute name="header" />
 		</div>
 	</div>
-	<table>
-		<tr>
-			<td>
-				
-			</td>
-			<td>
-				<div id="content">
-					<tiles:insertAttribute name="body" />
-				</div>
-			</td>
-		</tr>
-	</table>
+
+	<div id="content">
+		<tiles:insertAttribute name="body" />
+	</div>
 
 	<div>
 		<tiles:insertAttribute name="footer" />
