@@ -1,69 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
+<beans xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
 
-	
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.naver.com" />
-		<property name="port" value="465" />
-		<property name="username" value="anzolee" />
-		<property name="password" value="dldkstjr1@" />
-		<property name="defaultEncoding" value="utf-8" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.ssl.enable">true</prop>
-				<prop key="mail.smtp.auth">true</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="sendMail" class="com.sales.erp.member.vo.SendMail">
-		<property name="mailSender" ref="mailSender" />
-	</bean>
+<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-	<!-- Mybatis를 사용하는 패키지 경로를 적어준다. -->
-	<context:component-scan base-package="com.sales.erp" />
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="sales" />
-		<property name="password" value="oracle" />
-	</bean>
+<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 최대 업로드 수치(bytes) : 50mb 제한 -->
-		<property name="maxUploadSize" value="12428800" />
-		<!-- 업로드 파일 인코딩 -->
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
+<property value="smtp.naver.com" name="host"/>
 
-	<!-- 트랜잭션 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+<property value="465" name="port"/>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
-		<property name="typeAliasesPackage" value="com.sales.erp" />
-		<property name="mapperLocations" value="classpath:/com/sales/erp/**/**/*.xml" />
-	</bean>
+<property value="anzolee" name="username"/>
+
+<property value="dldkstjr1@" name="password"/>
+
+<property value="utf-8" name="defaultEncoding"/>
 
 
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+<property name="javaMailProperties">
+
+
+<props>
+
+<prop key="mail.smtp.ssl.enable">true</prop>
+
+<prop key="mail.smtp.auth">true</prop>
+
+</props>
+
+</property>
+
+</bean>
+
+
+<bean class="com.sales.erp.member.vo.SendMail" id="sendMail">
+
+<property name="mailSender" ref="mailSender"/>
+
+</bean>
+
+<!-- Mybatis를 사용하는 패키지 경로를 적어준다. -->
+
+
+<context:component-scan base-package="com.sales.erp"/>
+
+
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+
+<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName"/>
+
+<property value="jdbc:oracle:thin:@localhost:1521:xe" name="url"/>
+
+<property value="sales" name="username"/>
+
+<property value="oracle" name="password"/>
+
+</bean>
+
+
+<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+
+<!-- 최대 업로드 수치(bytes) : 50mb 제한 -->
+
+
+<property value="12428800" name="maxUploadSize"/>
+
+<!-- 업로드 파일 인코딩 -->
+
+
+<property value="UTF-8" name="defaultEncoding"/>
+
+</bean>
+
+<!-- 트랜잭션 -->
+
+
+
+<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+
+<property name="dataSource" ref="dataSource"/>
+
+</bean>
+
+
+<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+
+<property name="dataSource" ref="dataSource"/>
+
+<!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
+
+
+<property value="com.sales.erp" name="typeAliasesPackage"/>
+
+<property value="classpath:/com/sales/erp/**/**/*.xml" name="mapperLocations"/>
+
+</bean>
+
+
+<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+
+<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+</bean>
+
+<tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>

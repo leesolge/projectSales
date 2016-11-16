@@ -1,5 +1,8 @@
 package com.sales.erp.member.vo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -8,17 +11,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.sales.erp.member.dao.MemberDAOImpl;
+
 
 @Component
 public class MemberAuthenticationProvider implements AuthenticationProvider {
 
+	@Autowired
+	private MemberDAOImpl memberDAOImpl;
+	
 	@Autowired
     private MemberUserDetailsService sc;
 
 //	@Autowired
 //    private BCryptPasswordEncoder passwordEncoder;
 
-	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
@@ -31,7 +41,10 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         if(!pw.equals(user.getPassword())){
             throw new BadCredentialsException("틀렸어!!패스워드가 일치하지 않습니다.");
         }
-
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        MemberVO memberInfo = memberDAOImpl.selectMember(id);
+        HttpSession session = request.getSession();
+        session.setAttribute("memberInfo", memberInfo);
         return new UsernamePasswordAuthenticationToken(id, pw, user.getAuthorities());
     }
 

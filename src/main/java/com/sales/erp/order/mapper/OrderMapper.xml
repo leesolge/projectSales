@@ -4,6 +4,28 @@
 
 <mapper namespace="com.sales.erp.order.dao.OrderMapper">
 	
+	<select id="adminSelectOne" parameterType="com.sales.erp.order.vo.TestVO" resultType="com.sales.erp.order.vo.OrderJoinVO">
+		SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+			O.DELETED AS DELETED
+			FROM ORDERS O, 
+			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=0 AND DELETED=0 AND O.ID=#{tests}
+	</select> 
+	
+	<update id="orderCheck" parameterType="com.sales.erp.order.vo.TestVO">
+		UPDATE ORDERS SET CHECKS=1 WHERE ID=#{tests} 
+	</update>
+	
+	<insert id="transInsert" parameterType="com.sales.erp.order.vo.OrderJoinVO">
+		INSERT INTO TRANSACT (ID, EMPNO, PROCODE, PROAMOUNT, TEAM, CATEGORY, PRICE, TRANSDATE, DELETED)
+		VALUES (#{id}, #{empno}, #{procode}, #{proamount}, #{team}, '판매', #{profit}, SYSDATE, 0)
+	</insert>
+	
 	<update id="modifyPro" parameterType="com.sales.erp.order.vo.OrderVO">
 		UPDATE ORDERS SET EMPNO=#{empno}, PROCODE=#{procode},
 		PROAMOUNT=#{proamount}, CUSTOMER=#{customer}, ADDRESS=#{address}
@@ -44,7 +66,7 @@
 			FROM ORDERS O, 
 			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
 			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
-			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=0 AND DELETED=0 ${tests}
+			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND DELETED=0 ${tests}
 	</select> 
 	
 	<insert id="insertOrder" parameterType="com.sales.erp.order.vo.OrderVO">

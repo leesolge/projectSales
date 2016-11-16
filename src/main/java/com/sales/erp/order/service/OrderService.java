@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -27,6 +28,23 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDAO dao;
+	
+	@Transactional
+	public ModelAndView orderCheck(String orderid){
+		RedirectView rv = null;
+		rv = new RedirectView("/erp/admin/order");
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
+		TestVO vo = new TestVO();
+		vo.setTests(orderid);
+		System.out.println(vo.getTests());
+		
+		OrderJoinVO ovo = dao.adminSelectOne(vo);
+		ovo.toString();
+		dao.orderCheck(vo);
+		dao.transInsert(ovo);
+		return mav;
+	}
 	
 	public ModelAndView modifyPro(HttpServletRequest request){
 		RedirectView rv = null;
@@ -122,6 +140,7 @@ public class OrderService {
 		String seconddate = request.getParameter("seconddate");
 		String product = request.getParameter("product");
 		String emp = request.getParameter("emp");
+		String checks = request.getParameter("checks");
 		if(firstdate==null||firstdate.equals("")){
 			firstdate = "";
 		}else{
@@ -165,9 +184,13 @@ public class OrderService {
 				vo.setAuth("관리자");
 			}
 		}
-		
+		if(checks==null||checks.equals("0")||checks.equals("")){
+			checks = "AND CHECKS=0";
+		}else{
+			checks = "AND CHECKS=1";
+		}
 		TestVO vo = new TestVO();
-		vo.setTests(firstdate+seconddate+product+emp);
+		vo.setTests(firstdate+seconddate+product+emp+checks);
 		System.out.println(vo.getTests());
 		ArrayList<OrderJoinVO> list = dao.adminSelectOrders(vo);
 		for(OrderJoinVO ovo:list){
@@ -192,7 +215,13 @@ public class OrderService {
 			}
 			ovo.setAllowance(allowance);
 		}
+		if(checks.contains("1")){
+			checks = "1";
+		}else{
+			checks = "0";
+		}
 		
+		mav.addObject("checks", checks);
 		mav.addObject("plist", plist);
 		mav.addObject("alist", list);
 		mav.addObject("mlist", teamList);
