@@ -1,7 +1,9 @@
 package com.sales.erp.transact.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,6 +38,11 @@ public class TransactService {
 		vo.setProcode(request.getParameter("procode"));
 		vo.setCategory(request.getParameter("category"));
 		vo.setTeam(request.getParameter("team"));
+		vo.setStart_date(request.getParameter("start_date"));
+		vo.setEnd_date(request.getParameter("end_date"));
+		
+		System.out.println(vo.getStart_date());
+		System.out.println(vo.getEnd_date());
 		
 		ArrayList<String> procode_list;
 		ArrayList<String> team_list;
@@ -45,6 +52,14 @@ public class TransactService {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<TransactVO> list;
 		list = dao.selectList(vo);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		for(TransactVO tvo:list){
+			Date date = tvo.getTransdate();
+			String view_date = sdf.format(date);
+			tvo.setView_date(view_date);
+		}
+		
 		mav.addObject("list", list);		
 		mav.addObject("procode_list", procode_list);
 		mav.addObject("team_list", team_list);		

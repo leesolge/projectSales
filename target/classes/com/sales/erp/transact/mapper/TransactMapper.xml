@@ -17,6 +17,12 @@
 			<if test="procode != null">
 				AND PROCODE = #{procode}
 			</if>
+			<if test="start_date !=null and start_date != '' ">
+				<if test="end_date !=null and end_date != '' ">AND TO_CHAR(TRANSDATE, 'YYYY-MM-DD') BETWEEN
+					#{start_date} AND
+					#{end_date}
+				</if>
+			</if>
 		</where>
 		ORDER BY ID DESC
 	</select>

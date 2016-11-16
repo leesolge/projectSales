@@ -3,7 +3,7 @@ package com.sales.erp.transact.vo;
 import java.util.Date;
 
 public class TransactVO {
-	private String empno, id, title, category, price, assets, team;
+	private String empno, id, title, category, price, assets, team, view_date;
 	private Date transdate;
 	private int deleted;
 
@@ -78,4 +78,13 @@ public class TransactVO {
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
+
+	public String getView_date() {
+		return view_date;
+	}
+
+	public void setView_date(String view_date) {
+		this.view_date = view_date;
+	}
+	
 }

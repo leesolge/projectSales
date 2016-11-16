@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -65,7 +66,7 @@
 				<td>${member.category}</td>
 				<td>${member.price}</td>
 				<td>${member.assets}</td>
-				<td>${member.transdate}</td>
+				<td>${member.view_date}</td>
 				<td>${member.deleted}</td>
 			</tr>
 		</c:forEach>
