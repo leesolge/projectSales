@@ -45,6 +45,7 @@
 						<a href="/erp/admin/member_ok">가입 승인</a> 
 						<a href="/erp/admin/member_list">사원 명부</a>
 						<a href="/erp/product/list">상품 관리</a>
+						<a href="/erp/admin/order">수주 관리</a>
 					</div>
 				</li>
 			</sec:authorize>
