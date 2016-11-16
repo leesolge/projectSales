@@ -20,13 +20,9 @@
 		}
 	}
 	function corders(pn){
-		if (confirm("해당 판매 요청을 정말 확정하시겠습니까?") == true){
-			var jumping = document.cord;
-			jumping.orderid.value=pn;
-			jumping.submit();
-		}else{
-		    return;
-		}
+		var jumping = document.cord;
+		jumping.orderid.value=pn;
+		jumping.submit();
 	}
 	function worders(){
 		var jumping = document.write;
@@ -68,22 +64,6 @@
 					<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
 				</c:forEach>
 			</select>
-			&nbsp;
-			<select name="checks">
-				<c:if test="${checks==0}">
-					<option value="0" selected="selected">승인 대기</option>
-				</c:if>
-				<c:if test="${checks!=0}">
-					<option value="0">승인 대기</option>
-				</c:if>
-				<c:if test="${checks==1}">
-					<option value="1" selected="selected">승인 목록</option>
-				</c:if>
-				<c:if test="${checks!=1}">
-					<option value="1">승인 목록</option>
-				</c:if>
-			</select>
-			&nbsp;
 			<input type="submit" value="열람">
 		</form>
 		
@@ -121,12 +101,8 @@
 					<td>${alist.allowance}</td>
 					<td>${alist.customer}</td>
 					<td>${alist.address}</td>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:morders('${alist.id}')">수정</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:dorders('${alist.id}')">취소</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:corders('${alist.id}')">판매 확정</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
+					<td><button onclick="javascript:morders('${alist.id}')">수정</button></td>
+					<td><button onclick="javascript:dorders('${alist.id}')">취소</button></td>
 				</tr>
 			</c:forEach>
 		</table>

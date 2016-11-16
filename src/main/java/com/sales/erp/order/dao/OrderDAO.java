@@ -19,21 +19,6 @@ public class OrderDAO implements OrderMapper{
 	@Autowired
 	private SqlSession sqlSession;
 
-	public OrderJoinVO adminSelectOne(TestVO vo) {
-		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
-		return mapper.adminSelectOne(vo);
-	}
-
-	public void orderCheck(TestVO vo) {
-		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
-		mapper.orderCheck(vo);
-	}
-
-	public void transInsert(OrderJoinVO vo) {
-		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
-		mapper.transInsert(vo);
-	}
-
 	public void modifyPro(OrderVO vo) {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		mapper.modifyPro(vo);
