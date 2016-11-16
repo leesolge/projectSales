@@ -113,7 +113,7 @@ public class OrderService {
 			temp.setEmpno(teams.get(j).getTeam());
 			temp.setName("");
 			teamList.add(temp);
-			for(int k=0;k<map.size();k++){
+			for(int k=0;k<map.get(j).size();k++){
 				teamList.add(map.get(j).get(k));
 			}
 		}
