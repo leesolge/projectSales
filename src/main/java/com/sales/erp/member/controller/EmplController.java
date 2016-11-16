@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.dao.MemberDAOImpl;
+import com.sales.erp.member.service.EmplService;
 import com.sales.erp.member.vo.MemberJoinVO;
 import com.sales.erp.member.vo.MemberVO;
 
@@ -22,6 +23,9 @@ import com.sales.erp.member.vo.MemberVO;
 public class EmplController {
 	@Autowired
 	private MemberDAOImpl memberDAOImpl;
+	
+	@Autowired
+	private EmplService es;
 	
 	@RequestMapping("/my_Info")
 	public ModelAndView member_info(HttpServletRequest request) {
@@ -75,14 +79,21 @@ public class EmplController {
 	}
 	
 	@RequestMapping("/employee/buy_request_list")
-	public ModelAndView buy_request_list(HttpServletRequest request) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String empno = auth.getName();
-		MemberVO vo = memberDAOImpl.selectMember(empno);
-		ModelAndView result = new ModelAndView();
-		result.addObject("vo", vo);
+	public ModelAndView buy_request_list(HttpServletRequest request) {		
+		ModelAndView result = new ModelAndView();		
 		result.setViewName("empl/buy_request_list");
 
 		return result;
+	}
+	
+	@RequestMapping(value="/employee/buy_request", method=RequestMethod.POST)
+	public ModelAndView buy_request(HttpServletRequest request) {
+		ModelAndView mav = es.Buy_RequestForm();
+		
+		
+		
+		mav.setViewName("empl/buy_request_order");
+
+		return mav;
 	}
 }

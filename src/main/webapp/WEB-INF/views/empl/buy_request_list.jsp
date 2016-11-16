@@ -45,8 +45,9 @@
 	<form name="cord" action="/erp/admin/corder" method="post">
 		<input name="orderid" type="hidden" value="0">
 	</form>
-	<form name="write" action="/erp/admin/worder" method="post">
+	<form name="write" action="/erp/employee/buy_request" method="post">
 	</form>
+	<h1>${memberInfo.name }</h1>
 	
 		<form action="/erp/admin/order" method="post">
 			<input name="firstdate" type="date">&nbsp;
