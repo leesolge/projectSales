@@ -10,6 +10,7 @@
 				<li class="w3-dropdown-hover">
 				<a href="#">개인메뉴<i class="fa fa-caret-down"></i></a>
 					<div class="w3-dropdown-content w3-blue-grey w3-card-4">
+						<a href="/erp/schedule/calendarForm">스케줄관리</a>
 						<a href="/erp/my_Info">내정보</a>
 						<a href="/erp/note/list">쪽지</a>
 					</div>
