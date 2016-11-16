@@ -1,17 +1,27 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<!DOCTYPE HTML>
+
+<sec:authorize access="isAuthenticated()">
 <div class="w3-container">
 <table style="width: 100%; height: 100%;">
 	<tr>
 		<td>
+		<a href="/erp/main">
 			<img src="/erp/resources/image/logo2.png" height="80">
+		</a>
 		</td>
-		<td width="80%"></td>
+		<td width="78%"></td>
 		<td style="vertical-align: bottom;">
 		<font size="1">
-			SITEMAP | HELP | Q&A
+			<a href="/erp/main">HOME</a> | 
+			<a href="#">CONTACT</a> | 
+			<a href="#">SITEMAP</a>
 		</font>
 		</td>
 	</tr>
 </table>
 </div>
+</sec:authorize>
