@@ -6,19 +6,17 @@
 
 		
 <tiles-definitions>
-	<definition name="View_Template" template="/WEB-INF/views/template/View_Template.jsp">
+	<definition name="template" template="/WEB-INF/views/template/template.jsp">
 		<put-attribute name="title"  value="Spring Tiles Example" />
-		<put-attribute name="header" value="/WEB-INF/views//template/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp" />
+		<put-attribute name="top" value="/WEB-INF/views/template/top.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views//template/footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
-	
-	<definition name="*/*"  extends="View_Template">
+	<definition name="*/*"  extends="template">
 		<put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-	
-	<definition name="/*/*"  extends="View_Template">
+	<definition name="/*/*"  extends="template">
 		<put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 </tiles-definitions>
