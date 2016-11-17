@@ -9,7 +9,7 @@ create table schedule(
  	num number primary key
 );
 
-CREATE SEQUENCE NUMREG
+CREATE SEQUENCE CALREG
 START WITH 1
 NOCACHE;
 

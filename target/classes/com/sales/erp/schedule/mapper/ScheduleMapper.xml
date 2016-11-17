@@ -8,11 +8,11 @@
 	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno}
 	</select>
 	<delete id="delete" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
-	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and NUM= #{num}
+	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and CONTENTS= #{contents}
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
 			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY) 
-			VALUES (NUMREG.nextval,#{empno},#{contents},#{year},#{month},#{day})
+			VALUES (CALREG.nextval,#{empno},#{contents},#{year},#{month},#{day})
 	</insert>
 	<update id="update" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
 			UPDATE SCHEDULE SET CONTENTS=#{contents} WHERE EMPNO=#{empno}    

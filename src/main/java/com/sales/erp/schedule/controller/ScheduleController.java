@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.schedule.dao.ScheduleDAO;
 import com.sales.erp.schedule.vo.ScheduleVO;
 
@@ -41,10 +40,11 @@ public class ScheduleController {
 	@RequestMapping(value="/schedule/delete", method=RequestMethod.POST)
 	public String delete(HttpServletRequest request){
 		String empno = request.getParameter("empno");
-		int num = Integer.parseInt(request.getParameter("num"));
+		String contents = request.getParameter("contents");
+		System.out.println();
 		ScheduleVO vo = new  ScheduleVO();
 		vo.setEmpno(empno);
-		vo.setNum(num);
+		vo.setContents(contents);
 		System.out.println(empno);
 		sdao.deleteSchedule(vo);
 		

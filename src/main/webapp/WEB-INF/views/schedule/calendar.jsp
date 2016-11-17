@@ -84,24 +84,24 @@
 		                  </c:if>
 		                  
 			   			
-			                 <form action="/erp/schedule/delete" method="post">
+			                
 			                 <c:forEach var="vo" items="${vo}">
 			                     <c:if test="${year == vo.year && (month+1) == vo.month && a == vo.day}">
-			                    	
 			                        <c:out value="${vo.contents}"></c:out>
-			                        	<br>
-			                              <div class="tooltip-demo">
+			                        	 <form action="/erp/schedule/delete" method="post">
+                   			              <div class="tooltip-demo">
 			                              <input type="hidden" name="contents" value="${vo.contents}">
 			                              <input type="hidden" name="day" value="${vo.day}">
 			                              <input type="hidden" name="year" value="${vo.year}">
 			                              <input type="hidden" name="month" value="${vo.month}">
 			                              <input type="hidden" name="empno" value="${vo.empno}">
+			                              <input type="hidden" name="num" value="${vo.num}">
 			                              <button type="submit" style="height: 20px" class="btn btn-default" data-toggle="tooltip"  data-placement="left" title="삭제하려면 클릭하시오." >삭제</button>
 			                              </div>
-			                  		
+			                               </form>
 			                     </c:if>
 			                     </c:forEach>
-			                  </form>
+			                 
 		
                		 <c:set var="br" value="${br+1}" />
                  </td>  
