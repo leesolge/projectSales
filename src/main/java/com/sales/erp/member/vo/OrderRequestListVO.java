@@ -5,7 +5,7 @@ import java.util.Date;
 public class OrderRequestListVO {
 
 	private int cnt;
-	private String onum, empno, title, procode;
+	private String onum, empno, title, procode, team;
 	private Date regdate;
 
 	public int getCnt() {
@@ -54,6 +54,14 @@ public class OrderRequestListVO {
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
 	}
 
 }
