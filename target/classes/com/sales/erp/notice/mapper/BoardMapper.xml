@@ -60,9 +60,11 @@
 	</select>
 	
 	<!-- 커맨트 입력 -->
-	<select id="insertComment" resultType="com.sales.erp.notice.vo.CommentVO">
-		insert into bComment(num, name, comments, regDate) values(#{num},#{name},#{comments},sysdate)
+	<select id="insertComment" parameterType="com.sales.erp.notice.vo.CommentVO">
+		insert into bComment(empno, num, name, comments, regDate) values(#{empno},#{num},#{name},#{comments},sysdate)
 	</select>
+	
+	
 	
 </mapper>
 

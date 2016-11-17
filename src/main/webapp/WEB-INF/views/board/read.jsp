@@ -68,10 +68,12 @@ function board_reply(){
 
 <form action="/erp/board/comment" method="post">
 	<input type="hidden" name="num" value="${b.num}">
+	<input type="hidden" name="empno" value="${memberInfo.empno}">
+	<input type="hidden" name="name" value="${memberInfo.name}">
 	<table border="1">
 		<tr>
 			<td>이름 : </td>
-			<td><input type="text" name="name"/></td>
+			<td>${senderVo.name}</td>
 			<td>댓글 : </td>
 			<td><input type="text" name="comments"></td>
 			<td><input type="submit" name="Button" value="쓰기"></td>

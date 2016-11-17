@@ -1,6 +1,8 @@
 package com.sales.erp.notice.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -124,5 +126,32 @@ public class BoardService{
 
 	public void insertComment(CommentVO vo) {
 		dao.insertComment(vo);
+	}
+
+	public ModelAndView readBoard(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		String num=request.getParameter("num");
+		ArrayList<CommentVO> comments = dao.commentList(num);
+		
+		if(comments!=null){
+			for(CommentVO vo:comments){
+				Date date = vo.getRegDate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+				String change = sdf.format(date);
+				vo.setChange(change);
+			}
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		MemberVO senderVo = dao.getNameTeamAuth(empno);
+		
+		int num1=Integer.parseInt(request.getParameter("num"));
+		BoardVO b= dao.getBoard(num1);
+		
+		mav.addObject("b", b);
+		mav.addObject("senderVo", senderVo);
+		mav.addObject("comments", comments);
+		return mav;
 	}
 }

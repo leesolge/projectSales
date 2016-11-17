@@ -3,6 +3,7 @@ package com.sales.erp.notice.vo;
 import java.util.Date;
 
 public class CommentVO {
+	public String empno;
 	public String num; 
 	public String name;
 	public String comments;
@@ -38,5 +39,11 @@ public class CommentVO {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	public String getEmpno() {
+		return empno;
+	}
+	public void setEmpno(String empno) {
+		this.empno = empno;
 	}
 }

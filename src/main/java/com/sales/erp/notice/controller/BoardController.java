@@ -7,13 +7,16 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.note.vo.JoinVO;
+import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.notice.dao.BoardDAO;
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
 import com.sales.erp.notice.vo.CommentVO;
@@ -50,23 +53,8 @@ public class BoardController {
 	
 	@RequestMapping("/board/read")
 	public ModelAndView read(HttpServletRequest request){
-		String num=request.getParameter("num");
-		ArrayList<CommentVO> comments = boardService.commentList(num);
-		
-		if(comments!=null){
-			for(CommentVO vo:comments){
-				Date date = vo.getRegDate();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-				String change = sdf.format(date);
-				vo.setChange(change);
-			}
-		}
-		
-		ModelAndView mav=boardService.getBoard(request);  //글 읽기
-		
-		mav.addObject("comments", comments);
-		/*mav.addObject("comments", boardService.commentList(num));*/
-		/*mav.setViewName("/board/read");*/
+		ModelAndView mav = boardService.readBoard(request);
+		mav.setViewName("/board/read");
 		return mav;
 	}
 	
@@ -76,10 +64,13 @@ public class BoardController {
 		String num=request.getParameter("num");
 		String name=request.getParameter("name");
 		String comments=request.getParameter("comments");
+		String empno=request.getParameter("empno");
+
 		CommentVO vo=new CommentVO();
 		vo.setNum(num);
 		vo.setName(name);
 		vo.setComments(comments);
+		vo.setEmpno(empno);
 		
 		boardService.insertComment(vo);
 		
