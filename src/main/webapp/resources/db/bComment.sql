@@ -1,6 +1,7 @@
 drop table bComment;
 
 create table bComment(
+empno varchar2(10),
 num varchar2(50), 
 name varchar2(50), 
 comments varchar2(500),

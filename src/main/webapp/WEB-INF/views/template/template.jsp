@@ -42,43 +42,51 @@
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>
-	<div>
-		<tiles:insertAttribute name="top" />
-	</div>
-	
-	<div id="bar">
-		<tiles:insertAttribute name="header" />
-	</div>
 	<table style="width: 100%">
 		<tr>
-			<td width="20%" style="vertical-align: top;">
-				<div>
-					<tiles:insertAttribute name="side" />
-				</div>
-			</td>
+			<td width="10%"></td>
+			
 			<td width="80%">
-				<div id="content">
-					<tiles:insertAttribute name="body" />
+				<div>
+					<tiles:insertAttribute name="top" />                     <!-- TOP -->
+				</div>
+				<div id="bar">
+					<tiles:insertAttribute name="header" />                  <!-- MENU -->
+				</div>
+				<table style="width: 100%">
+					<tr>
+						<td width="20%" style="vertical-align: top;">
+							<div>
+								<tiles:insertAttribute name="side" />        <!-- LEFT BODY -->
+							</div>
+						</td>
+						<td width="80%" align="center" style="vertical-align: top;">
+							<div id="content">
+								<tiles:insertAttribute name="body" />        <!-- RIGHT BODY -->
+							</div>
+						</td>
+					</tr>
+				</table>	
+				<div>
+					<tiles:insertAttribute name="footer" />                  <!-- BOTTOM -->
 				</div>
 			</td>
+			
+			<td width="10%"></td>
 		</tr>
 	</table>
-
-
-	<div>
-		<tiles:insertAttribute name="footer" />
-	</div>
 </body>
+
 <!-- Script -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script type="text/javascript" src="/erp/resources/js/fix.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" type="text/javascript" ></script>
 
 <!-- CSS -->
 <link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet" >
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="/erp/resources/css/fix.css" rel="stylesheet" type="text/css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="/erp/resources/css/sizeControl.css" rel="stylesheet" type="text/css">
 <link href="/erp/resources/css/box.css" rel="stylesheet" type="text/css">
 <link href="/erp/resources/css/font.css" rel="stylesheet" type="text/css">
-<link href="/erp/resources/css/default.css" rel="stylesheet" type="text/css">x`
+<link href="/erp/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="/erp/resources/css/slider.css" rel="stylesheet" type="text/css">
+
 </html>

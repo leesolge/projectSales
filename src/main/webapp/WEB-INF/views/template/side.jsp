@@ -13,7 +13,7 @@
 	<div class="big w3-container">
 		<table style="width: 100%" >
 			<tr>
-				<td width="15%" style="vertical-align: top;">
+				<td style="vertical-align: top;">
 					<div class="borderBox">
 						<br>
 						<table style="width: 100%">
@@ -64,7 +64,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="15%" style="vertical-align: top;">
+				<td style="vertical-align: top;">
 					<div class="borderBox">
 						뭐시기
 					</div>
