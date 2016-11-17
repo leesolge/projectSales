@@ -26,4 +26,8 @@
 		MAX(PROCODE) AS PROCODE FROM OREQUEST WHERE EMPNO=#{empno} AND CHECKS=0
 		GROUP BY ONUM ORDER BY ONUM DESC
 	</select>
+	
+	<select id="getRequestContent" resultType="com.sales.erp.member.vo.OrderRequestVO">
+		SELECT * FROM OREQUEST WHERE ONUM = #{onum} 
+	</select>
 </mapper>

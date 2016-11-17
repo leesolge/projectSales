@@ -11,5 +11,6 @@ public interface EmplMapper extends Serializable {
 	void Buy_Request_Action(OrderRequestVO ovo);
 	void Buy_Request_Action_re(OrderRequestVO ovo);
 	ArrayList<OrderRequestListVO> getRequestList(String empno);
+	ArrayList<OrderRequestVO> getRequestContent(String onum);
 
 }

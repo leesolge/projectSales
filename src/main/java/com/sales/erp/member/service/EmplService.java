@@ -68,6 +68,13 @@ public class EmplService {
 		mav.addObject("count", list.size());
 		return mav;
 	}
+
+	public ModelAndView getRequestContent(String onum) {
+		ModelAndView mav = new ModelAndView();
+		ArrayList<OrderRequestVO> list = dao.getRequestContent(onum);
+		mav.addObject("list", list);
+		return mav;
+	}
 }
 
 

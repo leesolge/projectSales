@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
 	<form action="/erp/employee/buy_request_content" name="requestContent" method="post">
-		<input type="hidden" name="notenum" value="0">
+		<input type="hidden" name="onum" value="0">
 	</form>
 	<div class="w3-container w3-center">
 		<h2>구매요청 [${count }건]</h2>
@@ -26,7 +26,7 @@
 					<td>${list.regdate}</td>
 					<td>${list.empno}</td>
 					<td>${list.title}</td>					
-					<td><a href="javascript:content('${list.onum}')"></a></td>
+					<td><a href="javascript:content('${list.onum}')">내용</a></td>
 					<td>취소</td>
 				</tr>
 			</c:forEach>

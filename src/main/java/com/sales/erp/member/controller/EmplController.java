@@ -99,4 +99,12 @@ public class EmplController {
 		mav.setViewName("empl/buy_request_list");
 		return mav;
 	}
+	
+	@RequestMapping(value="/employee/buy_request_content", method=RequestMethod.POST)
+	public ModelAndView buy_request_content(HttpServletRequest request) {
+		
+		ModelAndView mav = es.getRequestContent(request.getParameter("onum"));
+		mav.setViewName("empl/buy_request_content");
+		return mav;
+	}
 }

@@ -37,4 +37,10 @@ public class EmplDAO {
 		ArrayList<OrderRequestListVO> list = mapper.getRequestList(empno);
 		return list;
 	}
+
+	public ArrayList<OrderRequestVO> getRequestContent(String onum) {
+		EmplMapper mapper = sqlSession.getMapper(EmplMapper.class);
+		ArrayList<OrderRequestVO> list = mapper.getRequestContent(onum);
+		return list;
+	}
 }
