@@ -5,19 +5,6 @@
 <div class="w3-container">
 	<sec:authorize access="isAuthenticated()">
 		<ul class="w3-navbar w3-blue-grey w3-center">
-			<li><a href="/erp/main">Main</a></li>
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
-				<li class="w3-dropdown-hover">
-				<a href="#">개인메뉴<i class="fa fa-caret-down"></i></a>
-					<div class="w3-dropdown-content w3-blue-grey w3-card-4">
-						<a href="/erp/schedule/calendarForm">스케줄관리</a>
-						<a href="/erp/my_Info">내정보</a>
-						<a href="/erp/note/list">쪽지</a>
-						<a href="/erp/employee/buy_request_list">구매요청</a>
-					</div>
-				</li>
-			</sec:authorize>
-			
 			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
 				<li class="w3-dropdown-hover">
 				<a href="#">팀메뉴<i class="fa fa-caret-down"></i></a>

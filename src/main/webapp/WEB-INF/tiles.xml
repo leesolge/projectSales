@@ -10,6 +10,7 @@
 		<put-attribute name="title"  value="Spring Tiles Example" />
 		<put-attribute name="top" value="/WEB-INF/views/template/top.jsp" />
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/template/side.jsp" />		
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>

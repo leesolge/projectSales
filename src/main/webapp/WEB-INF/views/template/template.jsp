@@ -45,18 +45,40 @@
 	<div>
 		<tiles:insertAttribute name="top" />
 	</div>
-	<div class="temp">
-		<div id="bar">
-			<tiles:insertAttribute name="header" />
-		</div>
+	
+	<div id="bar">
+		<tiles:insertAttribute name="header" />
 	</div>
+	<table style="width: 100%">
+		<tr>
+			<td width="20%" style="vertical-align: top;">
+				<div>
+					<tiles:insertAttribute name="side" />
+				</div>
+			</td>
+			<td width="80%">
+				<div id="content">
+					<tiles:insertAttribute name="body" />
+				</div>
+			</td>
+		</tr>
+	</table>
 
-	<div id="content">
-		<tiles:insertAttribute name="body" />
-	</div>
 
 	<div>
 		<tiles:insertAttribute name="footer" />
 	</div>
 </body>
+<!-- Script -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="/erp/resources/js/fix.js"></script>
+
+<!-- CSS -->
+<link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet" >
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/erp/resources/css/fix.css" rel="stylesheet" type="text/css">
+<link href="/erp/resources/css/sizeControl.css" rel="stylesheet" type="text/css">
+<link href="/erp/resources/css/box.css" rel="stylesheet" type="text/css">
+<link href="/erp/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="/erp/resources/css/default.css" rel="stylesheet" type="text/css">x`
 </html>
