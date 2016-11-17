@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,8 +38,8 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order/modifyForm")
-	public ModelAndView modifyOne(@RequestParam("orderid") String id){
-		ModelAndView mav = os.adminRegistForm();
+	public ModelAndView modifyOne(@RequestParam("orderid") String id, @RequestParam("authpage") String authpage){
+		ModelAndView mav = os.adminRegistForm(authpage);
 		mav.addObject("mo", os.selectOneOrder(id));
 		mav.setViewName("order/modifyone");
 		return mav;
@@ -56,9 +57,9 @@ public class OrderController {
 		return mav;
 	}
 	
-	@RequestMapping("/order/registForm")
-	public ModelAndView adminRegistForm(HttpServletRequest request){
-		ModelAndView mav = os.adminRegistForm();
+	@RequestMapping(value="/order/registForm", method=RequestMethod.POST)
+	public ModelAndView adminRegistForm(@RequestParam("authpage") String authpage){
+		ModelAndView mav = os.adminRegistForm(authpage);
 		mav.setViewName("order/adminregist");
 		return mav;
 	}

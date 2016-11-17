@@ -40,19 +40,24 @@
 	<body>
 	<form name="mord" action="/erp/order/modifyForm" method="post">
 		<input name="orderid" type="hidden" value="0">
+		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
 	
 	<form name="dord" action="/erp/order/delete" method="post">
 		<input name="orderid" type="hidden" value="0">
+		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
 	
 	<form name="cord" action="/erp/order/cancle" method="post">
 		<input name="orderid" type="hidden" value="0">
+		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
 	<form name="write" action="/erp/order/registForm" method="post">
+		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
 	
 		<form action="/erp/order/list" method="post">
+			<input name="authpage" type="hidden" value="${authpage}">
 			<input name="firstdate" type="date">&nbsp;
 			<input name="seconddate" type="date">&nbsp;
 			<select name="product">

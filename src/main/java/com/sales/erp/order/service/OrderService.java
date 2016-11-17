@@ -104,22 +104,46 @@ public class OrderService {
 		return mav;
 	}
 	
-	public ModelAndView adminRegistForm(){
+	public ModelAndView adminRegistForm(String authpage){
 		ModelAndView mav = new ModelAndView();
-		ArrayList<MemberVO> mlist = dao.memberForReg(); 
-		for(MemberVO vo:mlist){
-			if(vo.getAuth().equals("ROLE_EMPLOYEE")){
-				vo.setAuth("사원");
+		
+		/*관리자용 사원 선택 보내기*/
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		ArrayList<MemberVO> mlist = new ArrayList<MemberVO>();
+		if(authpage.equals("ROLE_ADMIN")){
+			mlist = dao.memberForReg(); 
+			for(MemberVO vo:mlist){
+				if(vo.getAuth().equals("ROLE_EMPLOYEE")){
+					vo.setAuth("사원");
+				}
+				if(vo.getAuth().equals("ROLE_MANAGER")){
+					vo.setAuth("팀장");
+				}
+				if(vo.getAuth().equals("ROLE_ADMIN")){
+					vo.setAuth("관리자");
+				}
 			}
-			if(vo.getAuth().equals("ROLE_MANAGER")){
-				vo.setAuth("팀장");
+		}else{
+			TestVO testvo = new TestVO();
+			testvo.setTests(empno);
+			MemberVO mvo = dao.selectAMember(testvo);
+			if(mvo.getAuth().equals("ROLE_EMPLOYEE")){
+				mvo.setAuth("사원");
 			}
-			if(vo.getAuth().equals("ROLE_ADMIN")){
-				vo.setAuth("관리자");
+			if(mvo.getAuth().equals("ROLE_MANAGER")){
+				mvo.setAuth("팀장");
 			}
+			if(mvo.getAuth().equals("ROLE_ADMIN")){
+				mvo.setAuth("관리자");
+			}
+			mlist.add(mvo);
 		}
-		ArrayList<ProductVO> plist = dao.selectProductAll();
 		mav.addObject("mlist", mlist);
+		mav.addObject("authpage", authpage);
+		mav.addObject("empno", empno);
+		
+		ArrayList<ProductVO> plist = dao.selectProductAll();
 		mav.addObject("plist", plist);
 		return mav;
 	}
@@ -247,11 +271,15 @@ public class OrderService {
 			emp = "";
 		}else{
 			boolean check = true;
-			for(int l=0;l<teams.size();l++){
-				String tempemp = teams.get(l).getTeam();
-				if(emp.equals(tempemp)){
-					emp = "AND S.TEAM='"+emp+"' ";
-					check = false;
+			if(teams==null){
+				
+			}else{
+				for(int l=0;l<teams.size();l++){
+					String tempemp = teams.get(l).getTeam();
+					if(emp.equals(tempemp)){
+						emp = "AND S.TEAM='"+emp+"' ";
+						check = false;
+					}
 				}
 			}
 			if(check==true){
