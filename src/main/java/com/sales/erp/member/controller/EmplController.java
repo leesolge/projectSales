@@ -82,18 +82,13 @@ public class EmplController {
 	public ModelAndView buy_request_list(HttpServletRequest request) {		
 		ModelAndView result = new ModelAndView();		
 		result.setViewName("empl/buy_request_list");
-
 		return result;
 	}
 	
 	@RequestMapping(value="/employee/buy_request", method=RequestMethod.POST)
 	public ModelAndView buy_request(HttpServletRequest request) {
-		ModelAndView mav = es.Buy_RequestForm();
-		
-		
-		
+		ModelAndView mav = es.Buy_RequestForm();		
 		mav.setViewName("empl/buy_request_order");
-
 		return mav;
 	}
 }
