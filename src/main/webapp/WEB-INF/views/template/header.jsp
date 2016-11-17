@@ -27,8 +27,8 @@
 			<li class="w3-dropdown-hover">
 			<a href="#">팀메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
-					<a href="/erp/manager/member_list">팀원 명부</a> 
-					<a href="/erp/manager/buy_request_list">승인대기</a> 
+					<a href="#">팀원 명부</a> 
+					<a href="#">승인대기</a> 
 					<a href="#">진행업무</a> 
 					<a href="#">요청</a>
 				</div>
