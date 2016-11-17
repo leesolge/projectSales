@@ -38,21 +38,21 @@
 	</head>
 	
 	<body>
-	<form name="mord" action="/erp/admin/morder" method="post">
+	<form name="mord" action="/erp/order/modifyForm" method="post">
 		<input name="orderid" type="hidden" value="0">
 	</form>
 	
-	<form name="dord" action="/erp/admin/dorder" method="post">
+	<form name="dord" action="/erp/order/delete" method="post">
 		<input name="orderid" type="hidden" value="0">
 	</form>
 	
-	<form name="cord" action="/erp/admin/corder" method="post">
+	<form name="cord" action="/erp/order/cancle" method="post">
 		<input name="orderid" type="hidden" value="0">
 	</form>
-	<form name="write" action="/erp/admin/worder" method="post">
+	<form name="write" action="/erp/order/registForm" method="post">
 	</form>
 	
-		<form action="/erp/admin/order" method="post">
+		<form action="/erp/order/list" method="post">
 			<input name="firstdate" type="date">&nbsp;
 			<input name="seconddate" type="date">&nbsp;
 			<select name="product">
@@ -62,12 +62,14 @@
 				</c:forEach>
 			</select>
 			&nbsp;
+			<c:if test="${mlist!=null}">
 			<select name="emp">
 				<option value="" disabled selected>팀/사원 선택</option>
 				<c:forEach var="mlist" items="${mlist}">
 					<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
 				</c:forEach>
 			</select>
+			</c:if>
 			&nbsp;
 			<select name="checks">
 				<c:if test="${checks==0}">

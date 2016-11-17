@@ -32,14 +32,13 @@ public class OrderService {
 	@Transactional
 	public ModelAndView orderCheck(String orderid){
 		RedirectView rv = null;
-		
 		TestVO vo = new TestVO();
 		vo.setTests(orderid);
 		int amount = dao.getProductAmount(vo);
 		System.out.println(vo.getTests());
 		OrderVO rvo = dao.selectOneOrder(vo);
 		if(Integer.parseInt(rvo.getProamount())>amount){
-			rv = new RedirectView("/erp/admin/orderfail");
+			rv = new RedirectView("/erp/order/orderfail");
 		}else{
 			OrderJoinVO ovo = dao.adminSelectOne(vo);
 			ovo.toString();
@@ -48,7 +47,7 @@ public class OrderService {
 			vo.setTests(rvo.getProamount()+" WHERE PROCODE="+rvo.getProcode());
 			System.out.println(vo.getTests());
 			dao.minusProduct(vo);
-			rv = new RedirectView("/erp/admin/order");
+			rv = new RedirectView("/erp/order/list");
 		}
 		
 		rv.setExposeModelAttributes(false);
@@ -58,7 +57,7 @@ public class OrderService {
 	
 	public ModelAndView modifyPro(HttpServletRequest request){
 		RedirectView rv = null;
-		rv = new RedirectView("/erp/admin/order");
+		rv = new RedirectView("/erp/order/list");
 		rv.setExposeModelAttributes(false);
 		ModelAndView mav = new ModelAndView(rv);
 		OrderVO vo = new OrderVO();
@@ -84,7 +83,7 @@ public class OrderService {
 		vo.setTests(id);
 		dao.cancleOne(vo);
 		RedirectView rv = null;
-		rv = new RedirectView("/erp/admin/order");
+		rv = new RedirectView("/erp/order/list");
 		rv.setExposeModelAttributes(false);
 		ModelAndView mav = new ModelAndView(rv);
 		return mav;
@@ -99,7 +98,7 @@ public class OrderService {
 		vo.setAddress(request.getParameter("address"));
 		dao.insertOrder(vo);
 		RedirectView rv = null;
-		rv = new RedirectView("/erp/admin/order");
+		rv = new RedirectView("/erp/order/list");
 		rv.setExposeModelAttributes(false);
 		ModelAndView mav = new ModelAndView(rv);
 		return mav;
@@ -125,49 +124,125 @@ public class OrderService {
 		return mav;
 	}
 	
+	/*Order List*/
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		ArrayList<ProductVO> plist = dao.selectProductAll();
 		
-		ArrayList<TeamVO> teams = dao.selectTeam();
-		ArrayList<MemberVO> teamList = new ArrayList<MemberVO>();
-		HashMap<Integer, ArrayList<MemberVO>> map = new HashMap<Integer, ArrayList<MemberVO>>();
-		for(int i=0;i<teams.size();i++){
-			map.put(i, dao.teamMember(teams.get(i)));
+		/*권한 정보 받아오기*/
+		String authpage = request.getParameter("authpage");
+		
+		/*제품 받아오기*/
+		ArrayList<ProductVO> plist = dao.selectProductAll();
+		mav.addObject("plist", plist);
+		
+		/*회원 정보 가져오기*/
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		TestVO testvo = new TestVO();
+		testvo.setTests(empno);
+		MemberVO mvo = dao.selectAMember(testvo);
+		if(authpage==null||authpage.equals("")){
+			authpage = mvo.getAuth();
 		}
-		for(int j=0;j<teams.size();j++){
-			MemberVO temp = new MemberVO();
-			temp.setAuth("");
-			temp.setEmpno(teams.get(j).getTeam());
-			temp.setName("");
-			teamList.add(temp);
-			for(int k=0;k<map.get(j).size();k++){
-				teamList.add(map.get(j).get(k));
+		mav.addObject("authpage", authpage);
+		
+		/*팀 종류 받아오기*/
+		System.out.println(authpage);
+		System.out.println(authpage.equals("ROLE_MANAGER"));
+		ArrayList<TeamVO> teams = null;
+		if(authpage.equals("ROLE_MANAGER")){
+			testvo.setTests(mvo.getTeam());
+			teams = dao.selectATeam(testvo);
+			System.out.println(teams);
+		}else if(authpage.equals("ROLE_ADMIN")){
+			teams = dao.selectTeam();
+			System.out.println(teams);
+		}
+		
+		if(!authpage.equals("ROLE_MANAGER")&&!authpage.equals("ROLE_ADMIN")){
+			
+		}else{
+		/*팀 종류 / 팀원 순으로 담을 ArrayList teamList*/
+			ArrayList<MemberVO> teamList = new ArrayList<MemberVO>();
+			
+		/*팀 종류별 팀원 받아 HashMap에 팀별로 싣기*/
+			HashMap<Integer, ArrayList<MemberVO>> map = new HashMap<Integer, ArrayList<MemberVO>>();
+			for(int i=0;i<teams.size();i++){
+				map.put(i, dao.teamMember(teams.get(i)));
 			}
+			
+		/*팀 종류 / 팀원들 / 팀 종류 / 팀원들 순으로 teamList에 담기*/ 
+			for(int j=0;j<teams.size();j++){
+				MemberVO temp = new MemberVO();
+				temp.setAuth("");
+				temp.setEmpno(teams.get(j).getTeam());
+				temp.setName("");
+				teamList.add(temp);
+				for(int k=0;k<map.get(j).size();k++){
+					teamList.add(map.get(j).get(k));
+				}
+			}
+		/*teamList에 있는 권한 이름 출력을 위해 변경*/
+			for(MemberVO vo:teamList){
+				if(vo.getAuth().equals("ROLE_EMPLOYEE")){
+					vo.setAuth("사원");
+				}
+				if(vo.getAuth().equals("ROLE_MANAGER")){
+					vo.setAuth("팀장");
+				}
+				if(vo.getAuth().equals("ROLE_ADMIN")){
+					vo.setAuth("관리자");
+				}
+			}
+			mav.addObject("mlist", teamList);
 		}
-		System.out.println(teamList);
+		/*해당 리스트는 emp 파라미터로 셀렉트 타입이 될 예정*/
+		
+		
+		/*검색에 사용될 파라미터 받아오기*/
+		
+		/*부터 날짜*/
 		String firstdate = request.getParameter("firstdate");
+		/*까지 날짜*/
 		String seconddate = request.getParameter("seconddate");
+		/*제품*/
 		String product = request.getParameter("product");
+		/*팀 / 팀원*/
 		String emp = request.getParameter("emp");
+		/*대기 중인지 승인된 목록인지 선택*/
 		String checks = request.getParameter("checks");
+		
+		
+		/*SQL에 들어갈 내용 입력*/
+		
+		/*부터 날짜가 비었다면 조건 삭제, 입력이 되었다면 해당 날짜부터 검색*/
 		if(firstdate==null||firstdate.equals("")){
 			firstdate = "";
 		}else{
 			firstdate = firstdate.replace("-", "")+"000000";
 			firstdate = "AND O.REGDATE>=TO_DATE('"+firstdate+"', 'YYYYMMDDHH24MISS') ";
 		}
+		
+		/*까지 날짜가 비었다면 조건 삭제, 입력이 되었다면 해당 날짜까지 검색*/
 		if(seconddate==null||seconddate.equals("")){
 			seconddate = "";
 		}else{
 			seconddate = seconddate.replace("-", "")+"235959";
 			seconddate = "AND O.REGDATE<=TO_DATE('"+seconddate+"', 'YYYYMMDDHH24MISS') ";
 		}
+		
+		/*제품 코드가 비었다면 조건 삭제, 입력이 되었다면 해당 제품만 검색*/
 		if(product==null||product.equals("")){
 			product = "";
 		}else{
 			product = "AND O.PROCODE='"+product+"' ";
 		}
+		
+		/*emp 파라미터가 비었다면 조건 삭제, 팀이 들어왔다면 팀별 내용, 사번이 들어왔다면 해당 사원만 검색*/
+		if(!authpage.equals("ROLE_MANAGER")&&!authpage.equals("ROLE_ADMIN")){
+			emp = empno;
+		}
+		
 		if(emp==null||emp.equals("")){
 			emp = "";
 		}else{
@@ -183,26 +258,22 @@ public class OrderService {
 				emp = "AND O.EMPNO='"+emp+"' ";
 			}
 		}
-		for(MemberVO vo:teamList){
-			if(vo.getAuth().equals("ROLE_EMPLOYEE")){
-				vo.setAuth("사원");
-			}
-			if(vo.getAuth().equals("ROLE_MANAGER")){
-				vo.setAuth("팀장");
-			}
-			if(vo.getAuth().equals("ROLE_ADMIN")){
-				vo.setAuth("관리자");
-			}
-		}
+		
+		/*0이면 승인 대기, 1이면 승인 목록*/
 		if(checks==null||checks.equals("0")||checks.equals("")){
 			checks = "AND CHECKS=0";
 		}else{
 			checks = "AND CHECKS=1";
 		}
+		
+		/*DB에 접근할 객체 생성 및 내용 입력*/
 		TestVO vo = new TestVO();
 		vo.setTests(firstdate+seconddate+product+emp+checks);
-		System.out.println(vo.getTests());
+		
+		/*객체를 매개변수로 주문 목록을 가져와서 Join DB에 싣기*/
 		ArrayList<OrderJoinVO> list = dao.adminSelectOrders(vo);
+		
+		/*날짜 및 권한 이름 가공, 수당 추가*/
 		for(OrderJoinVO ovo:list){
 			Date date = ovo.getRegdate();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
@@ -225,41 +296,19 @@ public class OrderService {
 			}
 			ovo.setAllowance(allowance);
 		}
+		
+		/*DB 접근에 사용된 checks를 변형해서 selected에 이용*/
 		if(checks.contains("1")){
 			checks = "1";
 		}else{
 			checks = "0";
 		}
-		
 		mav.addObject("checks", checks);
-		mav.addObject("plist", plist);
+		
+		/*받아온 리스트를 페이지에 전달*/
 		mav.addObject("alist", list);
-		mav.addObject("mlist", teamList);
+		
 		return mav;
 	}
 	
-	public ModelAndView registForm(){
-		ModelAndView mav = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String empno = auth.getName();
-		ArrayList<ProductVO> list = dao.selectProductAll();
-		mav.addObject("plist", list);
-		mav.addObject("empno", empno);
-		return mav;
-	}
-	
-	public ModelAndView registPro(HttpServletRequest request){
-		OrderVO vo = new OrderVO();
-		vo.setEmpno(request.getParameter("empno"));
-		vo.setProcode(request.getParameter("procode"));
-		vo.setProamount(request.getParameter("proamount"));
-		vo.setCustomer(request.getParameter("customer"));
-		vo.setAddress(request.getParameter("address"));
-		dao.insertOrder(vo);
-		RedirectView rv = null;
-		rv = new RedirectView("/erp/order/list");
-		rv.setExposeModelAttributes(false);
-		ModelAndView mav = new ModelAndView(rv);
-		return mav;
-	}
 }

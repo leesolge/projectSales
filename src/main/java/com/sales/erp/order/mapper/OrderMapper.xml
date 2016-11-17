@@ -37,7 +37,7 @@
 	<update id="modifyPro" parameterType="com.sales.erp.order.vo.OrderVO">
 		UPDATE ORDERS SET EMPNO=#{empno}, PROCODE=#{procode},
 		PROAMOUNT=#{proamount}, CUSTOMER=#{customer}, ADDRESS=#{address}
-		WHERE ID=#{id} 
+		WHERE ID=#{id} AND CHECKS=0
 	</update>
 	
 	<update id="cancleOne" parameterType="com.sales.erp.order.vo.TestVO">
@@ -53,11 +53,19 @@
 	</select>
 	
 	<select id="memberForReg" resultType="com.sales.erp.member.vo.MemberVO">
-		SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE TEAM!='관리팀' ORDER BY TEAM, AUTH DESC
+		SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE TEAM!='관리팀' AND TEAM!='자재팀' ORDER BY TEAM, AUTH DESC
+	</select>
+	
+	<select id="selectAMember" parameterType="com.sales.erp.order.vo.TestVO" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE EMPNO=#{tests}
 	</select>
 	
 	<select id="selectTeam" resultType="com.sales.erp.order.vo.TeamVO">
 		SELECT TEAM FROM SMEMBER WHERE AUTH!='ROLE_ADMIN' GROUP BY TEAM ORDER BY TEAM
+	</select>
+	
+	<select id="selectATeam" parameterType="com.sales.erp.order.vo.TestVO" resultType="com.sales.erp.order.vo.TeamVO">
+		SELECT TEAM FROM SMEMBER WHERE TEAM=#{tests} GROUP BY TEAM
 	</select>
 	
 	<select id="teamMember" parameterType="com.sales.erp.order.vo.TeamVO" resultType="com.sales.erp.member.vo.MemberVO">
