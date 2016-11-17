@@ -136,6 +136,7 @@
 					<c:if test="${alist.checks!=0}"><td></td></c:if>
 				</tr>
 			</c:forEach>
+			
 		</table>
 		<button onclick="javascript:worders()">등록</button>
 	</body>
