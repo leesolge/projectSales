@@ -22,7 +22,7 @@
 			}
 		</script>
 		<title>쪽지</title>
-		<style type="text/css">
+<!-- 		<style type="text/css">
 			h4 {
 				text-align: center;
 			}
@@ -49,7 +49,7 @@
 				padding: 10px;
 				text-align: center;
 			}
-		</style>
+		</style> -->
 	</head>
 	
 	<body>

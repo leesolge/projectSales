@@ -22,7 +22,7 @@
 				cont.submit();
 			}
 		</script>
-		<style type="text/css">
+		<!-- <style type="text/css">
 			h4 {
 				text-align: center;
 			}
@@ -49,7 +49,7 @@
 				padding: 10px;
 				text-align: center;
 			}
-		</style>
+		</style> -->
 		<title>보낸 쪽지함</title>
 	</head>
 	

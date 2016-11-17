@@ -12,6 +12,6 @@ create table schedule(
 CREATE SEQUENCE CALREG
 START WITH 1
 NOCACHE;
-
+delete from SCHEDULE;
 insert into SCHEDULE(num,empno,contents,year,month,day)
 values(numreg_nextval,'300300','오늘은 더워',2016,11,17);
