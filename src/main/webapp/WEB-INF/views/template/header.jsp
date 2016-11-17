@@ -14,9 +14,10 @@
 		
 		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
 			<li class="w3-dropdown-hover">
-			<a href="/erp/product/list">상품메뉴</a>
+			<a href="#">거래메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
-					<a href="/erp/product/list">상품 정보</a>
+					<a href="/erp/employee/buy_request_list">구매요청리스트</a>
+					<a href="/erp/employee/buy_request">자재충원요청</a>
 				</div>
 			</li>
 		</sec:authorize>

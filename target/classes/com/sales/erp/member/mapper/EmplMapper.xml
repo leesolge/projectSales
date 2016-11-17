@@ -8,7 +8,7 @@
 		OREQUEST
 		(ONUM, EMPNO, PROCODE, OAMOUNT, OCOMMENT, REGDATE, CHECKS,
 		DELETED)
-		VALUES(TO_CHAR(ONUM_SEQ.NEXTVAL), #{empno}, #{procode},
+		VALUES(ONUM_SEQ.NEXTVAL, #{empno}, #{procode},
 		#{oamount}, #{ocomment}, SYSDATE, 0, 0)
 	</insert>
 
@@ -21,7 +21,9 @@
 		#{oamount}, #{ocomment}, SYSDATE, 0, 0)
 	</insert>
 
-	<select id="getRequestList" resultType="com.sales.erp.member.vo.OrderRequestVO">
-		SELECT * FROM OREQUEST WHERE EMPNO=#{empno}
+	<select id="getRequestList" resultType="com.sales.erp.member.vo.OrderRequestListVO">
+		SELECT ONUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
+		MAX(PROCODE) AS PROCODE FROM OREQUEST WHERE EMPNO=#{empno} AND CHECKS=0
+		GROUP BY ONUM ORDER BY ONUM DESC
 	</select>
 </mapper>

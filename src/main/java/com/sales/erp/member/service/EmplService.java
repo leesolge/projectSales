@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.dao.EmplDAO;
+import com.sales.erp.member.vo.OrderRequestListVO;
 import com.sales.erp.member.vo.OrderRequestVO;
+import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;
 
 @Service
@@ -20,6 +22,9 @@ public class EmplService {
 
 	@Autowired
 	private EmplDAO dao;
+	
+	@Autowired
+	private ProductDAO prodao;
 
 	public ModelAndView Buy_RequestForm() {
 		ModelAndView mav = new ModelAndView();
@@ -28,8 +33,7 @@ public class EmplService {
 		return mav;
 	}
 
-	public ModelAndView Buy_Request_Action(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public void Buy_Request_Action(HttpServletRequest request) {		
 		ArrayList<String> list = new ArrayList<String>();
 		Enumeration var = request.getParameterNames();
 		String var_name;
@@ -49,15 +53,19 @@ public class EmplService {
 			if(i == 1) dao.Buy_Request_Action(ovo);
 			else dao.Buy_Request_Action_re(ovo);
 		}
-		return mav;
 	}
 
 	public ModelAndView getRequestList() {
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
-		ArrayList<OrderRequestVO> list = dao.getRequestList(empno);
+		ArrayList<OrderRequestListVO> list = dao.getRequestList(empno);
+		for(int i=0; i<list.size(); i++){
+			ProductVO name = prodao.selectOne(list.get(i).getProcode());
+			list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt()-1) + "건");
+		}
 		mav.addObject("list", list);
+		mav.addObject("count", list.size());
 		return mav;
 	}
 }

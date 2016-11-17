@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sales.erp.member.vo.OrderRequestListVO;
 import com.sales.erp.member.vo.OrderRequestVO;
 import com.sales.erp.order.dao.OrderMapper;
 import com.sales.erp.product.vo.ProductVO;
@@ -31,9 +32,9 @@ public class EmplDAO {
 		mapper.Buy_Request_Action_re(ovo);
 	}
 
-	public ArrayList<OrderRequestVO> getRequestList(String empno) {
+	public ArrayList<OrderRequestListVO> getRequestList(String empno) {
 		EmplMapper mapper = sqlSession.getMapper(EmplMapper.class);
-		ArrayList<OrderRequestVO> list = mapper.getRequestList(empno);
+		ArrayList<OrderRequestListVO> list = mapper.getRequestList(empno);
 		return list;
 	}
 }

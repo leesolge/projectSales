@@ -94,7 +94,8 @@ public class EmplController {
 	
 	@RequestMapping(value="/employee/buy_request_manager", method=RequestMethod.POST)
 	public ModelAndView buy_request_manager(HttpServletRequest request) {
-		ModelAndView mav = es.Buy_Request_Action(request);		
+		es.Buy_Request_Action(request);
+		ModelAndView mav = es.getRequestList();
 		mav.setViewName("empl/buy_request_list");
 		return mav;
 	}
