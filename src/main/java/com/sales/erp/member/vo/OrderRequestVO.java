@@ -5,8 +5,17 @@ import java.util.Date;
 public class OrderRequestVO {
 
 	private int oamount, oprice, checks, deleted;
-	private String empno, procode, ocomment, ourl;
+	private String onum, empno, procode, ocomment, ourl;
 	private Date regdate;
+
+	
+	public String getOnum() {
+		return onum;
+	}
+
+	public void setOnum(String onum) {
+		this.onum = onum;
+	}
 
 	public int getOamount() {
 		return oamount;
