@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.schedule.dao.ScheduleDAO;
 import com.sales.erp.schedule.vo.ScheduleVO;
 
@@ -25,23 +26,28 @@ public class ScheduleController {
 	//select로 들어온거 달력만들어 
 	@RequestMapping(value="/schedule/insert", method=RequestMethod.POST)
 	public String insert(HttpServletRequest request){
-		ScheduleVO vo = new ScheduleVO();
-		vo.setContents(request.getParameter("contents"));
-		vo.setEmpno(request.getParameter("empno"));
-		vo.setYear(Integer.parseInt(request.getParameter("year")));
-		vo.setMonth(Integer.parseInt(request.getParameter("month")));
-		vo.setDay(Integer.parseInt(request.getParameter("day")));
+	
+			ScheduleVO vo = new ScheduleVO();
+			vo.setContents(request.getParameter("contents"));
+			vo.setEmpno(request.getParameter("empno"));
+			vo.setYear(Integer.parseInt(request.getParameter("year")));
+			vo.setMonth(Integer.parseInt(request.getParameter("month")));
+			vo.setDay(Integer.parseInt(request.getParameter("day")));
+			sdao.insertSchedule(vo);
 		
-		sdao.insertSchedule(vo);
-		
-		return "redirect:/schedule/calendarForm";
+			return "redirect:/schedule/calendarForm";
 	}
 	
 	@RequestMapping(value="/schedule/delete", method=RequestMethod.POST)
 	public String delete(HttpServletRequest request){
 		String empno = request.getParameter("empno");
+		int num = Integer.parseInt(request.getParameter("num"));
+		ScheduleVO vo = new  ScheduleVO();
+		vo.setEmpno(empno);
+		vo.setNum(num);
 		System.out.println(empno);
-		sdao.deleteSchedule(empno);
+		sdao.deleteSchedule(vo);
+		
 		return "redirect:/schedule/calendarForm";
 	}
 	
@@ -75,12 +81,13 @@ public class ScheduleController {
 	     
 	    System.out.println("스타트 데이" + Calendar.DAY_OF_WEEK);
 	     System.out.println(end);
-	     ScheduleVO vo = null;
+	     ArrayList<ScheduleVO> list;
 	     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 String empno = auth.getName();
 	
 
-	     vo = sdao.getschedule(empno);
+	     list = sdao.getschedule(empno);
+	
 	     
 		  request.setAttribute("year", new Integer(year));
 		  request.setAttribute("month", new Integer(month));
@@ -91,7 +98,7 @@ public class ScheduleController {
 		  request.setAttribute("end", new Integer(end));
 		  request.setAttribute("br", br);
 		  request.setAttribute("empno", empno);
-		  request.setAttribute("vo", vo);
+		  request.setAttribute("vo", list);
 	  
 		  return "/schedule/calendar";
 		}

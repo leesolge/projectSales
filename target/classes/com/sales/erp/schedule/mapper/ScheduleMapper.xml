@@ -5,13 +5,16 @@
      
 <mapper namespace="com.sales.erp.schedule.dao.ScheduleMapper">
 	<select id="select" parameterType="java.lang.String" resultType="com.sales.erp.schedule.vo.ScheduleVO">
-	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{EMPNO}
+	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno}
 	</select>
-	<delete id="delete" parameterType="java.lang.String">
-	 		DELETE FROM SCHEDULE WHERE EMPNO= #{EMPNO}
+	<delete id="delete" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
+	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and NUM= #{num}
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
-			INSERT INTO SCHEDULE(EMPNO,CONTENTS,YEAR,MONTH,DAY) 
-			VALUES (#{empno},#{contents},#{year},#{month},#{day})
+			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY) 
+			VALUES (NUMREG.nextval,#{empno},#{contents},#{year},#{month},#{day})
 	</insert>
+	<update id="update" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
+			UPDATE SCHEDULE SET CONTENTS=#{contents} WHERE EMPNO=#{empno}    
+	</update>
 </mapper>

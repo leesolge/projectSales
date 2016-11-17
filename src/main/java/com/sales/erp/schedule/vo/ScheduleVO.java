@@ -3,7 +3,7 @@ package com.sales.erp.schedule.vo;
 public class ScheduleVO {
  	
 	String empno,contents;
-	int year,month,day;
+	int year,month,day,num;
 	
 	public String getEmpno() {
 		return empno;
@@ -28,6 +28,12 @@ public class ScheduleVO {
 	}
 	public void setMonth(int month) {
 		this.month = month;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public int getDay() {
 		return day;

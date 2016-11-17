@@ -33,7 +33,7 @@
 	               <a href="/erp/schedule/calendarForm?year=${year}&month=${month-1}">◀</a>
 	               ${month+1}월 <a href="/erp/schedule/calendarForm?year=${year}&month=${month+1}">▶</a>
 	            </td>
-	            <td align=right width=200>오늘▶${currentYear}-${currentMonth+1}-${currentDate}</td>
+	            <td align=right width=200>오늘▶${currentYear}-${currentMonth+1}-${currentDate}◀</td>
 	         </tr>
       	</table>
       	<table border=1 style="border-collapse: collapse;" class="table-condensed table-bordered table-striped">
@@ -57,15 +57,15 @@
          </tr>
          
          <tr height=80>
-            <c:set var="br" value="0" />
-      
-            <c:forEach var="i" begin="1" end="${startDay-1}">
-               <td>&nbsp;</td>
-               <c:set var="br" value="${br+1}" />
-               <c:if test="${br == 7}">
-                  <br>
-               </c:if>
-            </c:forEach>
+	            <c:set var="br" value="0" />
+	      
+	            <c:forEach var="i" begin="1" end="${startDay-1}">
+	               <td>&nbsp;</td>
+	               <c:set var="br" value="${br+1}" />
+	               <c:if test="${br == 7}">
+	                  <br>
+	               </c:if>
+	            </c:forEach>
         
            
             	<c:forEach var="a" begin="1" end="${end}">
@@ -85,7 +85,9 @@
 		                  
 			   			
 			                 <form action="/erp/schedule/delete" method="post">
+			                 <c:forEach var="vo" items="${vo}">
 			                     <c:if test="${year == vo.year && (month+1) == vo.month && a == vo.day}">
+			                    	
 			                        <c:out value="${vo.contents}"></c:out>
 			                        	<br>
 			                              <div class="tooltip-demo">
@@ -95,8 +97,10 @@
 			                              <input type="hidden" name="month" value="${vo.month}">
 			                              <input type="hidden" name="empno" value="${vo.empno}">
 			                              <button type="submit" style="height: 20px" class="btn btn-default" data-toggle="tooltip"  data-placement="left" title="삭제하려면 클릭하시오." >삭제</button>
-			                              </div> 
+			                              </div>
+			                  		
 			                     </c:if>
+			                     </c:forEach>
 			                  </form>
 		
                		 <c:set var="br" value="${br+1}" />
