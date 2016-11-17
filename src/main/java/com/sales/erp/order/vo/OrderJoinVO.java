@@ -19,7 +19,14 @@ public class OrderJoinVO {
 		private int checks;
 		private int deleted;
 		private String changes;
+		private String sales;
 		
+		public String getSales() {
+			return sales;
+		}
+		public void setSales(String sales) {
+			this.sales = sales;
+		}
 		public double getAllowance() {
 			return allowance;
 		}

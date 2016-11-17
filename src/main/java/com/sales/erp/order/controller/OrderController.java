@@ -17,6 +17,13 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
+	@RequestMapping("/admin/orderfail")
+	public ModelAndView orderFail(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/order/fail");
+		return mav;
+	}
+	
 	@RequestMapping("/admin/corder")
 	public ModelAndView orderCheck(@RequestParam("orderid") String orderid){
 		ModelAndView mav = os.orderCheck(orderid);

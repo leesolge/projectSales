@@ -12,6 +12,8 @@ import com.sales.erp.product.vo.ProductVO;
 
 public interface OrderMapper extends Serializable{
 
+	int getProductAmount(TestVO vo);
+	void minusProduct(TestVO vo);
 	OrderJoinVO adminSelectOne(TestVO vo);
 	void orderCheck(TestVO vo);
 	void transInsert(OrderJoinVO vo);

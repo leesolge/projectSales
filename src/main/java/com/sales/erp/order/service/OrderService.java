@@ -32,17 +32,27 @@ public class OrderService {
 	@Transactional
 	public ModelAndView orderCheck(String orderid){
 		RedirectView rv = null;
-		rv = new RedirectView("/erp/admin/order");
-		rv.setExposeModelAttributes(false);
-		ModelAndView mav = new ModelAndView(rv);
+		
 		TestVO vo = new TestVO();
 		vo.setTests(orderid);
+		int amount = dao.getProductAmount(vo);
 		System.out.println(vo.getTests());
+		OrderVO rvo = dao.selectOneOrder(vo);
+		if(Integer.parseInt(rvo.getProamount())>amount){
+			rv = new RedirectView("/erp/admin/orderfail");
+		}else{
+			OrderJoinVO ovo = dao.adminSelectOne(vo);
+			ovo.toString();
+			dao.orderCheck(vo);
+			dao.transInsert(ovo);
+			vo.setTests(rvo.getProamount()+" WHERE PROCODE="+rvo.getProcode());
+			System.out.println(vo.getTests());
+			dao.minusProduct(vo);
+			rv = new RedirectView("/erp/admin/order");
+		}
 		
-		OrderJoinVO ovo = dao.adminSelectOne(vo);
-		ovo.toString();
-		dao.orderCheck(vo);
-		dao.transInsert(ovo);
+		rv.setExposeModelAttributes(false);
+		ModelAndView mav = new ModelAndView(rv);
 		return mav;
 	}
 	

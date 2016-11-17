@@ -4,6 +4,14 @@
 
 <mapper namespace="com.sales.erp.order.dao.OrderMapper">
 	
+	<update id="minusProduct" parameterType="com.sales.erp.order.vo.TestVO">
+		UPDATE PRODUCT SET PROAMOUNT=PROAMOUNT-${tests}
+	</update>
+	
+	<select id="getProductAmount" parameterType="com.sales.erp.order.vo.TestVO" resultType="java.lang.Integer">
+		SELECT P.PROAMOUNT FROM ORDERS O, PRODUCT P WHERE O.PROCODE=P.PROCODE AND ID=#{tests}
+	</select>
+	
 	<select id="adminSelectOne" parameterType="com.sales.erp.order.vo.TestVO" resultType="com.sales.erp.order.vo.OrderJoinVO">
 		SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
