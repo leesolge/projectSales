@@ -19,6 +19,16 @@ public class OrderDAO implements OrderMapper{
 	@Autowired
 	private SqlSession sqlSession;
 
+	public ArrayList<TeamVO> selectATeam(TestVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.selectATeam(vo);
+	}
+
+	public MemberVO selectAMember(TestVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.selectAMember(vo);
+	}
+
 	public int getProductAmount(TestVO vo) {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		return mapper.getProductAmount(vo);

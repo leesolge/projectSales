@@ -26,10 +26,10 @@
 </script>
 	
 	<body>
-	<form name="list" action="/erp/admin/order" method="post">
+	<form name="list" action="/erp/order/list" method="post">
 	</form>
 	
-	<form name="regist" action="/erp/admin/registOrder" method="post">
+	<form name="regist" action="/erp/order/regist" method="post">
 		<table>
 			<tr>
 				<td>

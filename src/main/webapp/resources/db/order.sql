@@ -3,7 +3,7 @@ update orders set checks=0
 select p.proamount from orders o, product p where o.procode=p.procode and id='300322o26'
 select * from product
 update product set proamount=proamount-1 where procode=1004
-
+SELECT TEAM FROM SMEMBER WHERE TEAM='영업1팀'
 SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
 			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
