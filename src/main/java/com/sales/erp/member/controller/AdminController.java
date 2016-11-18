@@ -129,6 +129,10 @@ public class AdminController {
 	public String Approve(HttpServletRequest request) throws Exception {
 		String empno = request.getParameter("empno");
 		memberDAOImpl.Update_Approve_Member(empno);
+		MemberVO vo = memberDAOImpl.selectMember(empno);
+		String subject = "[회원가입승인]감사합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 승인되었습니다.";
+		String text = "회원님의 아이디는 [ " + empno + " ] 입니다.";
+		mail.sendMail(vo, subject, text);
 		
 		return "redirect:/admin/member_ok";
 	}
