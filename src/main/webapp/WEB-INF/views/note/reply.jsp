@@ -27,6 +27,7 @@
 	<body>
 		<form action="/erp/note/view" name="cont" method="post">
 		<input type="hidden" name="pageCheck" value="${pageCheck}">
+		<input type="hidden" name="notenum" value="${pageCheck}">
 	<c:if test="${pageCheck!='etc'}">
 		<input type="hidden" name="pageNum" value="${pageNum}">
 		<input type="hidden" name="field" value="${field}">
@@ -59,6 +60,7 @@
 				<input type="hidden" name="field" value="${field}">
 				<input type="hidden" name="keyword" value="${keyword}">
 			</c:if>
+			${pageCheck}
 				<table>
 					<tr>
 						<td>발신인 : ${svo.name}<input type="hidden" name="sender" value="${svo.empno}"></td>

@@ -148,6 +148,40 @@ public class OrderService {
 		return mav;
 	}
 	
+	public ModelAndView orderContents(String authpage, String orderid, String checks){
+		ModelAndView mav = new ModelAndView();
+		TestVO vo = new TestVO();
+		if(checks.equals("1")){
+			vo.setTests("'"+orderid+"' "+"AND CHECKS=1");
+		}else{
+			vo.setTests("'"+orderid+"' "+"AND CHECKS=0");
+		}
+		OrderJoinVO ovo = dao.adminSelectO(vo);
+		Date date = ovo.getRegdate();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		String changes = sdf.format(date);
+		ovo.setChanges(changes);
+		if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
+			ovo.setAuth("사원");
+		}
+		if(ovo.getAuth().equals("ROLE_MANAGER")){
+			ovo.setAuth("팀장");
+		}
+		if(ovo.getAuth().equals("ROLE_ADMIN")){
+			ovo.setAuth("관리자");
+		}
+		double allowance = Integer.parseInt(ovo.getProfit());
+		if(ovo.getAuth().equals("사원")){
+			allowance = Math.round(allowance*0.4);
+		}else if(ovo.getAuth().equals("팀장")){
+			allowance = Math.round(allowance*0.5);
+		}
+		ovo.setAllowance(allowance);
+		mav.addObject("ovo", ovo);
+		mav.addObject("authpage", authpage);
+		return mav;
+	}
+	
 	/*Order List*/
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
@@ -262,7 +296,7 @@ public class OrderService {
 			product = "AND O.PROCODE='"+product+"' ";
 		}
 		
-		/*emp 파라미터가 비었다면 조건 삭제, 팀이 들어왔다면 팀별 내용, 사번이 들어왔다면 해당 사원만 검색*/
+		/*emp 파라미터가 비었다면 조건 삭제, 팀이 들어왔다면 팀별 내용, 사번이 들어왔다면 해당 사원만 검색했으면 좋겠지만 사실은*/
 		if(!authpage.equals("ROLE_MANAGER")&&!authpage.equals("ROLE_ADMIN")){
 			emp = empno;
 		}
@@ -300,11 +334,11 @@ public class OrderService {
 		
 		/*객체를 매개변수로 주문 목록을 가져와서 Join DB에 싣기*/
 		ArrayList<OrderJoinVO> list = dao.adminSelectOrders(vo);
-		
 		/*날짜 및 권한 이름 가공, 수당 추가*/
 		for(OrderJoinVO ovo:list){
 			Date date = ovo.getRegdate();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+			/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");*/
 			String changes = sdf.format(date);
 			ovo.setChanges(changes);
 			if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
@@ -335,7 +369,6 @@ public class OrderService {
 		
 		/*받아온 리스트를 페이지에 전달*/
 		mav.addObject("alist", list);
-		
 		return mav;
 	}
 	

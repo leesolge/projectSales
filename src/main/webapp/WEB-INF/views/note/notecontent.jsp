@@ -32,6 +32,7 @@
 	</head>
 	
 	<body>
+	${pageCheck}
 	<c:if test="${pageCheck=='receive'}"><c:set var="ad" value="rd"/></c:if>
 	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
 	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>

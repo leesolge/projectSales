@@ -10,6 +10,12 @@
 		jumping.orderid.value=pn;
 		jumping.submit();
 	}
+	function details(pn, pa){
+		var jumping = document.detail;
+		jumping.orderid.value=pn;
+		jumping.checks.value=pa;
+		jumping.submit();
+	}
 	function dorders(pn){
 		if (confirm("해당 수주를 정말 취소하시겠습니까?") == true){
 			var jumping = document.dord;
@@ -38,6 +44,11 @@
 	</head>
 	
 	<body>
+	<form name="detail" action="/erp/order/detail" method="post">
+		<input name="orderid" type="hidden" value="0">
+		<input name="authpage" type="hidden" value="${authpage}">
+		<input name="checks" type="hidden" value="0">
+	</form>
 	<form name="mord" action="/erp/order/modifyForm" method="post">
 		<input name="orderid" type="hidden" value="0">
 		<input name="authpage" type="hidden" value="${authpage}">
@@ -96,47 +107,27 @@
 		
 		<table border="1">
 			<tr>
-				<td>구분</td>
 				<td>사번</td>
-				<td>등록날짜</td>
 				<td>이름</td>
-				<td>소속</td>
-				<td>직급</td>
+				<td>등록날짜</td>
 				<td>제품코드</td>
 				<td>제품명</td>
 				<td>수량</td>
 				<td>수익</td>
 				<td>직원 수당</td>
-				<td>고객명</td>
-				<td>고객 주소</td>
-				<td>수정</td>
-				<td>취소</td>
-				<td>판매 확정</td>
 			</tr>
 			<c:forEach var="alist" items="${alist}">
-				<tr>
-					<td>${alist.id}</td>
+				<tr onclick="javascript:details('${alist.id}', '${alist.checks}')">
 					<td>${alist.empno}</td>
-					<td>${alist.changes}</td>
 					<td>${alist.name}</td>
-					<td>${alist.team}</td>
-					<td>${alist.auth}</td>
+					<td>${alist.changes}</td>
 					<td>${alist.procode}</td>
 					<td>${alist.proname}</td>
 					<td>${alist.proamount}</td>
-					<td>${alist.profit}</td>
-					<td>${alist.allowance}</td>
-					<td>${alist.customer}</td>
-					<td>${alist.address}</td>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:morders('${alist.id}')">수정</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:dorders('${alist.id}')">취소</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
-					<c:if test="${alist.checks==0}"><td><button onclick="javascript:corders('${alist.id}')">판매 확정</button></td></c:if>
-					<c:if test="${alist.checks!=0}"><td></td></c:if>
+					<td>${alist.profit}원</td>
+					<td>${alist.allowance}원</td>
 				</tr>
 			</c:forEach>
-			
 		</table>
 		<button onclick="javascript:worders()">등록</button>
 	</body>

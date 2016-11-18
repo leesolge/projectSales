@@ -18,6 +18,11 @@ public class OrderDAO implements OrderMapper{
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	public OrderJoinVO adminSelectO(TestVO vo) {
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		return mapper.adminSelectO(vo);
+	}
 
 	public ArrayList<TeamVO> selectATeam(TestVO vo) {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);

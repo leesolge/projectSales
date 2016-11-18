@@ -40,6 +40,7 @@ public class OrderController {
 	@RequestMapping("/order/modifyForm")
 	public ModelAndView modifyOne(@RequestParam("orderid") String id, @RequestParam("authpage") String authpage){
 		ModelAndView mav = os.adminRegistForm(authpage);
+		System.out.println("id"+id);
 		mav.addObject("mo", os.selectOneOrder(id));
 		mav.setViewName("order/modifyone");
 		return mav;
@@ -61,6 +62,13 @@ public class OrderController {
 	public ModelAndView adminRegistForm(@RequestParam("authpage") String authpage){
 		ModelAndView mav = os.adminRegistForm(authpage);
 		mav.setViewName("order/adminregist");
+		return mav;
+	}
+	
+	@RequestMapping("/order/detail")
+	public ModelAndView orderContents(@RequestParam("authpage") String authpage, @RequestParam("orderid") String id, @RequestParam("checks") String checks){
+		ModelAndView mav = os.orderContents(authpage, id, checks);
+		mav.setViewName("order/orderdetail");
 		return mav;
 	}
 	
