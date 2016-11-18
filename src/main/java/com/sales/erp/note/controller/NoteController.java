@@ -49,6 +49,12 @@ public class NoteController {
 		return mav;
 	}
 	
+	@RequestMapping("/note/replys")
+	public ModelAndView replyPro(HttpServletRequest request){
+		ModelAndView mav = nos.writePro(request);
+		return mav;
+	}
+	
 	@RequestMapping("/note/list")
 	public ModelAndView selectNotes(){
 		ModelAndView mav = nos.sendRecieve();
