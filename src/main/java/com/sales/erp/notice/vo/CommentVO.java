@@ -3,6 +3,7 @@ package com.sales.erp.notice.vo;
 import java.util.Date;
 
 public class CommentVO {
+	public int seq;
 	public String empno;
 	public String num; 
 	public String name;
@@ -45,5 +46,11 @@ public class CommentVO {
 	}
 	public void setEmpno(String empno) {
 		this.empno = empno;
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 }

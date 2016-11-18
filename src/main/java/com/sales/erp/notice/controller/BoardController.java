@@ -1,12 +1,14 @@
 package com.sales.erp.notice.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
 import com.sales.erp.notice.vo.CommentVO;
@@ -98,4 +100,10 @@ public class BoardController {
 		return res;
 	}
 	
+	@RequestMapping(value="/board/commentsUpdateForm", method=RequestMethod.POST)
+	public ModelAndView commentsUpdateForm(HttpServletRequest request){
+		ModelAndView mav=boardService.getComments(request);
+		mav.setViewName("/board/commentsUpdateForm");
+		return mav;
+	}
 }

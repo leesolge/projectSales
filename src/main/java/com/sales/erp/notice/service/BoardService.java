@@ -16,6 +16,7 @@ import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.dao.BoardDAO;
 import com.sales.erp.notice.vo.BoardSearch;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentForUpdateVO;
 import com.sales.erp.notice.vo.CommentVO;
 
 @Service
@@ -152,6 +153,20 @@ public class BoardService{
 		mav.addObject("b", b);
 		mav.addObject("senderVo", senderVo);
 		mav.addObject("comments", comments);
+		return mav;
+	}
+
+	public ModelAndView getComments(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		String num=request.getParameter("num");
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		System.out.println("seq:"+seq);
+		CommentForUpdateVO vo=new CommentForUpdateVO();
+		vo.setNum(num);
+		vo.setSeq(seq);
+		
+		CommentVO comments1=dao.commentListforUpdate(vo);
+		mav.addObject("comments1", comments1);
 		return mav;
 	}
 }

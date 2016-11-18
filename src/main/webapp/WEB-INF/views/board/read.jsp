@@ -19,6 +19,11 @@ function board_reply(){
 	//alert("답변");
 	location.href="/erp/board/replyForm?num=${b.num}";
 }
+function comments_update(seq){
+	var jumping = document.reply;
+	jumping.seq.value=seq;
+	jumping.submit();
+}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 읽기</title>
@@ -81,6 +86,10 @@ function board_reply(){
 	</table>
 </form>
 	<!-- 달려있는 커맨트 보기 -->
+<form action="/erp/board/commentsUpdateForm" name="reply" method="post">
+	<input type="hidden" name="num" value="${b.num}">
+	<input type="hidden" name="name" value="${b.name}">
+	<input type="hidden" name="seq" value="0">
 		<table width="789" border="1">
 			<c:forEach var="comments" items="${comments}">
 				<tr>
@@ -88,8 +97,13 @@ function board_reply(){
 					<td width="86">${comments.name}</td>
 					<td width="639">${comments.comments}</td>
 					<td width="220" align="center">${comments.change}</td>
+					<c:if test="${memberInfo.empno==senderVo.empno}">
+					<td><input type="button" value="수정" onclick="comments_update('${comments.seq}')"/></td>
+					<td><input type="button" value="삭제" onclick="comments_delete('${comments.seq}')"/></td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
+</form>
 </body>
 </html>
