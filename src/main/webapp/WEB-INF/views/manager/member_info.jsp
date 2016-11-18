@@ -58,6 +58,20 @@
 				<td>${vo.join}</td>
 			</tr>
 		</table>
+		<div>
+			<p></p>
+		</div>
+
+		<div align="center">
+			<table class="w3-table w3-centered " style="width: 20%;">
+				<tr>
+					<td><input type="button" value="정보수정"
+						class="w3-btn w3-round-large"
+						onclick="window.location='/erp/my_Update?empno=${vo.empno}'">
+					</td>
+				</tr>
+			</table>
+		</div>
 
 	</div>
 	<div>

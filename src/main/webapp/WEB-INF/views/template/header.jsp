@@ -16,8 +16,10 @@
 			<li class="w3-dropdown-hover">
 			<a href="#">거래메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
-					<a href="/erp/employee/buy_request_list">구매요청리스트</a>
-					<a href="/erp/employee/buy_request">자재충원요청</a>
+					<a href="/erp/employee/buy_request">구매요청</a>
+					<a href="/erp/employee/buy_request_list">구매대기목록</a>
+					<a href="/erp/employee/buy_approved_list">구매승인목록</a>
+					
 				</div>
 			</li>
 		</sec:authorize>
@@ -28,8 +30,8 @@
 			<a href="#">팀메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
 					<a href="/erp/manager/member_list">팀원 명부</a> 
-					<a href="/erp/manager/buy_request_list">승인대기</a> 
-					<a href="#">진행업무</a> 
+					<a href="/erp/manager/buy_request_list">승인대기목록</a> 
+					<a href="/erp/manager/buy_approved_list">구매승인목록</a>
 					<a href="#">요청</a>
 				</div>
 			</li>

@@ -4,18 +4,9 @@ import java.util.Date;
 
 public class OrderRequestVO {
 
-	private int oamount, oprice, checks, deleted;
-	private String onum, empno, procode, ocomment, ourl;
+	private int oamount, checks, deleted;
+	private String onum, empno, procode, ocomment;
 	private Date regdate;
-
-	
-	public String getOnum() {
-		return onum;
-	}
-
-	public void setOnum(String onum) {
-		this.onum = onum;
-	}
 
 	public int getOamount() {
 		return oamount;
@@ -23,14 +14,6 @@ public class OrderRequestVO {
 
 	public void setOamount(int oamount) {
 		this.oamount = oamount;
-	}
-
-	public int getOprice() {
-		return oprice;
-	}
-
-	public void setOprice(int oprice) {
-		this.oprice = oprice;
 	}
 
 	public int getChecks() {
@@ -47,6 +30,14 @@ public class OrderRequestVO {
 
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getOnum() {
+		return onum;
+	}
+
+	public void setOnum(String onum) {
+		this.onum = onum;
 	}
 
 	public String getEmpno() {
@@ -71,14 +62,6 @@ public class OrderRequestVO {
 
 	public void setOcomment(String ocomment) {
 		this.ocomment = ocomment;
-	}
-
-	public String getOurl() {
-		return ourl;
-	}
-
-	public void setOurl(String ourl) {
-		this.ourl = ourl;
 	}
 
 	public Date getRegdate() {

@@ -85,6 +85,13 @@ public class EmplController {
 		return mav;
 	}
 	
+	@RequestMapping("/employee/buy_approved_list")
+	public ModelAndView buy_approved_list(HttpServletRequest request) {		
+		ModelAndView mav = es.getRequestApprovedList();		
+		mav.setViewName("empl/buy_approved_list");
+		return mav;
+	}
+	
 	@RequestMapping(value="/employee/buy_request")
 	public ModelAndView buy_request(HttpServletRequest request) {
 		ModelAndView mav = es.Buy_RequestForm();		

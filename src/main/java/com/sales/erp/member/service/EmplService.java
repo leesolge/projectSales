@@ -68,6 +68,20 @@ public class EmplService {
 		mav.addObject("count", list.size());
 		return mav;
 	}
+	
+	public ModelAndView getRequestApprovedList() {
+		ModelAndView mav = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		ArrayList<OrderRequestListVO> list = dao.getRequestApprovedList(empno);
+		for(int i=0; i<list.size(); i++){
+			ProductVO name = prodao.selectOne(list.get(i).getProcode());
+			list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt()-1) + "건");
+		}
+		mav.addObject("list", list);
+		mav.addObject("count", list.size());
+		return mav;
+	}
 
 	public ModelAndView getRequestContent(String onum) {
 		ModelAndView mav = new ModelAndView();
@@ -75,6 +89,8 @@ public class EmplService {
 		mav.addObject("list", list);
 		return mav;
 	}
+
+
 }
 
 
