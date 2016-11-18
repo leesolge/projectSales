@@ -42,6 +42,6 @@ START WITH 300300
 NOCACHE;
 
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
-VALUES('100', 'oracle', '관리자', '남', date '1900-1-1', date '1900-1-1', '노다지', '010-0000-0000', 'leesolge@gmail.com', 'ROLE_ADMIN', null, '01-4829-333-2201', '관리팀');
+VALUES('200', '200', '이도연', '여', date '2000-1-1', date '2000-1-1', '코스타', '010-0000-0000', 'kosta@kosta', 'ROLE_ADMIN', null, '01-4829-333-2201', '관리팀');
 INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM) 
 VALUES(to_char(numregister.nextval), 'oracle', '����', '��', date '1985-9-25', date '2010-4-27', '�츮����', '010-9459-2077', 'leesolge@gmail.com', 'ROLE_EE', null, '01-4829-333-2201', '����1��');

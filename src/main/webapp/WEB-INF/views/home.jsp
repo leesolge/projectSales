@@ -48,9 +48,6 @@
 					<tr>
 					<td colspan="2"><a href="/erp/confirmPWD">비밀번호 찾기</a></td>
 					</tr>
-					<tr>
-					<h1>오늘 떡볶이로 점심을 먹기에는 너무 속이 더 부룩해</h1>
-					</tr>
 				</table>
 			</form>
 		</div>
