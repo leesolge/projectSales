@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <style type="text/css">
 	.shortLine {
@@ -21,30 +24,39 @@
 			</div>
 			<table class="w3-table w3-bordered w3-small" style="width: 90%;">
 				<tr>
-					<th style="width: 80%;">제목</th>
-					<th style="width: 20%;">날짜</th>
+					<th style="width: 70%;">제목</th>
+					<th style="width: 30%;">날짜</th>
 				</tr>
-				<tr style="cursor:pointer;" onclick="location.href='#'">
-					<td style="width: 80%;">제목</td>
-					<td style="width: 20%;">날짜</td>
-				</tr>
+				<c:forEach var="b" items="${list}" begin="0" end="4">
+					<tr style="cursor:pointer;" onclick="location.href='/erp/board/read?num=${b.num}&pg=${pg}'">
+						<td>${b.title}</td>
+						<td><fmt:formatDate value="${b.regDate}" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:forEach>
+
+
 			</table>
 		</div>
 		<div class="w3-col m6">
 			<div align="left">
 				<h5>
-					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로온 쪽지<br>
+					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지<br>
 				</h5>
 			</div>
 			<table class="w3-table w3-bordered w3-small" style="width: 90%;">
 				<tr>
-					<th style="width: 80%;">제목</th>
-					<th style="width: 20%;">날짜</th>
+					<th style="width: 50%;">제목</th>
+					<th style="width: 20%;">발신자</th>
+					<th style="width: 30%;">날짜</th>
 				</tr>
-				<tr style="cursor:pointer;" onclick="location.href='#'">
-					<td style="width: 80%;">제목</td>
-					<td style="width: 20%;">날짜</td>
-				</tr>
+				<c:forEach var="c" items="${note}" begin="0" end="4">
+					<tr style="cursor:pointer;" onclick="location.href='/erp/note/list'">
+						<td>${c.title}</td>
+						<td>${c.sender}</td>
+						<td><fmt:formatDate value="${c.senddate}" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:forEach>
+
 			</table>
 		</div>
 	</div>

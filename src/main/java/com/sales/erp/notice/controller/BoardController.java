@@ -1,22 +1,12 @@
 package com.sales.erp.notice.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sales.erp.member.vo.MemberVO;
-import com.sales.erp.notice.dao.BoardDAO;
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
 import com.sales.erp.notice.vo.CommentVO;

@@ -133,8 +133,9 @@ public class JoinController {
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO vo = memberDAOImpl.ConfirmID_Member(member);
-		String subject = "[ID확인]" + vo.getName() + "님의 ID요청확인 메일입니다.";
-		String text = "귀하의 아이디는 [ " + vo.getEmpno() + " ]입니다.";
+		String subject = "[PW확인]" + vo.getName() + "님의 PW요청확인 메일입니다.";
+		String text = "귀하의 아이디는 [ " + vo.getEmpno() + " ]입니다.\n"
+				+ "귀하의 비밀번호는 [ " + vo.getPwd() + " ]입니다.";
 		mail.sendMail(vo, subject, text);
 		memberDAOImpl.Update_Cancel_Member(member.getEmpno());
 		return mav;
