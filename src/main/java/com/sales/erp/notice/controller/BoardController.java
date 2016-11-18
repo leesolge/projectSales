@@ -1,8 +1,10 @@
 package com.sales.erp.notice.controller;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -111,6 +113,13 @@ public class BoardController {
 	@RequestMapping(value="/board/commentsUpdate", method=RequestMethod.POST)
 	public String commentsUpdate(HttpServletRequest request){
 		boardService.updateComments(request);
+		return "redirect:/board/list";
+	}
+	
+	
+	@RequestMapping(value="/board/commentsDelete", method=RequestMethod.POST)
+	public String commentsDelete(HttpServletRequest request){
+		boardService.deleteComments(request);
 		return "redirect:/board/list";
 	}
 }

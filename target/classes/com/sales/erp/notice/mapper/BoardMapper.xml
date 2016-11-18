@@ -72,5 +72,10 @@
 	<update id="updateComments" parameterType="com.sales.erp.notice.vo.CommentForUpdateVO">
 		update bComment set comments=#{comments} where num=#{num} and seq=#{seq}
 	</update>	
+	
+	<!-- 커맨트 삭제 -->
+	<delete id="deleteComments" parameterType="com.sales.erp.notice.vo.CommentForUpdateVO">
+		delete from bComment where num=#{num} and seq=#{seq}
+	</delete>
 </mapper>
 

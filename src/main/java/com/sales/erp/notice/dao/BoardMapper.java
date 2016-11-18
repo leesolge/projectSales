@@ -34,5 +34,7 @@ public interface BoardMapper extends Serializable {
 	CommentVO commentListforUpdate(CommentForUpdateVO vo);
 
 	void updateComments(CommentForUpdateVO vo);
+
+	void deleteComments(CommentForUpdateVO vo);
 	
 }

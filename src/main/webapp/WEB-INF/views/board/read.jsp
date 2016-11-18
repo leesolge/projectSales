@@ -24,6 +24,11 @@ function comments_update(seq){
 	jumping.seq.value=seq;
 	jumping.submit();
 }
+function comments_delete(seq){
+	var jumping = document.c_delete;
+	jumping.seq.value=seq;
+	jumping.submit();
+}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 읽기</title>
@@ -86,6 +91,7 @@ function comments_update(seq){
 	</table>
 </form>
 	<!-- 달려있는 커맨트 보기 -->
+<form action="/erp/board/commentsDelete" name="c_delete" method="post">
 <form action="/erp/board/commentsUpdateForm" name="reply" method="post">
 	<input type="hidden" name="num" value="${b.num}">
 	<input type="hidden" name="name" value="${b.name}">

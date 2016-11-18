@@ -185,4 +185,19 @@ public class BoardService{
 	
 		dao.updateComments(vo);
 	}
+
+	public void deleteComments(HttpServletRequest request) {
+		String num=request.getParameter("num");
+		System.out.println("num="+num);
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		String comments=request.getParameter("comments");
+		System.out.println("num="+num+"/seq="+seq);
+		
+		CommentForUpdateVO vo=new CommentForUpdateVO();
+		vo.setNum(num);
+		vo.setSeq(seq);
+		vo.setComments(comments);
+		
+		dao.deleteComments(vo);
+	}
 }
