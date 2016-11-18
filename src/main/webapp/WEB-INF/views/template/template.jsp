@@ -9,51 +9,50 @@
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>
-<div>
-<!-- TOP, MENU -->
-<div class="w3-row"> 
-	<div class="w3-col m1">　</div>
-	<div class="w3-col m10 w3-center">
-		<div>
-			<tiles:insertAttribute name="top" />
+	<div>
+		<!-- TOP, MENU -->
+		<div class="w3-row">
+			<div class="w3-col m1"><p></p></div>
+			<div class="w3-col m10 w3-center">
+				<div>
+					<tiles:insertAttribute name="top" />
+				</div>
+				<div>
+					<tiles:insertAttribute name="header" />
+				</div>
+			</div>
+			<div class="w3-col m1"><p></p></div>
 		</div>
-		<div>
-			<tiles:insertAttribute name="header" />
-		</div>
-	</div>
-	<div class="w3-col m1">　</div>
-</div>
 
-<br>
-<!-- BODY -->
-<div class="w3-row">
-	<div class="w3-col m1">　</div>
-	<div class="w3-col m2 w3-center">
-		<div>
-			<tiles:insertAttribute name="side" />
+		<br>
+		<!-- BODY -->
+		<div class="w3-row">
+			<div class="w3-col m1"><p></p></div>
+			<div class="w3-col m2">
+				<div>
+					<tiles:insertAttribute name="side" />
+				</div>
+			</div>
+			<div class="w3-col m8">
+				<div>
+					<tiles:insertAttribute name="body" />
+				</div>
+			</div>
+			<div class="w3-col m1"><p></p></div>
 		</div>
-	</div>
-	<div class="w3-col m8 w3-center">
-		<div>
-			<tiles:insertAttribute name="body" />
-		</div>
-	</div>
-	<div class="w3-col m1">　</div>
-</div>
-<br>
+		
 
-<!-- Bottom -->
-<div class="w3-row">
-	<div class="w3-col m12">
-		<tiles:insertAttribute name="footer" />
+		<!-- Bottom -->
+		<div class="w3-row">
+			<div class="w3-col m12">
+				<tiles:insertAttribute name="footer" />
+			</div>
+		</div>
 	</div>
-</div>
-</div>
 </body>
 
 <!-- Script -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script type="text/javascript" src="/erp/resources/js/fix.js"></script>
 
 <!-- CSS -->
 <link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet" >

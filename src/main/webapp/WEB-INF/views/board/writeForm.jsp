@@ -1,47 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<title>글쓰기</title>
-</head>
 
 <body>
-<h1>글쓰기</h1>
-<div class="w3-col w3-center">
-<a href="/erp/board/list">리스트</a>
-</div>
-<form name="write" action="write" method="post">
-		<table>
-			<tr>
-				<th>이름</th>
-				<td>${senderVo.name}</td>
-				<td>
-				<input type="hidden" name="name" value="${senderVo.name}">
-				</td>
-			</tr>
-			
-			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" name="title" maxlength="50" size="72"/>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>내용</th>
-				<td>
-					<textarea name="content" rows="10" cols="72"></textarea>
-				</td>	
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="쓰기"/>
-					<input type="reset" value="취소"/>
-				</td>
-			</tr>
-		</table>
-</form>
+	<div class="w3-container w3-center">
+		<h1>글쓰기</h1>
+	</div>
+	
+	<div class="w3-row"> 
+		<div class="w3-col w3-left" style="width:10%"><p></p></div>
+		<div class="w3-col w3-right" style="width:10%"><p></p></div>
+		<div class="w3-rest w3-container">
+			<form class="w3-container" action="write" method="post" name="write">
+				<p>
+					<label class="w3-wide">Name</label>
+					<input
+						class="w3-input w3-border w3-round-large"
+						style="width: 20%; border-radius: 6px;" name="name"
+						readonly value="${memberInfo.name}">
+				</p>
+
+				<p>
+					<label class="w3-wide">Title</label> <input
+						class="w3-input w3-border w3-round-large"
+						style="width: 50%; border-radius: 6px;" type="text" name="title"
+						placeholder=" 제목을 입력하세요." required>
+				</p>
+
+				<p>
+					<label class="w3-wide">Content</label>
+					<textarea class="w3-input w3-border w3-round-large"" name="content" placeholder=" 내용을 입력하세요."
+						style="width: 100%; height: 300px; resize: none; border-radius: 6px;" required></textarea>
+				</p>
+				<div class="w3-row">
+					<div class="w3-col w3-left" style="width:10%"><p></p></div>
+					<div class="w3-col w3-right" style="width:10%"><button class="w3-btn w3-round-large"
+							onclick="location='/erp/board/list'">목록으로</button></div>
+					<div class="w3-rest w3-center">
+						<input class="w3-btn w3-round-large" type="submit" value="쓰기" /> <input class="w3-btn w3-round-large" type="reset" value="취소" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

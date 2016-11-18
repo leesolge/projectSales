@@ -27,7 +27,7 @@
 		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
 		<li></li>
 			<li class="w3-dropdown-hover">
-			<a href="#">팀메뉴</a>
+			<a href="#">영업팀메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
 					<a href="/erp/manager/member_list">팀원 명부</a> 
 					<a href="/erp/manager/buy_request_list">승인대기목록</a> 
@@ -39,7 +39,7 @@
 		
 		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
 			<li class="w3-dropdown-hover">
-			<a href="/erp/transact/transactlist_default">자재관리</a>
+			<a href="/erp/transact/transactlist_default">자재팀메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
 					<a href="/erp/transact/transactlist_default">거래내역</a> 
 					<a href="#">메뉴1</a> 
@@ -55,6 +55,7 @@
 					<a href="/erp/admin/member_list">사원 명부</a>
 					<a href="/erp/product/list">상품 관리</a>
 					<a href="/erp/order/list">수주 관리</a>
+					<a href="#">발주 관리</a>
 				</div>
 			</li>
 		</sec:authorize>

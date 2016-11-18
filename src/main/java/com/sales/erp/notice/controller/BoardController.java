@@ -1,10 +1,8 @@
 package com.sales.erp.notice.controller;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
-import com.sales.erp.notice.vo.CommentForUpdateVO;
 import com.sales.erp.notice.vo.CommentVO;
 
 @Controller

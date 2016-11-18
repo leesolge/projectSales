@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.dao.ManagerDAO;
-import com.sales.erp.member.dao.MemberDAOImpl;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.member.vo.OrderRequestListJoinVO;
-import com.sales.erp.member.vo.OrderRequestListVO;
 import com.sales.erp.member.vo.OrderRequestVO;
 import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;

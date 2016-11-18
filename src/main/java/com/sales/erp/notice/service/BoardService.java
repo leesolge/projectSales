@@ -54,11 +54,8 @@ public class BoardService{
 		int end=pg*rowSize;
 		
 		int total=dao.getBoardCount(search); //총 게시물수
-		System.out.println("시작 : "+start +" 끝:"+end);
-		System.out.println("글의 수 : " +total);
 		
 		int allPage = (int) Math.ceil(total/(double)rowSize); //페이지수
-		System.out.println("페이지수 : "+ allPage);
 		
 		int block=10; //한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] >>
 		int fromPage=((pg-1)/block*block)+1; //보여줄 페이지의 시작
@@ -67,11 +64,10 @@ public class BoardService{
 		
 	    search.setEnd(end);
 	    search.setStart(start);
-		System.out.println(field);
+	    
 		if(toPage>allPage){
 			toPage=allPage;
-		}
-		
+		}		
 		
 		ArrayList<BoardVO> list= dao.getBoardList(search);  ////////////
 		System.out.println(list);
