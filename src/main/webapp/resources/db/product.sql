@@ -8,7 +8,6 @@ create table product(
 	originprice varchar2(20) not null,
 	proimage varchar2(2000), 
 	proexpla varchar2(500)
-	
 );
 
 select * from PRODUCT;

@@ -43,8 +43,8 @@
 							</c:forEach>
 					</select></td>
 					
-					<td><input type="text" name="start_date" id="start_date"></td>
-					<td><input type="text" name="end_date" id="end_date"></td>
+					<td><input type="date" name="start_date" id="start_date"></td>
+					<td><input type="date" name="end_date" id="end_date"></td>
 					<td rowspan="2"><input type="submit" class="w3-btn" value="조회"></td>
 				</tr>
 			</table>

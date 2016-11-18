@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="w3-container w3-center">
-		<img src="resources/image/main.jpg" height="300">
+		<img src="resources/image/logo2.png" height="200">
 	</div>
 	
 	<div class="w3-container w3-center">
