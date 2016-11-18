@@ -86,7 +86,7 @@
 							class="w3-btn w3-round-large" value="정보수정완료"></td>
 						<td><input type="button" value="취소"
 							class="w3-btn w3-round-large"
-							onclick="window.location='/erp/admin/?empno=${vo.empno}'">
+							onclick="window.location='/erp/admin/member_list?empno=${vo.empno}'">
 						</td>
 					</tr>
 				</table>

@@ -22,13 +22,7 @@
 			<tr>
 				<th>EMPNO</th>
 				<th>NAME</th>
-				<th>PWD</th>
-				<th>GENDER</th>
-				<th>ADDRESS</th>
-				<th>PHONE</th>
-				<th>EMAIL</th>
 				<th>AUTH</th>
-				<th>ACCOUNT</th>
 				<th>TEAM</th>
 				<th>CONTENT</th>
 			</tr>
@@ -37,13 +31,7 @@
 				<tr>
 					<td>${member.empno}</td>
 					<td>${member.name}</td>
-					<td>${member.pwd}</td>
-					<td>${member.gender}</td>
-					<td>${member.address}</td>
-					<td>${member.phone}</td>
-					<td>${member.email}</td>
 					<td>${member.auth}</td>
-					<td>${member.account}</td>
 					<td>${member.team}</td>
 					<td><input type="button" value="Content"
 						class="w3-btn w3-round-large"
