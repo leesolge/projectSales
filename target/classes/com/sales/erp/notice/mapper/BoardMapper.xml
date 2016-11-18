@@ -68,5 +68,9 @@
 		select * from bComment where num=#{num} and seq=#{seq}
 	</select>
 	
+	<!-- 커맨트 수정 -->
+	<update id="updateComments" parameterType="com.sales.erp.notice.vo.CommentForUpdateVO">
+		update bComment set comments=#{comments} where num=#{num} and seq=#{seq}
+	</update>	
 </mapper>
 

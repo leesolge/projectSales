@@ -83,4 +83,9 @@ public class BoardDAO {
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
 		return boardDAO.commentListforUpdate(vo);
 	}
+
+	public void updateComments(CommentForUpdateVO vo) {
+		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
+		boardDAO.updateComments(vo);
+	}
 }

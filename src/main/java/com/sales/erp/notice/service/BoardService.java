@@ -167,6 +167,22 @@ public class BoardService{
 		
 		CommentVO comments1=dao.commentListforUpdate(vo);
 		mav.addObject("comments1", comments1);
+		mav.addObject("vo", vo);
 		return mav;
+	}
+
+	public void updateComments(HttpServletRequest request) {
+		String num=request.getParameter("num");
+		System.out.println("num:"+num);
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		String comments=request.getParameter("comments");
+		System.out.println("num:"+num+"/seq:"+seq);
+		
+		CommentForUpdateVO vo=new CommentForUpdateVO();
+		vo.setNum(num);
+		vo.setSeq(seq);
+		vo.setComments(comments);
+	
+		dao.updateComments(vo);
 	}
 }

@@ -32,5 +32,7 @@ public interface BoardMapper extends Serializable {
 	public void insertComment(CommentVO vo);
 
 	CommentVO commentListforUpdate(CommentForUpdateVO vo);
+
+	void updateComments(CommentForUpdateVO vo);
 	
 }

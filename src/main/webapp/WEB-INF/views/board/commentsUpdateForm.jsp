@@ -7,18 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/erp/board/commentsUpate">
-	<input type="hidden" name="num" value="${b.num}">
-	<input type="hidden" name="seq" value="${comments.seq}">
+v${vo.seq}
+<form action="/erp/board/commentsUpdate" method="post">
+	<input type="hidden" name="num" value="${vo.num}">
+	<input type="hidden" name="seq" value="${vo.seq}">
 	<table width="789" border="1">
-			<c:forEach var="comments1" items="${comments1}">
 				<tr>
 					<td width="42" align="center">*</td>
 					<td width="86">${comments1.name}</td>
 					<td width="639"><input type="text" name="comments" value="${comments1.comments}"/></td>
 					<td width="220" align="center">${comments1.regDate}</td>
-				</tr>
-			</c:forEach>
+					<td><input type="submit" value="¼öÁ¤"/></td>
+				</tr>		
 		</table>
 </form>
 </body>

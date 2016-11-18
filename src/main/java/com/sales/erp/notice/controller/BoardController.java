@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.notice.service.BoardService;
 import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.vo.CommentForUpdateVO;
 import com.sales.erp.notice.vo.CommentVO;
 
 @Controller
@@ -105,5 +106,11 @@ public class BoardController {
 		ModelAndView mav=boardService.getComments(request);
 		mav.setViewName("/board/commentsUpdateForm");
 		return mav;
+	}
+	
+	@RequestMapping(value="/board/commentsUpdate", method=RequestMethod.POST)
+	public String commentsUpdate(HttpServletRequest request){
+		boardService.updateComments(request);
+		return "redirect:/board/list";
 	}
 }
