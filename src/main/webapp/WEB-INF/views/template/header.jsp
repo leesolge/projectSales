@@ -42,6 +42,7 @@
 			<a href="/erp/transact/transactlist_default">자재팀메뉴</a>
 				<div class="w3-dropdown-content w3-blue-grey w3-card-4">
 					<a href="/erp/transact/transactlist_default">거래내역</a> 
+					<a href="/erp/transact/buy_request_list">승인대기목록</a> 
 					<a href="#">메뉴1</a> 
 				</div>
 			</li>
