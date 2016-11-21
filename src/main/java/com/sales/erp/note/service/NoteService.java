@@ -355,7 +355,6 @@ public class NoteService {
 		if(keyword==null||keyword.equals("")){
 			keyword="";
 		}
-		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
 		NoteSearchVO svo = new NoteSearchVO();
 		svo.setEmpno(empno);
@@ -418,7 +417,6 @@ public class NoteService {
 		if(keyword==null||keyword.equals("")){
 			keyword="";
 		}
-		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
 		NoteSearchVO svo = new NoteSearchVO();
 		svo.setEmpno(empno);
@@ -437,9 +435,6 @@ public class NoteService {
 		}else{
 			max = (count/pageSize)+1;
 		}
-		System.out.println("count : "+count);
-		System.out.println(start);
-		System.out.println(end);
 		svo.setStart(start);
 		svo.setEnd(end);
 		

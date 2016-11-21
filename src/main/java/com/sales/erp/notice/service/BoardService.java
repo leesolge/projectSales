@@ -1,8 +1,6 @@
 package com.sales.erp.notice.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -70,7 +68,7 @@ public class BoardService{
 		}		
 		
 		ArrayList<BoardVO> list= dao.getBoardList(search);  ////////////
-		System.out.println(list);
+		
 		mav.addObject("total", total);
 		mav.addObject("start", start);
 		mav.addObject("end", end);

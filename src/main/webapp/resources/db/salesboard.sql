@@ -1,5 +1,5 @@
 select * from salesBoard;
-
+select * from notice
 drop table salesBoard;
 
 CREATE TABLE SALESBOARD
