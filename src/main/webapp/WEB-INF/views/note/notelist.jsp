@@ -74,8 +74,8 @@
 					<td colspan="2"><c:out value="${receive.change}" /></td>
 				</tr>
 				<tr>
-					<td><a href="javascript:writePage('${receive.sender}')"><c:out value="${receive.sender}" /></a></td>
-					<td><c:out value="${receive.receiver}" /></td>
+					<td><a href="javascript:writePage('${receive.sender}')"><c:out value="${receive.sender} ${receive.sname}" /></a></td>
+					<td><c:out value="${receive.receiver} ${receive.rname}" /></td>
 				</tr>
 				<tr><td colspan="2">
 				<c:if test="${receive.checks==0}"><b></c:if>
@@ -101,8 +101,8 @@
 					<td colspan="2"><c:out value="${send.change}" /></td>
 				</tr>
 				<tr>
-					<td><c:out value="${send.sender}" /></td>
-					<td><a href="javascript:writePage('${send.receiver}')"><c:out value="${send.receiver}" /></a></td>
+					<td><c:out value="${send.sender} ${send.sname}" /></td>
+					<td><a href="javascript:writePage('${send.receiver}')"><c:out value="${send.receiver} ${send.rname}" /></a></td>
 				</tr>
 				<tr><td colspan="2">
 				<c:if test="${send.checks==0}"><b></c:if>

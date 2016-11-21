@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.note.dao.NoteDAO;
+import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.order.dao.OrderDAO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.order.vo.OrderVO;
@@ -29,11 +31,18 @@ public class OrderService {
 	@Autowired
 	private OrderDAO dao;
 	
+	@Autowired
+	private NoteDAO ndao;
+	
 	@Transactional
 	public ModelAndView orderCheck(String orderid){
 		RedirectView rv = null;
 		TestVO vo = new TestVO();
-		vo.setTests(orderid);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		vo.setTests(empno);
+		MemberVO memvo = dao.selectAMember(vo);
+		vo.setTests(orderid); 
 		int amount = dao.getProductAmount(vo);
 		System.out.println(vo.getTests());
 		OrderVO rvo = dao.selectOneOrder(vo);
@@ -41,13 +50,30 @@ public class OrderService {
 			rv = new RedirectView("/erp/order/orderfail");
 		}else{
 			OrderJoinVO ovo = dao.adminSelectOne(vo);
-			ovo.toString();
+			Date date = ovo.getRegdate();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+			String changes = sdf.format(date);
+			ovo.setChanges(changes);
 			dao.orderCheck(vo);
 			dao.transInsert(ovo);
 			vo.setTests(rvo.getProamount()+" WHERE PROCODE="+rvo.getProcode());
 			System.out.println(vo.getTests());
 			dao.minusProduct(vo);
 			rv = new RedirectView("/erp/order/list");
+			NoteVO notevo = new NoteVO();
+			notevo.setSender(memvo.getEmpno());
+			notevo.setReceiver(ovo.getEmpno());
+			notevo.setTitle("요청하신 수주가 승인되었습니다.");
+			String content = "주문 정보\n\n";
+			content = content + "등록자 : "+ovo.getEmpno()+"\n";
+			content = content + "등록일자 : "+ovo.getChanges()+"\n";
+			content = content + "상품명 : "+ovo.getProname()+"\n";
+			content = content + "주문수량 : "+ovo.getProamount()+"\n";
+			content = content + "금액 : "+ovo.getProfit()+"\n";
+			content = content + "고객명 : "+ovo.getCustomer()+"\n";
+			content = content + "감사합니다.";
+			notevo.setContent(content);
+			ndao.writePro(notevo);
 		}
 		
 		rv.setExposeModelAttributes(false);

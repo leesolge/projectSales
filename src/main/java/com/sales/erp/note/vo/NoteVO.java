@@ -13,7 +13,25 @@ public class NoteVO {
 	private String content;
 	private int checks;
 	private int deleted;
+	private String sname;
+	private String rname;
 	
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public String getRname() {
+		return rname;
+	}
+
+	public void setRname(String rname) {
+		this.rname = rname;
+	}
+
 	public String getPageCheck() {
 		return pageCheck;
 	}

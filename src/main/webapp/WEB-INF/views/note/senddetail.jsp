@@ -83,8 +83,8 @@
 				<c:forEach var="list" items="${list}">
 					<tr>
 						<td><c:out value="${list.change}" /></td>
-						<td><c:out value="${list.sender}" /></td>
-						<td><a href="javascript:writePage('${list.receiver}')"><c:out value="${list.receiver}" /></a></td>
+						<td><c:out value="${list.sender} ${list.sname}" /></td>
+						<td><a href="javascript:writePage('${list.receiver}')"><c:out value="${list.receiver} ${list.rname}" /></a></td>
 						<td><c:if test="${list.checks==0}"><b></c:if>
 						<a href="javascript:content('${list.notenum}')"><c:out value="${list.title}" /></a>
 						<c:if test="${list.checks==0}"></b></c:if></td>
