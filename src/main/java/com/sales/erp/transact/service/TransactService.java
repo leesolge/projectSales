@@ -95,6 +95,7 @@ public class TransactService {
 		ArrayList<OrderRequestVO> list = dao.GetTransactList(onum);
 		for(OrderRequestVO vo : list){
 			dao.AddTransactList(vo);
+			dao.AddProduct(vo);
 		}
 		
 		

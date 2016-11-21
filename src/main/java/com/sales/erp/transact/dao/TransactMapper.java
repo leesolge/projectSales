@@ -25,4 +25,6 @@ public interface TransactMapper extends Serializable {
 	public ArrayList<OrderRequestVO> GetTransactList(String onum);
 
 	public void AddTransactList(OrderRequestVO vo);
+
+	public void AddProduct(OrderRequestVO vo);
 }

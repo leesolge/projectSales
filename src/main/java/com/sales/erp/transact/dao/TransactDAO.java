@@ -50,6 +50,11 @@ public class TransactDAO {
 
 	public void AddTransactList(OrderRequestVO vo) {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
-		transactMapper.AddTransactList(vo);		
+		transactMapper.AddTransactList(vo);
+	}
+
+	public void AddProduct(OrderRequestVO vo) {
+		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
+		transactMapper.AddProduct(vo);
 	}
 }

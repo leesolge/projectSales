@@ -9,7 +9,11 @@ create table product(
 	proimage varchar2(2000), 
 	proexpla varchar2(500)
 );
+UPDATE PRODUCT SET PROAMOUNT= (PROAMOUNT+#{oamount}) WHERE PROCODE=#{procode}
 
+select * from PRODUCT
+
+UPDATE PRODUCT SET PROAMOUNT= (PROAMOUNT+'152') WHERE PROCODE='1004'
 select * from PRODUCT;
 insert into PRODUCT(procode,proname,proamount,sellprice,originprice,proimage,proexpla) 
 values('1004','천사채','4000','2000','1000',null,'짱이에요짱');

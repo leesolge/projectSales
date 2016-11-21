@@ -59,5 +59,9 @@
 		EMPNO=#{empno}), '판매',
 		(SELECT SELLPRICE FROM PRODUCT WHERE PROCODE=#{procode}), '0', SYSDATE, 0)
 	</insert>
+	
+	<update id="AddProduct" parameterType="com.sales.erp.member.vo.OrderRequestVO">
+		UPDATE PRODUCT SET PROAMOUNT= (PROAMOUNT+#{oamount}) WHERE PROCODE=#{procode}    
+	</update>
 
 </mapper>
