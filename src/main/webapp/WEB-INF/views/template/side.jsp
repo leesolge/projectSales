@@ -6,65 +6,59 @@
 <!DOCTYPE HTML>
 
 <html>
-<head>
-</head>
-<body>
-<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
-		<div class="w3-container borderBox">
-			<br>
-			<div class="w3-row w3-center">
-				<img src="/erp/resources/portraits/${memberInfo.portrait}"
-					width="100%">
-			</div>
-<br>
-			<div class="w3-row ">
-				<div class="w3-col m6 w3-center">
-					<b>이름</b>
-				</div>
-				<div class="w3-col m6 ">${memberInfo.name }</div>
-			</div>
-
-			<div class="w3-row ">
-				<div class="w3-col m6 w3-center">
-					<b>부서</b>
-				</div>
-				<div class="w3-col m6 ">${memberInfo.team }</div>
-			</div>
-
-			<div class="w3-row ">
-				<div class="w3-col m6 w3-center">
-					<b>권한</b>
-				</div>
-				<div class="w3-col m6 ">${memberInfo.auth }</div>
-			</div>
-			<br>
+<nav class="w3-sidenav w3-collapse w3-white" style="z-index:3;width:250px;" id="mySidenav"><br>
+	<div class="w3-container w3-row">
+		<div class="w3-col s12 w3-center">
+			<img src="/erp/resources/portraits/${memberInfo.portrait}" class="w3-circle" style="width:92px; height: 100px;">
 		</div>
-		<br>
-
-		<div class="w3-container borderBox">
-		<div class="w3-panel">
-			준규야 원래 니가 하던거 side1.jsp로 보관해둠 이런식으로 구성하면 어떨까 싶어서 해봄 </div>
-		<div class="w3-panel">
-			<a class="w3-padding w3-hover-red" href="/erp/my_Info"> <i
-				class="fa fa-user-circle-o" aria-hidden="true"></i> 내 정보
-			</a> </div>
-			<div class="w3-panel"><a class="w3-padding w3-hover-red" href="/erp/note/list"> <i
-				class="fa fa-envelope" aria-hidden="true"></i> 내 쪽지(안읽은쪽지숫자 나오게 수정해야됨)<span class="w3-tag w3-blue-grey w3-round w3-right">8</span>
-			</a> </div>
-			<div class="w3-panel"><a class="w3-padding w3-hover-red" href="/erp/employee/buy_request_list"> <i
-				class="fa fa-line-chart" aria-hidden="true"></i> 수주현황
-			</a></div>
-			<div class="w3-panel"><a class="w3-padding w3-hover-red" href="/erp/schedule/calendarForm"> <i
-				class="fa fa-calendar-check-o" aria-hidden="true"></i> 스케쥴
-			</a></div>
-			<div class="w3-panel"><a class="w3-padding w3-hover-red"
-				href="<c:url value='/j_spring_security_logout' />"> <i
-				class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃
-			</a>
-			</div>
-		
+		<div class="w3-col s12 w3-center">
+			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
+			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope"></i></a>
+			<a href="/erp/my_Info" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
+			<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
 		</div>
-
+	</div>
+	<hr>
+	<div class="w3-container">
+		<h5>Menu</h5>
+	</div>
+	
+	<a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+	
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
+		<a href="/erp/board/list" class="w3-padding"><i class="fa fa-bullhorn"></i>  공지사항</a>
 	</sec:authorize>
-</body>
+	
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
+		<a href="#"><i class="fa fa-balance-scale"></i>  거래메뉴</a>
+			<a href="/erp/employee/buy_request">구매요청</a>
+			<a href="/erp/employee/buy_request_list">구매대기목록</a>
+			<a href="/erp/employee/buy_approved_list">구매승인목록</a>
+	</sec:authorize>
+	
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
+		<a href="#"><i class="fa fa-users"></i>  영업팀메뉴</a>
+			<a href="/erp/manager/member_list">팀원 명부</a> 
+			<a href="/erp/manager/buy_request_list">승인대기목록</a> 
+			<a href="/erp/manager/buy_approved_list">구매승인목록</a>
+			<a href="#">요청</a>
+	</sec:authorize>
+	
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
+		<a href="/erp/transact/transactlist_default"><i class="fa fa-users" aria-hidden="true"></i>  자재팀메뉴</a>
+			<a href="/erp/transact/transactlist_default">거래내역</a> 
+			<a href="/erp/transact/buy_request_list">승인대기목록</a> 
+			<a href="#">메뉴1</a> 
+	</sec:authorize>
+	
+	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+		<a href="/erp/admin/member_ok"><i class="fa fa-cog"></i>  관리자메뉴</a>
+			<a href="/erp/admin/member_ok">가입 승인</a> 
+			<a href="/erp/admin/member_list">사원 명부</a>
+			<a href="/erp/product/list">상품 관리</a>
+			<a href="/erp/order/list">수주 관리</a>
+			<a href="#">발주 관리</a>
+	</sec:authorize>
+	<br><br><br><br>
+</nav>
 </html>

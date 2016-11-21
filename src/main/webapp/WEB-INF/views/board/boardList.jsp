@@ -7,7 +7,7 @@
 
 <body>
 	
-		<div class="w3-container">
+		<div class="w3-container w3-card-2">
 			<div class="w3-container w3-center">
 			<h1>공지사항</h1>
 			총 <c:out value="${total}"/>개의 게시물이 있습니다.
