@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.transact.service.TransactService;
@@ -30,5 +31,20 @@ public class TransactController {
 		mav.setViewName("/transact/transactlist");
 		return mav;
 	}
+	
+	@RequestMapping("/transact/buy_request_list")
+	public ModelAndView buy_request_list(HttpServletRequest request) {
+		ModelAndView mav = trs.getRequestList();
+		mav.setViewName("transact/buy_request_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/transact/buy_request_approve", method = RequestMethod.POST)
+	public String buy_request_approve(HttpServletRequest request) {
+		trs.RequestApprove(request);
+		trs.AddTransact(request);
+		return "redirect:/transact/buy_request_list";
+	}
+
 
 }

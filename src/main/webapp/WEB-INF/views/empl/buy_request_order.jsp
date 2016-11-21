@@ -48,8 +48,8 @@
 	<div class="w3-row"> 
 		<div class="w3-col w3-left" style="width: 10%"><p></p></div>
 		<div class="w3-col w3-right" style="width: 10%"><p></p></div>
-		<div class="w3-rest w3-container">
-			<table class="order_list w3-table w3-center">
+		<div class="w3-rest w3-container w3-center">
+			<table class="order_list w3-table w3-centered">
 				<tr>
 					<th style="width: 15%">요청상품</th>
 					<th style="width: 15%">주문수량</th>
@@ -69,15 +69,15 @@
 			$('#btn_AddO')	.click(
 					function() {
 						var num_ref = num;
-						$('<tr class="O' + num_ref + '"><td id="O' + num_ref + '"><select class="w3-select w3-border" name="Ocode_'+num_ref+'" required="required">'+
+						$('<tr class="O' + num_ref + '"><td id="O' + num_ref + '"><select class="w3-select w3-border w3-round-large" name="Ocode_'+num_ref+'" required="required">'+
 								'<option value="" selected disabled>상품명</option>'+
 								'<c:forEach var="list" items="${list}">'+
 								'<option value="${list.procode}">${list.proname}</option>'+ 
 								'</c:forEach></select></td></tr>'
 						).appendTo('.order_list');
 						
-						$('<td id="O' + num_ref + '"><input class="w3-input w3-border" type="number" name="Oamount_'+num_ref+'" required="required"></td>').appendTo('.O'+num_ref);
-						$('<td id="O' + num_ref + '"><input class="w3-input w3-border" type="text" name="Ocomment_' +num+ '" required="required"></td>').appendTo('.O'+num_ref);
+						$('<td id="O' + num_ref + '"><input class="w3-input w3-border w3-round-large" type="number" name="Oamount_'+num_ref+'" required="required"></td>').appendTo('.O'+num_ref);
+						$('<td id="O' + num_ref + '"><input class="w3-input w3-border w3-round-large" type="text" name="Ocomment_' +num+ '" required="required"></td>').appendTo('.O'+num_ref);
 						$('<td id="O' + num_ref + '"><input class="w3-btn page_button w3-round-large"  type="button" id="btn_DelO'+num_ref+'" value="물품삭제"></td>').appendTo('.O'+num_ref);
 						
 						$('#btn_DelO'+num_ref).click(function() {

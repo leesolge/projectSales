@@ -73,10 +73,8 @@ public class ManagerService {
 		return mav;
 	}
 
-	public ModelAndView RequestApprove(String onum) {
-		ModelAndView mav = new ModelAndView();
+	public void RequestApprove(String onum) {
 		dao.RequestApprove(onum);
-		return mav;
 	}
 
 }

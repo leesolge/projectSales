@@ -48,7 +48,7 @@ public class EmplService {
 			OrderRequestVO ovo = new OrderRequestVO();
 			ovo.setEmpno(list.get(0));
 			ovo.setProcode(list.get(i));
-			ovo.setOamount(Integer.parseInt(list.get(i+1)));
+			ovo.setOamount(list.get(i+1));
 			ovo.setOcomment(list.get(i+2));
 			if(i == 1) dao.Buy_Request_Action(ovo);
 			else dao.Buy_Request_Action_re(ovo);
