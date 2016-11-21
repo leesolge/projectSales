@@ -13,7 +13,7 @@ public class OrderJoinVO {
 		private String proname;
 		private int proamount;
 		private String profit;
-		private double allowance;
+		private long allowance;
 		private String customer;
 		private String address;
 		private int checks;
@@ -27,10 +27,10 @@ public class OrderJoinVO {
 		public void setSales(String sales) {
 			this.sales = sales;
 		}
-		public double getAllowance() {
+		public long getAllowance() {
 			return allowance;
 		}
-		public void setAllowance(double allowance) {
+		public void setAllowance(long allowance) {
 			this.allowance = allowance;
 		}
 		public String getChanges() {

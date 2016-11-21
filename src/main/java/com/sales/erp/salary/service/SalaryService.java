@@ -70,7 +70,7 @@ public class SalaryService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
 			String changes = sdf.format(date);
 			ovo.setChanges(changes);
-			double allowance = Integer.parseInt(ovo.getProfit());
+			long allowance = Long.parseLong(ovo.getProfit());
 			if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
 				ovo.setAuth("사원");
 			}
@@ -81,9 +81,9 @@ public class SalaryService {
 				ovo.setAuth("관리자");
 			}
 			if(ovo.getAuth().equals("사원")){
-				allowance = Math.round(allowance*0.4);
+				allowance = (long) (allowance*0.4);
 			}else if(ovo.getAuth().equals("팀장")){
-				allowance = Math.round(allowance*0.5);
+				allowance = (long) (allowance*0.5);
 			}
 			System.out.println(ovo.getAuth());
 			System.out.println(allowance);

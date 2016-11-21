@@ -196,11 +196,11 @@ public class OrderService {
 		if(ovo.getAuth().equals("ROLE_ADMIN")){
 			ovo.setAuth("관리자");
 		}
-		double allowance = Integer.parseInt(ovo.getProfit());
+		long allowance = Long.parseLong(ovo.getProfit());
 		if(ovo.getAuth().equals("사원")){
-			allowance = Math.round(allowance*0.4);
+			allowance = (long) (allowance*0.4);
 		}else if(ovo.getAuth().equals("팀장")){
-			allowance = Math.round(allowance*0.5);
+			allowance = (long) (allowance*0.5);
 		}
 		ovo.setAllowance(allowance);
 		mav.addObject("ovo", ovo);
@@ -376,11 +376,11 @@ public class OrderService {
 			if(ovo.getAuth().equals("ROLE_ADMIN")){
 				ovo.setAuth("관리자");
 			}
-			double allowance = Integer.parseInt(ovo.getProfit());
+			long allowance = Long.parseLong(ovo.getProfit());
 			if(ovo.getAuth().equals("사원")){
-				allowance = Math.round(allowance*0.4);
+				allowance = (long) (allowance*0.4);
 			}else if(ovo.getAuth().equals("팀장")){
-				allowance = Math.round(allowance*0.5);
+				allowance = (long) (allowance*0.5);
 			}
 			ovo.setAllowance(allowance);
 		}

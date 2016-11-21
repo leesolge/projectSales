@@ -1,4 +1,5 @@
-select * from product
+select * from product;
+select * from salary
 SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
 			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
