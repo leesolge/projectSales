@@ -19,7 +19,6 @@
 	</div>
 </div>
 
-
 <!-- Script -->
 <script>
 // Get the Sidenav

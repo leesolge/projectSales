@@ -27,11 +27,7 @@
   <div class="container">
 	<c:url value="/login" var="loginURL"></c:url>
 	<div class="w3-container w3-center">
-	<p></p>
-	</div>
-	
-	<div class="w3-container w3-center">
-		<img src="resources/image/logo2.png" height="200">
+		<img src="/erp/resources/image/logoblack.png" height="200">
 	</div>
 	
 	<div class="w3-container w3-center">
@@ -80,3 +76,5 @@
   </div>
 </body>
 </html>
+
+

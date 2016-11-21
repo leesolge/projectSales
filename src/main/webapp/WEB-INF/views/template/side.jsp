@@ -28,6 +28,11 @@
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
 			<div class="w3-accordion w3-padding">
+				<a href="/erp/main" class="w3-padding w3-hover-blue">
+					<i class="fa fa-home"></i>  홈
+				</a>
+			</div>
+			<div class="w3-accordion w3-padding">
 				<a href="/erp/board/list" class="w3-padding w3-hover-blue">
 					<i class="fa fa-bullhorn"></i>  공지사항
 				</a>
@@ -58,7 +63,6 @@
 				<a href="/erp/manager/member_list">- 팀원 명부</a> 
 				<a href="/erp/manager/buy_request_list">- 승인대기목록</a> 
 				<a href="/erp/manager/buy_approved_list">- 구매승인목록</a>
-				<a href="#">요청</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
