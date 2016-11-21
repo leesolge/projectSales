@@ -41,10 +41,9 @@
 
 				<tr>
 					<td>${b.num}</td>
-					<td><c:forEach begin="0" end="${b.tab}"> 여기 b.tab 얘는 어따 쓰는 앤가요
-						</c:forEach> <a href="/erp/board/read?num=${b.num}&pg=${pg}">${b.title}</a>
+					<td>
+						<a href="/erp/board/read?num=${b.num}&pg=${pg}">${b.title}</a>
 					</td>
-
 					<td>${b.name}</td>
 					<td><fmt:formatDate value="${b.regDate}" pattern="yyyy-MM-dd" /></td>
 				</tr>

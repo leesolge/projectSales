@@ -35,7 +35,7 @@
 	</insert>
 	
 	<!-- 글 하나 가져오기 -->
-	<select id="getBoard" parameterType="java.lang.Integer" resultType="com.sales.erp.notice.vo.BoardVO">
+	<select id="getBoard" parameterType="java.lang.String" resultType="com.sales.erp.notice.vo.BoardVO">
 		select * from salesBoard where num = #{num}
 	</select>
 	

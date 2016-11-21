@@ -40,7 +40,7 @@
 		<div class="w3-col m6">
 			<div align="left">
 				<h5>
-					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지<br>
+					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지</a><br>
 				</h5>
 			</div>
 			<table class="w3-table w3-bordered w3-small" style="width: 90%;">

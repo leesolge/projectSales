@@ -44,7 +44,7 @@ public class BoardDAO {
 		boardDAO.insertBoard(vo);
 	}
 	
-	public BoardVO getBoard(int num){
+	public BoardVO getBoard(String num){
 		BoardMapper boardDAO = sqlSession.getMapper(BoardMapper.class);
 		return boardDAO.getBoard(num);
 	}

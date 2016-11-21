@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <body>
@@ -27,7 +28,7 @@
 				<label class="w3-wide">Date</label> 
 				<input class="w3-input w3-border w3-round-large"
 					style="width: 50%; border-radius: 6px;" type="text" name="regDate"
-					readonly value="<fmt:formatDate value="${b.regDate}" pattern="yyyy-MM-dd"/>">
+					readonly value="<fmt:formatDate value="${b.regDate}" pattern="yy-MM-dd"/>">
 			</p>
 
 			<p>
@@ -42,33 +43,46 @@
 		<div class="w3-col w3-left" style="width: 10%"><p></p></div>		
 		<div class="w3-col w3-right" style="width: 10%"><p></p></div>		
 		<div class="w3-rest w3-center">
-			<input class="w3-btn w3-round-large"  type="button" value="수정" onclick="board_update()"/>
-			<input class="w3-btn w3-round-large"  type="button" value="삭제" onclick="board_delete()"/>
+			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+				<input class="w3-btn w3-round-large"  type="button" value="수정" onclick="board_update()"/>
+				<input class="w3-btn w3-round-large"  type="button" value="삭제" onclick="board_delete()"/>
+			</sec:authorize>
 			<%-- <a href="/erp/board/list?pg=${pg}">리스트</a> --%>
 			<button class="w3-btn w3-round-large"
 				onclick="location='/erp/board/list'">목록으로</button>
 		</div>
 	</div>
 
+<br>
 	<div class="w3-row">
 		<div class="w3-col w3-left" style="width: 10%"><p></p></div>
 		<div class="w3-col w3-right" style="width: 10%"><p></p>	</div>
-		<div class="w3-rest w3-center">
+		<div class="w3-rest w3-row-padding">
 			<form action="/erp/board/comment" method="post">
 				<input type="hidden" name="num" value="${b.num}"> 
 				<input type="hidden" name="empno" value="${memberInfo.empno}">
 				<input type="hidden" name="name" value="${memberInfo.name}">
-				<table class="w3-table" >
-					<tr>
-						<td style="width : 10%">이름 :</td>
-						<td style="width : 10%">${memberInfo.name}</td>
-						<td style="width : 10%">댓글 :</td>
-						<td style="width : 60%"><input type="text" name="comments" size="50"></td>
-						<td style="width : 10%"><input type="submit" name="Button" value="쓰기"></td>
-					</tr>
-				</table>
+				
+				<div class="w3-col s2 w3-center">
+				<label>작성자</label> <input
+					class="w3-input w3-border w3-round-large"
+					readonly value="${memberInfo.name}">
+				</div>
+				<div class="w3-col s8 w3-center">
+					<label class="w3-wide">댓글</label>
+					<input class="w3-input w3-border w3-round-large" type="text" name="comments">
+				</div>
+	
+				<div class="w3-col s2 w3-center">
+					<label>&nbsp;</label>
+					<input class="w3-btn w3-input page_button w3-round-large w3-right"
+						type="submit" 
+						value="등록">
+				</div>
+			</div>
+		</div>
 			</form>
-
+<div>
 			<!-- 달려있는 커맨트 보기 -->
 			<form action="/erp/board/commentsDelete" name="c_delete"
 				method="post">
@@ -82,9 +96,10 @@
 							<tr>
 								<td width="42" align="center">*</td>
 								<td width="86">${comments.name}</td>
-								<td width="639">${comments.comments}</td>
-								<td width="220" align="center">${comments.change}</td>
-								<c:if test="${memberInfo.empno==senderVo.empno}">
+								<td width="200">${comments.comments}</td>
+								
+								<td width="220" align="center"><fmt:formatDate value="${comments.regDate}" pattern="yy.MM.dd-hh:mm:ss"/></td>
+								<c:if test="${memberInfo.empno==comments.empno}">
 									<td><input type="button" value="수정"
 										onclick="comments_update('${comments.seq}')" /></td>
 									<td><input type="button" value="삭제"
@@ -95,7 +110,7 @@
 					</table>
 				</form>
 		</div>
-	</div>
+
 
 </body>
 

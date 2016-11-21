@@ -17,7 +17,7 @@ public interface BoardMapper extends Serializable {
 	public int getBoardCount(BoardSearch search); //글의수
 	public void insertBoard(BoardVO vo); //글쓰기
 
-	BoardVO getBoard(int num); //읽기
+	BoardVO getBoard(String num); //읽기
 	
 	public int deleteBoard(int num); //삭제
 

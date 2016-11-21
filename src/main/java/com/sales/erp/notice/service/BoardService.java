@@ -101,7 +101,7 @@ public class BoardService{
 
 	public ModelAndView getBoard(HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
-		int num=Integer.parseInt(request.getParameter("num"));
+		String num=request.getParameter("num");
 		BoardVO b= dao.getBoard(num);
 		mav.addObject("b", b);
 		return mav;
@@ -130,21 +130,11 @@ public class BoardService{
 		String num=request.getParameter("num");
 		ArrayList<CommentVO> comments = dao.commentList(num);
 		
-		if(comments!=null){
-			for(CommentVO vo:comments){
-				Date date = vo.getRegDate();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-				String change = sdf.format(date);
-				vo.setChange(change);
-			}
-		}
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
 		MemberVO senderVo = dao.getNameTeamAuth(empno);
 		
-		int num1=Integer.parseInt(request.getParameter("num"));
-		BoardVO b= dao.getBoard(num1);
+		BoardVO b= dao.getBoard(num);
 		
 		mav.addObject("b", b);
 		mav.addObject("senderVo", senderVo);
