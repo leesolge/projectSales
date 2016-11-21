@@ -86,11 +86,16 @@
 			<!-- 달려있는 커맨트 보기 -->
 			<form action="/erp/board/commentsDelete" name="c_delete"
 				method="post">
+				<input type="hidden" name="num" value="${b.num}"> <input
+						type="hidden" name="name" value="${b.name}">
+				<input type="hidden" name="seq" value="0">
+					</form>
 				<form action="/erp/board/commentsUpdateForm" name="reply"
 					method="post">
 					<input type="hidden" name="num" value="${b.num}"> <input
-						type="hidden" name="name" value="${b.name}"> <input
-						type="hidden" name="seq" value="0">
+						type="hidden" name="name" value="${b.name}">
+						<input type="hidden" name="seq" value="0">
+							</form>
 					<table width="789" border="1">
 						<c:forEach var="comments" items="${comments}">
 							<tr>
@@ -108,7 +113,7 @@
 							</tr>
 						</c:forEach>
 					</table>
-				</form>
+			
 		</div>
 
 
@@ -130,9 +135,9 @@ function board_reply(){
 	location.href="/erp/board/replyForm?num=${b.num}";
 }
 function comments_update(seq){
-	var jumping = document.reply;
-	jumping.seq.value=seq;
-	jumping.submit();
+	var update = document.reply;
+	update.seq.value=seq;
+	update.submit();
 }
 function comments_delete(seq){
 	var jumping = document.c_delete;
