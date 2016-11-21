@@ -17,10 +17,11 @@ public class SalaryController {
 	@Autowired
 	private SalaryService ss;
 	
-	@RequestMapping("/salary/view")
-	public ModelAndView viewSalary(HttpServletRequest request) throws ParseException{
-		ModelAndView mav = ss.viewSalary(request);
-		mav.setViewName("/salary/list");
+	@RequestMapping("/salary/salary")
+	public ModelAndView testSalary(){
+		ModelAndView mav = new ModelAndView();
+		ss.viewSalaries();
+		mav.setViewName("main/main");
 		return mav;
 	}
 }

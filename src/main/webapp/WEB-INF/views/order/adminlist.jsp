@@ -114,7 +114,8 @@
 				<td>제품명</td>
 				<td>수량</td>
 				<td>수익</td>
-				<td>직원 수당</td>
+				<td>판매 수당</td>
+				<td>매니저 수당</td>
 			</tr>
 			<c:forEach var="alist" items="${alist}">
 				<tr onclick="javascript:details('${alist.id}', '${alist.checks}')">
@@ -126,6 +127,7 @@
 					<td>${alist.proamount}</td>
 					<td>${alist.profit}원</td>
 					<td>${alist.allowance}원</td>
+					<td><c:if test="${alist.manage!=null||alist.manage!='0'}">${alist.manage}원</c:if></td>
 				</tr>
 			</c:forEach>
 		</table>

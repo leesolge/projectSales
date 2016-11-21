@@ -20,7 +20,14 @@ public class OrderJoinVO {
 		private int deleted;
 		private String changes;
 		private String sales;
+		private long manage;
 		
+		public long getManage() {
+			return manage;
+		}
+		public void setManage(long manage) {
+			this.manage = manage;
+		}
 		public String getSales() {
 			return sales;
 		}

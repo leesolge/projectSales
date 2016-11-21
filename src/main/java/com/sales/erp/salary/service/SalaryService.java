@@ -1,6 +1,5 @@
 package com.sales.erp.salary.service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,9 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.salary.dao.SalaryDAO;
 import com.sales.erp.salary.vo.SalaryVO;
+import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
 @Service
@@ -25,9 +26,68 @@ public class SalaryService {
 	@Autowired
 	private SalaryDAO dao;
 	
-	public ModelAndView viewSalary(HttpServletRequest request) throws ParseException{
+	public ModelAndView viewSalaries(){
+		ArrayList<MemberVO> memberList = dao.allMemberExceptAdmin();
+		long all = 0;
+		Calendar today = Calendar.getInstance();
+		int year = today.get(Calendar.YEAR);
+		int month = today.get(Calendar.MONTH)+1;
+		String cYear = String.valueOf(year);
+		String cMonth = String.valueOf(month);
+		if(cMonth.length()<2){
+			cMonth = "0"+cMonth;
+		}
+		String pMonth;
+		String pYear;
+		if(month-1<0){
+			pMonth = "12";
+			pYear = String.valueOf(year-1);
+		}else{
+			pMonth = String.valueOf(month-1);
+			if(pMonth.length()<2){
+				pMonth = "0"+pMonth;
+			}
+			pYear = String.valueOf(year);
+		}
+		String enddate = cYear+cMonth+"01000000";
+		String startdate = pYear+pMonth+"01000000";
+		VOforSQL vosql = new VOforSQL();
+		
+		for(MemberVO vo:memberList){
+			if(vo.getTeam().contains("영업")){
+				if(vo.getAuth().equals("ROLE_EMPLOYEE")){
+					vosql.setEmpno(vo.getEmpno());
+					vosql.setStartdate(startdate);
+					vosql.setEnddate(enddate);
+					String tempsa = dao.profitOfEmpl(vosql);
+					if(tempsa==null||tempsa.equals("")){
+						tempsa = "0";
+					}
+					long salary = (long) (Long.parseLong(tempsa)*0.4);
+					long tax1 = (long) (salary*0.06);
+					long tax2 = (long) (salary*0.006);
+					long reals = salary-tax1-tax2;
+					SalaryVO svo = new SalaryVO();
+					svo.setEmpno(vo.getEmpno());
+					svo.setSalarydate(startdate);
+					svo.setSalary(salary);
+					svo.setTax1(tax1);
+					svo.setTax2(tax2);
+					svo.setReals(reals);
+					dao.insertSalary(svo);
+				}else{
+					
+				}
+			}else{
+				
+			}
+		}
+		return null;
+	}
+	
+	public ModelAndView viewSalary(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		ArrayList<SalaryVO> selectlist = new ArrayList<SalaryVO>();
+		ArrayList<TempVO> selectlist = new ArrayList<TempVO>();
 		Calendar today = Calendar.getInstance();
 		int thisYear = today.get(Calendar.YEAR);
 		int thisMonth = today.get(Calendar.MONTH);
@@ -93,7 +153,7 @@ public class SalaryService {
 		
 		for(int i=0;i<12;i++){
 			today.set(thisYear, thisMonth, 1);
-			SalaryVO vo = new SalaryVO();
+			TempVO vo = new TempVO();
 			String month = "0";
 			if(String.valueOf(thisMonth+1).length()==1){
 				month = "0"+String.valueOf(thisMonth+1);

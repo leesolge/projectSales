@@ -81,7 +81,7 @@
 				<td>가격 정보</td>
 			</tr>
 			<tr>
-				<td>수익 : ${ovo.profit}&nbsp;사원 수당 : ${ovo.proname}</td>
+				<td>수익 : ${ovo.profit}&nbsp;판매 수당 : ${ovo.allowance}</td>
 			</tr>
 			<tr>
 				<td>구매자 정보</td>
