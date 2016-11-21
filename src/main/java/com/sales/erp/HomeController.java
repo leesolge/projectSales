@@ -15,14 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.note.service.NoteService;
 import com.sales.erp.note.vo.NoteVO;
-import com.sales.erp.notice.service.BoardService;
-import com.sales.erp.notice.vo.BoardVO;
+import com.sales.erp.notice.service.NoticeService;
+import com.sales.erp.notice.vo.NoticeVO;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	private BoardService boardService;
+	private NoticeService ns;
 	
 	@Autowired
 	private NoteService noteService;
@@ -36,11 +36,11 @@ public class HomeController {
 	//After login page
 	@RequestMapping(value = "/main")
 	public ModelAndView main(HttpServletRequest request) {
-		ModelAndView mv = boardService.getBoardList(request);
+		ModelAndView mv = ns.getNoticeList(request);
 		Map<String, Object> map = mv.getModel();
-		ArrayList<BoardVO> boards = (ArrayList<BoardVO>) map.get("list");
+		ArrayList<NoticeVO> notice = (ArrayList<NoticeVO>) map.get("list");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", boards);
+		mav.addObject("list", notice);
 		mv = noteService.receiveLists(request);
 		map = mv.getModel();
 		ArrayList<NoteVO> notes = (ArrayList<NoteVO>) map.get("list");

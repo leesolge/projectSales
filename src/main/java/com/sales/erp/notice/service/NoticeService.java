@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.notice.dao.NoticeDAO;
-import com.sales.erp.notice.vo.BoardVO;
-import com.sales.erp.notice.vo.CommentVO;
+import com.sales.erp.notice.vo.NoticeReplyVO;
 import com.sales.erp.notice.vo.NoticeSearchVO;
 import com.sales.erp.notice.vo.NoticeVO;
 import com.sales.erp.notice.vo.PagingVO;
@@ -84,19 +80,67 @@ public class NoticeService {
 	}
 
 	public ModelAndView noticeContent(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView();
-		String num=request.getParameter("num");
-		NoticeVO noticeVo = dao.noticeContent(num);		
+		ModelAndView mav = new ModelAndView();
+		String num = request.getParameter("num");
+		NoticeVO noticeVo = dao.noticeContent(num);						//공지사항 내용 불러오는부분
+		ArrayList<NoticeReplyVO> replyList = dao.replyList(num);		//공지사항내 댓글 불러오는 부분			
 		mav.addObject("noticeVo", noticeVo);
+		mav.addObject("replyList", replyList);
 		return mav;
 	}
 
 	public ModelAndView noticeUpdateForm(HttpServletRequest request) {
-		ModelAndView mav=new ModelAndView();
-		String num=request.getParameter("num");
-		NoticeVO noticeVo = dao.noticeContent(num);		
+		ModelAndView mav = new ModelAndView();
+		String num = request.getParameter("num");
+		NoticeVO noticeVo = dao.noticeContent(num);
 		mav.addObject("noticeVo", noticeVo);
 		return mav;
+	}
+
+	public void noticeUpdate(HttpServletRequest request) {
+		NoticeVO vo = new NoticeVO();
+		vo.setNum(Integer.parseInt(request.getParameter("num")));
+		vo.setName(request.getParameter("name"));
+		vo.setContent(request.getParameter("content"));
+		vo.setTitle(request.getParameter("title"));
+		dao.noticeUpdate(vo);
+	}
+
+	public void noticeDelete(HttpServletRequest request) {
+		String num = request.getParameter("num");
+		dao.noticeDelete(num);
+	}
+
+	public void replyWrite(HttpServletRequest request) {
+		NoticeReplyVO vo = new NoticeReplyVO();
+		vo.setEmpno(request.getParameter("empno"));
+		vo.setNum(Integer.parseInt(request.getParameter("num")));
+		vo.setReply(request.getParameter("reply"));
+		dao.replyWrite(vo);
+	}
+
+	public ModelAndView replyUpdateForm(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView();
+		NoticeReplyVO voParam = new NoticeReplyVO();
+		voParam.setNum(Integer.parseInt(request.getParameter("num")));
+		voParam.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+		NoticeReplyVO vo = dao.replyUpdateForm(voParam);
+		mav.addObject("vo", vo);		
+		return mav;
+	}
+
+	public void replyUpdate(HttpServletRequest request) {
+		NoticeReplyVO vo = new NoticeReplyVO();
+		vo.setNum(Integer.parseInt(request.getParameter("num")));
+		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+		vo.setReply(request.getParameter("reply"));
+		dao.replyUpdate(vo);		
+	}
+
+	public void replyDelete(HttpServletRequest request) {
+		NoticeReplyVO vo = new NoticeReplyVO();
+		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+		dao.replyDelete(vo);
 	}
 
 }

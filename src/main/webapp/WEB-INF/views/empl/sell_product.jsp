@@ -1,30 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Title</title>
-	</head>
-	
-<!-- <script type="text/javascript">
-	function registOrder(){
-		var pc = document.forms['regist'].procode.value;
-		var pa = document.forms['regist'].proamount.value;
-		var cu = document.forms['regist'].customer.value;
-		var ad = document.forms['regist'].address.value;
-		if (confirm("입력하신 사항이 모두 확실합니까?\n제품번호 : "+pc+"\n주문수량 : "+pa+"\n고객명 : "+cu+"\n고객주소 : "+ad) == true){
-			document.forms['regist'].submit();
-		}else{
-		    return;
-		}
-	}
-	function toList(){
-		document.forms['list'].submit();
-	}
-</script>
-	 -->
 	<body>
 	<form name="list" action="/erp/order/list" method="post">
 	</form>

@@ -33,7 +33,7 @@
 				</a>
 			</div>
 			<div class="w3-accordion w3-padding">
-				<a href="/erp/board/list" class="w3-padding w3-hover-blue">
+				<a href="/erp/notice/noticeList" class="w3-padding w3-hover-blue">
 					<i class="fa fa-bullhorn"></i>  공지사항
 				</a>
 			</div>
