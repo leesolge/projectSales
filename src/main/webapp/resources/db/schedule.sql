@@ -6,6 +6,7 @@ create table schedule(
  	year number,
  	month number,
  	day number,
+ 	REGDATE  DATE,
  	num number primary key
 );
 

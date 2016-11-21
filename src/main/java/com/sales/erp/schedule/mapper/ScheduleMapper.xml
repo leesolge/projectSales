@@ -5,18 +5,18 @@
      
 <mapper namespace="com.sales.erp.schedule.dao.ScheduleMapper">
 	<select id="select" parameterType="java.lang.String" resultType="com.sales.erp.schedule.vo.ScheduleVO">
-	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno}
+	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno} ORDER BY REGDATE DESC
 	</select>
 	<select id="selectOne" parameterType="com.sales.erp.schedule.vo.ScheduleVO" resultType="com.sales.erp.schedule.vo.ScheduleVO">
-	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day}
+	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} ORDER BY REGDATE DESC
 	</select>
 	<delete id="delete" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
 	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} and CONTENTS= #{contents} 
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
      		
-			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY) 
-			VALUES (CALREG.nextval,#{empno},#{contents},#{year},#{month},#{day})
+			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY,REGDATE) 
+			VALUES (CALREG.nextval,#{empno},#{contents},#{year},#{month},#{day},SYSDATE)
 	</insert>
 	<update id="update" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
 			UPDATE SCHEDULE SET CONTENTS=#{contents} WHERE EMPNO=#{empno}    

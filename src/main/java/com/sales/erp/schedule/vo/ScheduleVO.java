@@ -1,12 +1,21 @@
 package com.sales.erp.schedule.vo;
 
+import java.util.Date;
+
 public class ScheduleVO {
  	
 	String empno,contents;
 	int year,month,day,num;
+	Date regDate;
 	
 	public String getEmpno() {
 		return empno;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public void setEmpno(String empno) {
 		this.empno = empno;

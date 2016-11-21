@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -232,7 +233,8 @@ input[type=text] {
 	</c:if> 
 	<c:if test="${vo != null}"> 
 		<c:forEach var="vo" items="${vo}">
-			<c:out value="${vo.contents}"></c:out>
+			<c:out value="${vo.contents}"/>
+			<b><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></b>
 			<form action="/erp/schedule/delete" method="post">
 				<div class="tooltip-demo">
 					<input type="hidden" name="contents" value="${vo.contents}">
