@@ -28,7 +28,7 @@
 					<th style="width: 30%;">날짜</th>
 				</tr>
 				<c:forEach var="b" items="${list}" begin="0" end="4">
-					<tr style="cursor:pointer;" onclick="location.href='/erp/notice/noticeContent?num=${b.num}&pg=${pg}'">
+					<tr style="cursor:pointer;" onclick="location.href='/erp/board/read?num=${b.num}&pg=${pg}'">
 						<td>${b.title}</td>
 						<td><fmt:formatDate value="${b.regDate}" pattern="yyyy-MM-dd"/></td>
 					</tr>
