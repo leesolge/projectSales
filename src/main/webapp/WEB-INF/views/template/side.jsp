@@ -22,18 +22,26 @@
 	<div class="w3-container">
 		<h5>Menu</h5>
 	</div>
-	
+
 	<a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
-		<a href="/erp/board/list" class="w3-padding"><i class="fa fa-bullhorn"></i>  공지사항</a>
+		<a href="/erp/notice/noticeList" class="w3-padding">
+			<i class="fa fa-bullhorn"></i>  공지사항
+		</a>
 	</sec:authorize>
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
-		<a href="#"><i class="fa fa-balance-scale"></i>  거래메뉴</a>
+	<div class="w3-accordion">
+	    <a onclick="myAccFunc()" href="#">
+			<i class="fa fa-balance-scale"></i>  거래메뉴 <i class="fa fa-angle-down"></i>
+	    </a>
+	    <div id="demoAcc" class="w3-accordion-content">
 			<a href="/erp/employee/buy_request">구매요청</a>
 			<a href="/erp/employee/buy_request_list">구매대기목록</a>
 			<a href="/erp/employee/buy_approved_list">구매승인목록</a>
+	    </div>
+  	</div>
 	</sec:authorize>
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
