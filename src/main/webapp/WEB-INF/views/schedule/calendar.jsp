@@ -1,22 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-
+ <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 		<div align="center">
 		<H2>SCHEDULE</H2>
 		<HR>
 	   <form method=post action="/erp/schedule/insert">
-			<input type=text name=year size=2 value="${currentYear}">년
-			<input type=text name=month size=2 value="${currentMonth+1}">월
-			<input type=text name=day size=2 value="${currentDate}">일
-			내용 : <input type="text" name="contents"> 
-			<input type=hidden name=empno value="${empno}">
-			<input type=submit value="추가">
+	   	
+	   	 <select name="year">
+	   	 			<option class="w3-text-red" value="${currentYear}"  selected>${currentYear}</option>
+					<c:forEach var="year" begin="2016" end="2030">
+						<option value="${year}">${year}</option>
+					</c:forEach>
+		  </select>
+		  <select name="month">
+		  			<option class="w3-text-red" value="${currentMonth+1}"  selected>${currentMonth+1}</option>
+					<c:forEach var="month" begin="0" end="11">
+						<option value="${month+1}">${month+1}</option>
+					</c:forEach>
+		  </select>
+		  <select name="day"> 
+		  			<option class="w3-text-red" value="${currentDate}"  selected>${currentDate}</option>
+					<c:forEach var="day" begin="1" end="31">
+						<option value="${day}">${day}</option>
+					</c:forEach>
+		 </select>
+		 내용 : <input type="text" name="contents"> 
+		 <input type=hidden name=empno value="${empno}">
+		<input type=submit value="추가">
 		</form> 
 	</div>
 	<br>
@@ -56,31 +73,33 @@
                <!-- 토=7 -->
          </tr>
          
-         <tr height=80>
+         
+         
 	            <c:set var="br" value="0" />
-	      
+	           
+	           <c:if test="${startDay <=7 }">
+	 	
 	            <c:forEach var="i" begin="1" end="${startDay-1}">
-	               <td>&nbsp;</td>
+	               <td height=80 >&nbsp;</td>
 	               <c:set var="br" value="${br+1}" />
-	               <c:if test="${br == 7}">
-	                  <br>
-	               </c:if>
 	            </c:forEach>
+	         
+	   			</c:if>
         
            
             	<c:forEach var="a" begin="1" end="${end}">
-            	  <c:if test="${(br%7) == 0 && a != end }">
+            	  <c:if test="${(br%7) == 0}">
             		<tr height=80>
                	   </c:if>
                		<td style="vertical-align: top;">
 			              <c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
-			               		<font style="color:blue">${a}</font>
+			               		<font style="color:blue"><b>${a}</b></font>
 			              </c:if>
 		                  <c:if test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
-		                  		<font style="color:red">${a}</font>
+		                  		<font style="color:red"><b>${a}</b></font>
 		                  </c:if>
 		                  <c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
-		                  		<font style="color:black">${a}</font>
+		                  		<font style="color:black"><b>${a}</b></font>
 		                  </c:if>
 		                  
 			   			
@@ -96,7 +115,7 @@
 			                              <input type="hidden" name="month" value="${vo.month}">
 			                              <input type="hidden" name="empno" value="${vo.empno}">
 			                              <input type="hidden" name="num" value="${vo.num}">
-			                              <button type="submit" style="height: 20px" class="btn btn-default" data-toggle="tooltip"  data-placement="left" title="삭제하려면 클릭하시오." >삭제</button>
+			                              <button type="submit" style="height: 20px"  data-toggle="tooltip"  data-placement="left" title="삭제하려면 클릭하시오." >삭제</button>
 			                              </div>
 			                               </form>
 			                     </c:if>
@@ -105,8 +124,9 @@
 		
                		 <c:set var="br" value="${br+1}" />
                  </td>  
+                 
              </c:forEach>
-            </tr>
+            
       
       </table>
       <br>

@@ -11,6 +11,7 @@
 	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and CONTENTS= #{contents}
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
+     		
 			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY) 
 			VALUES (CALREG.nextval,#{empno},#{contents},#{year},#{month},#{day})
 	</insert>
