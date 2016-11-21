@@ -15,7 +15,7 @@
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
 			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope"></i></a>
 			<a href="/erp/my_Info" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
-			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-calendar"></i></a>
+			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
 			<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
 		</div>
 	</div>
@@ -27,8 +27,8 @@
 	<a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
-			<div class="w3-padding">
-				<a href="/erp/board/list">
+			<div class="w3-accordion w3-padding">
+				<a href="/erp/board/list" class="w3-padding w3-hover-blue">
 					<i class="fa fa-bullhorn"></i>  공지사항
 				</a>
 			</div>
@@ -36,7 +36,7 @@
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
 		<div class="w3-accordion w3-padding">
-		    <a onclick="myAccFunc1()" href="#">
+		    <a onclick="myAccFunc1()" class="w3-padding w3-hover-blue">
 				<i class="fa fa-balance-scale"></i>  거래메뉴  
 				<i class="fa fa-angle-down"></i>
 		    </a>
@@ -50,7 +50,7 @@
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
 		<div class="w3-accordion w3-padding">
-		    <a onclick="myAccFunc2()" href="#">
+		    <a onclick="myAccFunc2()" class="w3-padding w3-hover-blue">
 				<i class="fa fa-users"></i>  영업팀메뉴  
 				<i class="fa fa-angle-down"></i>
 		    </a>
@@ -64,7 +64,7 @@
 	</sec:authorize>
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
 		<div class="w3-accordion w3-padding">
-		    <a onclick="myAccFunc3()" href="#">
+		    <a onclick="myAccFunc3()" class="w3-padding w3-hover-blue">
 				<i class="fa fa-cubes"></i>  자재팀메뉴  
 				<i class="fa fa-angle-down"></i>
 		    </a>
@@ -77,7 +77,7 @@
 	
 	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 		<div class="w3-accordion w3-padding">
-		    <a onclick="myAccFunc4()" href="#">
+		    <a onclick="myAccFunc4()" class="w3-padding w3-hover-blue">
 				<i class="fa fa-cog"></i>  관리자메뉴
 				<i class="fa fa-angle-down"></i>
 		    </a>

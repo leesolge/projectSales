@@ -14,16 +14,13 @@
 </div>
 <div class="w3-row">
 	<tiles:insertAttribute name="side" />
-	<div class="w3-main" style="margin-left:250px; margin-top:43px; min-height: 100%">
+	<div class="w3-main" style="margin-left:250px; margin-top:43px;">
 		<tiles:insertAttribute name="body" />
 	</div>
-	<div style="margin-left:250px; margin-top:43px;">
-		<tiles:insertAttribute name="footer" />
-	</div>
-	
 </div>
+
+
 <!-- Script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" type="text/javascript" ></script>
 <script>
 // Get the Sidenav
 var mySidenav = document.getElementById("mySidenav");
