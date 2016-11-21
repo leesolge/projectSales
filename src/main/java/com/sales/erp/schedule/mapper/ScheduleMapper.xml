@@ -7,8 +7,11 @@
 	<select id="select" parameterType="java.lang.String" resultType="com.sales.erp.schedule.vo.ScheduleVO">
 	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno}
 	</select>
+	<select id="selectOne" parameterType="com.sales.erp.schedule.vo.ScheduleVO" resultType="com.sales.erp.schedule.vo.ScheduleVO">
+	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day}
+	</select>
 	<delete id="delete" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
-	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and CONTENTS= #{contents}
+	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} and CONTENTS= #{contents} 
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
      		

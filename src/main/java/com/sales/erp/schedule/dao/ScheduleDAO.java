@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.schedule.vo.ScheduleVO;
 
 @Repository
@@ -18,6 +17,12 @@ public class ScheduleDAO {
 	public ArrayList<ScheduleVO> getschedule(String empno){
 		ScheduleMapper sqlMapper = sqlSession.getMapper(ScheduleMapper.class);
 		ArrayList<ScheduleVO> list = sqlMapper.select(empno);
+		return list;
+	}
+	
+	public ArrayList<ScheduleVO> selectOne(ScheduleVO vo){
+		ScheduleMapper sqlMapper = sqlSession.getMapper(ScheduleMapper.class);
+		ArrayList<ScheduleVO> list = sqlMapper.selectOne(vo);
 		return list;
 	}
 	
