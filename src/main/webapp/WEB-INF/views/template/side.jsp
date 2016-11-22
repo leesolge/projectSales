@@ -48,7 +48,7 @@
 		    <div id="demoAcc1" class="w3-accordion-content w3-padding">
 				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
 				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
-				<a href="/erp/employee/buy_approved_list">- 구매승인목록</a>
+				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
@@ -61,8 +61,8 @@
 		    </a>
 		    <div id="demoAcc2" class="w3-accordion-content w3-padding">
 				<a href="/erp/manager/member_list">- 팀원 명부</a> 
-				<a href="/erp/manager/buy_request_list">- 승인대기목록</a> 
-				<a href="/erp/manager/buy_approved_list">- 구매승인목록</a>
+				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a> 
+				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
@@ -74,7 +74,8 @@
 		    </a>
 		    <div id="demoAcc3" class="w3-accordion-content w3-padding">
 				<a href="/erp/transact/transactlist_default">- 거래내역</a> 
-				<a href="/erp/transact/buy_request_list">- 승인대기목록</a> 
+				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a>
+				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
@@ -88,8 +89,8 @@
 		    <div id="demoAcc4" class="w3-accordion-content w3-padding">
 		    	<a href="/erp/admin/member_ok">- 가입 승인</a> 
 				<a href="/erp/admin/member_list">- 사원 명부</a>
-				<a href="/erp/transact/transactlist_default">- 거래내역</a> 
-				<a href="/erp/transact/buy_request_list">- 승인대기목록</a> 
+				<a href="/erp/transact/transactlist_default">- 거래내역</a>
+				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 				<a href="/erp/product/list">- 상품 관리</a>
 				<a href="/erp/order/list">- 수주 관리</a>
 		    </div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
 
 @Repository
@@ -36,8 +37,18 @@ public class BuyDAO {
 		return mapper.buyListWait(vo);
 	}
 
-	public String getAuth(BuyVO vo) {
+	public MemberVO getMember(MemberVO mvoParam) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.getAuth(vo);
+		return mapper.getMember(mvoParam);
+	}
+
+	public ArrayList<BuyListVO> buyListAppWaitTeam(MemberVO mvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyListAppWaitTeam(mvo);
+	}
+
+	public ArrayList<BuyListVO> buyListAppWaitAll(MemberVO mvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyListAppWaitAll(mvo);
 	}
 }

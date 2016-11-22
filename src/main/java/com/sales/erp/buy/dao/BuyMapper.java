@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
 
 public interface BuyMapper extends Serializable {
@@ -17,6 +18,10 @@ public interface BuyMapper extends Serializable {
 
 	ArrayList<BuyListVO> buyListWait(BuyVO vo);
 
-	String getAuth(BuyVO vo);
+	MemberVO getMember(MemberVO mvoParam);
+
+	ArrayList<BuyListVO> buyListAppWaitTeam(MemberVO mvo);
+
+	ArrayList<BuyListVO> buyListAppWaitAll(MemberVO mvo);
 
 }

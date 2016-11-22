@@ -28,17 +28,40 @@
 		VALUES((SELECT MAX(BUYNUM) FROM BUY), #{empno}, #{procode},
 		#{amount}, #{buycomment}, SYSDATE, #{buystep}, 0)
 	</insert>
-	
-	<select id="buyListWait" parameterType="com.sales.erp.buy.vo.BuyVO" resultType="com.sales.erp.buy.vo.BuyListVO">
+
+	<select id="buyListWait" parameterType="com.sales.erp.buy.vo.BuyVO"
+		resultType="com.sales.erp.buy.vo.BuyListVO">
 		<![CDATA[
 		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
 		MAX(PROCODE) AS PROCODE, MAX(BUYSTEP) AS BUYSTEP FROM BUY WHERE EMPNO=#{empno} AND BUYSTEP<=2
 		GROUP BY BUYNUM ORDER BY BUYNUM DESC
 		]]>
 	</select>
-	
-	<!-- 권한 받아오기 -->
-	<select id="getAuth" parameterType="com.sales.erp.buy.vo.BuyVO" resultType="java.lang.String">
-		SELECT AUTH FROM SMEMBER WHERE EMPNO=#{empno}
+
+	<!-- 사용자 정보 불러오기 -->
+	<select id="getMember" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+
+	<!-- 팀장급 승인대기목록 불러오기 -->
+	<select id="buyListAppWaitTeam" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.buy.vo.BuyListVO">
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO, MAX(PROCODE) AS PROCODE, MAX(TEAM) AS TEAM, MAX(BUYSTEP) AS BUYSTEP FROM 
+		(SELECT * FROM
+		(SELECT B.BUYNUM AS BUYNUM, B.EMPNO AS EMPNO, B.PROCODE AS PROCODE, B.AMOUNT AS AMOUNT, B.BUYCOMMENT AS BUYCOMMENT,
+					 B.REGDATE AS REGDATE, B.BUYSTEP AS BUYSTEP , B.DELETED AS DELETED, S.TEAM AS TEAM FROM BUY B, SMEMBER S WHERE B.EMPNO = S.EMPNO) 
+		WHERE TEAM=#{team})
+		WHERE BUYSTEP=0 GROUP BY BUYNUM ORDER BY BUYNUM DESC
+	</select>
+
+	<!-- 자재팀 / 관리자 승인대기목록 불러오기 -->
+	<select id="buyListAppWaitAll" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.buy.vo.BuyListVO">
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO, MAX(PROCODE) AS PROCODE, MAX(TEAM) AS TEAM, MAX(BUYSTEP) AS BUYSTEP FROM		
+		(SELECT B.BUYNUM AS BUYNUM, B.EMPNO AS EMPNO, B.PROCODE AS PROCODE, B.AMOUNT AS AMOUNT, B.BUYCOMMENT AS BUYCOMMENT,
+					 B.REGDATE AS REGDATE, B.BUYSTEP AS BUYSTEP , B.DELETED AS DELETED, S.TEAM AS TEAM FROM BUY B, SMEMBER S WHERE B.EMPNO = S.EMPNO) 		
+		WHERE BUYSTEP=1 GROUP BY BUYNUM ORDER BY BUYNUM DESC
+		
 	</select>
 </mapper>
