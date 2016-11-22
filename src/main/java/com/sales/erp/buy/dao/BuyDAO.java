@@ -51,4 +51,14 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.buyListAppWaitAll(mvo);
 	}
+
+	public ArrayList<BuyListVO> buyListWaitAll() {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyListWaitAll();
+	}
+
+	public ArrayList<BuyVO> buyContent(BuyVO voParam) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyContent(voParam);
+	}
 }

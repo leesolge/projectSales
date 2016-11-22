@@ -24,4 +24,8 @@ public interface BuyMapper extends Serializable {
 
 	ArrayList<BuyListVO> buyListAppWaitAll(MemberVO mvo);
 
+	ArrayList<BuyListVO> buyListWaitAll();
+
+	ArrayList<BuyVO> buyContent(BuyVO voParam);
+
 }

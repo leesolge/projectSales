@@ -48,9 +48,9 @@
 
 <script type="text/javascript">	
 	function content(num) {
-		var requestContent = document.requestContent;
-		requestContent.buynum.value = num;
-		requestContent.submit();
+		var buyContent = document.buyContent;
+		buyContent.buynum.value = num;
+		buyContent.submit();
 	}
 </script>
 </html>

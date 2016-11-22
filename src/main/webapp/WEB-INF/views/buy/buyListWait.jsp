@@ -15,6 +15,10 @@
 		<h2>구매요청 [${count }건]</h2>
 		<table class="w3-table w3-centered">
 			<tr>
+				<th>등록번호</th>
+				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+					<th>팀</th>
+				</sec:authorize>
 				<th>요청건</th>
 				<th>등록날짜</th>				
 				<th>상태</th>
@@ -23,6 +27,10 @@
 			</tr>
 			<c:forEach var="list" items="${list}">
 				<tr>
+					<td>${list.buynum}</td>	
+					<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+						<td>${list.team}</td>	
+					</sec:authorize>
 					<td>${list.title}</td>			
 					<td><fmt:formatDate value="${list.regdate}"
 							pattern="yyyy-MM-dd" /></td>
@@ -40,9 +48,9 @@
 
 <script type="text/javascript">	
 	function content(num) {
-		var requestContent = document.requestContent;
-		requestContent.buynum.value = num;
-		requestContent.submit();
+		var buyContent = document.buyContent;
+		buyContent.buynum.value = num;
+		buyContent.submit();
 	}
 </script>
 </html>

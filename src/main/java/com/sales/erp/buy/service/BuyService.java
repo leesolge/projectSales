@@ -15,7 +15,7 @@ import com.sales.erp.buy.dao.BuyDAO;
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
 import com.sales.erp.member.vo.MemberVO;
-import com.sales.erp.member.vo.OrderRequestListJoinVO;
+import com.sales.erp.member.vo.OrderRequestVO;
 import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;
 
@@ -35,7 +35,7 @@ public class BuyService {
 		return mav;
 	}
 
-	// Product 충원 요청 등록(사원)
+	// Product 충원 요청 등록
 	public void buyWrite(HttpServletRequest request) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -43,10 +43,8 @@ public class BuyService {
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
 
-		ArrayList<String> list = new ArrayList<String>(); // Parameter값 저장하기 위한
-															// list
-		BuyVO vo = new BuyVO();
-		vo.setEmpno(auth.getName());
+		ArrayList<String> list = new ArrayList<String>(); // Parameter값 저장하기 위한 list
+
 		Enumeration var = request.getParameterNames();
 		String var_name;
 		String var_value;
@@ -64,8 +62,14 @@ public class BuyService {
 			bvo.setBuycomment(list.get(i + 2));
 			if (mvo.getAuth().equals("ROLE_EMPLOYEE"))
 				bvo.setBuystep(0); // 사원일 경우 승인단계 0으로 지정
-			else
+			else if(mvo.getAuth().equals("ROLE_MANAGER"))
 				bvo.setBuystep(1); // 팀장급일 경우 승인단계 1로 지정
+			else {
+				bvo.setBuystep(2); // 팀장급 이상일 경우 승인단계 2로 지정
+				
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Product 내용 변경 추가해야함
+
+			}				
 
 			if (i == 1)
 				dao.buyWrite(bvo); // 구매요청 번호생성 및 등록
@@ -80,15 +84,17 @@ public class BuyService {
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
+		
+		BuyVO voParam = new BuyVO();
+		voParam.setEmpno(mvo.getEmpno());
+		ArrayList<BuyListVO> list = null;
 
-		BuyVO vo = new BuyVO();
-		vo.setEmpno(auth.getName());
-		if (mvo.getAuth().equals("ROLE_EMPLOYEE"))
-			vo.setBuystep(0); // 사원일 경우 승인단계 0으로 지정
-		else
-			vo.setBuystep(1); // 팀장급일 경우 승인단계 1로 지정
-
-		ArrayList<BuyListVO> list = dao.buyListWait(vo);
+		if (mvo.getAuth().equals("ROLE_ADMIN")) {
+			list = dao.buyListWaitAll();
+		}
+		else{
+			list = dao.buyListWait(voParam);
+		}
 		for (int i = 0; i < list.size(); i++) {
 			ProductVO name = pdao.selectOne(list.get(i).getProcode());
 			list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
@@ -124,6 +130,15 @@ public class BuyService {
 		}
 		mav.addObject("list", list);
 		mav.addObject("count", list.size());
+		return mav;
+	}
+
+	public ModelAndView buyContent(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		BuyVO voParam = new BuyVO();
+		voParam.setBuynum(Integer.parseInt(request.getParameter("buynum")));
+		ArrayList<BuyVO> list = dao.buyContent(voParam);
+		mav.addObject("list", list);
 		return mav;
 	}
 }

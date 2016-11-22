@@ -5,8 +5,16 @@ import java.util.Date;
 public class BuyListVO {
 
 	private int cnt, buystep;
-	private String buynum, empno, title, procode, team;
+	private String buynum, empno, title, procode, team, name;
 	private Date regdate, appdate;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getBuystep() {
 		return buystep;
