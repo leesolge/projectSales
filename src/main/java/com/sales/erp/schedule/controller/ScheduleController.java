@@ -144,7 +144,8 @@ public class ScheduleController {
 			vo.setYear(year1); vo.setMonth(month1+1); vo.setDay(day); vo.setEmpno(empno);
 		    list = sdao.selectOne(vo);
 			
-		    
+		      
+		      request.setAttribute("month1", month1+1);
 			  request.setAttribute("year", new Integer(year));
 			  request.setAttribute("month", new Integer(month));
 			  request.setAttribute("day", new Integer(day));

@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <style type="text/css">
 ul {
 	list-style-type: none;
@@ -121,7 +120,6 @@ input[type=text] {
 	border-radius: 4px;
 	background-color: #f1f1f1;
 }
-
 </style>
 </head>
 <body>
@@ -201,11 +199,11 @@ input[type=text] {
 				<c:if test="${(br%7) == 0}">
 					<tr height=40>
 				</c:if>
-				<td style="vertical-align: top;"><c:if
-						test="${br==6 || br==13 || br==20 || br==27 || br==34}">
-						<b><a
-							href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}"><font
-								color="#004d66" size="3">${a}</font></a></b>
+				<td style="vertical-align: top;">
+					<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
+						<b>
+						<a href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}">
+						<font color="#004d66" size="3">${a}</font></a></b>
 					</c:if> <c:if
 						test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
 						<b><a
@@ -225,16 +223,23 @@ input[type=text] {
 	<div style="float: left; width: 50%">
 		<hr>
 		<br> 
-	<c:if test="${fn:length(vo)==0}">
+    <h3 align="center"><b>${month1} . ${day}</b></h3>
+	<c:if test="${fn:length(vo) == 0}">
+		
 		<div class="noschedule">
+		<p>
 		<font color="#435e9b"><b>해당일자의 일정이</b></font>
 		<b>등록되어 있지 않습니다.</b>
+		</p>
 		</div>
 	</c:if> 
-	<c:if test="${vo != null}"> 
+
+	
+	<c:if test="${fn:length(vo) != 0}"> 
+  		<br><br><br>
 		<c:forEach var="vo" items="${vo}">
-			<c:out value="${vo.contents}"/>
-			<b><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></b>
+			<c:out value="${vo.contents}  "/>
+			<b>작성한 날짜 : <fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></b>
 			<form action="/erp/schedule/delete" method="post">
 				<div class="tooltip-demo">
 					<input type="hidden" name="contents" value="${vo.contents}">
@@ -254,16 +259,5 @@ input[type=text] {
 	<br>
 	<br>
 	<br>
-
-	<script>
-		// tooltip demo
-		$('.tooltip-demo').tooltip({
-			selector : "[data-toggle=tooltip]",
-			container : "body"
-		})
-		// popover demo
-		$("[data-toggle=popover]").popover()
-	</script>
-
 </body>
 </html>
