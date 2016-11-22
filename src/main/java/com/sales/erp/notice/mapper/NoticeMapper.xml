@@ -83,7 +83,7 @@
 	</update>
 
 	<!-- 리플라이 삭제 -->
-	<delete id="replyDelete" parameterType="com.sales.erp.notice.vo.CommentForUpdateVO">
+	<delete id="replyDelete" parameterType="com.sales.erp.notice.vo.NoticeReplyVO">
 		DELETE FROM
 		NOTICEREPLY
 		WHERE REPLYNUM=#{replynum}
