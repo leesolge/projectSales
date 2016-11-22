@@ -34,6 +34,7 @@ public class HomeController {
 	}
 
 	//After login page
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/main")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mv = ns.getNoticeList(request);

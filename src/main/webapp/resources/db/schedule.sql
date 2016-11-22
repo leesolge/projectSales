@@ -1,18 +1,19 @@
-select * from SCHEDULE;
-drop table schedule;
-create table schedule(
- 	empno varchar2(20),
- 	contents varchar2(1000),
- 	year number,
- 	month number,
- 	day number,
+
+DROP TABLE SCHEDULE;
+DROP SEQUENCE NUMREG;
+
+CREATE TABLE SCHEDULE(
+ 	EMPNO VARCHAR2(20),
+ 	CONTENTS VARCHAR2(1000),
+ 	YEAR NUMBER,
+ 	MONTH NUMBER,
+ 	DAY NUMBER,
  	REGDATE  DATE,
- 	num number primary key
+ 	NUM NUMBER PRIMARY KEY
 );
 
 CREATE SEQUENCE CALREG
 START WITH 1
 NOCACHE;
-delete from SCHEDULE;
-insert into SCHEDULE(num,empno,contents,year,month,day)
-values(numreg_nextval,'300300','오늘은 더워',2016,11,17);
+
+SELECT * FROM SCHEDULE;

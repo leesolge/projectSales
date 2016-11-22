@@ -46,8 +46,8 @@
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc1" class="w3-accordion-content w3-padding">
-				<a href="/erp/employee/buy_request">- 구매요청</a>
-				<a href="/erp/employee/buy_request_list">- 구매대기목록</a>
+				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
+				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
 				<a href="/erp/employee/buy_approved_list">- 구매승인목록</a>
 		    </div>
 	  	</div>

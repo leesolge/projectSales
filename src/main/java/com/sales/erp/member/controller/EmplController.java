@@ -97,6 +97,7 @@ public class EmplController {
 		ModelAndView mav = es.Buy_RequestForm();		
 		mav.setViewName("empl/buy_request_order");
 		return mav;
+		//수정완료
 	}
 	
 	@RequestMapping(value="/employee/buy_request_manager", method=RequestMethod.POST)
@@ -105,6 +106,7 @@ public class EmplController {
 		ModelAndView mav = es.getRequestList();
 		mav.setViewName("empl/buy_request_list");
 		return mav;
+		//수정 완료
 	}
 	
 	@RequestMapping(value="/employee/buy_request_content", method=RequestMethod.POST)

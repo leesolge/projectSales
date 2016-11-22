@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.buy.dao.BuyMapper">
+	<!-- 상품정보 불러오는 부분 -->
+	<select id="selectProductAll" resultType="com.sales.erp.product.vo.ProductVO">
+		SELECT * FROM PRODUCT
+	</select>
+
+	<!-- 구매요청 등록(새로운 구매번호 생성) -->
+	<insert id="buyWrite" parameterType="com.sales.erp.buy.vo.BuyVO">
+		INSERT INTO
+		BUY
+		(BUYNUM,
+		EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, BUYSTEP,
+		DELETED)
+		VALUES(BUY_SEQ.NEXTVAL, #{empno}, #{procode},
+		#{amount}, #{buycomment},
+		SYSDATE, #{buystep}, 0)
+	</insert>
+
+	<insert id="buyWriteSameBuynum" parameterType="com.sales.erp.buy.vo.BuyVO">
+		INSERT INTO
+		BUY
+		(BUYNUM, EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, BUYSTEP,
+		DELETED)
+		VALUES((SELECT MAX(BUYNUM) FROM BUY), #{empno}, #{procode},
+		#{amount}, #{buycomment}, SYSDATE, #{buystep}, 0)
+	</insert>
+	
+	<select id="buyListWait" parameterType="com.sales.erp.buy.vo.BuyVO" resultType="com.sales.erp.buy.vo.BuyListVO">
+		<![CDATA[
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
+		MAX(PROCODE) AS PROCODE, MAX(BUYSTEP) AS BUYSTEP FROM BUY WHERE EMPNO=#{empno} AND BUYSTEP<=2
+		GROUP BY BUYNUM ORDER BY BUYNUM DESC
+		]]>
+	</select>
+	
+	<!-- 권한 받아오기 -->
+	<select id="getAuth" parameterType="com.sales.erp.buy.vo.BuyVO" resultType="java.lang.String">
+		SELECT AUTH FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+</mapper>
