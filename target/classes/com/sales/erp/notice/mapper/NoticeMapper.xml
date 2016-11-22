@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.notice.dao.NoticeMapper">
+
+	<!-- 공지사항 리스트 출력 -->
+	<select id="getNoticeList" parameterType="com.sales.erp.notice.vo.NoticeSearchVO"
+		resultType="com.sales.erp.notice.vo.NoticeVO">
+		SELECT * FROM (SELECT ROWNUM R, D.* FROM
+		(SELECT * FROM NOTICE WHERE
+		TITLE LIKE #{word} ORDER BY REGDATE DESC) D)
+		WHERE R <![CDATA[>=]]>
+		#{start} AND R <![CDATA[<=]]>
+		#{end} ORDER BY R ASC
+	</select>
+
+	<!-- 공지사항 검색후 리스트 출력 -->
+	<select id="getNoticeCount" parameterType="com.sales.erp.notice.vo.NoticeSearchVO"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM NOTICE WHERE TITLE LIKE #{word}
+	</select>
+
+	<!-- 공지사항 작성 -->
+	<insert id="noticeWrite" parameterType="com.sales.erp.notice.vo.NoticeVO">
+		INSERT INTO
+		NOTICE(NUM,
+		NAME, TITLE, CONTENT, REGDATE)
+		VALUES(NOTICE_SEQ.NEXTVAL, #{name},
+		#{title}, #{content},
+		SYSDATE)
+	</insert>
+
+	<!-- 공지사항 내용확인 -->
+	<select id="noticeContent" parameterType="java.lang.String"
+		resultType="com.sales.erp.notice.vo.NoticeVO">
+		SELECT * FROM NOTICE WHERE NUM = #{num}
+	</select>
+
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="com.sales.erp.notice.vo.NoticeVO">
+		UPDATE NOTICE SET
+		NAME=#{name}, TITLE=#{title}, CONTENT=#{content}, REGDATE=SYSDATE
+		WHERE NUM=#{num}
+	</update>
+
+	<!--공지사항 삭제 -->
+	<delete id="noticeDelete" parameterType="java.lang.String">
+		DELETE FROM NOTICE WHERE
+		NUM=#{num}
+	</delete>
+
+	<!-- ///////////////// 리플라이 입력 및 출력부분 ///////////////// -->
+	<!-- 리플라이 입력 -->
+	<insert id="replyWrite" parameterType="com.sales.erp.notice.vo.NoticeReplyVO">
+		INSERT INTO
+		NOTICEREPLY(REPLYNUM, EMPNO, NUM, REPLY, REGDATE)
+		VALUES(NOTICEREPLY_SEQ.NEXTVAL,
+		#{empno}, #{num}, #{reply}, SYSDATE)
+	</insert>
+
+	<!-- 리플라이리스트 조회 -->
+	<select id="replyList" parameterType="java.lang.String"
+		resultType="com.sales.erp.notice.vo.NoticeReplyVO">
+		SELECT N.REPLYNUM, N.NUM, N.EMPNO, N.REPLY, N.REGDATE,
+		S.NAME FROM
+		NOTICEREPLY N, SMEMBER S WHERE N.EMPNO=S.EMPNO AND
+		N.NUM=#{num}
+
+	</select>
+
+	<!-- 리플라이 수정양식 출력 -->
+	<select id="replyUpdateForm" parameterType="com.sales.erp.notice.vo.NoticeReplyVO"
+		resultType="com.sales.erp.notice.vo.NoticeReplyVO">
+		SELECT * FROM NOTICEREPLY WHERE NUM=#{num} AND
+		REPLYNUM=#{replynum}
+	</select>
+
+	<!-- 리플라이 수정 -->
+	<update id="replyUpdate" parameterType="com.sales.erp.notice.vo.NoticeReplyVO">
+		UPDATE NOTICEREPLY SET
+		REPLY=#{reply} WHERE NUM=#{num} AND REPLYNUM=#{replynum}
+	</update>
+
+	<!-- 리플라이 삭제 -->
+	<delete id="replyDelete" parameterType="com.sales.erp.notice.vo.NoticeReplyVO">
+		DELETE FROM
+		NOTICEREPLY
+		WHERE REPLYNUM=#{replynum}
+	</delete>
+</mapper>
+
