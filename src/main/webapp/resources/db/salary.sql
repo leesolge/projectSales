@@ -1,6 +1,8 @@
-select * from smember where team like '%영업%';
+select * from smember where team like '%영업%' or team = '자재팀';
 drop table salary
-select * from salary s, smember m where s.empno=m.empno;
+
+select * from salary
+s, smember m where s.empno=m.empno;
 select * from smember
 CREATE TABLE SALARY(
 	EMPNO VARCHAR2(20),

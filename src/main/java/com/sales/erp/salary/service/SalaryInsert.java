@@ -21,12 +21,12 @@ import com.sales.erp.salary.vo.SalaryVO;
 import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
-@Service
-public class SalaryService {
+public class SalaryInsert {
 
 	@Autowired
 	private SalaryDAO dao;
 	
+	/*@Scheduled(cron="15 * * * * *")*/
 	@Scheduled(cron="0 0 0 1 * *")
 	public void confirmSalaries(){
 		

@@ -120,7 +120,7 @@
 
 <tx:annotation-driven transaction-manager="transactionManager"/>
 
- <bean id="salaryService" class="com.sales.erp.salary.service.SalaryService" />
+ <bean id="salaryService" class="com.sales.erp.salary.service.SalaryInsert" />
  <task:scheduler id="gsScheduler" pool-size="10" />
  <task:executor id="gsTaskExecutor" pool-size="10" />
  <task:annotation-driven executor="gsTaskExecutor"
