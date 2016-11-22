@@ -29,18 +29,18 @@
 				</tr>
 				<c:forEach var="list" items="${list}" begin="0" end="4">
 					<tr style="cursor:pointer;" onclick="location.href='/erp/notice/noticeContent?num=${list.num}'">
-						<td>${list.title}</td>
+						<td>
+							${list.title}
+						</td>
 						<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				</c:forEach>
-
-
 			</table>
 		</div>
 		<div class="w3-col m6">
 			<div align="left">
 				<h5>
-					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지</a><br>
+					<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지<br>
 				</h5>
 			</div>
 			<table class="w3-table w3-bordered w3-small" style="width: 90%;">
