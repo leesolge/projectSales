@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.salary.vo.SalaryVO;
+import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
 @Repository
@@ -16,7 +17,17 @@ public class SalaryDAO implements SalaryMapper {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
+	public MemberVO selectMember(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.selectMember(vo);
+	}
+
+	public ArrayList<SalaryVO> salaryList(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.salaryList(vo);
+	}
+
 	public String profitOfManager(VOforSQL vo) {
 		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
 		return mapper.profitOfManager(vo);

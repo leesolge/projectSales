@@ -4,6 +4,13 @@
      
 	<mapper namespace="com.sales.erp.salary.dao.SalaryMapper">
 	
+		<select id="selectMember" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.member.vo.MemberVO">
+			SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE EMPNO=#{datevalue}
+		</select>
+		<select id="salaryList" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.salary.vo.SalaryVO">
+			SELECT * fROM SALARY WHERE EMPNO=#{datevalue} ORDER BY SALARYDATE DESC
+		</select>
+		
 		<insert id="insertSalary" parameterType="com.sales.erp.salary.vo.SalaryVO">
 			INSERT INTO SALARY (EMPNO, SALARYDATE, SALARY, ALLOWANCE, MANAGER, TAX1, TAX2, REALS)
 			VALUES(#{empno}, TO_DATE(#{salarydate}, 'YYYYMMDDHH24MISS'),

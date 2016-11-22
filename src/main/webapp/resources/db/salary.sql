@@ -1,12 +1,16 @@
 select * from smember where team like '%영업%' or team = '자재팀';
 drop table salary
+select * from salary where salarydate=to_date('20160901000000','YYYYMMDDHH24MISS')
 
+insert into salary
+(empno, salarydate, salary, allowance, manager, tax1, tax2, reals)
+values(300301, '2016-09-01', 10000, 10000, 0, 0, 0, 10000)
 select * from salary
 s, smember m where s.empno=m.empno;
 select * from smember
 CREATE TABLE SALARY(
 	EMPNO VARCHAR2(20),
-	SALARYDATE VARCHAR2(30),
+	SALARYDATE date,
 	SALARY NUMBER,
 	ALLOWANCE NUMBER,
 	MANAGER NUMBER,

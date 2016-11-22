@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.salary.vo.SalaryVO;
+import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
 public interface SalaryMapper extends Serializable{
+	MemberVO selectMember(TempVO vo);
+	ArrayList<SalaryVO> salaryList(TempVO vo);
 	String profitOfManager(VOforSQL vo);
 	void insertSalary(SalaryVO vo);
 	String profitOfEmpl(VOforSQL vo);
