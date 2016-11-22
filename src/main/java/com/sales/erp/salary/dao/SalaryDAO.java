@@ -18,6 +18,11 @@ public class SalaryDAO implements SalaryMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
+	public ArrayList<OrderJoinVO> team(VOforSQL vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.team(vo);
+	}
+
 	public MemberVO selectMember(TempVO vo) {
 		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
 		return mapper.selectMember(vo);

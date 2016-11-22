@@ -25,7 +25,15 @@ public class SalaryService {
 	@Autowired
 	private SalaryDAO dao;
 	
-	public ModelAndView viewSalary(String datevalue) {
+	/* selectlist : 셀렉트 옵션(datevalue / viewdate) */
+	/* slist : 월급 내역(SalaryVO) */
+	/* datevalue : 날짜값 (parameter) */
+	/* dateview : 출력값 */
+	/* mylist : 내 실적 (OrderJoinVO) */ 
+	/* teamlist : 팀 실적 (OrderJoinVO) */
+	/* equal : 예정 월급이면 1 아니면 0 */
+	public ModelAndView viewSalary(HttpServletRequest request) {
+		String datevalue = request.getParameter("datevalue");
 		ModelAndView mav = new ModelAndView();
 		/*현재 사용자 사번, 이름, 팀, 직급 받아오기*/
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -34,8 +42,8 @@ public class SalaryService {
 		vo.setDatevalue(empno);
 		MemberVO membervo = dao.selectMember(vo);
 		
-		/*templist:하위 세개 항목을 잠시 담아둠
-		  slist:전체를 담을 리스트*/
+		/* templist:하위 세개 항목을 잠시 담아둠 */
+		/* slist:전체를 담을 리스트 */
 		ArrayList<SalaryVO> templist = new ArrayList<SalaryVO>();
 		ArrayList<SalaryVO> slist = new ArrayList<SalaryVO>();
 		ArrayList<TempVO> list = new ArrayList<TempVO>();
@@ -56,8 +64,10 @@ public class SalaryService {
 		compareDate = String.valueOf(thisYear) + String.valueOf(thisMonth+1) + "01000000";
 		vo.setDatevalue(compareDate);
 		list.add(vo);
-		vo.setDatevalue(empno);
-		templist = dao.salaryList(vo);
+		TempVO ab = new TempVO();
+		ab.setDatevalue(empno);
+		templist = dao.salaryList(ab);
+		System.out.println(templist);
 		for(SalaryVO savo : templist){
 			String date = savo.getSalarydate();
 			TempVO tvo = new TempVO();
@@ -73,31 +83,177 @@ public class SalaryService {
 			savo.setSalarydate(date);
 			list.add(tvo);
 		}
-		System.out.println(list);
-		mav.addObject("list", list);
+		mav.addObject("selectlist", list);
 		
 		if(datevalue==null||datevalue.equals("")){
 			datevalue = String.valueOf(thisYear) + String.valueOf(thisMonth+1);
+			datevalue = datevalue + "01000000";
 		}
-		datevalue = datevalue + "01000000";
+		/*시작날짜 역할도 하는 datevalue*/
 		mav.addObject("datevalue", datevalue);
+		String dateview = datevalue.substring(0, 4)+"년 "+datevalue.substring(4, 6)+"월";
+		mav.addObject("dateview", dateview);
+		System.out.println(datevalue);
 		
-		if(datevalue.equals(compareDate)){
-			if(membervo.getAuth().equals("ROLE_MANAGER")){
-
-			}else if(membervo.getAuth().equals("ROLE_EMPLOYEE")){
-				
-			}else{
-				
-			}
+		/*끝날짜 가공*/
+		String enddate = datevalue;
+		int endyear = Integer.parseInt(datevalue.substring(0, 4));
+		int endmonth = Integer.parseInt(datevalue.substring(4, 6));
+		endmonth = endmonth+1;
+		if(endmonth>12){
+			endmonth = 1;
+			endyear = endyear+1;
+		}
+		if(String.valueOf(endmonth).length()!=2){
+			enddate = String.valueOf(endyear)+"0"+String.valueOf(endmonth);
 		}else{
-			if(membervo.getAuth().equals("ROLE_MANAGER")){
-				
-			}else if(membervo.getAuth().equals("ROLE_EMPLOYEE")){
-				
-			}else{
-				
+			enddate = String.valueOf(endyear)+String.valueOf(endmonth);
+		}
+		enddate = enddate + "01000000";
+		
+		/*월급 정보 받을 준비*/
+		VOforSQL vosql = new VOforSQL();
+		vosql.setAuth(membervo.getAuth());
+		vosql.setEmpno(membervo.getEmpno());
+		vosql.setTeam(membervo.getTeam());
+		vosql.setStartdate(datevalue);
+		vosql.setEnddate(enddate);
+		
+		if(compareDate.equals(datevalue)){
+			mav.addObject("equal", "1");
+		}else{
+			mav.addObject("equal", "0");
+		}
+		/* 이번달 예정 월급 */
+		if (membervo.getAuth().equals("ROLE_MANAGER")) {
+			String tempprofit = dao.profitOfEmpl(vosql);
+			if(tempprofit==null||tempprofit.equals("")){
+				tempprofit = "0";
 			}
+			long allowance = (long) (Long.parseLong(tempprofit) * 0.5);
+			String tempmanager = dao.profitOfEmpl(vosql);
+			if(tempmanager==null||tempmanager.equals("")){
+				tempmanager = "0";
+			}
+			long manager = (long) (Long.parseLong(tempmanager));
+			long salary = allowance + manager;
+			long tax1 = (long) (salary * 0.06);
+			long tax2 = (long) (salary * 0.006);
+			long reals = salary - tax1 - tax2;
+			SalaryVO salvo = new SalaryVO();
+			salvo.setAllowance(allowance);
+			salvo.setEmpno(empno);
+			salvo.setManager(manager);
+			salvo.setReals(reals);
+			salvo.setSalary(salary);
+			salvo.setSalarydate(compareDate);
+			salvo.setTax1(tax1);
+			salvo.setTax2(tax2);
+			slist.add(salvo);
+			for (int i = 0; i < templist.size(); i++) {
+				slist.add(templist.get(i));
+			}
+			mav.addObject("slist", slist);
+			
+			/*내 실적*/
+			ArrayList<OrderJoinVO> olist = dao.selectMonthlyPerformance(vosql);
+			for(OrderJoinVO ovo:olist){
+				Date date = ovo.getRegdate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+				String changes = sdf.format(date);
+				ovo.setChanges(changes);
+				long allow = Long.parseLong(ovo.getProfit());
+				if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
+					ovo.setAuth("사원");
+				}
+				if(ovo.getAuth().equals("ROLE_MANAGER")){
+					ovo.setAuth("팀장");
+				}
+				if(ovo.getAuth().equals("ROLE_ADMIN")){
+					ovo.setAuth("관리자");
+				}
+				if(ovo.getAuth().equals("사원")){
+					allow = (long) (Long.parseLong(ovo.getProfit())*0.4);
+				}else if(ovo.getAuth().equals("팀장")){
+					allow = (long) (Long.parseLong(ovo.getProfit())*0.5);
+				}
+				ovo.setAllowance(allow);
+			}
+			mav.addObject("mylist", olist);
+			
+			ArrayList<OrderJoinVO> team = dao.team(vosql);
+			mav.addObject("teamlist", team);
+		} else if (membervo.getAuth().equals("ROLE_EMPLOYEE")) {
+			String tempprofit = dao.profitOfEmpl(vosql);
+			if(tempprofit==null||tempprofit.equals("")){
+				tempprofit = "0";
+			}
+			long allowance = (long) (Long.parseLong(tempprofit) * 0.4);
+			long salary = allowance;
+			long manager = 0;
+			long tax1 = (long) (salary * 0.06);
+			long tax2 = (long) (salary * 0.006);
+			long reals = salary - tax1 - tax2;
+			SalaryVO salvo = new SalaryVO();
+			salvo.setAllowance(allowance);
+			salvo.setEmpno(empno);
+			salvo.setManager(manager);
+			salvo.setReals(reals);
+			salvo.setSalary(salary);
+			salvo.setSalarydate(compareDate);
+			salvo.setTax1(tax1);
+			salvo.setTax2(tax2);
+			slist.add(salvo);
+			for (int i = 0; i < templist.size(); i++) {
+				slist.add(templist.get(i));
+			}
+			mav.addObject("slist", slist);
+			
+			/*내 실적*/
+			ArrayList<OrderJoinVO> olist = dao.selectMonthlyPerformance(vosql);
+			for(OrderJoinVO ovo:olist){
+				Date date = ovo.getRegdate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+				String changes = sdf.format(date);
+				ovo.setChanges(changes);
+				long allow = Long.parseLong(ovo.getProfit());
+				if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
+					ovo.setAuth("사원");
+				}
+				if(ovo.getAuth().equals("ROLE_MANAGER")){
+					ovo.setAuth("팀장");
+				}
+				if(ovo.getAuth().equals("ROLE_ADMIN")){
+					ovo.setAuth("관리자");
+				}
+				if(ovo.getAuth().equals("사원")){
+					allow = (long) (Long.parseLong(ovo.getProfit())*0.4);
+				}else if(ovo.getAuth().equals("팀장")){
+					allow = (long) (Long.parseLong(ovo.getProfit())*0.5);
+				}
+				System.out.println(ovo.getAuth());
+				System.out.println(allow);
+				ovo.setAllowance(allow);
+			}
+			mav.addObject("mylist", olist);
+		} else {
+			SalaryVO salvo = new SalaryVO();
+			long salary = 2150000;
+			long tax1 = (long) (salary*0.06);
+			long tax2 = (long) (salary*0.006);
+			salvo.setEmpno(membervo.getEmpno());
+			salvo.setAllowance(0);
+			salvo.setManager(0);
+			salvo.setReals(salary-tax1-tax2);
+			salvo.setSalary(salary);
+			salvo.setSalarydate(compareDate);
+			salvo.setTax1(tax1);
+			salvo.setTax2(tax2);
+			slist.add(salvo);
+			for (int i = 0; i < templist.size(); i++) {
+				slist.add(templist.get(i));
+			}
+			mav.addObject("slist", slist);
 		}
 		return mav;
 	}
@@ -203,7 +359,7 @@ public class SalaryService {
 		System.out.println(all);
 	}
 	
-	public ModelAndView viewSalary(HttpServletRequest request) throws Exception{
+	/*public ModelAndView viewsSalary(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		ArrayList<TempVO> selectlist = new ArrayList<TempVO>();
 		Calendar today = Calendar.getInstance();
@@ -289,6 +445,7 @@ public class SalaryService {
 			}
 			
 			mav.addObject("checks", checks);
+			
 			mav.addObject("calist", selectlist);
 			mav.addObject("perlist", perform);
 			mav.addObject("datevalue", datevalue);
@@ -296,5 +453,5 @@ public class SalaryService {
 			mav.addObject("sum", profitsum);
 		}
 		return mav;
-	}
+	}*/
 }

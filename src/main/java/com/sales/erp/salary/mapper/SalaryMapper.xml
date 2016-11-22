@@ -3,12 +3,32 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
      
 	<mapper namespace="com.sales.erp.salary.dao.SalaryMapper">
+		
+		<select id="team" parameterType="com.sales.erp.salary.vo.VOforSQL" resultType="com.sales.erp.order.vo.OrderJoinVO">
+			<![CDATA[
+			SELECT * FROM
+			(SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT)*0.1 AS MANAGER,
+			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+			O.DELETED AS DELETED FROM ORDERS O, 
+			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=1
+			AND DELETED=0 AND S.TEAM=#{team} AND S.AUTH!=#{auth}
+			AND O.REGDATE>TO_DATE(#{startdate}, 'YYYYMMDDHH24MISS')
+			AND O.REGDATE<TO_DATE(#{enddate}, 'YYYYMMDDHH24MISS'))
+			]]>
+		</select>
+	
 	
 		<select id="selectMember" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.member.vo.MemberVO">
 			SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER WHERE EMPNO=#{datevalue}
 		</select>
 		<select id="salaryList" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.salary.vo.SalaryVO">
-			SELECT * fROM SALARY WHERE EMPNO=#{datevalue} ORDER BY SALARYDATE DESC
+			SELECT * FROM SALARY WHERE EMPNO=#{datevalue} ORDER BY SALARYDATE DESC
 		</select>
 		
 		<insert id="insertSalary" parameterType="com.sales.erp.salary.vo.SalaryVO">
@@ -19,12 +39,12 @@
 		
 		<select id="profitOfManager" parameterType="com.sales.erp.salary.vo.VOforSQL" resultType="java.lang.String">
 			<![CDATA[
-			SELECT SUM(MANAGE) FROM
+			SELECT SUM(MANAGER) FROM
 			(SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
 			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
 			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
 			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
-			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT)*0.1 AS MANAGE,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT)*0.1 AS MANAGER,
 			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
 			O.DELETED AS DELETED FROM ORDERS O, 
 			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,

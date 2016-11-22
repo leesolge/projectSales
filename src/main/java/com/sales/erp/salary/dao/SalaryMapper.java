@@ -10,6 +10,7 @@ import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
 public interface SalaryMapper extends Serializable{
+	ArrayList<OrderJoinVO> team(VOforSQL vo);
 	MemberVO selectMember(TempVO vo);
 	ArrayList<SalaryVO> salaryList(TempVO vo);
 	String profitOfManager(VOforSQL vo);

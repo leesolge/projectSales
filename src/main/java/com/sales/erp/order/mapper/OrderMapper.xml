@@ -39,7 +39,7 @@
 	</select> 
 	
 	<update id="orderCheck" parameterType="com.sales.erp.order.vo.TestVO">
-		UPDATE ORDERS SET CHECKS=1 WHERE ID=#{tests} 
+		UPDATE ORDERS SET CHECKS=1, REGDATE=SYSDATE WHERE ID=#{tests} 
 	</update>
 	
 	<insert id="transInsert" parameterType="com.sales.erp.order.vo.OrderJoinVO">
