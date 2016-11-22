@@ -20,7 +20,7 @@ public class SalaryController {
 	@RequestMapping("/salary/salary")
 	public ModelAndView testSalary(){
 		ModelAndView mav = new ModelAndView();
-		ss.viewSalaries();
+		ss.confirmSalaries();
 		mav.setViewName("main/main");
 		return mav;
 	}

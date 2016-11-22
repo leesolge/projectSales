@@ -4,6 +4,21 @@ public class VOforSQL {
 	private String startdate;
 	private String enddate;
 	private String empno;
+	private String team;
+	private String auth;
+	
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 	public String getStartdate() {
 		return startdate;
 	}

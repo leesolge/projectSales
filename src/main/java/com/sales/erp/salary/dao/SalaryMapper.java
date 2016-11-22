@@ -9,7 +9,7 @@ import com.sales.erp.salary.vo.SalaryVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
 public interface SalaryMapper extends Serializable{
-	
+	String profitOfManager(VOforSQL vo);
 	void insertSalary(SalaryVO vo);
 	String profitOfEmpl(VOforSQL vo);
 	ArrayList<MemberVO> allMemberExceptAdmin();
