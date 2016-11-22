@@ -4,10 +4,24 @@ public class SalaryVO {
 	private String empno;
 	private String salarydate;
 	private long salary;
+	private long allowance;
+	private long manager;
 	private long reals;
 	private long tax1;
 	private long tax2;
 	
+	public long getAllowance() {
+		return allowance;
+	}
+	public void setAllowance(long allowance) {
+		this.allowance = allowance;
+	}
+	public long getManager() {
+		return manager;
+	}
+	public void setManager(long manager) {
+		this.manager = manager;
+	}
 	public String getEmpno() {
 		return empno;
 	}

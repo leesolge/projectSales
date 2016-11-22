@@ -17,6 +17,11 @@ public class SalaryDAO implements SalaryMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public String profitOfManager(VOforSQL vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.profitOfManager(vo);
+	}
+
 	public void insertSalary(SalaryVO vo) {
 		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
 		mapper.insertSalary(vo);

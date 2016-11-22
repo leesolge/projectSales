@@ -26,12 +26,12 @@ public class SalaryService {
 	@Autowired
 	private SalaryDAO dao;
 	
-	public ModelAndView viewSalaries(){
+	public ModelAndView confirmSalaries(){
 		ArrayList<MemberVO> memberList = dao.allMemberExceptAdmin();
 		long all = 0;
 		Calendar today = Calendar.getInstance();
 		int year = today.get(Calendar.YEAR);
-		int month = today.get(Calendar.MONTH)+1;
+		int month = today.get(Calendar.MONTH)+2;/*실험 중이니 나중에 +2>>+1로 바꿀 것*/
 		String cYear = String.valueOf(year);
 		String cMonth = String.valueOf(month);
 		if(cMonth.length()<2){
@@ -52,6 +52,7 @@ public class SalaryService {
 		String enddate = cYear+cMonth+"01000000";
 		String startdate = pYear+pMonth+"01000000";
 		VOforSQL vosql = new VOforSQL();
+		SalaryVO svo = new SalaryVO();
 		
 		for(MemberVO vo:memberList){
 			if(vo.getTeam().contains("영업")){
@@ -64,24 +65,63 @@ public class SalaryService {
 						tempsa = "0";
 					}
 					long salary = (long) (Long.parseLong(tempsa)*0.4);
+					svo.setAllowance(salary);
+					svo.setSalary(salary);
 					long tax1 = (long) (salary*0.06);
 					long tax2 = (long) (salary*0.006);
 					long reals = salary-tax1-tax2;
-					SalaryVO svo = new SalaryVO();
 					svo.setEmpno(vo.getEmpno());
 					svo.setSalarydate(startdate);
-					svo.setSalary(salary);
 					svo.setTax1(tax1);
 					svo.setTax2(tax2);
 					svo.setReals(reals);
 					dao.insertSalary(svo);
 				}else{
-					
+					vosql.setEmpno(vo.getEmpno());
+					vosql.setStartdate(startdate);
+					vosql.setEnddate(enddate);
+					String tempsa = dao.profitOfEmpl(vosql);
+					if(tempsa==null||tempsa.equals("")){
+						tempsa = "0";
+					}
+					long salary = (long) (Long.parseLong(tempsa)*0.5);
+					svo.setAllowance(salary);
+					vosql.setTeam(vo.getTeam());
+					vosql.setAuth(vo.getAuth());
+					tempsa = dao.profitOfManager(vosql);
+					if(tempsa==null||tempsa.equals("")){
+						tempsa = "0";
+					}
+					long manager = (long) (Long.parseLong(tempsa));
+					svo.setManager(manager);
+					salary = (salary + manager);
+					svo.setSalary(salary);
+					long tax1 = (long) (salary*0.06);
+					long tax2 = (long) (salary*0.006);
+					long reals = salary-tax1-tax2;
+					svo.setEmpno(vo.getEmpno());
+					svo.setSalarydate(startdate);
+					svo.setTax1(tax1);
+					svo.setTax2(tax2);
+					svo.setReals(reals);
+					dao.insertSalary(svo);
 				}
 			}else{
-				
+				long salary = 2150000;
+				long tax1 = (long) (salary*0.06);
+				long tax2 = (long) (salary*0.006);
+				svo.setEmpno(vo.getEmpno());
+				svo.setAllowance(0);
+				svo.setManager(0);
+				svo.setReals(salary-tax1-tax2);
+				svo.setSalary(salary);
+				svo.setTax1(tax1);
+				svo.setTax2(tax2);
+				dao.insertSalary(svo);
 			}
+			all += svo.getSalary();
 		}
+		System.out.println(all);
 		return null;
 	}
 	

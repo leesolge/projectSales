@@ -5,10 +5,30 @@
 	<mapper namespace="com.sales.erp.salary.dao.SalaryMapper">
 	
 		<insert id="insertSalary" parameterType="com.sales.erp.salary.vo.SalaryVO">
-			INSERT INTO SALARY (EMPNO, SALARYDATE, SALARY, TAX1, TAX2, REALS)
+			INSERT INTO SALARY (EMPNO, SALARYDATE, SALARY, ALLOWANCE, MANAGER, TAX1, TAX2, REALS)
 			VALUES(#{empno}, TO_DATE(#{salarydate}, 'YYYYMMDDHH24MISS'),
-			#{salary}, #{tax1}, #{tax2}, #{reals})
+			#{salary}, #{allowance}, #{manager}, #{tax1}, #{tax2}, #{reals})
 		</insert>
+		
+		<select id="profitOfManager" parameterType="com.sales.erp.salary.vo.VOforSQL" resultType="java.lang.String">
+			<![CDATA[
+			SELECT SUM(MANAGE) FROM
+			(SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
+			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
+			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
+			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT)*0.1 AS MANAGE,
+			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
+			O.DELETED AS DELETED FROM ORDERS O, 
+			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
+			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=1
+			AND DELETED=0 AND S.TEAM=#{team} AND S.AUTH!=#{auth}
+			AND O.REGDATE>TO_DATE(#{startdate}, 'YYYYMMDDHH24MISS')
+			AND O.REGDATE<TO_DATE(#{enddate}, 'YYYYMMDDHH24MISS'))
+			]]>
+		</select>
+		
 		<select id="profitOfEmpl" parameterType="com.sales.erp.salary.vo.VOforSQL" resultType="java.lang.String">
 		<![CDATA[
 			SELECT SUM(PROFIT) FROM
