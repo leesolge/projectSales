@@ -4,25 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
-<style>
-	table, td, tr, th {
-		table-layout:fixed; 
-		word-break:break-all;
-	}
-	span {
-		display: block;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;
-	}
-</style>
 <body><br>
-<!-- Title -->
-<div class="w3-container">
-	<h3> <i class="fa fa-bullhorn"></i>  공지사항</h3>	
-</div>
-
-<!-- Body -->
 <div class="w3-container">
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
-		
+		<!-- Title -->
+		<div class="w3-row">
+			<h3><i class="fa fa-bullhorn" aria-hidden="true"></i>  공지사항</h3>
+		</div>
 		<!-- Count -->
 		<div class="w3-row w3-right">
 			<h5><i class="fa fa-bar-chart"></i>  <c:out value="${paging.total}" /></h5>
@@ -32,9 +20,9 @@
 		<div class="w3-row">
 			<table class="w3-table w3-small w3-hoverable w3-bordered">
 				<tr class="w3-blue">
-					<th style="width: 75px">번호</th>
+					<th style="width: 70px">번호</th>
 					<th>제목</th>
-					<th style="width: 75px">글쓴이</th>
+					<th style="width: 70px">글쓴이</th>
 					<th style="width: 80px">날짜</th>
 				</tr>
 				<c:forEach var="notice" items="${list}">
@@ -96,7 +84,8 @@
 				<input class="w3-border w3-border-blue" type="text" name="word" placeholder="검색어" value="${word}" />
 				<button class="w3-border w3-border-blue w3-blue" type="submit"><i class="fa fa-search"></i></button>
 			</form>
-		</div>
+		</div><br>
+		
 	</div>
 </div>
 <br></body>

@@ -42,7 +42,7 @@ public class HomeController {
 		ArrayList<NoticeVO> notice = (ArrayList<NoticeVO>) map.get("list");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", notice);
-		mv = noteService.receiveLists(request);
+		mv = noteService.uncheckedList(request);
 		map = mv.getModel();
 		ArrayList<NoteVO> notes = (ArrayList<NoteVO>) map.get("list");
 		mav.addObject("note", notes);

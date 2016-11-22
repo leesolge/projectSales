@@ -25,6 +25,65 @@ public class NoteService {
 	@Autowired
 	private NoteDAO dao;
 
+	public ModelAndView uncheckedList(HttpServletRequest request){
+		ArrayList<NoteVO> list;
+		ModelAndView mav = new ModelAndView();
+		/*정보 가공 시작*/
+		int pageSize = 10;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		String pageNum = (String) request.getParameter("pageNum");
+		String field = (String) request.getParameter("field");
+		String keyword = (String) request.getParameter("keyword");
+		if(pageNum==null||pageNum.equals("")){
+			pageNum="1";
+		}
+		if(field==null||field.equals("")){
+			field="title";
+		}
+		if(keyword==null||keyword.equals("")){
+			keyword="";
+		}
+		String newkeyword="%"+keyword+"%";
+		NoteSearchVO svo = new NoteSearchVO();
+		svo.setEmpno(empno);
+		svo.setField(field);
+		svo.setKeyword(newkeyword);
+		
+		int count = dao.countReceiveAll(svo);
+		
+		int end = count -(pageSize*(Integer.parseInt(pageNum)-1));
+		int start = end -(pageSize-1);
+		if(start<1){
+			start = 1;
+		}
+		int max;
+		if(count%pageSize==0){
+			max = count/pageSize;
+		}else{
+			max = (count/pageSize)+1;
+		}
+		svo.setStart(start);
+		svo.setEnd(end);
+		
+		list = dao.selectUncheckedAll(svo);
+		if(list!=null){
+			for(NoteVO nvo:list){
+				Date date = nvo.getSenddate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+				String change = sdf.format(date);
+				nvo.setChange(change);
+			}
+		}
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("field", field);
+		mav.addObject("keyword", keyword);
+		mav.addObject("max", max);
+		return mav;
+	}
+	
 	public ModelAndView restore(HttpServletRequest request){
 		RedirectView rv = null;
 		rv = new RedirectView("/erp/admin/note");

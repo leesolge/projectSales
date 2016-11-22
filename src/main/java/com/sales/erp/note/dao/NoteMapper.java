@@ -9,6 +9,7 @@ import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
 
 public interface NoteMapper extends Serializable{
+	ArrayList<NoteVO> selectUncheckedAll(NoteSearchVO vo);
 	void deleteOne(int noteNum);
 	void restoreOne(int noteNum);
 	ArrayList<NoteVO> selectSend(String empno);

@@ -17,6 +17,11 @@ public class NoteDAO implements NoteMapper{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public ArrayList<NoteVO> selectUncheckedAll(NoteSearchVO vo){
+		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
+		return noteMapper.selectUncheckedAll(vo);
+	}
+	
 	public void restoreOne(int noteNum) {
 		NoteMapper noteMapper = sqlSession.getMapper(NoteMapper.class);
 		noteMapper.restoreOne(noteNum);
