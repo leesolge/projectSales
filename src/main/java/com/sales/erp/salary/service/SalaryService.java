@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,14 @@ public class SalaryService {
 	@Autowired
 	private SalaryDAO dao;
 	
-	public ModelAndView confirmSalaries(){
+	@Scheduled(cron="0 0 0 1 * *")
+	public void confirmSalaries(){
+		
 		ArrayList<MemberVO> memberList = dao.allMemberExceptAdmin();
 		long all = 0;
 		Calendar today = Calendar.getInstance();
 		int year = today.get(Calendar.YEAR);
-		int month = today.get(Calendar.MONTH)+2;/*실험 중이니 나중에 +2>>+1로 바꿀 것*/
+		int month = today.get(Calendar.MONTH)+1;/*실험 중이니 나중에 +2>>+1로 바꿀 것*/
 		String cYear = String.valueOf(year);
 		String cMonth = String.valueOf(month);
 		if(cMonth.length()<2){
@@ -122,7 +125,6 @@ public class SalaryService {
 			all += svo.getSalary();
 		}
 		System.out.println(all);
-		return null;
 	}
 	
 	public ModelAndView viewSalary(HttpServletRequest request) throws Exception{
