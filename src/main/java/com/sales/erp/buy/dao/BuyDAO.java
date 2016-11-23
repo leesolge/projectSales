@@ -47,11 +47,6 @@ public class BuyDAO {
 		return mapper.buyListAppWaitTeam(mvo);
 	}
 
-	public ArrayList<BuyListVO> buyListAppWaitAll(MemberVO mvo) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListAppWaitAll(mvo);
-	}
-
 	public ArrayList<BuyListVO> buyListWaitAll() {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.buyListWaitAll();
@@ -60,5 +55,30 @@ public class BuyDAO {
 	public ArrayList<BuyVO> buyContent(BuyVO voParam) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.buyContent(voParam);
+	}
+
+	public void buyApproveManager(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyApproveManager(buynum);
+	}
+
+	public void buyApproveAdmin(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyApproveAdmin(buynum);
+	}
+
+	public ArrayList<BuyListVO> buyAppListAll() {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyAppListAll();
+	}
+
+	public ArrayList<BuyListVO> buyAppListTeam(MemberVO mvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyAppListTeam(mvo);
+	}
+
+	public ArrayList<BuyListVO> buyAppList(MemberVO mvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyAppList(mvo);
 	}
 }

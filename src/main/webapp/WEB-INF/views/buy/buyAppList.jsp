@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
-	<form action="/erp/employee/buy_request_content" name="requestContent" method="post">
-		<input type="hidden" name="onum" value="0">
+	<form action="/erp/buy/buyContent" name="buyContent" method="post">
+		<input type="hidden" name="buynum" value="0">
 	</form>
 	<div class="w3-container w3-center">
 		<h2>구매요청 [${count }건]</h2>
@@ -22,11 +24,12 @@
 			</tr>
 			<c:forEach var="list" items="${list}">
 				<tr>
-					<td>${list.onum}</td>
-					<td>${list.regdate}</td>
+					<td>${list.buynum}</td>
+					<td><fmt:formatDate value="${list.regdate}"
+							pattern="yyyy-MM-dd" /></td>
 					<td>${list.empno}</td>
 					<td>${list.title}</td>					
-					<td><a href="javascript:content('${list.onum}')">내용</a></td>
+					<td><a href="javascript:content('${list.buynum}')">내용</a></td>
 					<td>취소</td>
 				</tr>
 			</c:forEach>
@@ -36,9 +39,9 @@
 
 <script type="text/javascript">	
 	function content(num) {
-		var requestContent = document.requestContent;
-		requestContent.onum.value = num;
-		requestContent.submit();
+		var buyContent = document.buyContent;
+		buyContent.buynum.value = num;
+		buyContent.submit();
 	}
 </script>
 </html>

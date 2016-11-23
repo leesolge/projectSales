@@ -22,10 +22,18 @@ public interface BuyMapper extends Serializable {
 
 	ArrayList<BuyListVO> buyListAppWaitTeam(MemberVO mvo);
 
-	ArrayList<BuyListVO> buyListAppWaitAll(MemberVO mvo);
-
 	ArrayList<BuyListVO> buyListWaitAll();
 
 	ArrayList<BuyVO> buyContent(BuyVO voParam);
+
+	void buyApproveManager(String buynum);
+
+	void buyApproveAdmin(String buynum);
+
+	ArrayList<BuyListVO> buyAppListTeam(MemberVO mvo);
+
+	ArrayList<BuyListVO> buyAppListAll();
+
+	ArrayList<BuyListVO> buyAppList(MemberVO mvo);
 
 }

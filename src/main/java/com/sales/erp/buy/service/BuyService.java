@@ -15,7 +15,6 @@ import com.sales.erp.buy.dao.BuyDAO;
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
 import com.sales.erp.member.vo.MemberVO;
-import com.sales.erp.member.vo.OrderRequestVO;
 import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;
 
@@ -43,7 +42,8 @@ public class BuyService {
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
 
-		ArrayList<String> list = new ArrayList<String>(); // Parameter값 저장하기 위한 list
+		ArrayList<String> list = new ArrayList<String>(); // Parameter값 저장하기 위한
+															// list
 
 		Enumeration var = request.getParameterNames();
 		String var_name;
@@ -62,14 +62,17 @@ public class BuyService {
 			bvo.setBuycomment(list.get(i + 2));
 			if (mvo.getAuth().equals("ROLE_EMPLOYEE"))
 				bvo.setBuystep(0); // 사원일 경우 승인단계 0으로 지정
-			else if(mvo.getAuth().equals("ROLE_MANAGER"))
+			else if (mvo.getAuth().equals("ROLE_MANAGER"))
 				bvo.setBuystep(1); // 팀장급일 경우 승인단계 1로 지정
 			else {
 				bvo.setBuystep(2); // 팀장급 이상일 경우 승인단계 2로 지정
-				
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Product 내용 변경 추가해야함
 
-			}				
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Product
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 내용
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 변경
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 추가해야함
+
+			}
 
 			if (i == 1)
 				dao.buyWrite(bvo); // 구매요청 번호생성 및 등록
@@ -84,15 +87,14 @@ public class BuyService {
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
-		
+
 		BuyVO voParam = new BuyVO();
 		voParam.setEmpno(mvo.getEmpno());
 		ArrayList<BuyListVO> list = null;
 
 		if (mvo.getAuth().equals("ROLE_ADMIN")) {
 			list = dao.buyListWaitAll();
-		}
-		else{
+		} else {
 			list = dao.buyListWait(voParam);
 		}
 		for (int i = 0; i < list.size(); i++) {
@@ -110,8 +112,6 @@ public class BuyService {
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
-		System.out.println("buyListAppWait Service");
-		System.out.println("Auth : " + mvo.getAuth());
 		ArrayList<BuyListVO> list = null;
 		if (mvo.getAuth().equals("ROLE_MANAGER")) {
 			list = dao.buyListAppWaitTeam(mvo);
@@ -122,7 +122,7 @@ public class BuyService {
 		}
 
 		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
-			list = dao.buyListAppWaitAll(mvo);
+			list = dao.buyListWaitAll();
 			for (int i = 0; i < list.size(); i++) {
 				ProductVO name = pdao.selectOne(list.get(i).getProcode());
 				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
@@ -139,6 +139,48 @@ public class BuyService {
 		voParam.setBuynum(Integer.parseInt(request.getParameter("buynum")));
 		ArrayList<BuyVO> list = dao.buyContent(voParam);
 		mav.addObject("list", list);
+		mav.addObject("buynum", voParam.getBuynum());
+		return mav;
+	}
+
+	public void buyApprove(HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberVO mvoParam = new MemberVO();
+		mvoParam.setEmpno(auth.getName());
+		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
+
+		if (mvo.getAuth().equals("ROLE_MANAGER")) {
+			dao.buyApproveManager(request.getParameter("buynum"));
+		} else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
+			dao.buyApproveAdmin(request.getParameter("buynum"));
+		}
+	}
+
+	public ModelAndView buyAppList() {
+		ModelAndView mav = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberVO mvoParam = new MemberVO();
+		mvoParam.setEmpno(auth.getName());
+		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
+
+		BuyVO voParam = new BuyVO();
+		voParam.setEmpno(mvo.getEmpno());
+		ArrayList<BuyListVO> list = null;
+
+		// 관리자나 자재팀 전체받아오기  //팀장일때 팀내용 받아오기  // 개인일때 개인내용 받아오기
+		if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
+			list = dao.buyAppListAll();
+		} else if (mvo.getAuth().equals("ROLE_MANAGER")) {
+			list = dao.buyAppListTeam(mvo);
+		} else if (mvo.getAuth().equals("ROLE_EMPLOYEE")) {
+			list = dao.buyAppList(mvo);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			ProductVO name = pdao.selectOne(list.get(i).getProcode());
+			list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
+		}
+		mav.addObject("list", list);
+		mav.addObject("count", list.size());
 		return mav;
 	}
 }

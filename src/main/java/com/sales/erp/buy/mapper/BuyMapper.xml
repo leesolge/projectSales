@@ -38,6 +38,7 @@
 		]]>		
 	</select>
 
+	<!-- 자재팀 / 관리자 승인대기목록 불러오기 -->
 	<select id="buyListWaitAll" resultType="com.sales.erp.buy.vo.BuyListVO">
 		<![CDATA[
 		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
@@ -65,16 +66,50 @@
 		WHERE BUYSTEP=0 GROUP BY BUYNUM ORDER BY BUYNUM DESC
 	</select>
 
-	<!-- 자재팀 / 관리자 승인대기목록 불러오기 -->
-	<select id="buyListAppWaitAll" parameterType="com.sales.erp.member.vo.MemberVO"
-		resultType="com.sales.erp.buy.vo.BuyListVO">
-		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO, MAX(PROCODE) AS PROCODE, MAX(TEAM) AS TEAM, MAX(BUYSTEP) AS BUYSTEP FROM		
-		(SELECT B.BUYNUM AS BUYNUM, B.EMPNO AS EMPNO, B.PROCODE AS PROCODE, B.AMOUNT AS AMOUNT, B.BUYCOMMENT AS BUYCOMMENT,
-					 B.REGDATE AS REGDATE, B.BUYSTEP AS BUYSTEP , B.DELETED AS DELETED, S.TEAM AS TEAM FROM BUY B, SMEMBER S WHERE B.EMPNO = S.EMPNO) 		
-		WHERE BUYSTEP=1 GROUP BY BUYNUM ORDER BY BUYNUM DESC		
-	</select>
-	
+	<!-- 구매요청 내용보기 -->
 	<select id="buyContent" resultType="com.sales.erp.buy.vo.BuyVO">
 		SELECT * FROM BUY WHERE BUYNUM = #{buynum} 
+	</select>
+
+	<!-- 구매요청 승인처리(매니저) -->
+	<update id="buyApproveManager" parameterType="java.lang.String">
+		UPDATE BUY SET BUYSTEP = 1 WHERE BUYNUM=#{buynum}
+	</update>
+	
+	<!-- 구매요청 승인처리(관리자) -->
+	<update id="buyApproveAdmin" parameterType="java.lang.String">
+		UPDATE BUY SET BUYSTEP = 2, APPDATE=SYSDATE WHERE BUYNUM=#{buynum}
+	</update>
+	
+		<!-- 팀장급 승인목록 불러오기 -->
+	<select id="buyAppListTeam" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.buy.vo.BuyListVO">
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO, MAX(PROCODE) AS PROCODE, MAX(TEAM) AS TEAM, MAX(BUYSTEP) AS BUYSTEP FROM 
+		(SELECT * FROM
+		(SELECT B.BUYNUM AS BUYNUM, B.EMPNO AS EMPNO, B.PROCODE AS PROCODE, B.AMOUNT AS AMOUNT, B.BUYCOMMENT AS BUYCOMMENT,
+					 B.REGDATE AS REGDATE, B.BUYSTEP AS BUYSTEP , B.DELETED AS DELETED, S.TEAM AS TEAM FROM BUY B, SMEMBER S WHERE B.EMPNO = S.EMPNO) 
+		WHERE TEAM=#{team})
+		WHERE BUYSTEP=2 GROUP BY BUYNUM ORDER BY BUYNUM DESC
+	</select>
+	
+	<!-- 자재팀 / 관리자 승인목록 불러오기 -->
+	<select id="buyAppListAll" resultType="com.sales.erp.buy.vo.BuyListVO">
+		<![CDATA[
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
+		MAX(PROCODE) AS PROCODE, MAX(BUYSTEP) AS BUYSTEP, MAX(TEAM) AS TEAM FROM 
+		(SELECT B.BUYNUM AS BUYNUM, B.EMPNO AS EMPNO, B.PROCODE AS PROCODE, B.AMOUNT AS AMOUNT, B.BUYCOMMENT AS BUYCOMMENT,
+					 B.REGDATE AS REGDATE, B.BUYSTEP AS BUYSTEP , B.DELETED AS DELETED, S.TEAM AS TEAM FROM BUY B, SMEMBER S WHERE B.EMPNO = S.EMPNO)
+		WHERE BUYSTEP=2 GROUP BY BUYNUM ORDER BY BUYNUM DESC
+		]]>
+	</select>
+	
+	<!-- 개인 승인목록 불러오기 -->
+	<select id="buyAppList" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.buy.vo.BuyListVO">
+		<![CDATA[
+		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
+		MAX(PROCODE) AS PROCODE, MAX(BUYSTEP) AS BUYSTEP FROM BUY WHERE EMPNO=#{empno} AND BUYSTEP=2
+		GROUP BY BUYNUM ORDER BY BUYNUM DESC
+		]]>		
 	</select>
 </mapper>

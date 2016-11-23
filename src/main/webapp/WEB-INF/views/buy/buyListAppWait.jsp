@@ -11,18 +11,25 @@
 	<form action="/erp/buy/buyContent" name="buyContent" method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
+	<form action="/erp/buy/buyApprove" name="buyApprove"
+		method="post">
+		<input type="hidden" name="buynum" value="0">
+	</form>
 	<div class="w3-container w3-center">
-		<h2>구매요청 [${count }건]</h2>
+		<h2>승인요청목록 [${count }건]</h2>
 		<table class="w3-table w3-centered">
 			<tr>
 				<th>등록번호</th>
 				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
-				<th>팀</th>
+					<th>팀</th>
 				</sec:authorize>
 				<th>요청건</th>
 				<th>등록날짜</th>				
 				<th>상태</th>
 				<th>내용보기</th>
+				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_BUDGET')">
+					<th>승인</th>
+				</sec:authorize>
 				<th>취소</th>
 			</tr>
 			<c:forEach var="list" items="${list}">
@@ -39,6 +46,10 @@
 							<c:if test="${list.buystep == 1}">자재팀승인대기</c:if>						
 					</td>
 					<td><a href="javascript:content('${list.buynum}')">내용</a></td>
+					<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_BUDGET')">
+						<td><input type="button" value="Approve" class="w3-btn w3-round-large"
+											onclick="javascript:approve('${list.buynum}')"></td>
+					</sec:authorize>
 					<td>취소</td>
 				</tr>
 			</c:forEach>
@@ -51,6 +62,12 @@
 		var buyContent = document.buyContent;
 		buyContent.buynum.value = num;
 		buyContent.submit();
+	}
+	
+	function approve(num) {
+		var buyApprove = document.buyApprove;
+		buyApprove.buynum.value = num;
+		buyApprove.submit();
 	}
 </script>
 </html>

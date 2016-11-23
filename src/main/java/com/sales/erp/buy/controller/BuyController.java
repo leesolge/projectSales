@@ -55,5 +55,19 @@ public class BuyController {
 		mav.setViewName("buy/buyContent");
 		return mav;
 	}
-
+	
+	// Product 충원 승인처리
+	@RequestMapping(value = "/buy/buyApprove", method = RequestMethod.POST)
+	public String buyApprove(HttpServletRequest request) {
+		bs.buyApprove(request);
+		return "redirect:/buy/buyListAppWait";
+	}
+	
+	// Product 충원 승인 리스트
+	@RequestMapping("/buy/buyAppList")
+	public ModelAndView buyAppList(HttpServletRequest request) {
+		ModelAndView mav = bs.buyAppList();
+		mav.setViewName("buy/buyAppList");
+		return mav;
+	}
 }

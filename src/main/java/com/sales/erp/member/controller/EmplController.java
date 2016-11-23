@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.dao.MemberDAOImpl;
-import com.sales.erp.member.service.EmplService;
 import com.sales.erp.member.vo.MemberJoinVO;
 import com.sales.erp.member.vo.MemberVO;
 
@@ -23,9 +22,6 @@ import com.sales.erp.member.vo.MemberVO;
 public class EmplController {
 	@Autowired
 	private MemberDAOImpl memberDAOImpl;
-	
-	@Autowired
-	private EmplService es;
 	
 	@RequestMapping("/my_Info")
 	public ModelAndView member_info(HttpServletRequest request) {
@@ -76,44 +72,5 @@ public class EmplController {
         }
 		memberDAOImpl.updateMember(vo);
 		return "main/main";
-	}
-	
-	@RequestMapping("/employee/buy_request_list")
-	public ModelAndView buy_request_list(HttpServletRequest request) {		
-		ModelAndView mav = es.getRequestList();		
-		mav.setViewName("empl/buy_request_list");
-		return mav;
-	}
-	
-	@RequestMapping("/employee/buy_approved_list")
-	public ModelAndView buy_approved_list(HttpServletRequest request) {		
-		ModelAndView mav = es.getRequestApprovedList();		
-		mav.setViewName("empl/buy_approved_list");
-		return mav;
-	}
-	
-	@RequestMapping(value="/employee/buy_request")
-	public ModelAndView buy_request(HttpServletRequest request) {
-		ModelAndView mav = es.Buy_RequestForm();		
-		mav.setViewName("empl/buy_request_order");
-		return mav;
-		//수정완료
-	}
-	
-	@RequestMapping(value="/employee/buy_request_manager", method=RequestMethod.POST)
-	public ModelAndView buy_request_manager(HttpServletRequest request) {
-		es.Buy_Request_Action(request);
-		ModelAndView mav = es.getRequestList();
-		mav.setViewName("empl/buy_request_list");
-		return mav;
-		//수정 완료
-	}
-	
-	@RequestMapping(value="/employee/buy_request_content", method=RequestMethod.POST)
-	public ModelAndView buy_request_content(HttpServletRequest request) {
-		
-		ModelAndView mav = es.getRequestContent(request.getParameter("onum"));
-		mav.setViewName("empl/buy_request_content");
-		return mav;
 	}
 }

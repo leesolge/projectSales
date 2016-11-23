@@ -11,6 +11,7 @@
 	<form action="/erp/buy/buyContent" name="buyContent" method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
+	
 	<div class="w3-container w3-center">
 		<h2>구매요청 [${count }건]</h2>
 		<table class="w3-table w3-centered">
@@ -52,5 +53,12 @@
 		buyContent.buynum.value = num;
 		buyContent.submit();
 	}
+	
+	function approve(num) {
+		var buyApprove = document.buyApprove;
+		buyApprove.buynum.value = num;
+		buyApprove.submit();
+	}
+
 </script>
 </html>

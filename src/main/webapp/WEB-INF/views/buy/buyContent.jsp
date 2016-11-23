@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <body>
+<form action="/erp/buy/buyApprove" name="buyApprove"
+		method="post">
+		<input type="hidden" name="buynum" value="0">
+	</form>
 	<div class="w3-container w3-center">
-		<form action="/erp/employee/buy_request_manager" method="post">
+		
 			<h2>자재충원요청</h2>
 			<table class="w3-table w3-centered">
 				<tr>
@@ -19,7 +24,7 @@
 				</tr>
 			</table>
 			
-			<table class="order_list w3-table w3-centered">
+			<table class="w3-table w3-centered">
 				<tr>
 					<th>요청상품</th>
 					<th>주문수량</th>
@@ -31,12 +36,26 @@
 				<td>${list.procode }</td>
 				<td>${list.amount }</td>
 				<td>${list.buycomment }</td>
-				<td>${list.regdate }</td>
+				<td><fmt:formatDate value="${list.regdate}"
+							pattern="yyyy-MM-dd" /></td>
 				</tr>
 				</c:forEach>
 			</table>
-			<input class="w3-btn page_button"  type="submit" value="수정" >
-		</form>
+			
+			<input type="button" value="목록" onclick="javascript:history.back()">
+			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
+						<input type="button" value="Approve" class="w3-btn w3-round-large"
+			onclick="javascript:approve('${buynum}')">
+			</sec:authorize>
+			
+		
 	</div>
 </body>
+<script type="text/javascript">
+	function approve(num) {
+		var buyApprove = document.buyApprove;
+		buyApprove.buynum.value = num;
+		buyApprove.submit();
+	}
+</script>
 </html>
