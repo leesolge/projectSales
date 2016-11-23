@@ -12,7 +12,9 @@
 <body>
 
 	<div class="w3-container w3-center">
-		<form action="/erp/member/memberUpdateForm" name="memberUpdateForm"	method="post">
+		<form action="/erp/member/memberUpdateFormE" name="UpdateFormE"	method="post">
+		</form>
+		<form action="/erp/admin/memberUpdateFormA" name="UpdateFormA"	method="post">
 			<input type="hidden" name="empno" value="${vo.empno}">
 		</form>
 		<c:if test="${memberInfo.empno==vo.empno}">
@@ -69,16 +71,19 @@
 			</tr>
 		</table>
 		<c:if test="${memberInfo.empno==vo.empno}">
-			<input type="button" value="내정보수정" onclick="Update()" />
+			<input type="button" value="내정보수정" onclick="Update('UpdateFormE')" />
 		</c:if>
+		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+			<input type="button" value="사원정보수정" onclick="Update('UpdateFormA')" />
+		</sec:authorize>
 	</div>
 
 </body>
 
 <script type="text/javascript">
-	function Update() {
-		var memberUpdateForm = document.memberUpdateForm;
-		memberUpdateForm.submit();
+	function Update(formname) {
+		var name=formname;
+		document.forms[name].submit();
 	}
 </script>
 </html>

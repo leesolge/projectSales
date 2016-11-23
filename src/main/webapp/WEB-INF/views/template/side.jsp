@@ -87,7 +87,7 @@
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc4" class="w3-accordion-content w3-padding">
-		    	<a href="/erp/admin/member_ok">- 가입 승인</a> 
+		    	<a href="/erp/admin/memberListWait">- 가입 승인</a> 
 				<a href="/erp/member/memberList">- 사원 명부</a>
 				<a href="/erp/transact/transactlist_default">- 거래내역</a>
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>

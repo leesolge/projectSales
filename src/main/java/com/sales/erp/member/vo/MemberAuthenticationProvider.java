@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.sales.erp.member.dao.MemberDAOImpl;
+import com.sales.erp.member.dao.MemberDAO;
 
 
 @Component
 public class MemberAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	private MemberDAOImpl memberDAOImpl;
+	private MemberDAO dao;
 	
 	@Autowired
     private MemberUserDetailsService sc;
@@ -42,7 +42,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("틀렸어!!패스워드가 일치하지 않습니다.");
         }
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        MemberVO memberInfo = memberDAOImpl.selectMember(id);
+        MemberVO memberInfo = dao.getMemberEmpno(id);
         HttpSession session = request.getSession();
         session.setAttribute("memberInfo", memberInfo);
         return new UsernamePasswordAuthenticationToken(id, pw, user.getAuthorities());

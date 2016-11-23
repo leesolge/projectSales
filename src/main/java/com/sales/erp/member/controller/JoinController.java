@@ -137,7 +137,6 @@ public class JoinController {
 		String text = "귀하의 아이디는 [ " + vo.getEmpno() + " ]입니다.\n"
 				+ "귀하의 비밀번호는 [ " + vo.getPwd() + " ]입니다.";
 		mail.sendMail(vo, subject, text);
-		memberDAOImpl.Update_Cancel_Member(member.getEmpno());
 		return mav;
 	}
 }

@@ -26,7 +26,7 @@ public class MemberUserDetailsService implements UserDetailsService {
 
 		MemberVO vo = new MemberVO();
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		vo = memberMapper.selectMember(empno);
+		vo = memberMapper.getMemberEmpno(empno);
 		if(vo == null) throw new UsernameNotFoundException(empno);
 		
 		List<GrantedAuthority> auth = new ArrayList<>();

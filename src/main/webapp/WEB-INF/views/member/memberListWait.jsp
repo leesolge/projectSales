@@ -26,7 +26,7 @@
 				<th>CANCEL</th>
 			</tr>
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
-			<c:forEach items="${result}" var="member">
+			<c:forEach items="${list}" var="member">
 				<tr>
 					<td>${member.empno}</td>
 					<td>${member.name}</td>
@@ -34,7 +34,7 @@
 					<td>${member.team}</td>
 					<td><input type="button" value="Content"
 						class="w3-btn w3-round-large"
-						onclick="window.location='/erp/admin/member_info?empno=${member.empno}'">
+						onclick="window.location='/erp/member/memberContent?empno=${member.empno}'">
 					</td>
 					<td><input type="button" value="Approve"
 						class="w3-btn w3-round-large"

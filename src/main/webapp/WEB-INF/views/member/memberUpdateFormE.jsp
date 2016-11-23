@@ -11,64 +11,50 @@
 <body>
 
 	<div class="w3-container w3-center">
-		<h1>사원 정보 수정</h1>
+		<h1>정보 수정</h1>
 		<hr>
-
-		<form method="post" action="Admin_Update_Member"">
+		<form method="post" action="/erp/member/memberUpdateE" enctype="multipart/form-data">
 			<table class="w3-table w3-centered" style="border: 1px solid #ddd">
 				<tr>
-					<td rowspan="6"><img
-						src="/erp/resources/portraits/${vo.portrait}" width="100%"></td>
+					<td rowspan="5">
+					<img src="/erp/resources/portraits/${vo.portrait}" width="100%"></td>
 					<th>EMPNO</th>
-					<td><input type="hidden" name="empno" value="${vo.empno}">${vo.empno}</td>
+					<td><input type="hidden" name="empno" value="${vo.empno}"></td>
 					<th>NAME</th>
-					<td>${vo.name}</td>
+					<td><input type="text" name="name" value="${vo.name}"></td>
 				</tr>
 
 
 				<tr>
 					<th>PASSWORD</th>
-					<td>${vo.pwd}</td>
+					<td><input type="text" name="pwd" value="${vo.pwd}"></td>
 					<th>GENDER</th>
 					<td>${vo.gender}</td>
 				</tr>
 
 				<tr>
 					<th>ADDRESS</th>
-					<td>${vo.address}</td>
+					<td><input type="text" name="address" value="${vo.address}"></td>
 					<th>PHONE</th>
-					<td>${vo.phone}</td>
+					<td><input type="text" name="phone" value="${vo.phone}"></td>
 				</tr>
 
 				<tr>
 					<th>EMAIL</th>
-					<td>${vo.email}</td>
+					<td><input type="text" name="email" value="${vo.email}"></td>
 					<th>AUTH</th>
-					<td><select name="auth">
-							<option class="w3-text-red" value="${vo.auth}"  selected>${vo.auth}</option>
-							<option value="ROLE_ADMIN">ROLE_ADMIN</option>
-							<option value="ROLE_BUDGET">ROLE_BUDGET</option>
-							<option value="ROLE_MANAGER">ROLE_MANAGER</option>
-							<option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
-							<option value="ROLE_EE">ROLE_EE</option>
-					</select></td>
+					<td>"${vo.auth}</td>
 				</tr>
   
 				<tr>
 					<th>ACCOUNT</th>
-					<td>${vo.account}</td>
+					<td><input type="text" name="account" value="${vo.account}"></td>
 					<th>TEAM</th>
-					<td><select  name="team">
-							<option class="w3-text-red"  value="${vo.team}" selected>${vo.team}</option>
-							<option value="영업1팀">영업1팀</option>
-							<option value="영업2팀">영업2팀</option>
-							<option value="자재팀">자재팀</option>
-					</select></td>
-
-
+					<td>${vo.team}</td>
 				</tr>
 
 				<tr>
+					<td><input type="file" name="file" ></td>
 					<th>BIRTH</th>
 					<td>${vo.birth}</td>
 					<th>JOINDATE</th>
@@ -86,16 +72,13 @@
 							class="w3-btn w3-round-large" value="정보수정완료"></td>
 						<td><input type="button" value="취소"
 							class="w3-btn w3-round-large"
-							onclick="window.location='/erp/admin/member_list?empno=${vo.empno}'">
+							onclick="window.location='/erp/member/memberContent?empno=${vo.empno}'">
 						</td>
 					</tr>
 				</table>
 			</div>
 		</form>
-
 	</div>
-
-
 	<div>
 		<p></p>
 	</div>

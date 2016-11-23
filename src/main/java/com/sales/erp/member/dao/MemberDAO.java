@@ -20,72 +20,6 @@ public class MemberDAO{
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.insertMember(member);
 	} 
-	
-	public MemberVO selectMember(String empno) {
-		MemberVO vo = new MemberVO();
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		vo = memberMapper.selectMember(empno);
-		
-		return vo;
-	}
-	
-
-	public void updateMember(MemberJoinVO vo) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		memberMapper.updateMember(vo);
-	}
-	
-
-	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo) {
-		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		member = memberMapper.Admin_Ok_Member(vo);
-		
-		return member;
-	}
-	
-
-	public ArrayList<MemberVO> Admin_Approved_Member(MemberSearch vo) {
-		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		member = memberMapper.Admin_Approved_Member(vo);
-		
-		return member;
-	}
-	
-
-	public void Update_Approve_Member(String empno) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		memberMapper.Update_Approve_Member(empno);
-	}
-	
-
-	public void Update_Cancel_Member(String empno) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		memberMapper.Update_Cancel_Member(empno);
-	}
-
-
-	public void Admin_Update_Member(MemberVO vo) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		memberMapper.Admin_Update_Member(vo);	
-	}
-
-
-	public int Count_Approved_Member(MemberSearch vo) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
-		int count = memberMapper.Count_Approved_Member(vo);
-		
-		return count;
-	}
-
-
-	public int Count_Ok_Member() {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
-		int count = memberMapper.Count_Ok_Member();
-		
-		return count;
-	} 	
 
 	public MemberVO ConfirmID_Member(MemberVO member){
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
@@ -95,6 +29,10 @@ public class MemberDAO{
 	
 	////////////////////////////////////새로 작성하는 부분
 
+	public MemberVO getMemberEmpno(String id) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.getMemberEmpno(id);
+	}
 	public MemberVO getMember(MemberVO mvoParam) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.getMember(mvoParam);
@@ -118,5 +56,35 @@ public class MemberDAO{
 	public ArrayList<MemberVO> memberListTeam(MemberSearch search) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.memberListTeam(search);
+	}
+
+	public void memberUpdate(MemberJoinVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		mapper.memberUpdate(vo);		
+	}
+
+	public void memberUpdateA(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		mapper.memberUpdateA(vo);			
+	}
+
+	public ArrayList<MemberVO> memberListWait(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberListWait(search);
+	}
+
+	public int memberListWaitCount(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberListWaitCount(search);
+	}
+
+	public void Approve(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		mapper.Approve(vo);		
+	}
+
+	public void Cancel(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		mapper.Cancel(vo);		
 	}
 }

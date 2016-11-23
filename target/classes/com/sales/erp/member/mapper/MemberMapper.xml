@@ -9,54 +9,17 @@
         VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, #{portrait}, #{account}, #{team})
     </insert>
     
-    <select id="selectMember" resultType="com.sales.erp.member.vo.MemberVO">
-		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
-	</select>
-	
-	<update id="updateMember" parameterType="com.sales.erp.member.vo.MemberVO" >    
-    	UPDATE SMEMBER SET NAME=#{name}, PWD=#{pwd}, ADDRESS=#{address}, PHONE=#{phone}, EMAIL=#{email}, ACCOUNT=#{account}, PORTRAIT=#{portrait} WHERE EMPNO=#{empno}         
-    </update>
-	
 	 <select id="ConfirmID_Member" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME=#{name} AND EMAIL= #{email} )
 	</select>
-	
-	<select id="Admin_Ok_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
-		<![CDATA[
-		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R>=#{start} AND R<=#{end}
-		]]>
-	</select>
-	
-	<select id="Admin_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
-		<![CDATA[
-		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE ${field} LIKE #{word} AND AUTH NOT LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R >= #{start} AND R <= #{end}
-		]]>
-	</select>
-	
-	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
-    <update id="Update_Approve_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
-    	UPDATE SMEMBER SET AUTH='ROLE_EMPLOYEE' WHERE EMPNO=#{empno}        
-    </update>
-    
-   <delete id="Update_Cancel_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
-    	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
-    </delete>
-    
-    <update id="Admin_Update_Member" parameterType="com.sales.erp.member.vo.MemberVO" >    
-    	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}         
-    </update>
-    
-    <select id="Count_Approved_Member" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="java.lang.Integer">
-    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
-    </select>
-    
-    <select id="Count_Ok_Member" resultType="java.lang.Integer">
-    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE'
-    </select>
-    
-    
+
+
     <!-- ///////////////////////////새로 작성하는 부분 -->
     <!-- 사용자 정보 불러오기 -->
+    <select id="getMemberEmpno" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
 	<select id="getMember" parameterType="com.sales.erp.member.vo.MemberVO"
 		resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
@@ -81,4 +44,36 @@
 		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE ${field} LIKE #{word} AND AUTH NOT LIKE 'ROLE_EE' AND TEAM LIKE #{team} ORDER BY EMPNO ASC) A) WHERE R >= #{start} AND R <= #{end}
 		]]>
 	</select>
+	
+	<!-- 개인정보수정 -->
+	<update id="memberUpdate" parameterType="com.sales.erp.member.vo.MemberJoinVO" >    
+    	UPDATE SMEMBER SET NAME=#{name}, PWD=#{pwd}, ADDRESS=#{address}, PHONE=#{phone}, EMAIL=#{email}, ACCOUNT=#{account}, PORTRAIT=#{portrait} WHERE EMPNO=#{empno}         
+    </update>
+    
+    <!-- 사원 가입대기 리스트 숫자 -->
+    <update id="memberUpdateA" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	UPDATE SMEMBER SET AUTH=#{auth}, TEAM=#{team} WHERE EMPNO=#{empno}         
+    </update>
+    
+    <!-- 사원 가입대기 리스트 숫자-->
+    <select id="memberListWaitCount" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE'
+    </select>
+    
+    <!-- 사원 가입대기 리스트 -->
+    <select id="memberListWait" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R>=#{start} AND R<=#{end}
+		]]>
+	</select>
+	
+	<!-- 사원 가입승인 -->
+	<update id="Approve" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	UPDATE SMEMBER SET AUTH='ROLE_EMPLOYEE' WHERE EMPNO=#{empno}        
+    </update>
+    
+    <!-- 사원 가입승인거부 -->
+    <delete id="Cancel" parameterType="com.sales.erp.member.vo.MemberVO" >    
+    	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
+    </delete>
 </mapper>
