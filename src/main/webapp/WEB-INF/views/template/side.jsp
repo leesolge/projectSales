@@ -49,6 +49,9 @@
 				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
 				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
+				<a href="/erp/sell/sellWriteForm">- 판매등록</a>
+				<a href="/erp/sell/sellListWait">- 판매대기목록</a>
+				<a href="/erp/sell/sellAppList">- 판매목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>

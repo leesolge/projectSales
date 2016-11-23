@@ -15,11 +15,7 @@
 					등록자 사번
 				</td>
 				<td>
-					<select name="empno" required="required">
-						<c:forEach var="mlist" items="${mlist}">
-							<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
-						</c:forEach>
-					</select>
+			a
 				</td>
 			</tr>
 			<tr>
@@ -43,11 +39,7 @@
 					수주상품
 				</td>
 				<td>
-					<select name="procode" required="required">
-						<c:forEach var="list" items="${plist}">
-							<option value="${list.procode}">${list.procode}&nbsp;${list.proname}</option>
-						</c:forEach>
-					</select>
+				a
 				</td>
 			<tr>
 				<td>
