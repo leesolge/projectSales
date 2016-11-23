@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="w3-container w3-center">
-		<h2>댓글 수정</h2>
+		<h2>대댓글 입력</h2>
 	</div>
 
 	<div class="w3-row">
@@ -21,7 +21,7 @@
 		</div>
 		<div class="w3-rest w3-container ">
 
-			<form action="/erp/freeboard/replyUpdate" method="post">
+			<form action="/erp/freeboard/reReplyWrite" method="post">
 				<input type="hidden" name="num" value="${vo.num}"> 
 				<input type="hidden" name="replynum" value="${vo.replynum}">
 				<table class="w3-table w3-striped w3-border w3-centered">
@@ -29,17 +29,15 @@
 						<th style="width: 10%">작성자</th>
 						<th style="width: 60%">내용</th>
 						<th style="width: 20%">작성일</th>
-						<th style="width: 10%">수정</th>
-
-
+						<th style="width: 10%">작성</th>
 					</tr>
 					<tr>
 
 						<td>${vo.empno}</td>
-						<td><input class="w3-input w3-border w3-round-large" type="text" name="reply" value="${vo.reply}" /></td>
+						<td><input class="w3-input w3-border w3-round-large" type="text" name="reply"/></td>
 						<td><fmt:formatDate value="${vo.regDate}"
 								pattern="yy.MM.dd-hh:mm:ss" /></td>
-						<td><input type="submit" value="수정" /></td>
+						<td><input type="submit" value="작성" /></td>
 					</tr>
 				</table>
 			</form>

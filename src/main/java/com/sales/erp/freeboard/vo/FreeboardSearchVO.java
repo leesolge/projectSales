@@ -1,6 +1,6 @@
 package com.sales.erp.freeboard.vo;
 
-public class FreeboardSearch {
+public class FreeboardSearchVO {
 	private String field, word;
 	private int start, end;
 	

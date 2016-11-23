@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -9,10 +8,10 @@
 	</div>
 	
 	<div class="w3-row"> 
-		<div class="w3-col w3-left" style="width:10%"><p></p></div>
-		<div class="w3-col w3-right" style="width:10%"><p></p></div>
+		<div class="w3-col w3-left" style="width:15%"><p></p></div>
+		<div class="w3-col w3-right" style="width:15%"><p></p></div>
 		<div class="w3-rest w3-container">
-			<form class="w3-container" action="write" method="post" name="write">
+			<form class="w3-container" action="freeboardWrite" method="post" name="write">
 				<p>
 					<label class="w3-wide">Name</label>
 					<input
@@ -36,7 +35,7 @@
 				<div class="w3-row">
 					<div class="w3-col w3-left" style="width:10%"><p></p></div>
 					<div class="w3-col w3-right" style="width:10%"><button class="w3-btn w3-round-large"
-							onclick="location='/erp/freeboard/list'">목록으로</button></div>
+							onclick="location='/erp/freeboard/freeboardList'">목록으로</button></div>
 					<div class="w3-rest w3-center">
 						<input class="w3-btn w3-round-large" type="submit" value="쓰기" /> 
 						<input class="w3-btn w3-round-large" type="reset" value="취소" />

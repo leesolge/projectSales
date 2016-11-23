@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.freeboard.service.FreeboardService;
-import com.sales.erp.freeboard.vo.FreeboardVO;
-import com.sales.erp.freeboard.vo.ReplyVO;
 
 @Controller
 public class FreeboardController {
@@ -19,102 +16,99 @@ public class FreeboardController {
 	@Autowired
 	private FreeboardService freeboardService;
 	
-	@RequestMapping("/freeboard/list")
-	public ModelAndView viewFreeboard(HttpServletRequest request){
+	// 자유게시판 글 리스트 요청
+	@RequestMapping("/freeboard/freeboardList")
+	public ModelAndView freeboardList(HttpServletRequest request){
 		ModelAndView mav = freeboardService.getFreeboardList(request);
 		mav.setViewName("/freeboard/freeboardList");
 		return mav;
 	}
 	
-	@RequestMapping("/freeboard/writeForm")
-	public String writeForm(){
-		return "/freeboard/writeForm";
+	// 자유게시판 글쓰기양식
+	@RequestMapping("/freeboard/freeboardWriteForm")
+	public String writeForm(HttpServletRequest request){
+		return "/freeboard/freeboardWriteForm";
 	}
 	
-	@RequestMapping(value="/freeboard/write", method=RequestMethod.POST)
-	public String write(HttpServletRequest request){
-		FreeboardVO vo = new FreeboardVO();
-		vo.setName(request.getParameter("name"));
-		vo.setTitle(request.getParameter("title"));
-		vo.setContent(request.getParameter("content"));
-		freeboardService.insertFreeboard(vo);
-		return "redirect:/freeboard/list";
+	// 자유게시판 글쓰기
+	@RequestMapping(value="/freeboard/freeboardWrite", method=RequestMethod.POST)
+	public String freeboardWrite(HttpServletRequest request){
+		freeboardService.freeboardWrite(request);
+		return "redirect:/freeboard/freeboardList";
 	}
 	
-	@RequestMapping("/freeboard/read")
-	public ModelAndView read(HttpServletRequest request){
-		ModelAndView mav = freeboardService.readFreeboard(request);
-		mav.setViewName("/freeboard/read");
+	// 자유게시판 글 하나 클릭해서 글 보기
+	@RequestMapping("/freeboard/freeboardContent")
+	public ModelAndView freeboardContent(HttpServletRequest request){
+		ModelAndView mav = freeboardService.freeboardContent(request);
+		mav.setViewName("/freeboard/freeboardContent");
 		return mav;
+	}
+	
+	// 자유게시판 수정양식
+	@RequestMapping("/freeboard/freeboardUpdateForm")
+	public ModelAndView freeboardUpdateForm(HttpServletRequest request){
+		ModelAndView mav = freeboardService.freeboardUpdateForm(request);
+		mav.setViewName("/freeboard/freeboardUpdateForm");
+		return mav;
+	}
+	
+	// 자유게시판 수정하기
+	@RequestMapping("/freeboard/freeboardUpdate")
+	public String freeboardUpdate(HttpServletRequest request){
+		String num = request.getParameter("num");
+		freeboardService.freeboardUpdate(request);
+		return "redirect:/freeboard/freeboardContent?num=" + num;
+	}
+	
+	// 자유게시판 글 삭제
+	@RequestMapping("/freeboard/freeboardDelete")
+	public String freeboardDelete(HttpServletRequest request){
+		freeboardService.freeboardDelete(request);
+		return "redirect:/freeboard/freeboardList";
 	}
 	
 	//댓글
-	@RequestMapping(value="/freeboard/reply", method=RequestMethod.POST)
-	public ModelAndView reply(HttpServletRequest request){
+	@RequestMapping(value="/freeboard/replyWrite", method=RequestMethod.POST)
+	public String replyWrite(HttpServletRequest request){
 		String num = request.getParameter("num");
-		String name = request.getParameter("name");
-		String reply = request.getParameter("reply");
-		String empno = request.getParameter("empno");
-		
-		ReplyVO vo = new ReplyVO();
-		vo.setNum(num);
-		vo.setName(name);
-		vo.setReply(reply);
-		vo.setEmpno(empno);
-		
-		freeboardService.insertReply(vo);
-		
-		return new ModelAndView("redirect:/freeboard/read?num="+num);
+		freeboardService.replyWrite(request);
+		return "redirect:/freeboard/freeboardContent?num="+num;
 	}
 	
-	@RequestMapping("/freeboard/delete")
-	public String delete(@RequestParam("num") int num){
-		int result = freeboardService.deleteFreeboard(num); //실패: 0, 성공: 1
-		String res = "redirect:/freeboard/list";
-		if(result == 0){
-			res = "/freeboard/fail"; //fail.jsp
-		}
-		return res;
-	}
-	
-	@RequestMapping("/freeboard/updateForm")
-	public ModelAndView updateForm(HttpServletRequest request){
-		ModelAndView mav = freeboardService.getFreeboard(request);
-		mav.setViewName("/freeboard/updateForm");
+	@RequestMapping(value="/freeboard/reReplyWriteForm", method=RequestMethod.POST)
+	public ModelAndView reReplyWriteForm(HttpServletRequest request){
+		ModelAndView mav = freeboardService.replyUpdateForm(request);
+		mav.setViewName("/freeboard/reReplyWriteForm");
 		return mav;
 	}
 	
-	@RequestMapping("/freeboard/update")
-	public String update(FreeboardVO vo){
-		System.out.println("update=>"+vo);
-		freeboardService.updateFreeboard(vo); //실패: 0, 성공: 1
-		//System.out.println("update result=>"+result);
-		
-		String res = "redirect:/freeboard/list";
-		
-		/*if(result == 0){
-			res = "/freeboard/fail";
-		}*/
-		return res;
+	//대댓글 작성
+	@RequestMapping(value="/freeboard/reReplyWrite", method=RequestMethod.POST)
+	public String reReplyWrite(HttpServletRequest request){
+		String num = request.getParameter("num");
+		freeboardService.reReplyWrite(request);
+		return "redirect:/freeboard/freeboardContent?num="+num;
 	}
-	
 	
 	@RequestMapping(value="/freeboard/replyUpdateForm", method=RequestMethod.POST)
 	public ModelAndView replyUpdateForm(HttpServletRequest request){
-		ModelAndView mav = freeboardService.getReply(request);
+		ModelAndView mav = freeboardService.replyUpdateForm(request);
 		mav.setViewName("/freeboard/replyUpdateForm");
 		return mav;
 	}
 	
 	@RequestMapping(value="/freeboard/replyUpdate", method=RequestMethod.POST)
 	public String replyUpdate(HttpServletRequest request){
-		freeboardService.updateReply(request);
-		return "redirect:/freeboard/list";
+		String num = request.getParameter("num");
+		freeboardService.replyUpdate(request);
+		return "redirect:/freeboard/freeboardContent?num="+num;
 	}
 	
 	@RequestMapping(value="/freeboard/replyDelete", method=RequestMethod.POST)
 	public String replyDelete(HttpServletRequest request){
-		freeboardService.deleteReply(request);
-		return "redirect:/freeboard/list";
+		String num = request.getParameter("num");
+		freeboardService.replyDelete(request);
+		return "redirect:/freeboard/freeboardContent?num="+num;
 	}
 }

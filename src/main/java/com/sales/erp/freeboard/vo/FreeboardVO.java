@@ -1,36 +1,17 @@
 package com.sales.erp.freeboard.vo;
 
-import oracle.sql.DATE;
+import java.util.Date;
 
 public class FreeboardVO {
-	int parent, sort, tab;
-	String num, name, title, content;
-	DATE regDate;
+	private int num;
+	private String name, title, content;
+	private Date regDate;
 	
-	
-	public String getNum() {
+	public int getNum() {
 		return num;
 	}
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
-	}
-	public int getParent() {
-		return parent;
-	}
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-	public int getSort() {
-		return sort;
-	}
-	public void setSort(int sort) {
-		this.sort = sort;
-	}
-	public int getTab() {
-		return tab;
-	}
-	public void setTab(int tab) {
-		this.tab = tab;
 	}
 	public String getName() {
 		return name;
@@ -50,11 +31,12 @@ public class FreeboardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public DATE getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(DATE regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 
 }

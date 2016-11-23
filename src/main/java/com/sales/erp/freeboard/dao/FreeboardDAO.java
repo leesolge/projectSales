@@ -6,11 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.freeboard.vo.FreeboardSearch;
+import com.sales.erp.freeboard.vo.FreeboardReplyVO;
+import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
-import com.sales.erp.freeboard.vo.ReplyForUpdateVO;
-import com.sales.erp.freeboard.vo.ReplyVO;
-import com.sales.erp.member.vo.MemberVO;
 
 @Repository
 public class FreeboardDAO {
@@ -18,70 +16,69 @@ public class FreeboardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public ArrayList<FreeboardVO> getFreeboardList(FreeboardSearch search){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.getFreeboardList(search);
+	public ArrayList<FreeboardVO> getFreeboardList(FreeboardSearchVO search){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.getFreeboardList(search);
 	}
 	
-	public int getFreeboardCount(FreeboardSearch search){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.getFreeboardCount(search);
+	public int getFreeboardCount(FreeboardSearchVO search){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.getFreeboardCount(search);
 	}
 	
-	public void insertFreeboard(FreeboardVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		freeboardDAO.insertFreeboard(vo);
+	public void freeboardWrite(FreeboardVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.freeboardWrite(vo);
 	}
 	
-	public FreeboardVO getFreeboard(String num){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.getFreeboard(num);
+	public FreeboardVO freeboardContent(String num){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.freeboardContent(num);
 	}
 	
-	public int deleteFreeboard(int num){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.deleteFreeboard(num);
+	public void freeboardUpdate(FreeboardVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.freeboardUpdate(vo);
 	}
 	
-	public void updateFreeboard(FreeboardVO vo){
-		System.out.println("DAO의 updateFreeboard 시작점");
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		System.out.println("DAO의 updateFreeboard 끝점");
-		
+	public void freeboardDelete(String num){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.freeboardDelete(num);
 	}
 	
-	public FreeboardVO sendWriteform(FreeboardVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.sendWriteform(vo);
+	public void replyWrite(FreeboardReplyVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.replyWrite(vo);
 	}
 	
-	public MemberVO getNameTeamAuth(String empno){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.getNameTeamAuth(empno);
+	public void reReplyWrite(FreeboardReplyVO vo) {
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.reReplyWrite(vo);
 	}
 	
-	public ArrayList<ReplyVO> replyList(String num){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.replyList(num);
+	/*public MemberVO getNameTeamAuth(String empno){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.getNameTeamAuth(empno);
+	}*/
+	
+	public ArrayList<FreeboardReplyVO> replyList(String num){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.replyList(num);
 	}
 	
-	public void insertReply(ReplyVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		freeboardDAO.insertReply(vo);
+	public FreeboardReplyVO replyUpdateForm(FreeboardReplyVO voParam){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.replyUpdateForm(voParam);
 	}
 	
-	public ReplyVO replyListForUpdate(ReplyForUpdateVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		return freeboardDAO.replyListForUpdate(vo);
+	public void replyUpdate(FreeboardReplyVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.replyUpdate(vo);
 	}
 	
-	public void updateReply(ReplyForUpdateVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		freeboardDAO.updateReply(vo);
+	public void replyDelete(FreeboardReplyVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.replyDelete(vo);
 	}
-	
-	public void deleteReply(ReplyForUpdateVO vo){
-		FreeboardMapper freeboardDAO = sqlSession.getMapper(FreeboardMapper.class);
-		freeboardDAO.deleteReply(vo);
-	}
+
 }

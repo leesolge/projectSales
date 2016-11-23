@@ -3,38 +3,39 @@ package com.sales.erp.freeboard.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.sales.erp.freeboard.vo.FreeboardSearch;
+import com.sales.erp.freeboard.vo.FreeboardReplyVO;
+import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
-import com.sales.erp.freeboard.vo.ReplyForUpdateVO;
-import com.sales.erp.freeboard.vo.ReplyVO;
-import com.sales.erp.member.vo.MemberVO;
 
 public interface FreeboardMapper extends Serializable {
 
-	ArrayList<FreeboardVO> getFreeboardList(FreeboardSearch search);
+	ArrayList<FreeboardVO> getFreeboardList(FreeboardSearchVO search);
 	
-	public int getFreeboardCount(FreeboardSearch search); //글의 수
+	public int getFreeboardCount(FreeboardSearchVO search); //글의 수
 	
-	public void insertFreeboard(FreeboardVO vo); //글 쓰기
+	public void freeboardWrite(FreeboardVO vo); //글 쓰기
 	
-	FreeboardVO getFreeboard(String num); //읽기
+	FreeboardVO freeboardContent(String num); //읽기
 	
-	public int deleteFreeboard(int num); //삭제
+	void freeboardUpdate(FreeboardVO vo); //수정
+
+	void freeboardDelete(String num); //삭제
 	
-	public void updateFreeboard(FreeboardVO vo); //수정
+	//MemberVO getNameTeamAuth(String empno); //?
 	
-	MemberVO getNameTeamAuth(String empno); //?
+	/*여기서부터 댓글*/
+	//public FreeboardVO sendWriteform(FreeboardVO vo);
 	
-	public FreeboardVO sendWriteform(FreeboardVO vo);
+	public void replyWrite(FreeboardReplyVO vo);
 	
-	ArrayList<ReplyVO> replyList(String num);
+	public void reReplyWrite(FreeboardReplyVO vo);
 	
-	public void insertReply(ReplyVO vo);
+	ArrayList<FreeboardReplyVO> replyList(String num);
 	
-	ReplyVO replyListForUpdate(ReplyForUpdateVO vo);
+	FreeboardReplyVO replyUpdateForm(FreeboardReplyVO voParam);
 	
-	void updateReply(ReplyForUpdateVO vo);
+	void replyUpdate(FreeboardReplyVO vo);
 	
-	void deleteReply(ReplyForUpdateVO vo);
-	
+	void replyDelete(FreeboardReplyVO vo);
+
 }
