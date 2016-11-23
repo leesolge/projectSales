@@ -19,7 +19,7 @@
 		<!-- Table -->
 		<div class="w3-row">
 			<table class="w3-table w3-small w3-hoverable w3-bordered">
-				<tr class="w3-blue">
+				<tr class="w3-indigo">
 					<th style="width: 70px">번호</th>
 					<th>제목</th>
 					<th style="width: 70px">글쓴이</th>
@@ -42,7 +42,7 @@
 		<!-- Write Button -->
 		<div align="right">
 			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-				<button class="w3-btn w3-border w3-border-blue w3-round-large w3-small w3-white" onclick="location='/erp/notice/admin/noticeWriteForm'">글쓰기</button>
+				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" onclick="location='/erp/notice/admin/noticeWriteForm'">글쓰기</button>
 			</sec:authorize>
 		</div>
 		
@@ -81,8 +81,8 @@
 		<!-- Search -->
 		<div class="w3-row w3-center">
 			<form action="/erp/notice/noticeList" name="search" method="post">
-				<input class="w3-border w3-border-blue" type="text" name="word" placeholder="검색어" value="${word}" />
-				<button class="w3-border w3-border-blue w3-blue" type="submit"><i class="fa fa-search"></i></button>
+				<input class="w3-border w3-border-indigo" type="text" name="word" placeholder="검색어" value="${word}" />
+				<button class="w3-border w3-border-indigo w3-indigo" type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div><br>
 		

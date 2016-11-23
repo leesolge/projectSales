@@ -5,93 +5,66 @@
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <html>
-<body>
-	<div class="w3-container w3-center">
-		<h2>공지사항</h2>
-	</div>
-
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-container ">
-			<p>
-				<label class="w3-wide">Name</label>
-				<input
-					class="w3-input w3-border w3-round-large"
-					style="width: 20%; border-radius: 6px;" name="name" readonly
-					value="${noticeVo.name}">
-				<label class="w3-wide">Title</label>
-				<input
-					class="w3-input w3-border w3-round-large"
-					style="width: 50%; border-radius: 6px;" type="text" name="title"
-					readonly value="${noticeVo.title}">
-				<label class="w3-wide">Date</label>
-				<input class="w3-input w3-border w3-round-large"
-					style="width: 50%; border-radius: 6px;" type="text" name="regDate"
-					readonly
-					value="<fmt:formatDate value="${noticeVo.regDate}" pattern="yy-MM-dd"/>">
-			</p>
-
-			<p>
-				<label class="w3-wide">Content</label>
-				<textarea class="w3-input w3-border w3-round-large" " name="content"
-					style="width: 100%; height: 300px; resize: none; border-radius: 6px;"
-					readonly>${noticeVo.content}</textarea>
-			</p>
+<body><br>
+<div class="w3-container">
+	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding"><br>
+		
+		<!-- Info -->
+		<table class="w3-table w3-border-top w3-bordered">
+			<tr>
+				<td class="w3-text-gray" style="text-align: left; width: 80px;">제목　 | </td>
+				<td style="text-align: left;"><span>${noticeVo.title}</span></td>
+				<td class="w3-text-gray" style="text-align: left; width: 80px;">작성일 | </td>
+				<td style="width: 80px; text-align: left;"><fmt:formatDate value="${noticeVo.regDate}" pattern="yy-MM-dd"/></td>
+			</tr>
+			<tr style="text-align: left;">
+				<td class="w3-text-gray" style="text-align: left; width: 80px;">작성자 | </td>
+				<td style="text-align: left;"><span>${noticeVo.name}</span></td>
+				<td class="w3-text-gray" style="text-align: left; width: 80px;">댓글　 | </td>
+				<td style="width: 80px; text-align: left;">0</td>
+			</tr>
+		</table>
+		<br>
+		<textarea class="w3-input" name="content" style="width: 100%; min-height: 300px; resize: none;"	readonly>${noticeVo.content}</textarea>
+		<br>
+		
+		<!-- Control Button -->
+		<div class="w3-row">
+			<div class="w3-right">
+				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="수정"
+						onclick="location='/erp/notice/admin/noticeUpdateForm?num=${noticeVo.num}'" />
+					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="삭제"
+						onclick="location='/erp/notice/admin/noticeDelete?num=${noticeVo.num}'" />
+				</sec:authorize>
+				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+					onclick="location='/erp/notice/noticeList'">목록</button>
+			</div>
 		</div>
-	</div>
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-center">
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-				<input class="w3-btn w3-round-large" type="button" value="수정"
-					onclick="location='/erp/notice/admin/noticeUpdateForm?num=${noticeVo.num}'" />
-				<input class="w3-btn w3-round-large" type="button" value="삭제"
-					onclick="location='/erp/notice/admin/noticeDelete?num=${noticeVo.num}'" />
-			</sec:authorize>
-			<button class="w3-btn w3-round-large"
-				onclick="location='/erp/notice/noticeList'">목록으로</button>
-		</div>
-	</div>
-	
-	<br>
-	
-	<!-- 댓글 작성부분 -->
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-row-padding">
+		<br>
+		
+		<!-- Reply Write -->
+		<div class="w3-row">
 			<form action="/erp/notice/replyWrite" method="post">
-			
 				<input type="hidden" name="num" value="${noticeVo.num}"> 
 				<input type="hidden" name="empno" value="${memberInfo.empno}">
-				
-				<div class="w3-col s2 w3-center">
-					<label>작성자</label>
-					<input class="w3-input w3-border w3-round-large"
-						readonly value="${memberInfo.name}">
-				</div>
-				
-				<div class="w3-col s8 w3-center">
-					<label class="w3-wide">댓글</label>
-					<input class="w3-input w3-border w3-round-large" type="text" name="reply">
-				</div>
-				<div class="w3-col s1 w3-center"><p></p></div>
-				<div class="w3-col s1 w3-center">
-					<label>&nbsp;</label>
-					<input class="w3-btn w3-input page_button w3-round-large w3-right"
-						type="submit"  value="등록">
-				</div>
+				<table style="width: 100%">
+					<tr>
+						<td class="w3-text-gray" style="width: 80px;"><span>${memberInfo.name}</span></td>
+						<td><input class="w3-input w3-border" type="text" name="reply"></td>
+						<td style="width: 50px;">
+						<button class="w3-btn w3-input page_button w3-round-large" type="submit">
+						<i class="fa fa-pencil"></i>
+						</button>
+						</td>
+					</tr>
+				</table>
 			</form>
 		</div>
-	</div>
-	
-	<!-- 댓글 출력 -->
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-row-padding">
+		
+		<!-- Reply Print -->
+		<div class="w3-row w3-hoverable">
+			<br>
 			<form action="/erp/notice/replyDelete" name="replyDelete" method="post">
 				<input type="hidden" name="num" value="${noticeVo.num}">
 				<input type="hidden" name="replynum" value="0">
@@ -100,36 +73,30 @@
 				<input type="hidden" name="num" value="${noticeVo.num}">
 				<input type="hidden" name="replynum" value="0">
 			</form>
-			
-			<table class="w3-table w3-striped w3-border w3-centered">
-				<tr>
-					<th style="width: 10%">작성자</th>
-					<th style="width: 60%">내용</th>
-					<th style="width: 20%">작성일</th>
-					<th style="width: 5%">수정</th>
-					<th style="width: 5%">삭제</th>
-				</tr>
+			<table class="w3-table w3-bordered w3-striped w3-border-top w3-small" style="width: 100%">
 				<c:forEach var="replyList" items="${replyList}">
-					<tr>
-						<td>${replyList.name}</td>
-						<td>${replyList.reply}</td>
-						<td>
-							<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd-hh:mm:ss" />
-						</td>
-						<c:if test="${memberInfo.empno==replyList.empno}">
-							<td><input type="button" value="수정"
-								onclick="Update('${replyList.replynum}')" /></td>
-							<td><input type="button" value="삭제"
-								onclick="Delete('${replyList.replynum}')" /></td>
-						</c:if>
-					</tr>
+				<tr>
+					<td class="w3-text-gray" style="width: 80px;">${replyList.name}</td>
+					<td style="text-align: left;">${replyList.reply}</td>
+					<c:if test="${memberInfo.empno!=replyList.empno}">
+					<td class="w3-large" style="width: 40px;"></td>
+					<td class="w3-large" style="width: 40px;"></td>
+					</c:if>
+					<c:if test="${memberInfo.empno==replyList.empno}">
+					<td class="w3-large" style="width: 40px;">
+						<a class="w3-hover-text-blue" onclick="Update('${replyList.replynum}')"><i class="fa fa-pencil-square"></i></a>
+					</td>
+					<td class="w3-large" style="width: 40px;">
+						<a class="w3-hover-text-red" onclick="Delete('${replyList.replynum}')"><i class="fa fa-window-close"></i></a>
+					</td>
+					</c:if>
+				</tr>
 				</c:forEach>
-			</table>			
-		</div>
+			</table>
+		</div><br>
 	</div>
-
-
-</body>
+</div>
+<br></body>
 
 <script type="text/javascript">
 	function Update(replynum) {

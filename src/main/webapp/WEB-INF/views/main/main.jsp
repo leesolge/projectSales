@@ -2,68 +2,66 @@
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 
 <html>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="/erp/resources/js/jquery.ulslide.js"></script>
-<script type="text/javascript">
-$(function() {
-	$('#main_bn').ulslide({
-		statusbar: true,
-		width: 450,
-		height: 338, 
-		affect: 'slide', 
-		axis: 'x', 	
-		navigator: '#main_bn_btn a',
-		duration: 400, 
-		autoslide: 3000 
-	});
-});
-</script>
-<style type="text/css">
-	#wrap{ position:relative; width:100%; }
-	#main_bn { margin:0 auto; width:450px; height:338px; }
-	#main_bn img { width:100%; height:auto;}
-	#main_bn_btn { list-style-type:none; position:absolute;	bottom:5px; left:5px; }
-	main_bn_btn li { float: left; padding:0px 2px; margin-right:5px; }
-	a, a:hover, a:visited { text-decoration:none; }
-	ul li { list-style : none; }
+<style>
+.mySlides {display:none;}
 </style>
+
 <body><br>
 <div class="w3-container">
-<div id="wrap">
-	<div id="main_bn">
-	        <li>
-	            <img src="/erp/resources/image/image_1.jpg" alt="" />
-	        </li>
-	        <li>
-	            <img src="/erp/resources/image/image_2.jpg" alt="" />
-	        </li>
-	        <li>
-	            <img src="/erp/resources/image/image_3.jpg" alt="" />
-	        </li>
-	    <div id="main_bn_btn">
-	        <li><a href="#"><img src="/erp/resources/image/blt.png"></a></li>
-	        <li><a href="#"><img src="/erp/resources/image/blt.png"></a></li>
-	        <li><a href="#"><img src="/erp/resources/image/blt.png"></a></li>
-	    </div>
-	</div>
-</div>
-
-	<!-- Slider -->
-	<div class="w3-container">
-		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
-			<div class="w3-row w3-border w3-border-blue" style="height: 200px;">사내 정보, 배너가 들어갈 공간</div>
+	<div class="w3-row-padding w3-margin-bottom">
+		<div class="w3-quarter">
+			<div class="w3-container w3-red w3-padding-16">
+				<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+				<div class="w3-right">
+					<h3>52</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Messages</h4>
+			</div>
 		</div>
-	</div>
-	<br><br>
-	
-	<div class="w3-container">
-		<div class="w3-row">
-			<!-- Notice -->
-			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding w3-col m5" style="min-height: 280px;">
+		<div class="w3-quarter">
+			<div class="w3-container w3-blue w3-padding-16">
+			<div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+			<div class="w3-right">
+				<h3>99</h3>
+			</div>
+			<div class="w3-clear"></div>
+			<h4>Views</h4>
+			</div>
+		</div>
+		<div class="w3-quarter">
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+				<div class="w3-right">
+					<h3>23</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Shares</h4>
+			</div>
+		</div>
+		<div class="w3-quarter">
+			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+					<h3>50</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Users</h4>
+			</div>
+		</div>
+	 </div>
+	  
+	<div class="w3-row-padding w3-margin-bottom">
+		<!-- Notice -->
+		<div class="w3-half">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 280px;">
 				<div align="left">
-					<h5><i class="fa fa-bullhorn" aria-hidden="true"></i> 공지사항</h5>
+						<h5><a href="/erp/notice/noticeList">
+							<i class="fa fa-bullhorn" aria-hidden="true"></i> 공지사항
+						</a></h5>
 				</div>
 				<table class="w3-table w3-bordered w3-small">
 					<tr>
@@ -78,13 +76,15 @@ $(function() {
 					</c:forEach>
 				</table>
 			</div>
-			<!-- Note -->
-			<div class="w3-col m2">　</div>
-			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding w3-col m5" style="min-height: 280px;">
+		</div>
+			
+		<!-- Note -->
+		<div class="w3-half">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 280px;">
 				<div align="left">
-					<h5>
+					<h5><a href="/erp/note/list">
 						<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지<br>
-					</h5>
+					</a></h5>
 				</div>
 				<table class="w3-table w3-bordered w3-small" style="cursor:pointer;" onclick="location.href='/erp/note/list'">
 					<tr>
@@ -103,6 +103,17 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	
+	<!-- Slider -->
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+			<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">
+				<img class="mySlides" src="/erp/resources/image/banner01.png" style="width:100%; max-height: 180px;">
+				<img class="mySlides" src="/erp/resources/image/banner02.png" style="width:100%; max-height: 180px;">
+			</div>
+		</div>
+	</div>
 </div>
 <br></body>
+
 </html>

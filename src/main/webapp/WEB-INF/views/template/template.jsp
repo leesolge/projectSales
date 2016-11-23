@@ -20,6 +20,8 @@
 </div>
 
 <!-- Script -->
+<script src="/erp/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/erp/resources/js/jquery.sldr.js"></script>
 <script>
 	// Get the Sidenav
 	var mySidenav = document.getElementById("mySidenav");
@@ -90,6 +92,21 @@
 	        x.previousElementSibling.className =
 	        x.previousElementSibling.className.replace(" w3-green", "");
 	    }
+	}
+	
+	var myIndex = 0;
+	carousel();
+
+	function carousel() {
+	    var i;
+	    var x = document.getElementsByClassName("mySlides");
+	    for (i = 0; i < x.length; i++) {
+	       x[i].style.display = "none";
+	    }
+	    myIndex++;
+	    if (myIndex > x.length) {myIndex = 1}
+	    x[myIndex-1].style.display = "block";
+	    setTimeout(carousel, 2000); // Change image every 2 seconds
 	}
 </script>
 
