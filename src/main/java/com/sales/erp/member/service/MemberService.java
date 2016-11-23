@@ -1,5 +1,6 @@
 package com.sales.erp.member.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,31 @@ public class MemberService {
 	@Autowired
 	private SendMail mail;
 
-
+	public ModelAndView JoinMember(MemberJoinVO vo) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String year = vo.getYear();
+		String month = vo.getMonth();
+		String day = vo.getDay();
+		String birth = year + "-" + month + "-" + day;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		MemberVO member = new MemberVO();
+		member.setPwd(vo.getPwd());
+		member.setName(vo.getName());
+		member.setGender(vo.getGender());
+		member.setBirth(sdf.parse(birth));
+		member.setAddress(vo.getAddress());
+		member.setPhone(vo.getPhone());
+		member.setEmail(vo.getEmail());
+		member.setAuth("ROLE_EE");
+		member.setAccount(vo.getAccount());
+		member.setTeam(vo.getTeam());
+		member.setPortrait(vo.getPortrait());
+		dao.JoinMember(member);
+		mav.addObject("member", member);
+		return mav;
+	}
+	
 	public ModelAndView memberContent(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String empno = request.getParameter("empno");
@@ -205,6 +230,50 @@ public class MemberService {
 		String text = "다음 기회에 도전해 주십시요";
 		mail.sendMail(vo, subject, text);
 		dao.Cancel(vo);
+	}
+
+	public ModelAndView ConfirmID_Member(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO member = new MemberVO ();
+		member.setName(request.getParameter("name"));
+		member.setEmail(request.getParameter("email"));
+		member = dao.ConfirmID_Member(member);
+		if(member != null){
+			String subject = "[ID확인]" + member.getName() + "님의 ID요청 확인메일입니다.";
+			String text = "귀하의 아이디는 [ " + member.getEmpno() + " ]입니다.";
+			mail.sendMail(member, subject, text);
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Success");
+			return mav;
+		}
+		else{
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Fail");
+			return mav;
+		}	
+	}
+
+	public ModelAndView ConfirmPWD_Member(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO member = new MemberVO ();
+		member.setEmpno(request.getParameter("empno"));
+		member.setName(request.getParameter("name"));
+		member.setEmail(request.getParameter("email"));
+		member = dao.ConfirmPWD_Member(member);
+		if(member != null){
+			String subject = "[PW확인]" + member.getName() + "님의 PW요청확인 메일입니다.";
+			String text = "귀하의 아이디는 [ " + member.getEmpno() + " ]입니다.\n"
+					+ "귀하의 비밀번호는 [ " + member.getPwd() + " ]입니다.";
+			mail.sendMail(member, subject, text);
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Success");
+			return mav;
+		}
+		else{
+			mav.addObject("member", member);
+			mav.setViewName("/join/confirmID_Fail");
+			return mav;
+		}	
 	}
 
 }
