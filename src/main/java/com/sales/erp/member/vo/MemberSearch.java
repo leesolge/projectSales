@@ -1,9 +1,18 @@
 package com.sales.erp.member.vo;
 
 public class MemberSearch {
-	private String field, word;
+	private String field, word, team;
 	private int start, end;
 	
+	
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
 	public int getStart() {
 		return start;
 	}

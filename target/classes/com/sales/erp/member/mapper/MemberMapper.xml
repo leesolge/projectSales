@@ -53,4 +53,32 @@
     <select id="Count_Ok_Member" resultType="java.lang.Integer">
     	SELECT COUNT(*) FROM SMEMBER WHERE AUTH LIKE 'ROLE_EE'
     </select>
+    
+    
+    <!-- ///////////////////////////새로 작성하는 부분 -->
+    <!-- 사용자 정보 불러오기 -->
+	<select id="getMember" parameterType="com.sales.erp.member.vo.MemberVO"
+		resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
+	<select id="memberListCount" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word}
+    </select>
+    
+    <select id="memberListCountTeam" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND ${field} LIKE #{word} AND TEAM LIKE #{team}
+    </select>
+    
+    <select id="memberList" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE ${field} LIKE #{word} AND AUTH NOT LIKE 'ROLE_EE' ORDER BY EMPNO ASC) A) WHERE R >= #{start} AND R <= #{end}
+		]]>
+	</select>
+	
+	<select id="memberListTeam" parameterType="com.sales.erp.member.vo.MemberSearch" resultType="com.sales.erp.member.vo.MemberVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*,ROWNUM R FROM (SELECT * FROM SMEMBER WHERE ${field} LIKE #{word} AND AUTH NOT LIKE 'ROLE_EE' AND TEAM LIKE #{team} ORDER BY EMPNO ASC) A) WHERE R >= #{start} AND R <= #{end}
+		]]>
+	</select>
 </mapper>

@@ -11,18 +11,16 @@ import com.sales.erp.member.vo.MemberSearch;
 import com.sales.erp.member.vo.MemberVO;
 
 @Repository
-public class MemberDAOImpl implements MemberDAO {
+public class MemberDAOImpl{
 
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
 	public void insertMember(MemberVO member) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.insertMember(member);
 	} 
 	
-	@Override
 	public MemberVO selectMember(String empno) {
 		MemberVO vo = new MemberVO();
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
@@ -31,13 +29,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 	
-	@Override
+
 	public void updateMember(MemberJoinVO vo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.updateMember(vo);
 	}
 	
-	@Override
+
 	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo) {
 		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
@@ -46,7 +44,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return member;
 	}
 	
-	@Override
+
 	public ArrayList<MemberVO> Admin_Approved_Member(MemberSearch vo) {
 		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
@@ -55,25 +53,25 @@ public class MemberDAOImpl implements MemberDAO {
 		return member;
 	}
 	
-	@Override
+
 	public void Update_Approve_Member(String empno) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.Update_Approve_Member(empno);
 	}
 	
-	@Override
+
 	public void Update_Cancel_Member(String empno) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.Update_Cancel_Member(empno);
 	}
 
-	@Override
+
 	public void Admin_Update_Member(MemberVO vo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberMapper.Admin_Update_Member(vo);	
 	}
 
-	@Override
+
 	public int Count_Approved_Member(MemberSearch vo) {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
 		int count = memberMapper.Count_Approved_Member(vo);
@@ -81,15 +79,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return count;
 	}
 
-	@Override
+
 	public int Count_Ok_Member() {
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
 		int count = memberMapper.Count_Ok_Member();
 		
 		return count;
 	} 	
-	
-	@Override
+
 	public MemberVO ConfirmID_Member(MemberVO member){
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
 		MemberVO vo = memberMapper.ConfirmID_Member(member);

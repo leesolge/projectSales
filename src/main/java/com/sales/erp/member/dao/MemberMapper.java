@@ -17,7 +17,14 @@ public interface MemberMapper extends Serializable{
 	public void Update_Approve_Member(String empno); // 가입승인
 	public void Update_Cancel_Member(String empno); // 반려, 사원정보 삭제
 	public void Admin_Update_Member(MemberVO vo); // 사원정보 수정
-	public int Count_Approved_Member(MemberSearch vo); // 사원 수
+	public int Count_Approved_Member(MemberSearch vo);
 	public int Count_Ok_Member(); // 승인 대기자 수
 	public MemberVO ConfirmID_Member(MemberVO vo);//ID 찾기
+	
+	/////////////////////////////////////////새로 시작하는 부분
+	public MemberVO getMember(MemberVO mvoParam); // 사용자 정보 받아오기
+	public int memberListCount(MemberSearch search);		// 사원 수
+	public int memberListCountTeam(MemberSearch search);	// 팀별 사원 수
+	public ArrayList<MemberVO> memberList(MemberSearch search);
+	public ArrayList<MemberVO> memberListTeam(MemberSearch search);
 }

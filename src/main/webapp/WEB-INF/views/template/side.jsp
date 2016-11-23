@@ -14,7 +14,7 @@
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
 			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope"></i></a>
-			<a href="/erp/my_Info" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
+			<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
 			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
 			<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
 		</div>
@@ -60,7 +60,7 @@
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc2" class="w3-accordion-content w3-padding">
-				<a href="/erp/manager/member_list">- 팀원 명부</a> 
+				<a href="/erp/member/memberList">- 팀원 명부</a> 
 				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a> 
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 		    </div>
@@ -88,7 +88,7 @@
 		    </a>
 		    <div id="demoAcc4" class="w3-accordion-content w3-padding">
 		    	<a href="/erp/admin/member_ok">- 가입 승인</a> 
-				<a href="/erp/admin/member_list">- 사원 명부</a>
+				<a href="/erp/member/memberList">- 사원 명부</a>
 				<a href="/erp/transact/transactlist_default">- 거래내역</a>
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 				<a href="/erp/product/list">- 상품 관리</a>

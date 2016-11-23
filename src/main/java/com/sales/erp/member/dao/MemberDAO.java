@@ -2,6 +2,8 @@ package com.sales.erp.member.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sales.erp.member.vo.MemberJoinVO;
@@ -9,16 +11,112 @@ import com.sales.erp.member.vo.MemberSearch;
 import com.sales.erp.member.vo.MemberVO;
 
 @Repository
-public interface MemberDAO {
-	public void insertMember(MemberVO member); // 회원등록
-	public MemberVO selectMember(String empno); // empno에 따른 개인정보 추출
-	public void updateMember(MemberJoinVO vo); // 사원정보 수정
-	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo); // 승인대기 목록
-	public ArrayList<MemberVO> Admin_Approved_Member(MemberSearch vo); // 사원목록
-	public void Update_Approve_Member(String empno); // 가입승인
-	public void Update_Cancel_Member(String empno); // 반려, 사원정보 삭제
-	public void Admin_Update_Member(MemberVO vo); // 사원정보 수정
-	public int Count_Approved_Member(MemberSearch vo); // 사원 수
-	public int Count_Ok_Member(); // 승인 대기자 수
-	public MemberVO ConfirmID_Member(MemberVO vo);//ID 찾기
+public class MemberDAO{
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	public void insertMember(MemberVO member) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.insertMember(member);
+	} 
+	
+	public MemberVO selectMember(String empno) {
+		MemberVO vo = new MemberVO();
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		vo = memberMapper.selectMember(empno);
+		
+		return vo;
+	}
+	
+
+	public void updateMember(MemberJoinVO vo) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.updateMember(vo);
+	}
+	
+
+	public ArrayList<MemberVO> Admin_Ok_Member(MemberSearch vo) {
+		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		member = memberMapper.Admin_Ok_Member(vo);
+		
+		return member;
+	}
+	
+
+	public ArrayList<MemberVO> Admin_Approved_Member(MemberSearch vo) {
+		ArrayList<MemberVO> member = new ArrayList<MemberVO>();	
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		member = memberMapper.Admin_Approved_Member(vo);
+		
+		return member;
+	}
+	
+
+	public void Update_Approve_Member(String empno) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.Update_Approve_Member(empno);
+	}
+	
+
+	public void Update_Cancel_Member(String empno) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.Update_Cancel_Member(empno);
+	}
+
+
+	public void Admin_Update_Member(MemberVO vo) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.Admin_Update_Member(vo);	
+	}
+
+
+	public int Count_Approved_Member(MemberSearch vo) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
+		int count = memberMapper.Count_Approved_Member(vo);
+		
+		return count;
+	}
+
+
+	public int Count_Ok_Member() {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
+		int count = memberMapper.Count_Ok_Member();
+		
+		return count;
+	} 	
+
+	public MemberVO ConfirmID_Member(MemberVO member){
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
+		MemberVO vo = memberMapper.ConfirmID_Member(member);
+		return vo;
+	}
+	
+	////////////////////////////////////새로 작성하는 부분
+
+	public MemberVO getMember(MemberVO mvoParam) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.getMember(mvoParam);
+	}
+
+	public int memberListCount(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberListCount(search);
+	}
+
+	public int memberListCountTeam(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberListCountTeam(search);
+	}
+
+	public ArrayList<MemberVO> memberList(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberList(search);
+	}
+
+	public ArrayList<MemberVO> memberListTeam(MemberSearch search) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.memberListTeam(search);
+	}
 }
