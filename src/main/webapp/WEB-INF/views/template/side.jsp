@@ -8,6 +8,7 @@
 <html>
 <nav class="w3-sidenav w3-collapse w3-white" style="z-index:3;width:250px;" id="mySidenav"><br>
 	<div class="w3-container w3-row">
+		<a class="w3-hide-large w3-right w3-hover-white" onclick="w3_close()"><i class="fa fa-remove"></i></a>
 		<div class="w3-col s12 w3-center">
 			<img src="/erp/resources/portraits/${memberInfo.portrait}" class="w3-circle" style="width:92px; height: 100px;">
 		</div>
@@ -23,9 +24,6 @@
 	<div class="w3-container">
 		<h5>Menu</h5>
 	</div>
-
-	<a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
 			<div class="w3-accordion w3-padding">
 				<a href="/erp/main" class="w3-padding w3-hover-blue">

@@ -4,8 +4,32 @@
 <!DOCTYPE html>
 <html>
 <body>
+<div class="w3-container">
+	<div class="w3-row">
+		<div class="w3-container w3-indigo">
+			<h4><i class="fa fa-pencil-square-o"></i>  글 수정</h4>
+		</div>
+		<form class="w3-container w3-white w3-card-4" action="/erp/notice/admin/noticeUpdate" method="post" >
+			<br>
+			<input type="hidden" name="num" value="${noticeVo.num}"/>
+			<input type="hidden" name="name" value="${noticeVo.name}">
+			<label class="w3-text-indigo"><b>제목</b></label>
+			<input class="w3-input w3-border w3-border-indigo w3-round" name="title" type="text" value="${noticeVo.title}" placeholder="제목을 입력하세요.">
+			<p>      
+			<label class="w3-text-indigo"><b>내용</b></label>
+			<textarea class="w3-input w3-border w3-border-indigo w3-round" name="content" placeholder="내용을 입력하세요."
+			style="min-height: 300px; resize: none;" required>${noticeVo.content}</textarea>
+			<p>
+			<div class="w3-row w3-center">
+				<input class="w3-btn w3-indigo" type="submit" value="작성" />
+				<input class="w3-btn w3-indigo" type="reset" value="취소" />		
+			</div><br>
+		</form>
+	</div>
+</div>
+
 	<div class="w3-container w3-center">
-		<h2>리플라이 수정</h2>
+		<h2>댓글 수정</h2>
 	</div>
 
 	<div class="w3-row">

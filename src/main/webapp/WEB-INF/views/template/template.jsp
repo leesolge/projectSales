@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><tiles:getAsString name="title" /></title>
 </head>
+
+<sec:authorize access="isAuthenticated()">
 <div class="w3-row">
 	<tiles:insertAttribute name="header" />	
 </div>
@@ -18,6 +20,11 @@
 		<tiles:insertAttribute name="body" />
 	</div>
 </div>
+</sec:authorize>
+
+<sec:authorize access="!isAuthenticated()">
+	<tiles:insertAttribute name="body" />
+</sec:authorize>
 
 <!-- Script -->
 <script src="/erp/resources/js/jquery-1.10.2.min.js"></script>
