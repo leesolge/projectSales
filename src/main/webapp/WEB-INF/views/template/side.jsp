@@ -8,7 +8,7 @@
 <html>
 <nav class="w3-sidenav w3-collapse w3-white" style="z-index:3;width:250px;" id="mySidenav"><br>
 	<div class="w3-container w3-row">
-		<a class="w3-hide-large w3-right w3-hover-white" onclick="w3_close()"><i class="fa fa-remove"></i></a>
+		<a class="w3-hide-large w3-right w3-hover-white" onclick="w3_close()" style="cursor:pointer;"><i class="fa fa-remove"></i></a>
 		<div class="w3-col s12 w3-center">
 			<img src="/erp/resources/portraits/${memberInfo.portrait}" class="w3-circle" style="width:92px; height: 100px;">
 		</div>
