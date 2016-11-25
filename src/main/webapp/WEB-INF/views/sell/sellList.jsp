@@ -10,7 +10,7 @@
 <body>
 
 	<div class="w3-container w3-center">
-		<h2>승인요청목록 [${count }건]</h2>
+		<h2>판매목록 [${count }건]</h2>
 		<table class="w3-table w3-centered">
 			<tr>
 				<th>등록번호</th>
