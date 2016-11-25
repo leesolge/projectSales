@@ -27,8 +27,6 @@
 </sec:authorize>
 
 <!-- Script -->
-<script src="/erp/resources/js/jquery-1.10.2.min.js"></script>
-<script src="/erp/resources/js/jquery.sldr.js"></script>
 <script>
 	// Get the Sidenav
 	var mySidenav = document.getElementById("mySidenav");

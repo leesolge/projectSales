@@ -7,22 +7,8 @@
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <head>
-<style> 
- .container{
- 	margin: 0 auto;
- 	margin-top:8%;
- }
- .login{
- 	 border-radius: 5px;
- }
- input:hover {
-    background-color: #eeeeee;
- }
-
-</style>
 <title>Home</title>
 </head>
-
 <body>
   <div class="container">
 	<c:url value="/login" var="loginURL"></c:url>
@@ -39,7 +25,6 @@
 		<div class="w3-col w3-right" style="width: 30%"><p></p></div>
 		<div class="w3-rest w3-container" align="center">
 			<form action="${loginURL}" method="post">
-				
 				<table class="w3-table w3-centered">
 					<tr>
 						<td>
@@ -57,7 +42,6 @@
 							<input type="password" name="pwd" placeholder="Password 입력" class="login">
 						</td>
 					</tr>
-					
 					<tr>						
 						<td colspan="2">
 						<input type="submit" value="로그인" class="w3-btn w3-round-large" >&nbsp;				

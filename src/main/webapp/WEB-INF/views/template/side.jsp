@@ -10,7 +10,7 @@
 	<div class="w3-container w3-row">
 		<a class="w3-hide-large w3-right w3-hover-white" onclick="w3_close()" style="cursor:pointer;"><i class="fa fa-remove"></i></a>
 		<div class="w3-col s12 w3-center">
-			<img src="/erp/resources/portraits/${memberInfo.portrait}" class="w3-circle" style="width:92px; height: 100px;">
+			<img src="/erp/resources/portraits/${memberInfo.portrait}" class="w3-circle w3-card-4" style="width:92px; height: 100px;">
 		</div>
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>

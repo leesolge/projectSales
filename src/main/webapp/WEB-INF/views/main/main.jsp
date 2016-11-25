@@ -11,6 +11,7 @@
 
 <body><br>
 <div class="w3-container">
+	<!-- Top Button(Large) -->
 	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
 		<div class="w3-quarter">
 			<div class="w3-container w3-red w3-padding-16">
@@ -52,22 +53,23 @@
 				<h4>Users</h4>
 			</div>
 		</div>
-	 </div>
+	</div>
 	 
-	 <div class="w3-row-padding w3-margin-bottom w3-hide-large w3-hide-medium">
-	 	<div class="w3-col s3 w3-center w3-text-red">
-	 		<i class="fa fa-comment w3-xxlarge"></i>
-	 	</div>
-	 	<div class="w3-col s3 w3-center w3-text-blue">
-	 		<i class="fa fa-eye w3-xxlarge"></i>
-	 	</div>
-	 	<div class="w3-col s3 w3-center w3-text-teal">
-		 	<i class="fa fa-share-alt w3-xxlarge"></i>
-	 	</div>
-	 	<div class="w3-col s3 w3-center w3-text-orange">
-	 		<i class="fa fa-users w3-xxlarge"></i>
-	 	</div>
-	 </div>
+	 <!-- Top Button(Small) -->
+	<div class="w3-row-padding w3-margin-bottom w3-hide-large w3-hide-medium">
+		<div class="w3-col s3 w3-center w3-text-red">
+			<i class="fa fa-comment w3-xxlarge"></i>
+		</div>
+		<div class="w3-col s3 w3-center w3-text-blue">
+			<i class="fa fa-eye w3-xxlarge"></i>
+		</div>
+		<div class="w3-col s3 w3-center w3-text-teal">
+	 	<i class="fa fa-share-alt w3-xxlarge"></i>
+		</div>
+		<div class="w3-col s3 w3-center w3-text-orange">
+			<i class="fa fa-users w3-xxlarge"></i>
+		</div>
+	</div>
 	  
 	<div class="w3-row-padding w3-margin-bottom">
 		<!-- Notice -->
