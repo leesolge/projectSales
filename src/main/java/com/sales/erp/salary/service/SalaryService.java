@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
+import com.sales.erp.order.vo.TeamVO;
 import com.sales.erp.salary.dao.SalaryDAO;
+import com.sales.erp.salary.vo.SalaryJoinVO;
 import com.sales.erp.salary.vo.SalaryVO;
 import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
@@ -24,6 +27,259 @@ public class SalaryService {
 
 	@Autowired
 	private SalaryDAO dao;
+	
+	/*selectlist : 셀렉션 옵션을 위한 리스트*/
+	/*mlist : 팀 옵션을 위한 리스트*/
+	public ModelAndView adminSalary(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<TempVO> selectionlist = new ArrayList<TempVO>();
+		ArrayList<SalaryVO> templist = new ArrayList<SalaryVO>();
+		ArrayList<SalaryJoinVO> sjlist = new ArrayList<SalaryJoinVO>();
+		
+		/*예정 월급과 지급된 월급을 보여주기 위한 selection 항목 작성*/
+		Calendar today = Calendar.getInstance();
+		int thisYear = today.get(Calendar.YEAR);
+		int thisMonth = today.get(Calendar.MONTH);
+		
+		TempVO vo = new TempVO();
+		
+		String compareDate;
+		if(thisMonth<9){
+			compareDate = String.valueOf(thisYear) + "0" + String.valueOf(thisMonth+1);
+		}else{
+			compareDate = String.valueOf(thisYear) + String.valueOf(thisMonth+1);
+		}
+		vo.setViewdate(compareDate.substring(0, 4)+"년 "+compareDate.substring(4, 6)+"월");
+		compareDate = String.valueOf(thisYear) + String.valueOf(thisMonth+1) + "01000000";
+		vo.setDatevalue(compareDate);
+		selectionlist.add(vo);
+		templist = dao.dateObject();
+		for(SalaryVO savo : templist){
+			String date = savo.getSalarydate();
+			TempVO tvo = new TempVO();
+			String year = date.substring(0, 4);
+			String month = date.substring(5, 7);
+			tvo.setViewdate(year+"년 "+month+"월");
+			date = date.trim();
+			date = date.replace(":", "");
+			date = date.replace("-", "");
+			tvo.setDatevalue(date);
+			selectionlist.add(tvo);
+		}
+		mav.addObject("selectlist", selectionlist);
+		
+		/*팀 종류 받아오기*/
+		ArrayList<TeamVO> teams = null;
+		teams = dao.selectTeam();
+		ArrayList<MemberVO> teamList = new ArrayList<MemberVO>();
+
+		/*팀 종류별 팀원 받아 HashMap에 팀별로 싣기*/
+		HashMap<Integer, ArrayList<MemberVO>> map = new HashMap<Integer, ArrayList<MemberVO>>();
+		for(int i=0;i<teams.size();i++){
+			map.put(i, dao.teamMember(teams.get(i)));
+		}
+		for (int j = 0; j < teams.size(); j++) {
+			MemberVO temp = new MemberVO();
+			temp.setAuth("");
+			temp.setEmpno(teams.get(j).getTeam());
+			temp.setName("");
+			teamList.add(temp);
+			for (int k = 0; k < map.get(j).size(); k++) {
+				teamList.add(map.get(j).get(k));
+			}
+		}
+		
+		/*teamList에 있는 권한 이름 출력을 위해 변경*/
+		for (MemberVO mvo : teamList) {
+			if (mvo.getAuth().equals("ROLE_EMPLOYEE")) {
+				mvo.setAuth("사원");
+			}
+			if (mvo.getAuth().equals("ROLE_MANAGER")) {
+				mvo.setAuth("팀장");
+			}
+		}
+		mav.addObject("mlist", teamList);
+		
+		String datevalue = request.getParameter("datevalue");
+		
+		if(datevalue==null||datevalue.equals("")){
+			datevalue = String.valueOf(thisYear) + String.valueOf(thisMonth+1);
+			datevalue = datevalue + "01000000";
+		}
+		/*시작날짜 역할도 하는 datevalue*/
+		mav.addObject("datevalue", datevalue);
+		String dateview = datevalue.substring(0, 4)+"년 "+datevalue.substring(4, 6)+"월";
+		mav.addObject("dateview", dateview);
+		
+		/*끝날짜 가공*/
+		String startdate = datevalue;
+		String enddate = datevalue;
+		int endyear = Integer.parseInt(datevalue.substring(0, 4));
+		int endmonth = Integer.parseInt(datevalue.substring(4, 6));
+		endmonth = endmonth+1;
+		if(endmonth>12){
+			endmonth = 1;
+			endyear = endyear+1;
+		}
+		if(String.valueOf(endmonth).length()!=2){
+			enddate = String.valueOf(endyear)+"0"+String.valueOf(endmonth);
+		}else{
+			enddate = String.valueOf(endyear)+String.valueOf(endmonth);
+		}
+		enddate = enddate + "01000000";
+		
+		String emp = request.getParameter("emp");
+		
+		if(emp==null||emp.equals("")){
+			emp = "";
+		}else{
+			boolean check = true;
+			for (int l=0;l<teams.size();l++) {
+				String tempemp = teams.get(l).getTeam();
+				if (emp.equals(tempemp)) {
+					if(emp.equals("자재팀")){
+						mav.addObject("budget", "1");
+					}
+					emp = "AND M.TEAM='" + emp + "' ";
+					check = false;
+				}
+			}
+			if(check==true){
+				TempVO ttvo = new TempVO();
+				ttvo.setDatevalue(emp);
+				MemberVO mmvo = dao.selectAMember(ttvo);
+				emp = "AND S.EMPNO='"+emp+"' ";
+				if(mmvo.getTeam().equals("자재팀")){
+					mav.addObject("budget", "1");
+				}
+			}
+		}
+		TempVO temvo = new TempVO();
+		temvo.setDatevalue(emp);
+		ArrayList<MemberVO> memberList = dao.tempTeam(temvo);
+		
+		String sql = emp + " AND S.REGDATE>=TO_DATE('"+startdate+"', 'YYYYMMDDHH24MISS') AND S.REGDATE<TO_DATE('"+enddate+"', 'YYYYMMDDHH24MISS')";
+		temvo.setDatevalue(sql);
+		ArrayList<OrderJoinVO> orderjoinlist = dao.selectOrders(temvo);
+		for(OrderJoinVO ovo:orderjoinlist){
+			Date date = ovo.getRegdate();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+			String changes = sdf.format(date);
+			ovo.setChanges(changes);
+			if(ovo.getAuth().equals("ROLE_EMPLOYEE")){
+				ovo.setAuth("사원");
+			}
+			if(ovo.getAuth().equals("ROLE_MANAGER")){
+				ovo.setAuth("팀장");
+			}
+			if(ovo.getAuth().equals("ROLE_ADMIN")){
+				ovo.setAuth("관리자");
+			}
+			long allowance = Long.parseLong(ovo.getProfit());
+			if(ovo.getAuth().equals("사원")){
+				allowance = (long) (allowance*0.4);
+				ovo.setManage(allowance/4);
+			}else if(ovo.getAuth().equals("팀장")){
+				allowance = (long) (allowance*0.5);
+			}
+			ovo.setAllowance(allowance);
+		}
+		mav.addObject("mylist", orderjoinlist);
+		
+		if(compareDate.equals(datevalue)){
+			mav.addObject("equal", "1");
+			VOforSQL vosql = new VOforSQL();
+			for(MemberVO mbvo:memberList){
+				if(mbvo.getTeam().contains("영업")){
+					if(mbvo.getAuth().equals("ROLE_EMPLOYEE")){
+						SalaryJoinVO svo = new SalaryJoinVO();
+						vosql.setEmpno(mbvo.getEmpno());
+						vosql.setStartdate(startdate);
+						vosql.setEnddate(enddate);
+						String tempsa = dao.profitOfEmpl(vosql);
+						if(tempsa==null||tempsa.equals("")){
+							tempsa = "0";
+						}
+						long salary = (long) (Long.parseLong(tempsa)*0.4);
+						svo.setTeam(mbvo.getTeam());
+						svo.setAllowance(salary);
+						svo.setSalary(salary);
+						svo.setName(mbvo.getName());
+						svo.setAuth("사원");
+						long tax1 = (long) (salary*0.06);
+						long tax2 = (long) (salary*0.006);
+						long reals = salary-tax1-tax2;
+						svo.setEmpno(mbvo.getEmpno());
+						svo.setSalarydate(startdate);
+						svo.setTax1(tax1);
+						svo.setTax2(tax2);
+						svo.setReals(reals);
+						sjlist.add(svo);
+					}else{
+						SalaryJoinVO svo = new SalaryJoinVO();
+						vosql.setEmpno(mbvo.getEmpno());
+						vosql.setStartdate(startdate);
+						vosql.setEnddate(enddate);
+						String tempsa = dao.profitOfEmpl(vosql);
+						if(tempsa==null||tempsa.equals("")){
+							tempsa = "0";
+						}
+						long salary = (long) (Long.parseLong(tempsa)*0.5);
+						svo.setAllowance(salary);
+						svo.setTeam(mbvo.getTeam());
+						svo.setName(mbvo.getName());
+						svo.setAuth("팀장");
+						vosql.setTeam(mbvo.getTeam());
+						vosql.setAuth(mbvo.getAuth());
+						tempsa = dao.profitOfManager(vosql);
+						if(tempsa==null||tempsa.equals("")){
+							tempsa = "0";
+						}
+						long manager = (long) (Long.parseLong(tempsa));
+						svo.setManager(manager);
+						salary = (salary + manager);
+						svo.setSalary(salary);
+						long tax1 = (long) (salary*0.06);
+						long tax2 = (long) (salary*0.006);
+						long reals = salary-tax1-tax2;
+						svo.setEmpno(mbvo.getEmpno());
+						svo.setSalarydate(startdate);
+						svo.setTax1(tax1);
+						svo.setTax2(tax2);
+						svo.setReals(reals);
+						sjlist.add(svo);
+					}
+				}else{
+					SalaryJoinVO svo = new SalaryJoinVO();
+					long salary = 2150000;
+					long tax1 = (long) (salary*0.06);
+					long tax2 = (long) (salary*0.006);
+					svo.setName(mbvo.getName());
+					svo.setAuth("사원");
+					svo.setTeam(mbvo.getTeam());
+					svo.setEmpno(mbvo.getEmpno());
+					svo.setAllowance(0);
+					svo.setManager(0);
+					svo.setReals(salary-tax1-tax2);
+					svo.setSalary(salary);
+					svo.setTax1(tax1);
+					svo.setTax2(tax2);
+					sjlist.add(svo);
+				}
+			}
+			mav.addObject("salarylist", sjlist);
+		}else{
+			mav.addObject("equal", "0");
+			String query = emp + "AND S.SALARYDATE=TO_DATE('"+datevalue+"',  'YYYYMMDDHH24MISS')";
+			temvo.setDatevalue(query);
+			sjlist = dao.adminSalary(temvo);
+			mav.addObject("salarylist", sjlist);
+		}
+		
+		return mav;
+	}
+		
 	
 	/* selectlist : 셀렉트 옵션(datevalue / viewdate) */
 	/* slist : 월급 내역(SalaryVO) */
