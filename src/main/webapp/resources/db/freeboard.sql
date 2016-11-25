@@ -5,6 +5,7 @@ drop table freeboard;
 drop sequence freeboard_seq;
 drop table freeboardReply;
 drop sequence freeboardReply_seq;
+drop sequence freeboardReReply_seq;
 
 create table freeboard(
 	num number,
@@ -24,10 +25,13 @@ create table freeboardReply(
 	empno varchar2(10),
 	reply varchar2(1000),
 	regdate date,
-	sort varchar2(10),
+	sort number,
 	parent number,
 	child number
 );
+
+insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child)
+		values(1, 1, '1', '1', sysdate, 1, #{num}, freeboardReReply_seq.nextval)
 
 create sequence freeboardReply_seq
 start with 1

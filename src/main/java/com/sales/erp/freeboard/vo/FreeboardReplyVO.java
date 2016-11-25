@@ -8,7 +8,7 @@ public class FreeboardReplyVO {
 	public String empno;
 	public String reply;
 	public Date regDate;
-	public String sort;
+	public int sort;
 	public int parent, child; //대댓글 관련
 	public String name; // DB에는 저장하지 않지만 출력을 위해서 VO에 작성
 	
@@ -48,10 +48,10 @@ public class FreeboardReplyVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSort() {
+	public int getSort() {
 		return sort;
 	}
-	public void setSort(String sort) {
+	public void setSort(int sort) {
 		this.sort = sort;
 	}
 	public int getParent() {
