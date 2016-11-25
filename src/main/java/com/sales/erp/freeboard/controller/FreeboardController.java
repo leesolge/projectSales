@@ -76,10 +76,9 @@ public class FreeboardController {
 		return "redirect:/freeboard/freeboardContent?num="+num;
 	}
 	
-	//대댓글 작성하는 폼으로 가기
 	@RequestMapping(value="/freeboard/reReplyWriteForm", method=RequestMethod.POST)
 	public ModelAndView reReplyWriteForm(HttpServletRequest request){
-		ModelAndView mav = freeboardService.reReplyWriteForm(request);
+		ModelAndView mav = freeboardService.replyUpdateForm(request);
 		mav.setViewName("/freeboard/reReplyWriteForm");
 		return mav;
 	}

@@ -26,8 +26,6 @@ public interface FreeboardMapper extends Serializable {
 	/*여기서부터 댓글*/
 	//public FreeboardVO sendWriteform(FreeboardVO vo);
 	
-	public void reReplyWriteForm(FreeboardReplyVO voParam);
-	
 	public void replyWrite(FreeboardReplyVO vo);
 	
 	public void reReplyWrite(FreeboardReplyVO vo);

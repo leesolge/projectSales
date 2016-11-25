@@ -121,29 +121,17 @@ public class FreeboardService {
 	
 	public void replyWrite(HttpServletRequest request){
 		FreeboardReplyVO vo = new FreeboardReplyVO();
-		vo.setNum(Integer.parseInt(request.getParameter("num")));//글 번호
 		vo.setEmpno(request.getParameter("empno"));
+		vo.setNum(Integer.parseInt(request.getParameter("num")));
 		vo.setReply(request.getParameter("reply"));
 		
 		dao.replyWrite(vo);
-	}  
+	}
 	
-	public ModelAndView reReplyWriteForm(HttpServletRequest request){
-		ModelAndView mav = new ModelAndView();
+	public void reReplyWrite(HttpServletRequest request) {
 		FreeboardReplyVO vo = new FreeboardReplyVO();
 		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
 		vo.setNum(Integer.parseInt(request.getParameter("num")));
-		vo.setEmpno(request.getParameter("empno"));
-		mav.addObject("vo", vo);
-		return mav;
-	}
-	
-	//대댓글 작성
-	public void reReplyWrite(HttpServletRequest request) {
-		FreeboardReplyVO vo = new FreeboardReplyVO();
-		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));//댓글 번호
-		vo.setNum(Integer.parseInt(request.getParameter("num")));//글 번호
-		vo.setEmpno(request.getParameter("empno"));
 		vo.setReply(request.getParameter("reply"));
 		
 		dao.reReplyWrite(vo);

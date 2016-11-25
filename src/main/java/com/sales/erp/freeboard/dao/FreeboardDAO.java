@@ -51,11 +51,6 @@ public class FreeboardDAO {
 		mapper.replyWrite(vo);
 	}
 	
-	/*public void reReplyWriteForm(FreeboardReplyVO voParam){
-		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
-		return mapper.reReplyWriteForm(voParam);
-	}*/
-	
 	public void reReplyWrite(FreeboardReplyVO vo) {
 		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
 		mapper.reReplyWrite(vo);

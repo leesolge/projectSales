@@ -102,8 +102,7 @@
 			</form>
 			<form action="/erp/freeboard/reReplyWriteForm" name="reReplyWrite" method="post">
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
-				<input type="hidden" name="replynum" value="${freeboardReplyVO.replynum}">
-				<input type="hidden" name="empno" value="${memberInfo.empno}">
+				<input type="hidden" name="replynum" value="0">
 			</form>
 			
 			<table class="w3-table w3-striped w3-border w3-centered">
@@ -117,39 +116,37 @@
 				</tr>
 				<c:forEach var="replyList" items="${replyList}">
 					<tr>
-						<c:if test="${replyList.child=='0'}">
-							<td>${replyList.name}</td>
-							<td style="text-align: left;">${replyList.reply}</td>
-							<td>
-								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
-							</td>
-							<c:if test="${memberInfo.empno==replyList.empno}">
-								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}')" /></td>
-								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}')" /></td>
-							</c:if>
-							<td>
-								<input type="button" value="댓글"
-									onclick="ReReply('${replyList.replynum}')"/>	
-							</td>
+						<td>${replyList.name}</td>
+						<td>${replyList.reply}</td>
+						<td>
+							<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
+						</td>
+						<c:if test="${memberInfo.empno==replyList.empno}">
+							<td><input type="button" value="수정"
+								onclick="Update('${replyList.replynum}')" /></td>
+							<td><input type="button" value="삭제"
+								onclick="Delete('${replyList.replynum}')" /></td>
 						</c:if>
-						<c:if test="${replyList.child!='0'}">
-							<td>${replyList.name}</td>
-							<td style="text-align: left;"><i class="fa fa-hand-o-right"></i>${replyList.reply}</td>
-							<td>
-								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
-							</td>
-							<c:if test="${memberInfo.empno==replyList.empno}">
-								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}')" /></td>
-								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}')" /></td>
-							</c:if>
-							<td>
-								<input type="button" value="댓글"
-									onclick="ReReply('${replyList.replynum}')"/>	
-							</td>
+						<td>
+							<input type="button" value="댓글"
+								onclick="ReReply('${replyList.replynum}')"/>	
+						</td>
+					</tr>
+					<tr>
+						<c:if test="${replyList.sort}==1">
+							<c:forEach var="replyList" items="${replyList}">
+								<td>${replyList.name}</td>
+								<td>${replyList.reply}</td>
+								<td>
+									<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
+								</td>
+								<c:if test="${memberInfo.empno==replyList.empno}">
+									<td><input type="button" value="수정"
+										onclick="Update('${replyList.replynum}')" /></td>
+									<td><input type="button" value="삭제"
+										onclick="Delete('${replyList.replynum}')" /></td>
+								</c:if>
+							</c:forEach>
 						</c:if>
 					</tr>
 				</c:forEach>
