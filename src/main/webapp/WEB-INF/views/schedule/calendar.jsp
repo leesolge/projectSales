@@ -8,6 +8,13 @@
 <html>
 <head>
 <style type="text/css">
+
+a:hover{
+	 background-color: #e60000;
+}
+td:hover { 
+    background-color: #4CAF50;
+}
 ul {
 	list-style-type: none;
 }
@@ -15,6 +22,7 @@ ul {
 body {
 	font-family: Verdana, sans-serif;
 }
+
 
 .noschedule {
     float: left;
@@ -114,7 +122,6 @@ input[type=submit] {
 }
 
 input[type=text] {
-	width: 65%;
 	padding: 16px 20px;
 	border: none;
 	border-radius: 4px;
@@ -146,9 +153,12 @@ input[type=text] {
 					<c:forEach var="day" begin="1" end="31">
 						<option value="${day}">${day}</option>
 					</c:forEach>
-				</select> <br> <br> <br> <input type="text" name="contents"
-					placeholder="CONTENTS"> <input type=hidden name=empno
-					value="${empno}"> <input type=submit value="ADD">
+				</select> <br> <br> <br> 
+				
+				<input type="text" size="10" name="title" placeholder="SMILE"> 
+				<input type="text" size="27" name="contents" placeholder="CONTENTS"> 
+				<input type=hidden name=empno value="${empno}"> 
+				<input type=submit value="ADD">
 			</form>
 
 		</div>
@@ -167,7 +177,7 @@ input[type=text] {
 							&gt;</b></a></td>
 			</tr>
 		</table>
-		<table class="weekdays" style="border-collapse: collapse;"
+		<table class="weekdays" border=0
 			class="table-condensed table-bordered table-striped">
 			<!-- 달력 부분 -->
 			<tr class="weekdays">
@@ -178,7 +188,6 @@ input[type=text] {
 				<th style="text-align: center;">목</th>
 				<th style="text-align: center;">금</th>
 				<th style="color: #004d99; text-align: center;">토</th>
-
 			</tr>
 
 
@@ -207,13 +216,13 @@ input[type=text] {
 					</c:if> <c:if
 						test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
 						<b><a
-							href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}"><font
-								style="color: #cc3300">${a}</font></a></b>
+							href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}">
+							<font style="color: #cc3300">${a}</font></a></b>
 					</c:if> <c:if
 						test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
 						<b><a
-							href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}"><font
-								style="color: black">${a}</font></a></b>
+							href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}">
+							<font style="color: black">${a}</font></a></b>
 					</c:if> <c:set var="br" value="${br+1}" /></td>
 			</c:forEach>
 
@@ -224,6 +233,8 @@ input[type=text] {
 		<hr>
 		<br> 
     <h3 align="center"><b>${month1} . ${day}</b></h3>
+    <h2 align="left"><b>${count} Schedule</b></h2>
+  
 	<c:if test="${fn:length(vo) == 0}">
 		
 		<div class="noschedule">
@@ -238,7 +249,9 @@ input[type=text] {
 	<c:if test="${fn:length(vo) != 0}"> 
   		<br><br><br>
 		<c:forEach var="vo" items="${vo}">
+			<c:out value="${vo.title}      "/>
 			<c:out value="${vo.contents}  "/>
+			
 			<b>작성한 날짜 : <fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></b>
 			<form action="/erp/schedule/delete" method="post">
 				<div class="tooltip-demo">

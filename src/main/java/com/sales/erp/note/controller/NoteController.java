@@ -82,7 +82,6 @@ public class NoteController {
 	
 	@RequestMapping("/note/sdetail")
 	public ModelAndView viewSdetail(HttpServletRequest request){
-		
 		ModelAndView mav = nos.sendLists(request);
 		mav.setViewName("/note/senddetail");
 		return mav;

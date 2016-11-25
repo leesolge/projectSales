@@ -4,10 +4,17 @@ import java.util.Date;
 
 public class ScheduleVO {
  	
-	String empno,contents;
+	String empno,contents,title;
 	int year,month,day,num;
 	Date regDate;
 	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getEmpno() {
 		return empno;
 	}

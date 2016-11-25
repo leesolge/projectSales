@@ -11,4 +11,5 @@ public interface ScheduleMapper extends Serializable{
 	public void delete(ScheduleVO vo);
 	public void insert(ScheduleVO vo);
 	public void update(ScheduleVO vo);
+	public int count(ScheduleVO vo);
 }

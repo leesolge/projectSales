@@ -29,6 +29,7 @@ public class ScheduleController {
 			ScheduleVO vo = new ScheduleVO();
 			int month = Integer.parseInt(request.getParameter("month"))-1;
 			vo.setContents(request.getParameter("contents"));
+			vo.setTitle(request.getParameter("title"));
 			vo.setEmpno(request.getParameter("empno"));
 			vo.setYear(Integer.parseInt(request.getParameter("year")));
 			vo.setMonth(Integer.parseInt(request.getParameter("month")));
@@ -143,6 +144,7 @@ public class ScheduleController {
 			ScheduleVO vo = new ScheduleVO();
 			vo.setYear(year1); vo.setMonth(month1+1); vo.setDay(day); vo.setEmpno(empno);
 		    list = sdao.selectOne(vo);
+		    int count = sdao.countSchedule(vo);
 			
 		      
 		      request.setAttribute("month1", month1+1);
@@ -157,6 +159,7 @@ public class ScheduleController {
 			  request.setAttribute("br", br);
 			  request.setAttribute("empno", empno);
 			  request.setAttribute("vo", list);
+			  request.setAttribute("count", count);
 			  
 			  return "/schedule/calendar";
 		}
