@@ -1,107 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
-	<body>
-	<form name="list" action="/erp/order/list" method="post">
-	</form>
+<body>
+	<div class="w3-container w3-center">
+		<h2>Product 충원요청</h2>
+	</div>
 	
-	<form name="regist" action="/erp/order/regist" method="post">
+	<br>
+
+	<form name="SellWrite" action="/erp/sell/sellWrite" method="post">
 		<table>
 			<tr>
+				<td><input type="hidden" name="empno" value="${memberInfo.empno }"> 등록자 사번</td>
+				<td>${memberInfo.empno }</td>
+			</tr>
+			<tr>
+				<td>수주상품</td>
 				<td>
-					<input type="hidden" name="id" value="0">
-					등록자 사번
+					<select class="w3-select w3-border w3-round-large"  name="procode">
+						<option value="" selected disabled>상품명</option>
+						 <c:forEach 	var="list" items="${list}">
+							<option value="${list.procode}">${list.proname}</option> 
+						</c:forEach>
+					</select>
 				</td>
-				<td>
-			a
+			</tr>
+
+			</td>
+			<tr>
+				<td>수주수량</td>
+				<td><input type="number" name="proamount" required="required">
 				</td>
 			</tr>
 			<tr>
-				<td>
-					출고 예정일
-				</td>
-				<td>
-					<input type="number" name="releasedate" required="required">
+				<td>고객명</td>
+				<td><input type="text" name="customer" required="required">
 				</td>
 			</tr>
 			<tr>
-				<td>
-					만기일
-				</td>
-				<td>
-					<input type="number" name="expiredate" required="required">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					수주상품
-				</td>
-				<td>
-				a
-				</td>
-			<tr>
-				<td>
-					수주수량
-				</td>
-				<td>
-					<input type="number" name="proamount" required="required">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					수주단가
-				</td>
-				<td>
-					<input type="number" name="originprice" required="required">
-				</td>`
-			</tr>
-			<tr>
-				<td>
-					공급금액
-				</td>
-				<td>
-					<input type="number" name="sellprice" required="required">
-				</td>
-			</tr>
-				<tr>
-				<td>
-					품목합계
-				</td>
-				<td>
-					<input type="number" name="totalprice" required="required">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					고객명
-				</td>
-				<td>
-					<input type="text" name="customer" required="required">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					고객주소
-				</td>
-				<td>
-					<input type="text" name="address" required="required">
-					<input type="hidden" name="checks" value="0">
-					<input type="hidden" name="deleted" value="0">
-				</td>
-			</tr>
-				<tr>
-				<td>
-					고객전화번호
-				</td>
-				<td>
-					<input type="text" name="tel" required="required">
-				</td>
+				<td>고객주소</td>
+				<td><input type="text" name="address" required="required"></td>
 			</tr>
 		</table>
+		<input class="w3-btn w3-round-large" type="submit" value="등록" />
 	</form>
-	<button onclick="javascript:registOrder()">등록</button><br>
-	<button onclick="javascript:toList()">목록</button>
-	</body>
+</body>
 </html>
