@@ -44,7 +44,6 @@ public class OrderService {
 		MemberVO memvo = dao.selectAMember(vo);
 		vo.setTests(orderid); 
 		int amount = dao.getProductAmount(vo);
-		System.out.println(vo.getTests());
 		OrderVO rvo = dao.selectOneOrder(vo);
 		if(Integer.parseInt(rvo.getProamount())>amount){
 			rv = new RedirectView("/erp/order/orderfail");
@@ -57,7 +56,6 @@ public class OrderService {
 			dao.orderCheck(vo);
 			dao.transInsert(ovo);
 			vo.setTests(rvo.getProamount()+" WHERE PROCODE="+rvo.getProcode());
-			System.out.println(vo.getTests());
 			dao.minusProduct(vo);
 			rv = new RedirectView("/erp/order/list");
 			NoteVO notevo = new NoteVO();
@@ -232,16 +230,12 @@ public class OrderService {
 		mav.addObject("authpage", authpage);
 		
 		/*팀 종류 받아오기*/
-		System.out.println(authpage);
-		System.out.println(authpage.equals("ROLE_MANAGER"));
 		ArrayList<TeamVO> teams = null;
 		if(authpage.equals("ROLE_MANAGER")){
 			testvo.setTests(mvo.getTeam());
 			teams = dao.selectATeam(testvo);
-			System.out.println(teams);
 		}else if(authpage.equals("ROLE_ADMIN")){
 			teams = dao.selectTeam();
-			System.out.println(teams);
 		}
 		
 		if(!authpage.equals("ROLE_MANAGER")&&!authpage.equals("ROLE_ADMIN")){

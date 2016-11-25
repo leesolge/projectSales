@@ -67,7 +67,6 @@ public class SalaryService {
 		TempVO ab = new TempVO();
 		ab.setDatevalue(empno);
 		templist = dao.salaryList(ab);
-		System.out.println(templist);
 		for(SalaryVO savo : templist){
 			String date = savo.getSalarydate();
 			TempVO tvo = new TempVO();
@@ -93,7 +92,6 @@ public class SalaryService {
 		mav.addObject("datevalue", datevalue);
 		String dateview = datevalue.substring(0, 4)+"년 "+datevalue.substring(4, 6)+"월";
 		mav.addObject("dateview", dateview);
-		System.out.println(datevalue);
 		
 		/*끝날짜 가공*/
 		String enddate = datevalue;
@@ -231,8 +229,6 @@ public class SalaryService {
 				}else if(ovo.getAuth().equals("팀장")){
 					allow = (long) (Long.parseLong(ovo.getProfit())*0.5);
 				}
-				System.out.println(ovo.getAuth());
-				System.out.println(allow);
 				ovo.setAllowance(allow);
 			}
 			mav.addObject("mylist", olist);
@@ -356,7 +352,6 @@ public class SalaryService {
 			}
 			all += svo.getSalary();
 		}
-		System.out.println(all);
 	}
 	
 	/*public ModelAndView viewsSalary(HttpServletRequest request) throws Exception{
@@ -365,7 +360,6 @@ public class SalaryService {
 		Calendar today = Calendar.getInstance();
 		int thisYear = today.get(Calendar.YEAR);
 		int thisMonth = today.get(Calendar.MONTH);
-		System.out.println(thisMonth);
 		double payment = 0;
 		
 		String datevalue = request.getParameter("datevalue");
@@ -398,7 +392,6 @@ public class SalaryService {
 		vvo.setEnddate(datevalue);
 		String profitsum = dao.profitSum(vvo);
 		ArrayList<OrderJoinVO> perform = dao.selectMonthlyPerformance(vvo);
-		System.out.println(perform.size());
 		for(OrderJoinVO ovo:perform){
 			Date date = ovo.getRegdate();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
@@ -419,8 +412,6 @@ public class SalaryService {
 			}else if(ovo.getAuth().equals("팀장")){
 				allowance = (long) (allowance*0.5);
 			}
-			System.out.println(ovo.getAuth());
-			System.out.println(allowance);
 			ovo.setAllowance(allowance);
 			payment = payment+ovo.getAllowance();
 		}
