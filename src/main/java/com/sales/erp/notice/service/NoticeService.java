@@ -83,9 +83,13 @@ public class NoticeService {
 		ModelAndView mav = new ModelAndView();
 		String num = request.getParameter("num");
 		NoticeVO noticeVo = dao.noticeContent(num);						//공지사항 내용 불러오는부분
-		ArrayList<NoticeReplyVO> replyList = dao.replyList(num);		//공지사항내 댓글 불러오는 부분			
+		ArrayList<NoticeReplyVO> replyList = dao.replyList(num);		//공지사항내 댓글 불러오는 부분
+		
+		int count=dao.getReplyCount(num);
+		
 		mav.addObject("noticeVo", noticeVo);
 		mav.addObject("replyList", replyList);
+		mav.addObject("count", count);
 		return mav;
 	}
 
