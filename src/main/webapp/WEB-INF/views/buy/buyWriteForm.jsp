@@ -17,45 +17,70 @@
 	<br>
 	
 	<div class="w3-row">
-		<div class="w3-col w3-left" style="width: 10%"><p></p></div>
-		<div class="w3-col w3-right" style="width: 10%"><p></p></div>
-		<div class="w3-rest w3-container w3-row-padding">	
-			<div class="w3-third">
-				<label class="w3-wide">Name</label> <input
-					class="w3-input w3-border w3-round-large"
-					style="width: 60%; border-radius: 6px;" readonly
-					value="${memberInfo.name}">
-			</div>
-			<div class="w3-third">
-				<label class="w3-wide">Team</label> <input
-					class="w3-input w3-border w3-round-large"
-					style="width: 60%; border-radius: 6px;" readonly
-					value="${memberInfo.team}">
-			</div>
+		<div class="w3-col w3-left" style="width: 50%">
 
-			<div class="w3-third">
-				<label class="w3-wide"><p></p></label> <input
-					class="w3-btn w3-input page_button w3-round-large w3-right"
-					style="width: 40%;" type="button" id="btn_AddO"
-					value="물품추가">
+			<div class="w3-col w3-left" style="width: 30%">
+				<input class="w3-input w3-border w3-padding" type="text"
+					placeholder="Search for Code.." id="myInput"
+					onkeyup="myFunction()">
 			</div>
-		</div>
-	</div>
-
-	<br>
-	
-	<div class="w3-row"> 
-		<div class="w3-col w3-left" style="width: 10%"><p></p></div>
-		<div class="w3-col w3-right" style="width: 10%"><p></p></div>
-		<div class="w3-rest w3-container w3-center">
-			<table class="order_list w3-table w3-centered">
+			<table class="w3-table w3-centered" id="myTable">
 				<tr>
-					<th style="width: 15%">요청상품</th>
-					<th style="width: 15%">주문수량</th>
-					<th style="width: 60%">주문사유</th>					
-					<th style="width: 10%">취소</th>
+					
+					<th>상품명</th>
+					<th>재고</th>				
+					<th>원가</th>					
+					<th>내용</th>
 				</tr>
+
+				<c:forEach items="${list}" var="list">
+					<tr>						
+						<td>${list.proname}</td>
+						<td>${list.proamount}</td>
+						<td>${list.originprice}</td>						
+						<td><input type="button" value="Content"
+							class="w3-btn w3-round-large"							
+							onclick="window.location='/erp/product/productInfo?procode=${list.procode}'"> <!-- 멤버콘텐츠 보는 경로 -->
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
+			<hr>
+		</div>
+				
+		<div class="w3-rest w3-container w3-row-padding">	
+			<div class=" w3-row">	
+				<div class="w3-third">
+					<label class="w3-wide">Name</label> <input
+						class="w3-input w3-border w3-round-large"
+						style="width: 60%; border-radius: 6px;" readonly
+						value="${memberInfo.name}">
+				</div>
+				<div class="w3-third">
+					<label class="w3-wide">Team</label> <input
+						class="w3-input w3-border w3-round-large"
+						style="width: 60%; border-radius: 6px;" readonly
+						value="${memberInfo.team}">
+				</div>
+	
+				<div class="w3-third">
+					<label class="w3-wide"><p></p></label> <input
+						class="w3-btn w3-input page_button w3-round-large w3-right"
+						style="width: 40%;" type="button" id="btn_AddO"
+						value="물품추가">
+				</div>
+			</div>
+			
+			<div class=" w3-row" style="height:300px; overflow:auto;">				
+				<table class="order_list w3-table w3-centered">
+					<tr>
+						<th style="width: 15%">상품명	</th>
+						<th style="width: 15%">주문수량</th>
+						<th style="width: 60%">주문사유</th>					
+						<th style="width: 10%">취소</th>
+					</tr>
+				</table>
+			</div>
 			<input class="w3-btn w3-round-large" type="submit" value="등록" />
 	</div>
 	</form>
@@ -87,5 +112,25 @@
 						num++;
 						});				
 			});
+</script>
+
+<script>
+	function myFunction() {
+		var input, filter, table, tr, td, i;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
 </script>
 </html>
