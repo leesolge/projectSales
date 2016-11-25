@@ -11,7 +11,7 @@
 
 <body><br>
 <div class="w3-container">
-	<div class="w3-row-padding w3-margin-bottom">
+	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
 		<div class="w3-quarter">
 			<div class="w3-container w3-red w3-padding-16">
 				<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
@@ -53,6 +53,21 @@
 			</div>
 		</div>
 	 </div>
+	 
+	 <div class="w3-row-padding w3-margin-bottom w3-hide-large w3-hide-medium">
+	 	<div class="w3-col s3 w3-center w3-text-red">
+	 		<i class="fa fa-comment w3-xxlarge"></i>
+	 	</div>
+	 	<div class="w3-col s3 w3-center w3-text-blue">
+	 		<i class="fa fa-eye w3-xxlarge"></i>
+	 	</div>
+	 	<div class="w3-col s3 w3-center w3-text-teal">
+		 	<i class="fa fa-share-alt w3-xxlarge"></i>
+	 	</div>
+	 	<div class="w3-col s3 w3-center w3-text-orange">
+	 		<i class="fa fa-users w3-xxlarge"></i>
+	 	</div>
+	 </div>
 	  
 	<div class="w3-row-padding w3-margin-bottom">
 		<!-- Notice -->
@@ -70,14 +85,15 @@
 					</tr>
 					<c:forEach var="list" items="${list}" begin="0" end="4">
 					<tr style="cursor:pointer;" onclick="location.href='/erp/notice/noticeContent?num=${list.num}'">
-						<td style="text-align: left;"><span>${list.title}</span></td>
+						<td style="text-align: left;"><span title="${list.title}">${list.title}</span></td>
 						<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 					</c:forEach>
 				</table>
 			</div>
+			<div class="w3-hide-large w3-hide-medium"><br></div>
 		</div>
-			
+
 		<!-- Note -->
 		<div class="w3-half">
 			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 280px;">
@@ -94,7 +110,7 @@
 					</tr>
 					<c:forEach var="c" items="${note}" begin="0" end="4">
 						<tr>
-							<td style="text-align: left;"><span>${c.title}</span></td>
+							<td style="text-align: left;"><span title="${c.title}">${c.title}</span></td>
 							<td>${c.sender}</td>
 							<td><fmt:formatDate value="${c.senddate}" pattern="yyyy-MM-dd"/></td>
 						</tr>

@@ -2,8 +2,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <html>
+<script type="text/javascript">
+	var InputImage = (function loadImageFile() {
+		if (window.FileReader) {
+			var ImagePre;
+			var ImgReader = new window.FileReader();
+			var fileType = /^(?:image\/bmp|image\/gif|image\/jpeg|image\/png|image\/x\-xwindowdump|image\/x\-portable\-bitmap)$/i;
+			ImgReader.onload = function(Event) {
+				if (!ImagePre) {
+					var newPreview = document.getElementById("imagePreview");
+					ImagePre = new Image();
+					ImagePre.style.width = "200px";
+					ImagePre.style.height = "140px";
+					newPreview.appendChild(ImagePre);
+				}
+				ImagePre.src = Event.target.result;
+			};
+
+			return function() {
+				var img = document.getElementById("image").files;
+				if (!fileType.test(img[0].type)) {
+					alert("이미지 파일을 업로드 하세요");
+					return;
+				}
+				ImgReader.readAsDataURL(img[0]);
+			}
+		}
+		document.getElementById("imagePreview").src = document
+				.getElementById("image").value;
+	})();
+</script>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
+<div id="imagePreview"></div>
 	<div class="w3-row ">
 		<div class="w3-col w3-left" style="width:30%"><p></p></div>
 		<div class="w3-col w3-right" style="width:30%"><p></p></div>
@@ -12,8 +43,8 @@
 				<h4>Join</h4>
 				<table class="w3-table w3-bordered w3-border w3-centered">
 					<tr>
-						<td><input type="file" name="file" required></td>
-					</tr>		
+						<td><input id="image" type="file" name="file" onchange="InputImage();" required></td>
+					</tr>
 					<tr>
 						<td><input type="text" name="name" placeholder="Name"></td>
 					</tr>				

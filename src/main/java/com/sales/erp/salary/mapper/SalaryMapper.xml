@@ -4,6 +4,49 @@
      
 	<mapper namespace="com.sales.erp.salary.dao.SalaryMapper">
 		
+		<select id="selectAMember" resultType="com.sales.erp.member.vo.MemberVO" parameterType="com.sales.erp.salary.vo.TempVO">
+			SELECT EMPNO, AUTH, TEAM FROM SMEMBER WHERE EMPNO=#{datevalue}
+		</select>
+		<select id="selectOrders" resultType="com.sales.erp.order.vo.OrderJoinVO" parameterType="com.sales.erp.salary.vo.TempVO">
+			SELECT S.ID AS ID, S.EMPNO AS EMPNO, S.REGDATE AS REGDATE,
+			M.NAME AS NAME, M.TEAM AS TEAM, M.AUTH AS AUTH,
+			S.PROCODE AS PROCODE, P.PRONAME AS PRONAME, S.PROAMOUNT AS PROAMOUNT,
+			((P.SELLPRICE-P.ORIGINPRICE)*S.PROAMOUNT) AS PROFIT,
+			S.CUSTOMER AS CUSTOMER, S.ADDRESS AS ADDRESS, S.CHECKS AS CHECKS,
+			S.DELETED AS DELETED
+			FROM ORDERS S, 
+			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) M,
+			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
+			WHERE S.EMPNO=M.EMPNO AND S.PROCODE=P.PROCODE AND DELETED=0 AND CHECKS=1
+			${datevalue} ORDER BY S.REGDATE DESC
+		</select>
+	
+		<select id="tempTeam" resultType="com.sales.erp.member.vo.MemberVO" parameterType="com.sales.erp.salary.vo.TempVO">
+			SELECT S.* FROM SMEMBER S, SMEMBER M WHERE S.EMPNO=M.EMPNO AND S.TEAM!='관리팀' ${datevalue} ORDER BY S.TEAM, S.AUTH DESC
+		</select>
+		
+		<select id="selectTeam" resultType="com.sales.erp.order.vo.TeamVO">
+			SELECT TEAM FROM SMEMBER WHERE TEAM!='관리팀' GROUP BY TEAM ORDER BY TEAM
+		</select>
+		
+		<select id="teamMember" parameterType="com.sales.erp.order.vo.TeamVO" resultType="com.sales.erp.member.vo.MemberVO">
+			SELECT EMPNO, NAME, AUTH FROM SMEMBER WHERE TEAM=#{team} ORDER BY AUTH DESC
+		</select>
+	
+		<select id="adminSalary" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.salary.vo.SalaryJoinVO">
+			SELECT S.EMPNO AS EMPNO, M.TEAM AS TEAM, M.AUTH AS AUTH,
+			S.SALARYDATE AS SALARYDATE, S.SALARY AS SALARY,
+			S.ALLOWANCE AS ALLOWANCE, S.MANAGER AS MANAGER,
+			S.TAX1 AS TAX1, S.TAX2 AS TAX2, S.REALS AS REALS
+			FROM SALARY S, SMEMBER M WHERE S.EMPNO = M.EMPNO
+			${datevalue}
+			ORDER BY S.SALARYDATE DESC, M.TEAM, M.AUTH DESC
+		</select>
+		
+		<select id="dateObject" resultType="com.sales.erp.salary.vo.SalaryVO">
+			SELECT SALARYDATE FROM SALARY GROUP BY SALARYDATE ORDER BY SALARYDATE DESC
+		</select>
+		
 		<select id="team" parameterType="com.sales.erp.salary.vo.VOforSQL" resultType="com.sales.erp.order.vo.OrderJoinVO">
 			<![CDATA[
 			SELECT * FROM

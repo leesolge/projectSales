@@ -21,7 +21,8 @@
 				<td class="w3-text-gray" style="text-align: left; width: 80px;">작성자 | </td>
 				<td style="text-align: left;"><span>${noticeVo.name}</span></td>
 				<td class="w3-text-gray" style="text-align: left; width: 80px;">댓글　 | </td>
-				<td style="width: 80px; text-align: left;">0</td>
+				<td style="width: 80px; text-align: left;">${count}</td>
+				
 			</tr>
 		</table>
 		<br>

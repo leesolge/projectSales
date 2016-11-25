@@ -40,4 +40,10 @@ public class ScheduleDAO {
 		ScheduleMapper sqlMapper = sqlSession.getMapper(ScheduleMapper.class);
 		sqlMapper.update(vo);
 	}
+	
+	public int countSchedule(ScheduleVO vo){
+		ScheduleMapper sqlMapper = sqlSession.getMapper(ScheduleMapper.class);
+		int count = sqlMapper.count(vo);
+		return count;
+	}
 }

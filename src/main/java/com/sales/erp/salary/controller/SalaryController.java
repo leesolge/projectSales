@@ -18,6 +18,13 @@ public class SalaryController {
 	@Autowired
 	private SalaryService ss;
 	
+	@RequestMapping("/admin/salary")
+	public ModelAndView adminSalary(HttpServletRequest request){
+		ModelAndView mav = ss.adminSalary(request);
+		mav.setViewName("salary/adminlist");
+		return mav;
+	}
+	
 	@RequestMapping("/salary/view")
 	public ModelAndView testSalary(HttpServletRequest request){
 		ModelAndView mav = ss.viewSalary(request);

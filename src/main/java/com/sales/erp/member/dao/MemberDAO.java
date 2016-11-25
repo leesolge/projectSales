@@ -11,28 +11,16 @@ import com.sales.erp.member.vo.MemberSearch;
 import com.sales.erp.member.vo.MemberVO;
 
 @Repository
-public class MemberDAO{
+public class MemberDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public void insertMember(MemberVO member) {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-		memberMapper.insertMember(member);
-	} 
-
-	public MemberVO ConfirmID_Member(MemberVO member){
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);	
-		MemberVO vo = memberMapper.ConfirmID_Member(member);
-		return vo;
-	}
-	
-	////////////////////////////////////새로 작성하는 부분
 
 	public MemberVO getMemberEmpno(String id) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.getMemberEmpno(id);
 	}
+
 	public MemberVO getMember(MemberVO mvoParam) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.getMember(mvoParam);
@@ -60,12 +48,12 @@ public class MemberDAO{
 
 	public void memberUpdate(MemberJoinVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		mapper.memberUpdate(vo);		
+		mapper.memberUpdate(vo);
 	}
 
 	public void memberUpdateA(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		mapper.memberUpdateA(vo);			
+		mapper.memberUpdateA(vo);
 	}
 
 	public ArrayList<MemberVO> memberListWait(MemberSearch search) {
@@ -80,11 +68,26 @@ public class MemberDAO{
 
 	public void Approve(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		mapper.Approve(vo);		
+		mapper.Approve(vo);
 	}
 
 	public void Cancel(MemberVO vo) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		mapper.Cancel(vo);		
+		mapper.Cancel(vo);
+	}
+
+	public void JoinMember(MemberVO member) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberMapper.JoinMember(member);
+	}
+
+	public MemberVO ConfirmID_Member(MemberVO member) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		return memberMapper.ConfirmID_Member(member);
+	}
+
+	public MemberVO ConfirmPWD_Member(MemberVO member) {
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		return memberMapper.ConfirmPWD_Member(member);
 	}
 }

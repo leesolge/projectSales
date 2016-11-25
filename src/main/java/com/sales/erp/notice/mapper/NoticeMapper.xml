@@ -88,5 +88,10 @@
 		NOTICEREPLY
 		WHERE REPLYNUM=#{replynum}
 	</delete>
+	
+	<!-- 리플라이 수 조회 -->
+	<select id="getReplyCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from noticereply where num like #{num}
+	</select>
 </mapper>
 

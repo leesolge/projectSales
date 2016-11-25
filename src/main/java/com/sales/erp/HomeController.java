@@ -20,24 +20,29 @@ import com.sales.erp.notice.vo.NoticeVO;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
-	private NoticeService ns;
-	
+	private NoticeService noticeService;
+
 	@Autowired
 	private NoteService noteService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
 		return "home";
 	}
 
-	//After login page
+	@RequestMapping("/home")
+	public String home() {
+		return "home";
+	}
+
+	// After login page
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/main")
 	public ModelAndView main(HttpServletRequest request) {
-		ModelAndView mv = ns.getNoticeList(request);
+		ModelAndView mv = noticeService.getNoticeList(request);
 		Map<String, Object> map = mv.getModel();
 		ArrayList<NoticeVO> notice = (ArrayList<NoticeVO>) map.get("list");
 		ModelAndView mav = new ModelAndView();

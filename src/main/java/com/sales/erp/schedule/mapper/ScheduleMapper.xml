@@ -15,10 +15,13 @@
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
      		
-			INSERT INTO SCHEDULE(NUM,EMPNO,CONTENTS,YEAR,MONTH,DAY,REGDATE) 
-			VALUES (CALREG.nextval,#{empno},#{contents},#{year},#{month},#{day},SYSDATE)
+			INSERT INTO SCHEDULE(NUM,EMPNO,TITLE,CONTENTS,YEAR,MONTH,DAY,REGDATE) 
+			VALUES (CALREG.nextval,#{empno},#{title},#{contents},#{year},#{month},#{day},SYSDATE)
 	</insert>
 	<update id="update" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
 			UPDATE SCHEDULE SET CONTENTS=#{contents} WHERE EMPNO=#{empno}    
 	</update>
+	<select id="count" parameterType="com.sales.erp.schedule.vo.ScheduleVO" resultType="java.lang.Integer">
+		select count(*) from schedule where  EMPNO like #{empno} and YEAR like #{year} and MONTH like #{month} and DAY like #{day}
+	</select>
 </mapper>

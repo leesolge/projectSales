@@ -30,4 +30,6 @@ public interface NoticeMapper extends Serializable {
 	void replyUpdate(NoticeReplyVO vo);
 
 	void replyDelete(NoticeReplyVO vo);
+
+	int getReplyCount(String num);
 }

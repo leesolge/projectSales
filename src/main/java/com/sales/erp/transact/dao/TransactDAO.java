@@ -6,9 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sales.erp.member.vo.OrderRequestListJoinVO;
-import com.sales.erp.member.vo.OrderRequestListVO;
-import com.sales.erp.member.vo.OrderRequestVO;
+import com.sales.erp.buy.vo.BuyListVO;
+import com.sales.erp.buy.vo.BuyVO;
 import com.sales.erp.transact.vo.TransactSearchVO;
 import com.sales.erp.transact.vo.TransactVO;
 
@@ -33,27 +32,27 @@ public class TransactDAO {
 		return transactMapper.get_team();
 	}
 
-	public ArrayList<OrderRequestListJoinVO> getRequestList() {
+	public ArrayList<BuyListVO> getRequestList() {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
 		return transactMapper.getRequestList();
 	}
 
-	public void RequestApprove(String onum) {
+	public void RequestApprove(String buynum) {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
-		transactMapper.RequestApprove(onum);
+		transactMapper.RequestApprove(buynum);
 	}
 
-	public ArrayList<OrderRequestVO> GetTransactList(String onum) {
+	public ArrayList<BuyVO> GetTransactList(String buynum) {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
-		return transactMapper.GetTransactList(onum);
+		return transactMapper.GetTransactList(buynum);
 	}
 
-	public void AddTransactList(OrderRequestVO vo) {
+	public void AddTransactList(BuyVO vo) {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
 		transactMapper.AddTransactList(vo);
 	}
 
-	public void AddProduct(OrderRequestVO vo) {
+	public void AddProduct(BuyVO vo) {
 		TransactMapper transactMapper = sqlSession.getMapper(TransactMapper.class);
 		transactMapper.AddProduct(vo);
 	}

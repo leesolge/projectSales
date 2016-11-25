@@ -29,7 +29,7 @@
 				<tr onclick="location.href='/erp/notice/noticeContent?num=${notice.num}&pg=${pg}'" style="cursor:pointer;">
 					<td>${notice.num}</td>
 					<td style="text-align: left;">
-						<span>${notice.title}</span>
+						<span title="${notice.title}">${notice.title}</span>
 					</td>
 					<td>${notice.name}</td>
 					<td><fmt:formatDate value="${notice.regDate}" pattern="yyyy-MM-dd" /></td>
@@ -47,20 +47,20 @@
 		</div>
 		
 		<!-- Page -->
-		<div class="w3-row w3-center">
+		<div class="w3-row w3-center w3-small">
 			<ul class="w3-pagination">
 				<c:if test="${paging.page>paging.block}">
-					<li><a href="/erp/notice/noticeList?pg=1" class="w3-hover-black">&laquo;&laquo;</a></li>
+					<li><a href="/erp/notice/noticeList?pg=1" class="w3-hover-black w3-hide-small">&laquo;&laquo;</a></li>
 					<li><a href="/erp/notice/noticeList?pg=${paging.fromPage-1}"  class="w3-hover-black">&laquo;</a></li>
 				</c:if>
 				<c:if test="${paging.page <= paging.block}">
-					<li><a href="#" class="w3-hover-black">&laquo;&laquo;</a></li>
+					<li><a href="#" class="w3-hover-black w3-hide-small">&laquo;&laquo;</a></li>
 					<li><a href="#" class="w3-hover-black">&laquo;</a></li>
 				</c:if>
 				<!-- 블록 범위 찍기 -->
 				<c:forEach begin="${paging.fromPage}" end="${paging.toPage}" var="i">
 					<c:if test="${i == paging.page}">
-						<li><a href="#" class="w3-hover-red">${i}</a></li>
+						<li><a href="#" class="w3-hover-red w3-text-red"><b>${i}</b></a></li>
 					</c:if>
 					<c:if test="${i != paging.page}">
 						<li><a href="/erp/notice/noticeList?pg=${i}" class="w3-hover-black">${i}</a></li>
@@ -69,11 +69,11 @@
 				<!-- 다음, 이후 -->
 				<c:if test="${paging.toPage < paging.allPage}">
 					<li><a href="/erp/notice/noticeList?pg=${paging.toPage+1}" class="w3-hover-black">&raquo;</a></li>
-					<li><a href="/erp/notice/noticeList?pg=${paging.allPage}" class="w3-hover-black">&raquo;&raquo;</a></li>
+					<li><a href="/erp/notice/noticeList?pg=${paging.allPage}" class="w3-hover-black w3-hide-small">&raquo;&raquo;</a></li>
 				</c:if>
 				<c:if test="${paging.toPage >= paging.allPage}">
 					<li><a href="#" class="w3-hover-black">&raquo;</a></li>
-					<li><a href="#" class="w3-hover-black">&raquo;&raquo;</a></li>
+					<li><a href="#" class="w3-hover-black w3-hide-small">&raquo;&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>

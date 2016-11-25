@@ -36,32 +36,32 @@
 		SELECT TEAM FROM SMEMBER GROUP BY TEAM ORDER BY TEAM
 	</select>
 		
-	<select id="getRequestList" resultType="com.sales.erp.member.vo.OrderRequestListJoinVO">
-		SELECT ONUM, MAX(REGDATE)
+	<select id="getRequestList" resultType="com.sales.erp.buy.vo.BuyListVO">
+		SELECT buynum, MAX(REGDATE)
 		AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO,
 		MAX(PROCODE) AS
-		PROCODE FROM OREQUEST
-		WHERE CHECKS=1 GROUP BY ONUM ORDER BY ONUM DESC
+		PROCODE FROM buy
+		WHERE buystep=1 GROUP BY buynum ORDER BY buynum DESC
 	</select>
 	
 	<update id="RequestApprove" parameterType="java.lang.String">
-		UPDATE OREQUEST SET CHECKS = 2 WHERE ONUM=#{onum}
+		UPDATE buy SET buystep = 2 WHERE buynum=#{buynum}
 	</update>
 	
-	<select id="GetTransactList" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.OrderRequestVO">
-		SELECT * from OREQUEST where ONUM=#{onum}
+	<select id="GetTransactList" parameterType="java.lang.String" resultType="com.sales.erp.buy.vo.BuyVO">
+		SELECT * from buy where buynum=#{buynum}
 	</select>
 
-	<insert id="AddTransactList" parameterType="com.sales.erp.member.vo.OrderRequestVO">
+	<insert id="AddTransactList" parameterType="com.sales.erp.buy.vo.BuyVO">
 		INSERT INTO TRANSACT (ID, EMPNO, PROCODE, PROAMOUNT, TEAM, CATEGORY, PRICE,
 		ASSETS, TRANSDATE , DELETED)
-		VALUES(TO_CHAR(TRANSSEQ.NEXTVAL), #{empno}, #{procode}, #{oamount}, (SELECT TEAM FROM SMEMBER WHERE
+		VALUES(TO_CHAR(TRANSSEQ.NEXTVAL), #{empno}, #{procode}, #{amount}, (SELECT TEAM FROM SMEMBER WHERE
 		EMPNO=#{empno}), '판매',
 		(SELECT SELLPRICE FROM PRODUCT WHERE PROCODE=#{procode}), '0', SYSDATE, 0)
 	</insert>
 	
-	<update id="AddProduct" parameterType="com.sales.erp.member.vo.OrderRequestVO">
-		UPDATE PRODUCT SET PROAMOUNT= (PROAMOUNT+#{oamount}) WHERE PROCODE=#{procode}    
+	<update id="AddProduct" parameterType="com.sales.erp.buy.vo.BuyVO">
+		UPDATE PRODUCT SET PROAMOUNT= (PROAMOUNT+#{amount}) WHERE PROCODE=#{procode}    
 	</update>
 
 </mapper>

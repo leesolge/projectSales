@@ -3,18 +3,17 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sales.erp.member.dao.MemberMapper">
-	<!-- parameterType 에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래명이나 별칭이 들어간다  -->
-    <insert id="insertMember" parameterType="com.sales.erp.member.vo.MemberVO" >
-        INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
-        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, #{portrait}, #{account}, #{team})
-    </insert>
     
+	 <!-- ID 확인 -->
 	 <select id="ConfirmID_Member" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=(SELECT MIN(EMPNO) FROM SMEMBER WHERE NAME=#{name} AND EMAIL= #{email} )
 	</select>
+	
+	<!-- PW 확인 -->
+	 <select id="ConfirmPWD_Member" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT * FROM SMEMBER WHERE AUTH NOT LIKE 'ROLE_EE' AND EMPNO=#{empno} AND NAME=#{name} AND EMAIL= #{email}
+	</select>
 
-
-    <!-- ///////////////////////////새로 작성하는 부분 -->
     <!-- 사용자 정보 불러오기 -->
     <select id="getMemberEmpno" parameterType="java.lang.String" resultType="com.sales.erp.member.vo.MemberVO">
 		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
@@ -76,4 +75,9 @@
     <delete id="Cancel" parameterType="com.sales.erp.member.vo.MemberVO" >    
     	DELETE FROM SMEMBER WHERE EMPNO=#{empno}        
     </delete>
+    
+    <insert id="JoinMember" parameterType="com.sales.erp.member.vo.MemberVO" >
+        INSERT INTO SMEMBER (EMPNO, PWD, NAME, GENDER, BIRTH, JOIN, ADDRESS, PHONE, EMAIL, AUTH, PORTRAIT, ACCOUNT, TEAM)
+        VALUES(to_char(numregister.nextval), #{pwd}, #{name}, #{gender}, #{birth}, SYSDATE, #{address}, #{phone}, #{email}, #{auth}, #{portrait}, #{account}, #{team})
+    </insert>
 </mapper>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
+import com.sales.erp.order.vo.TeamVO;
+import com.sales.erp.salary.vo.SalaryJoinVO;
 import com.sales.erp.salary.vo.SalaryVO;
 import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
@@ -17,6 +19,41 @@ public class SalaryDAO implements SalaryMapper {
 
 	@Autowired
 	private SqlSession sqlSession;
+
+	public MemberVO selectAMember(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.selectAMember(vo);
+	}
+
+	public ArrayList<OrderJoinVO> selectOrders(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.selectOrders(vo);
+	}
+
+	public ArrayList<MemberVO> tempTeam(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.tempTeam(vo);
+	}
+
+	public ArrayList<TeamVO> selectTeam() {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.selectTeam();
+	}
+
+	public ArrayList<MemberVO> teamMember(TeamVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.teamMember(vo);
+	}
+
+	public ArrayList<SalaryJoinVO> adminSalary(TempVO vo) {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.adminSalary(vo);
+	}
+
+	public ArrayList<SalaryVO> dateObject() {
+		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);
+		return mapper.dateObject();
+	}
 
 	public ArrayList<OrderJoinVO> team(VOforSQL vo) {
 		SalaryMapper mapper = sqlSession.getMapper(SalaryMapper.class);

@@ -119,7 +119,6 @@ public class NoteService {
 		if(keyword==null||keyword.equals("")){
 			keyword="";
 		}
-		System.out.println(pageNum);
 		String newkeyword="%"+keyword+"%";
 		NoteSearchVO svo = new NoteSearchVO();
 		svo.setEmpno(empno);
@@ -138,9 +137,6 @@ public class NoteService {
 		}else{
 			max = (count/pageSize)+1;
 		}
-		System.out.println("count : "+count);
-		System.out.println(start);
-		System.out.println(end);
 		svo.setStart(start);
 		svo.setEnd(end);
 		
@@ -172,7 +168,6 @@ public class NoteService {
 				}
 			}
 		}
-		System.out.println(list);
 		mav.addObject("list", list);
 		mav.addObject("count", count);
 		mav.addObject("pageNum", pageNum);
@@ -208,8 +203,6 @@ public class NoteService {
 		int notenum = Integer.parseInt(request.getParameter("notenum"));
 		mav.addObject("notenum", notenum);
 		String receiver = request.getParameter("receiver");
-		System.out.println(empno);
-		System.out.println(receiver);
 		if(empno.equals(receiver)){
 			dao.deleteOne(notenum);
 		}
@@ -317,7 +310,6 @@ public class NoteService {
 		}
 		
 		ArrayList<MemberVO> receiverList = dao.receiverCheck(empno);
-		System.out.println(receiverList);
 		for(MemberVO svo:receiverList){
 			if(svo.getAuth().equals("ROLE_EMPLOYEE")){
 				svo.setAuth("사원");
@@ -465,8 +457,6 @@ public class NoteService {
 		String pageNum = (String) request.getParameter("pageNum");
 		String field = (String) request.getParameter("field");
 		String keyword = (String) request.getParameter("keyword");
-		System.out.println(field);
-		System.out.println(keyword);
 		if(pageNum==null||pageNum.equals("")){
 			pageNum="1";
 		}

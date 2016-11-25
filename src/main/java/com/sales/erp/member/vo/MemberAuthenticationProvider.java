@@ -47,7 +47,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         session.setAttribute("memberInfo", memberInfo);
         return new UsernamePasswordAuthenticationToken(id, pw, user.getAuthorities());
     }
-
+/////
     
 	@Override
 	public boolean supports(Class<?> authentication) {
