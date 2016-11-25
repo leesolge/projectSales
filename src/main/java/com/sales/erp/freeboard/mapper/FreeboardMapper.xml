@@ -57,13 +57,13 @@
 	<!-- 대댓글 입력 -->
 	<insert id="reReplyWrite" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO">
 		insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child)
-		values(#{replynum}, #{num}, #{empno}, #{reply}, sysdate, 1, #{num}, freeboardReReply_seq.nextval)
+		values(#{replynum}, #{num}, #{empno}, #{reply}, sysdate, 1, #{replynum}, freeboardReReply_seq.nextval)
 	</insert>
 	
 	<!-- 댓글 조회 -->
 	<select id="replyList" parameterType="java.lang.String" resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO">
-		select f.replynum, f.num, f.empno, f.reply, f.regDate, s.name from 
-		freeboardReply f, smember s where f.empno = s.empno and f.num = #{num}
+		select f.replynum, f.num, f.empno, f.reply, f.regDate, f.child, s.name from 
+		freeboardReply f, smember s where f.empno = s.empno and f.num = #{num} order by f.replynum asc, f.child asc
 	</select>
 	
 	<!-- 댓글 수정 양식 -->
@@ -71,6 +71,7 @@
 		resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO">
 		select * from freeboardReply where num=#{num} and replynum=#{replynum}
 	</select>
+	
 	
 	<!-- 댓글 수정 -->
 	<update id="replyUpdate" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO">
