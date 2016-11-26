@@ -61,6 +61,11 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.buyApproveManager(buynum);
 	}
+	
+	public void buyCancel(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyCancel(buynum);
+	}
 
 	public void buyApproveAdmin(String buynum) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
@@ -86,4 +91,6 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.addProduct(bvo);		
 	}
+
+
 }

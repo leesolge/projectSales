@@ -22,7 +22,7 @@
 							<input class="w3-border w3-border-indigo" type="text"
 								placeholder="검색어" id="myInput" onkeyup="myFunction()">
 						</div>
-						
+						<br>
 						<div class=" w3-row" style="height: 450px; overflow: auto;">
 							<table class="w3-table w3-small w3-hoverable w3-bordered"
 								id="myTable">
@@ -56,6 +56,7 @@
 							</div>
 						</div>
 					</div>
+					<br>
 					<div class=" w3-row" style="height: 450px; overflow: auto;">
 						<table
 							class="order_list w3-table w3-small w3-hoverable w3-bordered">

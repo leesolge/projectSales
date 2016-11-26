@@ -92,13 +92,8 @@ public class BuyService {
 
 		BuyVO voParam = new BuyVO();
 		voParam.setEmpno(mvo.getEmpno());
-		ArrayList<BuyListVO> list = null;
+		ArrayList<BuyListVO> list = dao.buyListWait(voParam);
 
-		if (mvo.getAuth().equals("ROLE_ADMIN")) {
-			list = dao.buyListWaitAll();
-		} else {
-			list = dao.buyListWait(voParam);
-		}
 		for (int i = 0; i < list.size(); i++) {
 			ProductVO name = pdao.selectOne(list.get(i).getProcode());
 			list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
@@ -141,8 +136,14 @@ public class BuyService {
 		voParam.setBuynum(Integer.parseInt(request.getParameter("buynum")));
 		ArrayList<BuyVO> list = dao.buyContent(voParam);
 		mav.addObject("list", list);
+		mav.addObject("list1", list.get(0));
 		mav.addObject("buynum", voParam.getBuynum());
-		return mav;
+		
+		MemberVO mvoParam = new MemberVO();
+		mvoParam.setEmpno(list.get(0).getEmpno());
+		MemberVO writer = dao.getMember(mvoParam);
+		mav.addObject("writer", writer);
+		return mav;	
 	}
 
 	public void buyApprove(HttpServletRequest request) {
@@ -156,6 +157,13 @@ public class BuyService {
 		} else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
 			dao.buyApproveAdmin(request.getParameter("buynum"));
 		}
+	}
+	
+	public ModelAndView buyCancel(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		dao.buyCancel(request.getParameter("buynum"));
+		mav.setViewName("redirect:/buy/buyListWait");
+		return mav;
 	}
 
 	public ModelAndView buyAppList() {
@@ -186,8 +194,5 @@ public class BuyService {
 		return mav;
 	}
 
-	public ModelAndView buyCancel(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

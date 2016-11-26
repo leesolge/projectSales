@@ -38,4 +38,6 @@ public interface BuyMapper extends Serializable {
 
 	void addProduct(BuyVO bvo);
 
+	void buyCancel(String buynum);
+
 }

@@ -41,8 +41,10 @@
 							<td onclick="javascript:content('${list.buynum}')" style="cursor:pointer;"><fmt:formatDate value="${list.regdate}"
 									pattern="yyyy-MM-dd" /></td>
 							<td onclick="javascript:content('${list.buynum}')" style="cursor:pointer;">
-								<c:if test="${list.buystep == 0}">팀장승인대기</c:if>
-								<c:if test="${list.buystep == 1}">자재팀승인대기</c:if>
+								<c:if test="${list.buystep == 0 && list.deleted==0}">팀장승인대기</c:if>
+								<c:if test="${list.buystep == 1 && list.deleted==0}">자재팀승인대기</c:if>
+								<c:if test="${list.buystep == 0 && list.deleted==1}"><font color="red">구매취소</font></c:if>
+								<c:if test="${list.buystep > 0 && list.deleted==1}"><font color="red">승인취소</font></c:if>
 							</td>
 							<td><a onclick="javascript:cancel('${list.buynum}')" class="w3-hover-text-red"><i class="fa fa-times w3-large"></i></a></td>
 						</tr>

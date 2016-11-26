@@ -59,7 +59,9 @@
 		    </a>
 		    <div id="demoAcc1" class="w3-accordion-content w3-padding">
 				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
+				<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE')">
 				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
+				</sec:authorize>				
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
 				<a href="/erp/order/registForm">- 판매등록</a>
 				<a href="/erp/order/list">- 판매대기목록</a>

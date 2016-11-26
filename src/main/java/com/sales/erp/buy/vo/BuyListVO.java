@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BuyListVO {
 
-	private int cnt, buystep;
+	private int cnt, buystep, deleted;
 	private String buynum, empno, title, procode, team, name;
 	private Date regdate, appdate;
 
@@ -86,6 +86,14 @@ public class BuyListVO {
 
 	public void setAppdate(Date appdate) {
 		this.appdate = appdate;
+	}
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
 	}
 
 }

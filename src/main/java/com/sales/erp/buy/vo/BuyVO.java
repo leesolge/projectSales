@@ -6,6 +6,7 @@ public class BuyVO {
 	private int buynum; // 주문번호
 	private String empno; // 주문자 사원번호
 	private String procode; // 주문 물품번호
+	private String proname; // 주문 물품번호
 	private String amount; // 주문 수량
 	private String buycomment; // 주문 이유
 	private Date regdate; // 주문등록 날짜
@@ -83,6 +84,14 @@ public class BuyVO {
 
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getProname() {
+		return proname;
+	}
+
+	public void setProname(String proname) {
+		this.proname = proname;
 	}
 
 }
