@@ -274,6 +274,13 @@ public class SalaryService {
 			String query = emp + "AND S.SALARYDATE=TO_DATE('"+datevalue+"',  'YYYYMMDDHH24MISS')";
 			temvo.setDatevalue(query);
 			sjlist = dao.adminSalary(temvo);
+			for(SalaryJoinVO sjoinvo:sjlist){
+				if(sjoinvo.getAuth().equals("ROLE_EMPLOYEE")){
+					sjoinvo.setAuth("사원");
+				}else{
+					sjoinvo.setAuth("팀장");
+				}
+			}
 			mav.addObject("salarylist", sjlist);
 		}
 		

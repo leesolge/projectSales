@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sales.erp.ledger.dao.LedgerMapper">
+
+	<insert id="registLedger" parameterType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		INSERT INTO LEDGER (ID, EMPNO, REGDATE, ENABLE, SORT, CONTENT, AMOUNT, MONEY, ETC)
+		VALUES(TO_CHAR(LEDGERSEQ.NEXTVAL), #{empno}, SYSDATE, 1, #{sort}, #{content}, #{amount}, (SELECT MONEY FROM LEDGER WHERE ID = (SELECT MAX(ID) FROM LEDGER))+#{sortamount}, #{etc})
+	</insert>
+
+	<select id="selectAMember" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="com.sales.erp.member.vo.MemberVO">
+		SELECT NAME, AUTH, TEAM FROM SMEMBER WHERE EMPNO=#{query}
+	</select>
+	
+	<select id="selectLedger" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		SELECT L.*, S.NAME FROM LEDGER L, SMEMBER S WHERE L.EMPNO=S.EMPNO ${query} ORDER BY REGDATE DESC
+	</select>
+</mapper>

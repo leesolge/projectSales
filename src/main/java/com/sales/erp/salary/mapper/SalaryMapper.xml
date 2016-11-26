@@ -34,7 +34,7 @@
 		</select>
 	
 		<select id="adminSalary" parameterType="com.sales.erp.salary.vo.TempVO" resultType="com.sales.erp.salary.vo.SalaryJoinVO">
-			SELECT S.EMPNO AS EMPNO, M.TEAM AS TEAM, M.AUTH AS AUTH,
+			SELECT S.EMPNO AS EMPNO, M.NAME AS NAME, M.TEAM AS TEAM, M.AUTH AS AUTH,
 			S.SALARYDATE AS SALARYDATE, S.SALARY AS SALARY,
 			S.ALLOWANCE AS ALLOWANCE, S.MANAGER AS MANAGER,
 			S.TAX1 AS TAX1, S.TAX2 AS TAX2, S.REALS AS REALS
