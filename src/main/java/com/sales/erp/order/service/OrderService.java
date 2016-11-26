@@ -128,12 +128,20 @@ public class OrderService {
 		return mav;
 	}
 	
-	public ModelAndView adminRegistForm(String authpage){
+	public ModelAndView adminRegistForm(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		
 		/*관리자용 사원 선택 보내기*/
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String empno = auth.getName();
+		TestVO tevo = new TestVO();
+		tevo.setTests(empno);
+		String authpage = request.getParameter("authpage");
+		MemberVO memvo = dao.selectAMember(tevo);
+		if(authpage==null||authpage.equals("")){
+			authpage = memvo.getAuth();
+		}
+		mav.addObject("authpage", authpage);
 		ArrayList<MemberVO> mlist = new ArrayList<MemberVO>();
 		if(authpage.equals("ROLE_ADMIN")){
 			mlist = dao.memberForReg(); 

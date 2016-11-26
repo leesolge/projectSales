@@ -6,6 +6,14 @@
 <!DOCTYPE HTML>
 
 <html>
+<form action="/erp/order/list" name="tolist">
+	<input type="hidden" name="checks" value="1">
+</form>
+<script type="text/javascript">
+	function tolist(){
+		document.tolist.submit();
+	}
+</script>
 <nav class="w3-sidenav w3-collapse w3-white" style="z-index:3;width:250px;" id="mySidenav"><br>
 	<div class="w3-container w3-row">
 		<a class="w3-hide-large w3-right w3-hover-white" onclick="w3_close()" style="cursor:pointer;"><i class="fa fa-remove"></i></a>
@@ -47,9 +55,9 @@
 				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
 				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
-				<a href="/erp/sell/sellWriteForm">- 판매등록</a>
-				<a href="/erp/sell/sellListPayWait">- 판매대기목록</a>
-				<a href="/erp/sell/sellList">- 판매목록</a>
+				<a href="/erp/order/registForm">- 판매등록</a>
+				<a href="/erp/order/list">- 판매대기목록</a>
+				<a href="javascript:tolist()">- 판매목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>

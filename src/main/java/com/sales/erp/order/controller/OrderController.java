@@ -38,10 +38,9 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order/modifyForm")
-	public ModelAndView modifyOne(@RequestParam("orderid") String id, @RequestParam("authpage") String authpage){
-		ModelAndView mav = os.adminRegistForm(authpage);
-		System.out.println("id"+id);
-		mav.addObject("mo", os.selectOneOrder(id));
+	public ModelAndView modifyOne(HttpServletRequest request){
+		ModelAndView mav = os.adminRegistForm(request);
+		mav.addObject("mo", os.selectOneOrder(request.getParameter("orderid")));
 		mav.setViewName("order/modifyone");
 		return mav;
 	}
@@ -58,9 +57,9 @@ public class OrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/order/registForm", method=RequestMethod.POST)
-	public ModelAndView adminRegistForm(@RequestParam("authpage") String authpage){
-		ModelAndView mav = os.adminRegistForm(authpage);
+	@RequestMapping("/order/registForm")
+	public ModelAndView adminRegistForm(HttpServletRequest request){
+		ModelAndView mav = os.adminRegistForm(request);
 		mav.setViewName("order/adminregist");
 		return mav;
 	}

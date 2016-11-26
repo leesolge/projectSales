@@ -100,7 +100,7 @@
 	
 	<insert id="insertOrder" parameterType="com.sales.erp.order.vo.OrderVO">
 		INSERT INTO ORDERS (ID, EMPNO, PROCODE, PROAMOUNT, REGDATE, CUSTOMER, ADDRESS, CHECKS, DELETED)
-		VALUES (#{empno}||'o'||TO_CHAR(ORDERID.NEXTVAL), #{empno}, #{procode}, #{proamount}, SYSDATE, #{customer}, #{address}, 0, 0)
+		VALUES (ORDERID.NEXTVAL, #{empno}, #{procode}, #{proamount}, SYSDATE, #{customer}, #{address}, 0, 0)
 	</insert>
 	
 </mapper>
