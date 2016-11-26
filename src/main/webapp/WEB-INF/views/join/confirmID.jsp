@@ -1,27 +1,55 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<body>
-	<div class="w3-row ">
-		<div class="w3-col w3-left" style="width:30%"><p></p></div>
-		<div class="w3-col w3-right" style="width:30%"><p></p></div>
-		<div class="w3-rest w3-container" align="center">
-			<form method="post" action="ConfirmID_Member" enctype="multipart/form-data">
-				<h4>Confirm ID</h4>
-				<table class="w3-table w3-bordered w3-border w3-centered">
-					<tr>
-						<td><input type="text" name="name" placeholder="Name"></td>
-					</tr>				
-					<tr>
-						<td><input type="email" name="email" placeholder="E-mail"></td>
-					</tr>	
-				</table>
-				<input type="submit" name="confirm" value="확인">
-				<input type="reset" name="reset" value="다시쓰기">
-				<input type="button" value="취소" onclick="window.location='/erp/home'"> 
+<body class="w3-dark-grey">
+	<div class="w3-row-padding w3-margin-bottom" style="margin-top: 10%">
+		<div class="w3-half">
+			<div class="w3-white w3-round-large w3-centered" style="min-height: 400px;">
+				<div class="w3-container w3-indigo">
+					<h4><i class="fa fa-lock"></i>  아이디 찾기</h4>
+				</div>
+			<form method="post" action="ConfirmID_Member" enctype="multipart/form-data" class="w3-container w3-white">
+				<br>
+				<label class="w3-text-indigo"><b>이름</b></label>
+				<input class="w3-input w3-border w3-border-indigo w3-round" name="name" type="text" placeholder="Name">
+				<br>
+				<label class="w3-text-indigo"><b>이메일</b></label>
+				<input class="w3-input w3-border w3-border-indigo w3-round" name="email" type="text" placeholder="Email">
+				<br>
+				<div class="w3-row w3-center">
+					<input type="submit" class="w3-btn w3-indigo" name="confirm" value="찾기">
+					<input type="button" class="w3-btn w3-indigo" value="취소" onclick="window.location='/erp/home'">
+				</div>
+				<br>
 			</form>
+			</div>
+			<div class="w3-hide-medium w3-hide-large"><br></div>
+		</div>
+		
+		<div class="w3-half">
+			<div class="w3-white w3-round-large w3-centered" style="min-height: 400px;">
+				<div class="w3-container w3-indigo">
+					<h4><i class="fa fa-lock"></i>  비밀번호 찾기</h4>
+				</div>
+			<form method="post" action="ConfirmPWD_Member" enctype="multipart/form-data" class="w3-container w3-white">
+				<br>
+				<label class="w3-text-indigo"><b>사번</b></label>
+				<input class="w3-input w3-border w3-border-indigo w3-round" name="empno" type="text" placeholder="Empno">
+				<br>
+				<label class="w3-text-indigo"><b>이름</b></label>
+				<input class="w3-input w3-border w3-border-indigo w3-round" name="name" type="text" placeholder="Name">
+				<br>
+				<label class="w3-text-indigo"><b>이메일</b></label>
+				<input class="w3-input w3-border w3-border-indigo w3-round" name="email" type="text" placeholder="Email">
+				<br>
+				<div class="w3-row w3-center">
+					<input type="submit" class="w3-btn w3-indigo" name="confirm" value="찾기">
+					<input type="button" class="w3-btn w3-indigo" value="취소" onclick="window.location='/erp/home'">
+				</div>
+				<br>
+			</form>
+			</div>
 		</div>
 	</div>
 </body>
