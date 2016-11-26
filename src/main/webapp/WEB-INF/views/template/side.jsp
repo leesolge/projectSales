@@ -22,6 +22,12 @@
 		</div>
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
+			<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
+			<a href="/erp/salary/view" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
+			</sec:authorize>
+			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+			<a href="/erp/admin/salary" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
+			</sec:authorize>
 			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope"></i></a>
 			<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
 			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
