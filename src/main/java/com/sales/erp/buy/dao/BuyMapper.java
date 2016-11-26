@@ -36,4 +36,6 @@ public interface BuyMapper extends Serializable {
 
 	ArrayList<BuyListVO> buyAppList(MemberVO mvo);
 
+	void addProduct(BuyVO bvo);
+
 }

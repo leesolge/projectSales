@@ -35,8 +35,9 @@ public class BuyService {
 	}
 
 	// Product 충원 요청 등록
-	public void buyWrite(HttpServletRequest request) {
-
+	public ModelAndView buyWrite(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
@@ -60,18 +61,18 @@ public class BuyService {
 			bvo.setProcode(list.get(i));
 			bvo.setAmount(list.get(i + 1));
 			bvo.setBuycomment(list.get(i + 2));
-			if (mvo.getAuth().equals("ROLE_EMPLOYEE"))
+			if (mvo.getAuth().equals("ROLE_EMPLOYEE")){
 				bvo.setBuystep(0); // 사원일 경우 승인단계 0으로 지정
-			else if (mvo.getAuth().equals("ROLE_MANAGER"))
+			    mav.setViewName("redirect:/buy/buyListWait");				
+			}			
+			else if (mvo.getAuth().equals("ROLE_MANAGER")){
 				bvo.setBuystep(1); // 팀장급일 경우 승인단계 1로 지정
+				mav.setViewName("redirect:/buy/buyListWait");			
+			}			
 			else {
 				bvo.setBuystep(2); // 팀장급 이상일 경우 승인단계 2로 지정
-
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Product
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 내용
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 변경
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 추가해야함
-
+				mav.setViewName("redirect:/buy/buyAppList");
+				dao.addProduct(bvo);
 			}
 
 			if (i == 1)
@@ -79,6 +80,7 @@ public class BuyService {
 			else
 				dao.buyWriteSameBuynum(bvo); // 동일한 구매요청번호 등록
 		}
+		return mav;
 	}
 
 	public ModelAndView buyListWait() {
@@ -182,5 +184,10 @@ public class BuyService {
 		mav.addObject("list", list);
 		mav.addObject("count", list.size());
 		return mav;
+	}
+
+	public ModelAndView buyCancel(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

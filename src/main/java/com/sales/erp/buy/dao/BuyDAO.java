@@ -81,4 +81,9 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.buyAppList(mvo);
 	}
+
+	public void addProduct(BuyVO bvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.addProduct(bvo);		
+	}
 }

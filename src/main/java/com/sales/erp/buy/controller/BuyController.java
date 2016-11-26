@@ -26,10 +26,9 @@ public class BuyController {
 
 	// Product 충원 요청 등록
 	@RequestMapping(value = "/buy/buyWrite", method = RequestMethod.POST)
-	public String EbuyWrite(HttpServletRequest request) {
-		bs.buyWrite(request); // BUY 테이블에 승인요청 등록
-		return "redirect:/buy/buyListWait";
-		
+	public ModelAndView EbuyWrite(HttpServletRequest request) {
+		ModelAndView mav = bs.buyWrite(request); // BUY 테이블에 승인요청 등록
+		return mav;		
 	}
 	
 	// Product 충원 요청 대기 리스트
@@ -62,6 +61,13 @@ public class BuyController {
 		bs.buyApprove(request);
 		return "redirect:/buy/buyListAppWait";
 	}
+
+	// Product 충원 승인처리
+		@RequestMapping(value = "/buy/buyCancel", method = RequestMethod.POST)
+		public ModelAndView buyCancel(HttpServletRequest request) {
+			ModelAndView mav = bs.buyCancel(request);
+			return mav;
+		}
 	
 	// Product 충원 승인 리스트
 	@RequestMapping("/buy/buyAppList")

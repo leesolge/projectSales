@@ -9,80 +9,81 @@
 
 <body>
 	<form action="/erp/buy/buyWrite" method="post">
-		<input type="hidden" name="empno" value="${memberInfo.empno}">
-	<div class="w3-container w3-center">
-		<h2>Product 충원요청</h2>
-	</div>
-	
-	<br>
-	
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width: 50%">
+		<input type="hidden" name="empno" value="${memberInfo.empno}"><br>
+		<div class="w3-container">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+				<h3>
+					<i class="fa fa-bullhorn" aria-hidden="true"></i> 구매요청
+				</h3>
 
-			<div class="w3-col w3-left" style="width: 30%">
-				<input class="w3-input w3-border w3-padding" type="text"
-					placeholder="Search for Code.." id="myInput"
-					onkeyup="myFunction()">
-			</div>
-			<table class="w3-table w3-centered" id="myTable">
-				<tr>
-					
-					<th>상품명</th>
-					<th>재고</th>				
-					<th>원가</th>					
-					<th>내용</th>
-				</tr>
+				<div class="w3-row">
+					<div class="w3-col w3-left" style="width: 50%">
+						<div class="w3-container" style="width: 30%">
+							<input class="w3-border w3-border-indigo" type="text"
+								placeholder="검색어" id="myInput" onkeyup="myFunction()">
+						</div>
+						
+						<div class=" w3-row" style="height: 450px; overflow: auto;">
+							<table class="w3-table w3-small w3-hoverable w3-bordered"
+								id="myTable">
+								<tr class="w3-indigo">
+									<th>상품명</th>
+									<th>재고</th>
+									<th>원가</th>
+								</tr>
+	
+								<c:forEach items="${list}" var="list">
+									<tr
+										onclick="location.href='/erp/product/productInfo?procode=${list.procode}'"
+										style="cursor: pointer;">
+										<td>${list.proname}</td>
+										<td>${list.proamount}</td>
+										<td>${list.originprice}</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+					</div>
 
-				<c:forEach items="${list}" var="list">
-					<tr>						
-						<td>${list.proname}</td>
-						<td>${list.proamount}</td>
-						<td>${list.originprice}</td>						
-						<td><input type="button" value="Content"
-							class="w3-btn w3-round-large"							
-							onclick="window.location='/erp/product/productInfo?procode=${list.procode}'"> <!-- 멤버콘텐츠 보는 경로 -->
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-			<hr>
-		</div>
+					<div class="w3-rest w3-container w3-row-padding">
+						<div class=" w3-row">
+							<div class="w3-half w3-center">
+								<input class="w3-border w3-border-indigo" style="width: 40%;" type="submit" value="등록" />
+							</div>
+							<div class="w3-half w3-center">
+								<input class="w3-border w3-border-indigo" style="width: 40%;"
+									type="button" id="btn_AddO" value="물품추가">
+							</div>
+						</div>
+					</div>
+					<div class=" w3-row" style="height: 450px; overflow: auto;">
+						<table
+							class="order_list w3-table w3-small w3-hoverable w3-bordered">
+							<tr class="w3-indigo">
+								<th style="width: 100px">상품명</th>
+								<th style="width: 70px">주문수량</th>
+								<th>주문사유</th>
+								<th style="width: 70px">취소</th>
+							</tr>
+							<tr>
+								<td>
+									<select class="w3-select w3-border w3-round-large" name="Ocode_0" required="required">
+										<option value="" selected disabled>상품명</option>
+										<c:forEach var="alist" items="${list}">
+											<option value="${alist.procode}">${alist.proname}</option>
+										</c:forEach>
+									</select>
+								</td>
+								<td><input class="w3-input w3-border w3-round-large" type="number" name="Oamount_0" required="required"></td>
+								<td><input class="w3-input w3-border w3-round-large" type="text" name="Ocomment_0" required="required"></td>
+								<td></td>
+							</tr>
 				
-		<div class="w3-rest w3-container w3-row-padding">	
-			<div class=" w3-row">	
-				<div class="w3-third">
-					<label class="w3-wide">Name</label> <input
-						class="w3-input w3-border w3-round-large"
-						style="width: 60%; border-radius: 6px;" readonly
-						value="${memberInfo.name}">
-				</div>
-				<div class="w3-third">
-					<label class="w3-wide">Team</label> <input
-						class="w3-input w3-border w3-round-large"
-						style="width: 60%; border-radius: 6px;" readonly
-						value="${memberInfo.team}">
-				</div>
-	
-				<div class="w3-third">
-					<label class="w3-wide"><p></p></label> <input
-						class="w3-btn w3-input page_button w3-round-large w3-right"
-						style="width: 40%;" type="button" id="btn_AddO"
-						value="물품추가">
+						</table>
+					</div>
 				</div>
 			</div>
-			
-			<div class=" w3-row" style="height:300px; overflow:auto;">				
-				<table class="order_list w3-table w3-centered">
-					<tr>
-						<th style="width: 15%">상품명	</th>
-						<th style="width: 15%">주문수량</th>
-						<th style="width: 60%">주문사유</th>					
-						<th style="width: 10%">취소</th>
-					</tr>
-				</table>
-			</div>
-			<input class="w3-btn w3-round-large" type="submit" value="등록" />
-	</div>
+		</div>
 	</form>
 </body>
 
@@ -102,8 +103,8 @@
 						
 						$('<td id="O' + num_ref + '"><input class="w3-input w3-border w3-round-large" type="number" name="Oamount_'+num_ref+'" required="required"></td>').appendTo('.O'+num_ref);
 						$('<td id="O' + num_ref + '"><input class="w3-input w3-border w3-round-large" type="text" name="Ocomment_' +num+ '" required="required"></td>').appendTo('.O'+num_ref);
-						$('<td id="O' + num_ref + '"><input class="w3-btn page_button w3-round-large"  type="button" id="btn_DelO'+num_ref+'" value="물품삭제"></td>').appendTo('.O'+num_ref);
-						
+						$('<td id="O' + num_ref + '"><a id="btn_DelO'+num_ref+'" class="w3-hover-text-red"><i class="fa fa-trash-o w3-xlarge"></i></a></td>').appendTo('.O'+num_ref);
+				
 						$('#btn_DelO'+num_ref).click(function() {
 							$('.O'+num_ref).remove();
 							$('#O'+num_ref).remove();

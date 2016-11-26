@@ -13,21 +13,27 @@
 		INSERT INTO
 		BUY
 		(BUYNUM,
-		EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, BUYSTEP,
+		EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, APPDATE, BUYSTEP,
 		DELETED)
 		VALUES(BUY_SEQ.NEXTVAL, #{empno}, #{procode},
 		#{amount}, #{buycomment},
-		SYSDATE, #{buystep}, 0)
+		SYSDATE, SYSDATE, #{buystep}, 0)
 	</insert>
 
 	<insert id="buyWriteSameBuynum" parameterType="com.sales.erp.buy.vo.BuyVO">
 		INSERT INTO
 		BUY
-		(BUYNUM, EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, BUYSTEP,
+		(BUYNUM, EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, APPDATE BUYSTEP,
 		DELETED)
 		VALUES((SELECT MAX(BUYNUM) FROM BUY), #{empno}, #{procode},
-		#{amount}, #{buycomment}, SYSDATE, #{buystep}, 0)
+		#{amount}, #{buycomment}, SYSDATE, SYSDATE, #{buystep}, 0)
 	</insert>
+	
+	<!-- 구매후 물품 처리(관리자) -->
+	<update id="addProduct" parameterType="com.sales.erp.buy.vo.BuyVO">
+		UPDATE PRODUCT SET PROAMOUNT=PROAMOUNT+#{amount}  WHERE PROCODE=#{procode}
+	</update>
+	
 
 	<select id="buyListWait" parameterType="com.sales.erp.buy.vo.BuyVO"
 		resultType="com.sales.erp.buy.vo.BuyListVO">

@@ -4,10 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<body>
+<body><br>
 	<form action="/erp/buy/buyContent" name="buyContent" method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
@@ -15,6 +13,20 @@
 		method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
+
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+			<div class="w3-row">
+				<h3><i class="fa fa-bullhorn" aria-hidden="true"></i> 구매대기목록</h3>
+			</div>
+			<!-- Count -->
+			<div class="w3-row w3-right">
+				<h5><i class="fa fa-bar-chart"></i>  <c:out value="${paging.total}" /></h5>
+			</div>
+		</div>
+	</div>
+
+
 	<div class="w3-container w3-center">
 		<h2>승인요청목록 [${count }건]</h2>
 		<table class="w3-table w3-centered">
