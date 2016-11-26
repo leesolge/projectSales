@@ -161,7 +161,8 @@
 		<input name="keyword" type="text" size="10" value="${keyword}">
 		<input type="submit" value="검색">
 	</form>
-	</div>
+	</div><br>
+	<button onclick="location.href='/erp/note/list'">쪽지 목록</button>
 		
 		
 		

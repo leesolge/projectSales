@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -53,6 +54,7 @@
 	</head>
 	
 	<body>
+	<form action="/erp/admin/note" name="adm"></form>
 	<form action="/erp/note/write" name="write" method="post">
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="rec" value="0">
@@ -65,6 +67,11 @@
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="notenum" value="0">
 	</form>
+	
+	<s:authorize access="hasRole('ROLE_ADMIN')">
+	<button onclick="jumpPage('adm')">쪽지 관리</button>
+	<br><br>
+	</s:authorize>
 	
 	<h4>최근 받은 쪽지</h4>
 	<div class="wrapper">
