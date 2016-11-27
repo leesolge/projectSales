@@ -11,7 +11,7 @@
 	  		SELECT * FROM SCHEDULE WHERE EMPNO = #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} ORDER BY REGDATE DESC
 	</select>
 	<delete id="delete" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
-	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} and CONTENTS= #{contents} 
+	 		DELETE FROM SCHEDULE WHERE EMPNO= #{empno} and YEAR = #{year} and MONTH = #{month} and DAY = #{day} and CONTENTS= #{contents} and NUM = #{num} 
 	</delete>
 	<insert id="insert" parameterType="com.sales.erp.schedule.vo.ScheduleVO">
      		

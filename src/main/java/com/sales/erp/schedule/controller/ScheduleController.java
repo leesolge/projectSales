@@ -47,11 +47,11 @@ public class ScheduleController {
 		int year1= Integer.parseInt(request.getParameter("year"));
 		int month1 = Integer.parseInt(request.getParameter("month"));
 		int day = Integer.parseInt(request.getParameter("day"));
-		
+		int num = Integer.parseInt(request.getParameter("num"));
 
 		ScheduleVO vo = new  ScheduleVO();
 		vo.setYear(year1); vo.setMonth(month1); vo.setDay(day); vo.setEmpno(empno);
-		vo.setEmpno(empno); vo.setContents(contents);
+		vo.setEmpno(empno); vo.setContents(contents); vo.setNum(num);
 	
 		sdao.deleteSchedule(vo);
 		month1 -= 1;
