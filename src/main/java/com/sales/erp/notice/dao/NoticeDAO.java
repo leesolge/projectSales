@@ -76,4 +76,9 @@ public class NoticeDAO {
 		return mapper.getReplyCount(num);
 	}
 
+	public void replyAllDelete(String num) {
+		NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
+		mapper.replyAllDelete(num);
+	}
+
 }

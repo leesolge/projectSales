@@ -93,5 +93,12 @@
 	<select id="getReplyCount" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from noticereply where num like #{num}
 	</select>
+	
+	<!-- 글 삭제시 해당 리플라이 모두 삭제 -->
+	<delete id="replyAllDelete" parameterType="java.lang.String">
+		DELETE FROM
+		NOTICEREPLY
+		WHERE NUM=#{num}
+	</delete>
 </mapper>
 

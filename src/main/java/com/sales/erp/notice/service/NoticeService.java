@@ -113,6 +113,7 @@ public class NoticeService {
 	public void noticeDelete(HttpServletRequest request) {
 		String num = request.getParameter("num");
 		dao.noticeDelete(num);
+		dao.replyAllDelete(num);
 	}
 
 	public void replyWrite(HttpServletRequest request) {
