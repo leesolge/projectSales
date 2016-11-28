@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.buy.vo.BuyPagingVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
 
@@ -16,7 +17,9 @@ public interface BuyMapper extends Serializable {
 
 	void buyWriteSameBuynum(BuyVO bvo);
 
-	ArrayList<BuyListVO> buyListWait(BuyVO vo);
+	ArrayList<BuyListVO> buyListWait(BuyPagingVO paging);
+
+	int buyListWaitCount(BuyPagingVO paging);
 
 	MemberVO getMember(MemberVO mvoParam);
 
@@ -30,14 +33,14 @@ public interface BuyMapper extends Serializable {
 
 	void buyApproveAdmin(String buynum);
 
-	ArrayList<BuyListVO> buyAppListTeam(MemberVO mvo);
+	ArrayList<BuyListVO> buyAppListAll(BuyPagingVO paging);
 
-	ArrayList<BuyListVO> buyAppListAll();
-
-	ArrayList<BuyListVO> buyAppList(MemberVO mvo);
+	int getbuyAppListCountAll(BuyPagingVO paging);
 
 	void addProduct(BuyVO bvo);
 
 	void buyCancel(String buynum);
+
+	ArrayList<String> get_team();
 
 }
