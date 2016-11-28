@@ -7,85 +7,77 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-<body>
-	<form action="/erp/buy/buyWrite" method="post">
-		<input type="hidden" name="empno" value="${memberInfo.empno}"><br>
-		<div class="w3-container">
+<body><br>
+<form action="/erp/buy/buyWrite" method="post">
+	<input type="hidden" name="empno" value="${memberInfo.empno}">
+	<div class="w3-row-padding">
+		<div class="w3-half" style="min-height: 500px;">
 			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
-				<h3>
-					<i class="fa fa-bullhorn" aria-hidden="true"></i> 구매요청
-				</h3>
+				<h3><i class="fa fa-inbox"></i>  상품정보</h3>
+				<div class="w3-container" style="height: 40px;">
+					물품명 : 
+					<input class="w3-border w3-border-indigo" type="text" placeholder="검색어" id="myInput" onkeyup="myFunction()">
+				</div>
+				<br>
+				<div class=" w3-row" style="height: 450px; overflow: auto;">
+					<table class="w3-table w3-small w3-hoverable w3-bordered"
+						id="myTable">
+						<tr class="w3-indigo">
+							<th>상품명</th>
+							<th>재고</th>
+							<th>원가</th>
+						</tr>
 
-				<div class="w3-row">
-					<div class="w3-col w3-left" style="width: 50%">
-						<div class="w3-container" style="width: 30%">
-							<input class="w3-border w3-border-indigo" type="text"
-								placeholder="검색어" id="myInput" onkeyup="myFunction()">
-						</div>
-						<br>
-						<div class=" w3-row" style="height: 450px; overflow: auto;">
-							<table class="w3-table w3-small w3-hoverable w3-bordered"
-								id="myTable">
-								<tr class="w3-indigo">
-									<th>상품명</th>
-									<th>재고</th>
-									<th>원가</th>
-								</tr>
-	
-								<c:forEach items="${list}" var="list">
-									<tr
-										onclick="location.href='/erp/product/productInfo?procode=${list.procode}'"
-										style="cursor: pointer;">
-										<td>${list.proname}</td>
-										<td>${list.proamount}</td>
-										<td>${list.originprice}</td>
-									</tr>
-								</c:forEach>
-							</table>
-						</div>
-					</div>
-
-					<div class="w3-rest w3-container w3-row-padding">
-						<div class=" w3-row">
-							<div class="w3-half w3-center">
-								<input class="w3-border w3-border-indigo" style="width: 40%;" type="submit" value="등록" />
-							</div>
-							<div class="w3-half w3-center">
-								<input class="w3-border w3-border-indigo" style="width: 40%;"
-									type="button" id="btn_AddO" value="물품추가">
-							</div>
-						</div>
-					</div>
-					<br>
-					<div class=" w3-row" style="height: 450px; overflow: auto;">
-						<table
-							class="order_list w3-table w3-small w3-hoverable w3-bordered">
-							<tr class="w3-indigo">
-								<th style="width: 100px">상품명</th>
-								<th style="width: 70px">주문수량</th>
-								<th>주문사유</th>
-								<th style="width: 70px">취소</th>
+						<c:forEach items="${list}" var="list">
+							<tr
+								onclick="location.href='/erp/product/productInfo?procode=${list.procode}'"
+								style="cursor: pointer;">
+								<td>${list.proname}</td>
+								<td>${list.proamount}</td>
+								<td>${list.originprice}</td>
 							</tr>
-							<tr>
-								<td>
-									<select class="w3-select w3-border w3-round-large" name="Ocode_0" required="required">
-										<option value="" selected disabled>상품명</option>
-										<c:forEach var="alist" items="${list}">
-											<option value="${alist.procode}">${alist.proname}</option>
-										</c:forEach>
-									</select>
-								</td>
-								<td><input class="w3-input w3-border w3-round-large" type="number" name="Oamount_0" required="required"></td>
-								<td><input class="w3-input w3-border w3-round-large" type="text" name="Ocomment_0" required="required"></td>
-								<td></td>
-							</tr>
-				
-						</table>
-					</div>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+			<div class="w3-hide-large w3-hide-medium"><br></div>
+		</div>
+		<div class="w3-half" style="min-height: 500px;">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" >
+				<h3><i class="fa fa-share-square-o"></i>  구매요청</h3>
+				<div class="w3-container" style="height: 40px;">
+					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="submit" value="요청" />
+					<input class="w3-btn-floating w3-indigo w3-border-indigo w3-border w3-right" type="button" id="btn_AddO" value="+">
+				</div>
+				<br>
+				<div class=" w3-row" style="height: 450px; overflow: auto;">
+					<table class="order_list w3-table w3-small w3-hoverable w3-bordered">
+						<tr class="w3-indigo">
+							<th style="width: 100px">상품명</th>
+							<th style="width: 70px">수량</th>
+							<th>사유</th>
+							<th style="width: 40px"></th>
+						</tr>
+						<tr>
+							<td>
+								<select class="w3-select w3-border w3-round-large" name="Ocode_0" required="required">
+									<option value="" selected disabled>상품명</option>
+									<c:forEach var="alist" items="${list}">
+										<option value="${alist.procode}">${alist.proname}</option>
+									</c:forEach>
+								</select>
+							</td>
+							<td><input class="w3-input w3-border w3-round-large" type="number" name="Oamount_0" required="required"></td>
+							<td><input class="w3-input w3-border w3-round-large" type="text" name="Ocomment_0" required="required"></td>
+							<td></td>
+						</tr>
+			
+					</table>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
+</form>
 </body>
 
 <script type="text/javascript">
