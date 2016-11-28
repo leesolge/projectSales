@@ -21,7 +21,14 @@ public class OrderJoinVO {
 		private String changes;
 		private String sales;
 		private long manage;
+		private long sellprice;
 		
+		public long getSellprice() {
+			return sellprice;
+		}
+		public void setSellprice(long sellprice) {
+			this.sellprice = sellprice;
+		}
 		public long getManage() {
 			return manage;
 		}

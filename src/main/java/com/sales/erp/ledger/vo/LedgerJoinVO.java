@@ -15,7 +15,14 @@ public class LedgerJoinVO {
 	private long money;
 	private String etc;
 	private long sortamount;
+	private long pastamount;
 	
+	public long getPastamount() {
+		return pastamount;
+	}
+	public void setPastamount(long pastamount) {
+		this.pastamount = pastamount;
+	}
 	public long getSortamount() {
 		return sortamount;
 	}

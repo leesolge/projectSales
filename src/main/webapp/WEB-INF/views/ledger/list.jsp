@@ -12,12 +12,34 @@
 			jumping.pageNum.value=pn;
 			jumping.submit();
 		}
+		
+		function modify(pn){
+			var modione = document.modifyOne;
+			modione.id.value=pn;
+			modione.submit();
+		}
+		
+		function deletes(pn){
+			var delone = document.deleteOne;
+			delone.id.value=pn;
+			if(confirm("해당 내역을 정말 지우시겠습니까?")==true){
+				delone.submit();
+			}else{
+				return;
+			}
+		}
 		</script>
 	</head>
 	
 	<body>
+		<form name="deleteOne" action="/erp/ledger/delete" mehtod="post">
+			<input name="id" type="hidden" value="0">
+		</form>
+		<form name="modifyOne" action="/erp/ledger/modifyForm" mehtod="post">
+			<input name="id" type="hidden" value="0">
+		</form>
 		<form name="viewList" action="/erp/ledger/list" method="post">
-			<input name="pageNum" type="hidden" value="${pageNum}">
+			<input name="pageNum" type="hidden" value="1">
 			<input name="startdate" id="start" type="date">&nbsp;
 			<input name="enddate" id="end" type="date">&nbsp;
 			<select name="sort">
@@ -64,8 +86,8 @@
 					<td><c:if test="${list.sort=='지출'}">${list.amount}</c:if><c:if test="${list.sort!='지출'}">0</c:if></td>
 					<td>${list.money}</td>
 					<td>${list.etc}</td>
-					<td><c:if test="${list.enable=='1'}"><button onclick="">수정</button></c:if></td>
-					<td><c:if test="${list.enable=='1'}"><button onclick="">삭제</button></c:if></td>
+					<td><c:if test="${(list.enable=='1'&&empno==list.empno)||(list.enable=='1'&&memberInfo.auth=='ROLE_ADMIN')}"><button onclick="modify('${list.id}')">수정</button></c:if></td>
+					<td><c:if test="${(list.enable=='1'&&empno==list.empno)||(list.enable=='1'&&memberInfo.auth=='ROLE_ADMIN')}"><button onclick="deletes('${list.id}')">삭제</button></c:if></td>
 				</tr>
 			</c:forEach>
 			
@@ -83,7 +105,6 @@
 			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">다음</a></c:if>&nbsp;</td>
 		</tr></table>
 	</div>
-		${max}
 
 	<script src="/erp/resources/js/moment-min.js"></script>
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

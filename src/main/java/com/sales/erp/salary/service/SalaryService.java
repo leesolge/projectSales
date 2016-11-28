@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sales.erp.ledger.dao.LedgerDAO;
+import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.order.vo.OrderJoinVO;
 import com.sales.erp.order.vo.TeamVO;
@@ -27,6 +29,9 @@ public class SalaryService {
 
 	@Autowired
 	private SalaryDAO dao;
+	
+	@Autowired
+	private LedgerDAO ldao;
 	
 	/*selectlist : 셀렉션 옵션을 위한 리스트*/
 	/*mlist : 팀 옵션을 위한 리스트*/
@@ -525,7 +530,7 @@ public class SalaryService {
 		long all = 0;
 		Calendar today = Calendar.getInstance();
 		int year = today.get(Calendar.YEAR);
-		int month = today.get(Calendar.MONTH)+1;/*실험 중이니 나중에 +2>>+1로 바꿀 것*/
+		int month = today.get(Calendar.MONTH)+2;/*실험 중이니 나중에 +2>>+1로 바꿀 것*/
 		String cYear = String.valueOf(year);
 		String cMonth = String.valueOf(month);
 		if(cMonth.length()<2){
@@ -615,6 +620,15 @@ public class SalaryService {
 			}
 			all += svo.getSalary();
 		}
+		LedgerJoinVO ljvo = new LedgerJoinVO();
+		ljvo.setEmpno("100");
+		ljvo.setEnable("0");
+		ljvo.setEtc("");
+		ljvo.setSort("지출");
+		ljvo.setPastamount(all*(-1));
+		ljvo.setAmount(all);
+		ljvo.setContent(pYear+"년 "+pMonth+"월 월급");
+		ldao.registLedger(ljvo);
 	}
 	
 	/*public ModelAndView viewsSalary(HttpServletRequest request) throws Exception{

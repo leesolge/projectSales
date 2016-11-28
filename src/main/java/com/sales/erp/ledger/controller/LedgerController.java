@@ -15,6 +15,29 @@ public class LedgerController {
 	@Autowired
 	private LedgerService ls;
 	
+	@RequestMapping("/ledger/delete")
+	public ModelAndView delete(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		ls.deletePro(request);
+		mav.setViewName("redirect:/ledger/list");
+		return mav;
+	}
+	
+	@RequestMapping("/ledger/modify")
+	public ModelAndView modifyPro(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		ls.modifyPro(request);;
+		mav.setViewName("redirect:/ledger/list");
+		return mav;
+	}
+	
+	@RequestMapping("/ledger/modifyForm")
+	public ModelAndView modifyForm(HttpServletRequest request){
+		ModelAndView mav = ls.modifyForm(request);
+		mav.setViewName("/ledger/modifyform");
+		return mav;
+	}
+	
 	@RequestMapping("/ledger/regist")
 	public ModelAndView registPro(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();

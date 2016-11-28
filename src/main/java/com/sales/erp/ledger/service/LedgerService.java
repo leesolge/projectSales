@@ -23,15 +23,67 @@ public class LedgerService {
 	@Autowired
 	private LedgerDAO dao;
 	
+	public void deletePro(HttpServletRequest request){
+		String id = request.getParameter("id");
+		SqlVO sql = new SqlVO();
+		sql.setQuery(id);
+		LedgerJoinVO one = dao.selectOne(sql);
+		one.setPastamount(one.getAmount()*(-1));
+		one.setAmount(0);
+		dao.deleteOne(one);
+		dao.modifyMany(one);
+	}
+	
+	public void modifyPro(HttpServletRequest request){
+		String id = request.getParameter("id");
+		String empno = request.getParameter("empno");
+		String content = request.getParameter("content");
+		String sort = request.getParameter("sort");
+		long amount = Long.parseLong(request.getParameter("amount"));
+		String pastsort = request.getParameter("pastsort");
+		long pastamount = Long.parseLong(request.getParameter("pastamount"));
+		if(pastsort.equals("수입")){
+			pastamount = pastamount*(-1);
+		}
+		String etc = request.getParameter("etc");
+		LedgerJoinVO ljvo = new LedgerJoinVO();
+		ljvo.setPastamount(pastamount);
+		ljvo.setEmpno(empno);
+		ljvo.setContent(content);
+		ljvo.setSort(sort);
+		ljvo.setEtc(etc);
+		ljvo.setId(id);
+		ljvo.setAmount(amount);
+		if(sort.equals("수입")){
+			ljvo.setSortamount(amount);
+		}else{
+			ljvo.setSortamount(amount*(-1));
+		}
+		dao.modifyOne(ljvo);
+		dao.modifyMany(ljvo);
+	}
+	
+	public ModelAndView modifyForm(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		String id = request.getParameter("id");
+		SqlVO sql = new SqlVO();
+		sql.setQuery(id);
+		LedgerJoinVO modify = dao.selectOne(sql);
+		mav.addObject("modify", modify);
+		return mav;
+	}
+	
 	public void ledgerRegistPro(HttpServletRequest request){
 		String empno = request.getParameter("empno");
 		String content = request.getParameter("content");
 		String sort = request.getParameter("sort");
+		String enable = request.getParameter("enable");
 		long amount = Long.parseLong(request.getParameter("amount"));
 		String etc = request.getParameter("etc");
 		LedgerJoinVO ljvo = new LedgerJoinVO();
 		ljvo.setEmpno(empno);
 		ljvo.setContent(content);
+		ljvo.setEnable(enable);
 		ljvo.setSort(sort);
 		ljvo.setEtc(etc);
 		ljvo.setAmount(amount);
@@ -57,6 +109,9 @@ public class LedgerService {
 	
 	public ModelAndView ledgerList(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		mav.addObject("empno", empno);
 		String sPage = request.getParameter("pageNum");
 		if(sPage==null||sPage.equals("")){
 			sPage = "1";

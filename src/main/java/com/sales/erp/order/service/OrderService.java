@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.sales.erp.ledger.dao.LedgerDAO;
+import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.note.dao.NoteDAO;
 import com.sales.erp.note.vo.NoteVO;
@@ -27,6 +29,9 @@ import com.sales.erp.product.vo.ProductVO;
 
 @Service
 public class OrderService {
+	
+	@Autowired
+	private LedgerDAO ldao;
 	
 	@Autowired
 	private OrderDAO dao;
@@ -72,6 +77,15 @@ public class OrderService {
 			content = content + "감사합니다.";
 			notevo.setContent(content);
 			ndao.writePro(notevo);
+			LedgerJoinVO ljvo = new LedgerJoinVO();
+			ljvo.setEmpno(ovo.getEmpno());
+			ljvo.setEnable("0");
+			ljvo.setSort("수입");
+			ljvo.setContent(ovo.getProcode()+" "+ovo.getProname()+" "+String.valueOf(ovo.getProamount())+"개 판매");
+			ljvo.setAmount(ovo.getSellprice()*ovo.getProamount());
+			ljvo.setSortamount(ljvo.getAmount());
+			ljvo.setEtc("");
+			ldao.registLedger(ljvo);
 		}
 		
 		rv.setExposeModelAttributes(false);

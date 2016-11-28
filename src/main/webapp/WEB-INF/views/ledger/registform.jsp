@@ -18,7 +18,7 @@
 			금액 : <input type="number" name="amount" required="required"><br>
 			비고 : <input type="text" name="etc" maxlength="50"><br>
 			<input type="submit" value="등록">&nbsp;<input type="reset" value="다시 작성">&nbsp;
-			<button onclick="location.href='/erp/ledger/list'">목록</button>
 		</form>
+			<button onclick="location.href='/erp/ledger/list'">목록</button>
 	</body>
 </html>

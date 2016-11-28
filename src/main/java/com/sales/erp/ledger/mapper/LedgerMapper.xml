@@ -3,6 +3,26 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sales.erp.ledger.dao.LedgerMapper">
+	
+	<delete id="deleteOne" parameterType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		DELETE FROM LEDGER WHERE ID=#{id}
+	</delete>
+
+	<update id="modifyMany" parameterType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		<![CDATA[
+		UPDATE LEDGER SET MONEY=MONEY+#{sortamount}+#{pastamount} WHERE TO_NUMBER(ID)>TO_NUMBER(#{id})
+		]]>
+	</update>
+
+	<update id="modifyOne" parameterType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		UPDATE LEDGER SET SORT=#{sort}, CONTENT=#{content}, AMOUNT=#{amount},
+		MONEY=MONEY+#{sortamount}+#{pastamount}, ETC=#{etc} WHERE ID=#{id}
+	</update>
+
+	<select id="selectOne" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="com.sales.erp.ledger.vo.LedgerJoinVO">
+		SELECT L.*, S.NAME FROM LEDGER L, SMEMBER S WHERE L.EMPNO=S.EMPNO AND ID=#{query}
+		ORDER BY REGDATE DESC
+	</select>
 
 	<select id="countLedger" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM (SELECT ROWNUM R, L.*, S.NAME FROM LEDGER L, SMEMBER S WHERE L.EMPNO=S.EMPNO ${query} ORDER BY ID DESC)
@@ -10,7 +30,7 @@
 
 	<insert id="registLedger" parameterType="com.sales.erp.ledger.vo.LedgerJoinVO">
 		INSERT INTO LEDGER (ID, EMPNO, REGDATE, ENABLE, SORT, CONTENT, AMOUNT, MONEY, ETC)
-		VALUES(TO_CHAR(LEDGERSEQ.NEXTVAL), #{empno}, SYSDATE, 1, #{sort}, #{content}, #{amount}, (SELECT MONEY FROM LEDGER WHERE ID = (SELECT MAX(ID) FROM LEDGER))+#{sortamount}, #{etc})
+		VALUES(TO_CHAR(LEDGERSEQ.NEXTVAL), #{empno}, SYSDATE, #{enable}, #{sort}, #{content}, #{amount}, (SELECT MONEY FROM LEDGER WHERE ID = (SELECT MAX(TO_NUMBER(ID)) FROM LEDGER))+#{sortamount}, #{etc})
 	</insert>
 
 	<select id="selectAMember" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="com.sales.erp.member.vo.MemberVO">

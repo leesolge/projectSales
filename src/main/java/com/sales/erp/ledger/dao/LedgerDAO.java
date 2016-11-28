@@ -16,6 +16,26 @@ public class LedgerDAO implements LedgerMapper {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public void deleteOne(LedgerJoinVO one) {
+		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
+		mapper.deleteOne(one);
+	}
+
+	public void modifyMany(LedgerJoinVO ljvo) {
+		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
+		mapper.modifyMany(ljvo);
+	}
+
+	public void modifyOne(LedgerJoinVO ljvo) {
+		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
+		mapper.modifyOne(ljvo);
+	}
+
+	public LedgerJoinVO selectOne(SqlVO sql) {
+		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
+		return mapper.selectOne(sql);
+	}
+
 	public int countLedger(SqlVO sql) {
 		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
 		return mapper.countLedger(sql);
