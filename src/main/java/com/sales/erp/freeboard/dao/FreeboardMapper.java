@@ -39,5 +39,7 @@ public interface FreeboardMapper extends Serializable {
 	void replyUpdate(FreeboardReplyVO vo);
 	
 	void replyDelete(FreeboardReplyVO vo);
+	
+	void reReplyDelete(FreeboardReplyVO vo);
 
 }

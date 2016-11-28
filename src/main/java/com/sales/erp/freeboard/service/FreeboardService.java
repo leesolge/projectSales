@@ -152,8 +152,9 @@ public class FreeboardService {
 	public ModelAndView replyUpdateForm(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		FreeboardReplyVO voParam = new FreeboardReplyVO();
-		voParam.setNum(Integer.parseInt(request.getParameter("num")));
+		//voParam.setNum(Integer.parseInt(request.getParameter("num")));
 		voParam.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+		voParam.setChild(Integer.parseInt(request.getParameter("child")));
 		FreeboardReplyVO vo = dao.replyUpdateForm(voParam);
 		mav.addObject("vo", vo);
 		return mav;
@@ -161,16 +162,23 @@ public class FreeboardService {
 	
 	public void replyUpdate(HttpServletRequest request){
 		FreeboardReplyVO vo = new FreeboardReplyVO();
-		vo.setNum(Integer.parseInt(request.getParameter("num")));
 		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+		vo.setChild(Integer.parseInt(request.getParameter("child")));
 		vo.setReply(request.getParameter("reply"));
 		dao.replyUpdate(vo);
 	}
 	
 	public void replyDelete(HttpServletRequest request){
 		FreeboardReplyVO vo = new FreeboardReplyVO();
-		vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
-		dao.replyDelete(vo);
+		if (Integer.parseInt(request.getParameter("child"))==0) {
+			vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+			dao.replyDelete(vo);
+		} else if (Integer.parseInt(request.getParameter("child"))!=0) {
+			vo.setReplynum(Integer.parseInt(request.getParameter("replynum")));
+			vo.setChild(Integer.parseInt(request.getParameter("child")));
+			dao.reReplyDelete(vo);
+		}
+		
 	}
 
 	

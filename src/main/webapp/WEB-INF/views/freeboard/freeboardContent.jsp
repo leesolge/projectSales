@@ -3,8 +3,79 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<% String cp = request.getContextPath(); %>
 
 <html>
+<head>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function Update(replynum, child){
+		var replyUpdate = document.replyUpdate;
+		replyUpdate.replynum.value = replynum;
+		replyUpdate.child.value = child;
+		replyUpdate.submit();
+	}
+
+	function Delete(replynum, child){
+		var replyDelete = document.replyDelete;
+		replyDelete.replynum.value = replynum;
+		replyDelete.child.value = child;
+		replyDelete.submit();
+	}
+	
+	function ReReply(replynum){
+		var reReply = document.reReplyWrite;
+		reReplyWrite.replynum.value = replynum;
+		reReplyWrite.submit();
+	}
+	
+	<%-- $(document).ready(function(){
+	    $('#cmt').click(function(){
+	        $.post('<%=cp%>/freeboard/freeboardContent',
+	        {
+	          name: "Donald Duck",
+	          city: "Duckburg"
+	        },
+	        function(data,status){
+	            alert("Data: " + data + "\nStatus: " + status);
+	        });
+	    });
+	});
+ 	function doCreateCmt() {
+	      // 한줄댓글 내용이 필수이므로 검사
+	      if($('#cmt').val() == '') {
+	            alert("한줄 댓글의 내용은 필수 입력입니다.");
+	            $('#cmt').focus(); return;
+	      }
+	      // 버튼 중복 클릭 방지
+	      $('#createbt').attr('disabled', 'disabled');
+	      $.post('<%=cp%>/freeboard/freeboardContent',
+	                  {cwriter:$('#cwriter').val(),
+	                   cmt:$('#cmt').val()},
+	                  function(data){
+	                         $('#cmt').val(''); // 내용 비우기
+	                         // 다시 클릭이 가능하게끔
+	                         $('#createbt').attr("disabled", false);
+	                         // 입력이 완료가 됐으므로 다시 리스트 불러오기
+	                         cmtList();
+	                  });
+	}
+	
+	function cmtList() {
+	      $('#cmtTarget').load("<%=cp%>/freeboard/freeboardContent?num=${freeboardVO.num}");
+	}
+	
+	$(function(){
+	      // id가 cmt인 텍스트에서 엔터를 쳤을 경우
+	      // 바로 데이터 입력이 되도록 작성
+	      $('#cmt').keyup(function(e){
+	            if(e.keyCode == 13) doCreateCmt();
+	      });
+	      // 처음 읽기 화면 들어왔을때 바로 리스트를 가져와서 보여줌
+	      cmtList();
+	}); --%>
+</script>
+</head>
 <body>
 	<div class="w3-container w3-center">
 		<h2>글 읽기</h2>
@@ -34,7 +105,7 @@
 
 			<p>
 				<label class="w3-wide">Content</label>
-				<textarea class="w3-input w3-border w3-round-large" " name="content"
+				<textarea class="w3-input w3-border w3-round-large" name="content"
 					style="width: 100%; height: 300px; resize: none; border-radius: 6px;"
 					readonly>${freeboardVO.content}</textarea>
 			</p>
@@ -94,10 +165,12 @@
 		<div class="w3-rest w3-row-padding">
 			<form action="/erp/freeboard/replyDelete" name="replyDelete" method="post">
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
-				<input type="hidden" name="replynum" value="0">
+				<input type="hidden" name="child" value="${freeboardReplyVO.child}">
+				<input type="hidden" name="replynum" value="${freeboardReplyVO.replynum}">
 			</form>
 			<form action="/erp/freeboard/replyUpdateForm" name="replyUpdate" method="post">
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
+				<input type="hidden" name="child" value="${freeboardReplyVO.child}">
 				<input type="hidden" name="replynum" value="0">
 			</form>
 			<form action="/erp/freeboard/reReplyWriteForm" name="reReplyWrite" method="post">
@@ -125,9 +198,9 @@
 							</td>
 							<c:if test="${memberInfo.empno==replyList.empno}">
 								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}')" /></td>
+									onclick="Update('${replyList.replynum}', '${replyList.child}')" /></td>
 								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}')" /></td>
+									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
 							</c:if>
 							<td>
 								<input type="button" value="댓글"
@@ -142,38 +215,19 @@
 							</td>
 							<c:if test="${memberInfo.empno==replyList.empno}">
 								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}')" /></td>
+									onclick="Update('${replyList.replynum}', '${replyList.child}')" /></td>
 								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}')" /></td>
+									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
 							</c:if>
-							<td>
+							<%-- <td>
 								<input type="button" value="댓글"
 									onclick="ReReply('${replyList.replynum}')"/>	
-							</td>
+							</td> --%>
 						</c:if>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+	</div>
 </body>
-
-<script type="text/javascript">
-	function Update(replynum){
-		var replyUpdate = document.replyUpdate;
-		replyUpdate.replynum.value = replynum;
-		replyUpdate.submit();
-	}
-
-	function Delete(replynum){
-		var replyDelete = document.replyDelete;
-		replyDelete.replynum.value = replynum;
-		replyDelete.submit();
-	}
-	
-	function ReReply(replynum){
-		var reReply = document.reReplyWrite;
-		reReplyWrite.replynum.value = replynum;
-		reReplyWrite.submit();
-	}
-</script>
 </html>

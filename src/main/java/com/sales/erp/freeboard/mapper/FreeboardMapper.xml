@@ -17,18 +17,19 @@
 		parameterType="com.sales.erp.freeboard.vo.FreeboardSearchVO" id="getFreeboardCount">
 		select count(*) from freeboard where title like #{word} </select>
 	<!-- 글 쓰기 -->
-	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardVO"
-		id="freeboardWrite"> insert into freeboard(num, name, title, content, regdate)
+	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardVO" id="freeboardWrite"> 
+		insert into freeboard(num, name, title, content, regdate)
 		values(freeboard_seq.nextval, #{name}, #{title}, #{content}, sysdate)
 	</insert>
 	<!-- 글 하나 보기 -->
 	<select resultType="com.sales.erp.freeboard.vo.FreeboardVO"
-		parameterType="java.lang.String" id="freeboardContent"> SELECT * FROM FREEBOARD WHERE NUM = #{num} 
+		parameterType="java.lang.String" id="freeboardContent"> 
+		SELECT * FROM FREEBOARD WHERE NUM = #{num} 
 	</select>
 	<!-- 글 수정 -->
 	<update parameterType="com.sales.erp.freeboard.vo.FreeboardVO" id="freeboardUpdate"> 
-		update freeboard set name=#{name}, title=#{title},
-		content=#{content}, regDate=sysdate where num = #{num} 
+		update freeboard set name=#{name}, title=#{title}, content=#{content}, regDate=sysdate 
+		where num = #{num} 
 	</update>
 	<!-- 글 삭제 -->
 	<delete parameterType="java.lang.String" id="freeboardDelete"> 
@@ -37,34 +38,36 @@
 	<!-- ////////////////댓글 부분///////////////// -->
 	<!-- 댓글 입력 -->
 	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyWrite"> 
-		insert into freeboardReply(replynum, num, empno, reply, regDate,
-		sort, parent, child) values(freeboardReply_seq.nextval, #{num},
-		#{empno}, #{reply}, sysdate, 0, #{num}, 0) 
+		insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child) 
+		values(freeboardReply_seq.nextval, #{num}, #{empno}, #{reply}, sysdate, 0, #{num}, 0) 
 	</insert>
 	<!-- 대댓글 입력 -->
 	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="reReplyWrite"> 
-		insert into freeboardReply(replynum, num, empno, reply, regDate,
-		sort, parent, child) values(#{replynum}, #{num}, #{empno}, #{reply},
-		sysdate, 1, #{replynum}, freeboardReReply_seq.nextval) 
+		insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child) 
+		values(#{replynum}, #{num}, #{empno}, #{reply}, sysdate, 1, #{replynum}, freeboardReReply_seq.nextval) 
 	</insert>
 	<!-- 댓글 조회 -->
 	<select resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
 		parameterType="java.lang.String" id="replyList"> 
-		select f.replynum, f.num,
-		f.empno, f.reply, f.regDate, f.child, s.name from freeboardReply f,
-		smember s where f.empno = s.empno and f.num = #{num} order by
-		f.replynum asc, f.child asc 
+		select f.replynum, f.num, f.empno, f.reply, f.regDate, f.child, s.name 
+		from freeboardReply f, smember s 
+		where f.empno = s.empno and f.num = #{num} 
+		order by f.replynum asc, f.child asc 
 	</select>
 	<!-- 댓글 수정 양식 -->
 	<select resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
-		parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyUpdateForm"> select * from freeboardReply where num=#{num} and replynum=#{replynum}
+	parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyUpdateForm"> 
+		select * from freeboardReply where replynum=#{replynum} and child=#{child}
 	</select>
 	<!-- 댓글 수정 -->
 	<update parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyUpdate"> 
-		update freeboardReply set reply=#{reply} where num=#{num} and replynum=#{replynum} 
+		update freeboardReply set reply=#{reply} where replynum=#{replynum} and child=#{child} 
 	</update>
 	<!-- 댓글 삭제 -->
-	<delete parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyDelete"> 
-		delete from freeboardReply where replynum=#{replynum} 
+	<delete parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyDelete">
+		delete from freeboardReply where replynum=#{replynum}
+	</delete>
+	<delete parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="reReplyDelete"> 
+		delete from freeboardReply where replynum=#{replynum} and child=#{child} 
 	</delete>
 </mapper>

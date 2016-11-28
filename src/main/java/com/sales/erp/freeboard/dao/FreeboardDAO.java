@@ -85,5 +85,10 @@ public class FreeboardDAO {
 		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
 		mapper.replyDelete(vo);
 	}
+	
+	public void reReplyDelete(FreeboardReplyVO vo){
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		mapper.reReplyDelete(vo);
+	}
 
 }

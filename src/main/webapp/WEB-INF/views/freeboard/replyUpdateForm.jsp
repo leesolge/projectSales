@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,6 +27,7 @@
 			<form action="/erp/freeboard/replyUpdate" method="post">
 				<input type="hidden" name="num" value="${vo.num}"> 
 				<input type="hidden" name="replynum" value="${vo.replynum}">
+				<input type="hidden" name="child" value="${vo.child}">
 				<table class="w3-table w3-striped w3-border w3-centered">
 					<tr>
 						<th style="width: 10%">작성자</th>

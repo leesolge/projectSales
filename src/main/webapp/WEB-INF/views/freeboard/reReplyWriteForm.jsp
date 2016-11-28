@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="js/jquery-3.1.1.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -30,7 +31,7 @@
 					</tr>
 					<tr>
 						<td>${memberInfo.name}</td>
-						<td><input class="w3-input w3-border w3-round-large" type="text" name="reply"/></td>
+						<td><input class="w3-input w3-border w3-round-large" type="text" name="reply" required/></td>
 						<%-- <td><fmt:formatDate value="${freeboardReplyVO.regDate}"
 								pattern="yy.MM.dd-hh:mm:ss" /></td> --%>
 						<td><input type="submit" value="작성" /></td>

@@ -8,10 +8,10 @@ drop sequence freeboardReply_seq;
 drop sequence freeboardReReply_seq;
 
 create table freeboard(
-	num number,
-	name varchar2(50),
-	title varchar2(500),
-	content varchar2(3000),
+	num number primary key,
+	name varchar2(50) not null,
+	title varchar2(500) not null,
+	content varchar2(3000) not null,
 	regdate date
 );
 
@@ -22,8 +22,8 @@ nocache;
 create table freeboardReply(
 	replynum number,
 	num number,
-	empno varchar2(10),
-	reply varchar2(1000),
+	empno varchar2(10) not null,
+	reply varchar2(1000) not null,
 	regdate date,
 	sort number,
 	parent number,
