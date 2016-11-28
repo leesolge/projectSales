@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.buy.vo.BuyPagingVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
 
@@ -32,9 +33,9 @@ public class BuyDAO {
 		mapper.buyWriteSameBuynum(bvo);
 	}
 
-	public ArrayList<BuyListVO> buyListWait(BuyVO vo) {
+	public ArrayList<BuyListVO> buyListWait(BuyPagingVO paging) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListWait(vo);
+		return mapper.buyListWait(paging);
 	}
 
 	public MemberVO getMember(MemberVO mvoParam) {
@@ -72,24 +73,29 @@ public class BuyDAO {
 		mapper.buyApproveAdmin(buynum);
 	}
 
-	public ArrayList<BuyListVO> buyAppListAll() {
+	public ArrayList<BuyListVO> buyAppListAll(BuyPagingVO paging) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyAppListAll();
-	}
-
-	public ArrayList<BuyListVO> buyAppListTeam(MemberVO mvo) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyAppListTeam(mvo);
-	}
-
-	public ArrayList<BuyListVO> buyAppList(MemberVO mvo) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyAppList(mvo);
+		return mapper.buyAppListAll(paging);
 	}
 
 	public void addProduct(BuyVO bvo) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.addProduct(bvo);		
+	}
+
+	public int getbuyAppListCountAll(BuyPagingVO paging) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.getbuyAppListCountAll(paging);
+	}
+
+	public ArrayList<String> get_team() {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.get_team();
+	}
+
+	public int buyListWaitCount(BuyPagingVO paging) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyListWaitCount(paging);
 	}
 
 

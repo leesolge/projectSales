@@ -12,6 +12,9 @@
 	<form action="/erp/buy/buyCancel" name="buyCancel" method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
+	<form action="/erp/buy/buyListWait" name="buyListWait" method="post">
+		<input type="hidden" name="page" value="0">
+	</form>	
 	<br>
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -21,7 +24,7 @@
 			</div>
 			<!-- Count -->
 			<div class="w3-row w3-right">
-				<h5><i class="fa fa-bar-chart"></i><c:out value="${count}" /></h5>
+				<h5><i class="fa fa-bar-chart"></i><c:out value="${paging.total}" /></h5>
 			</div>
 
 			<div class="w3-row" >
@@ -52,6 +55,39 @@
 				</table>
 			</div>
 
+
+					<!-- Page -->
+		<div class="w3-row w3-center w3-small">
+			<ul class="w3-pagination">
+				<c:if test="${paging.page>paging.block}">
+					<li><a href="javascript:jumppage('${paging.page}')" class="w3-hover-black w3-hide-small">&laquo;&laquo;</a></li>
+					<li><a href="javascript:jumppage('${paging.fromPage-1}')" class="w3-hover-black">&laquo;</a></li>
+				</c:if>
+				<c:if test="${paging.page <= paging.block}">
+					<li><a href="#" class="w3-hover-black w3-hide-small">&laquo;&laquo;</a></li>
+					<li><a href="#" class="w3-hover-black">&laquo;</a></li>
+				</c:if>
+				<!-- 블록 범위 찍기 -->
+				<c:forEach begin="${paging.fromPage}" end="${paging.toPage}" var="i">
+					<c:if test="${i == paging.page}">
+						<li><a href="#" class="w3-hover-red w3-text-red"><b>${i}</b></a></li>
+					</c:if>
+					<c:if test="${i != paging.page}">
+						<li><a href="javascript:jumppage('${i}')" class="w3-hover-black">${i}</a></li>
+					</c:if>
+				</c:forEach>
+				<!-- 다음, 이후 -->
+				<c:if test="${paging.toPage < paging.allPage}">
+					<li><a href="javascript:jumppage('${paging.toPage+1}')" class="w3-hover-black">&raquo;</a></li>
+					<li><a href="javascript:jumppage('${paging.allPage}')" class="w3-hover-black w3-hide-small">&raquo;&raquo;</a></li>
+				</c:if>
+				<c:if test="${paging.toPage >= paging.allPage}">
+					<li><a href="#" class="w3-hover-black">&raquo;</a></li>
+					<li><a href="#" class="w3-hover-black w3-hide-small">&raquo;&raquo;</a></li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- end Paging -->
 		</div>
 	</div>
 </body>
@@ -74,6 +110,11 @@
 		buyCancel.buynum.value = num;
 		buyCancel.submit();
 	}
-
+	
+	function jumppage(page) {
+		var buyListWait = document.buyListWait;
+		buyListWait.page.value = page;
+		buyListWait.submit();
+	}
 </script>
 </html>
