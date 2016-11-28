@@ -44,6 +44,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         MemberVO memberInfo = dao.getMemberEmpno(id);
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(3600);
         session.setAttribute("memberInfo", memberInfo);
         return new UsernamePasswordAuthenticationToken(id, pw, user.getAuthorities());
     }

@@ -28,8 +28,12 @@ public class LedgerService {
 		SqlVO sql = new SqlVO();
 		sql.setQuery(id);
 		LedgerJoinVO one = dao.selectOne(sql);
-		one.setPastamount(one.getAmount()*(-1));
-		one.setAmount(0);
+		if(one.getSort().equals("수입")){
+			one.setPastamount(one.getAmount()*(-1));
+		}else{
+			one.setPastamount(one.getAmount());
+		}
+		one.setSortamount(0);
 		dao.deleteOne(one);
 		dao.modifyMany(one);
 	}
