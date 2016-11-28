@@ -15,6 +15,11 @@ public class LedgerDAO implements LedgerMapper {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	public int countLedger(SqlVO sql) {
+		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);
+		return mapper.countLedger(sql);
+	}
 
 	public void registLedger(LedgerJoinVO vo) {
 		LedgerMapper mapper = sqlSession.getMapper(LedgerMapper.class);

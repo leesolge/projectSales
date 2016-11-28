@@ -6,12 +6,20 @@
 <html>
 	<head>
 		<title>Title</title>
+		<script>
+		function jumpPage(pn){
+			var jumping = document.viewList;
+			jumping.pageNum.value=pn;
+			jumping.submit();
+		}
+		</script>
 	</head>
 	
 	<body>
 		<form name="viewList" action="/erp/ledger/list" method="post">
-			<input name="startdate" type="date">&nbsp;
-			<input name="enddate" type="date">&nbsp;
+			<input name="pageNum" type="hidden" value="${pageNum}">
+			<input name="startdate" id="start" type="date">&nbsp;
+			<input name="enddate" id="end" type="date">&nbsp;
 			<select name="sort">
 				<option value="">전체</option>
 				<c:if test="${sort=='수입'}">
@@ -64,5 +72,28 @@
 		</table>
 		<button onclick="location.href='/erp/ledger/registForm'">등록</button>
 		
-	</body>
+			<div class="center">
+		<table><tr>
+			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">이전</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">${pageNum-2}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">${pageNum-1}</a></c:if>&nbsp;</td>
+			<td class="paging">${pageNum}</td>
+			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">${pageNum+1}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('${pageNum+2}')">${pageNum+2}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">다음</a></c:if>&nbsp;</td>
+		</tr></table>
+	</div>
+		${max}
+
+	<script src="/erp/resources/js/moment-min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(function() {
+			var s_date = moment("${sdate}").format("YYYY-MM-DD");
+			var e_date = moment("${edate}").format("YYYY-MM-DD");
+			$("#start").val(s_date);
+			$("#end").val(e_date);
+		}); 
+	</script>
+</body>
 </html>

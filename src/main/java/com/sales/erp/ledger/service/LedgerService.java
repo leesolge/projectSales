@@ -57,8 +57,15 @@ public class LedgerService {
 	
 	public ModelAndView ledgerList(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
+		String sPage = request.getParameter("pageNum");
+		if(sPage==null||sPage.equals("")){
+			sPage = "1";
+		}
+		int pageNum = Integer.parseInt(sPage);
 		String startdate = request.getParameter("startdate");
 		String enddate = request.getParameter("enddate");
+		mav.addObject("sdate", startdate);
+		mav.addObject("edate", enddate);
 		String sort = request.getParameter("sort");
 		String query = "";
 		if(startdate==null||startdate.equals("")){
@@ -80,9 +87,23 @@ public class LedgerService {
 		}else{
 			query = query + "AND L.SORT='"+sort+"'";
 		}
-		System.out.println(query);
 		SqlVO sql = new SqlVO();
 		sql.setQuery(query);
+		int count = dao.countLedger(sql);
+		int pageSize = 10;
+		int start = (pageSize*pageNum)-(pageSize-1);
+		int end = start+(pageSize-1);
+		sql.setStart(start);
+		sql.setEnd(end);
+		
+		int max = count/pageSize;
+		if(count%pageSize!=0){
+			max = max+1;
+		}
+		
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("max", max);
+		
 		ArrayList<LedgerJoinVO> ledgerList = dao.selectLedger(sql);
 		for(LedgerJoinVO jvo:ledgerList){
 			Date date = jvo.getRegdate();

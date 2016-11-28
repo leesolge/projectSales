@@ -8,6 +8,7 @@ import com.sales.erp.ledger.vo.SqlVO;
 import com.sales.erp.member.vo.MemberVO;
 
 public interface LedgerMapper extends Serializable{
+	int countLedger(SqlVO sql);
 	void registLedger(LedgerJoinVO vo);
 	ArrayList<LedgerJoinVO> selectLedger(SqlVO sql);
 	MemberVO selectAMember(SqlVO sql);
