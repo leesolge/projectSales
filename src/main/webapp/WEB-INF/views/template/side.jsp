@@ -28,7 +28,7 @@
 			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
 			<a href="/erp/admin/salary" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
 			</sec:authorize>
-			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope"></i></a>
+			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope-o"></i></a>
 			<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
 			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
 			<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>

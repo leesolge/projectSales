@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -30,9 +31,7 @@
 		</script>
 		<title>쪽지 보기</title>
 	</head>
-	
-	<body>
-	${pageCheck}
+	<body><br>
 	<c:if test="${pageCheck=='receive'}"><c:set var="ad" value="rd"/></c:if>
 	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
 	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>
@@ -76,19 +75,48 @@
 	</form>
 	<form action="/erp/note/list" name="li" method="post">
 	</form>
-	
-	<hr>
-		${pageCheck}<br>
-		발신 날짜 : ${vo.senddate}<br>
-		발신자 : ${svo.team} ${svo.name} ${svo.auth}<br>
-		수신자 : ${rvo.team} ${rvo.name} ${rvo.auth}<br>
-		제목 : ${vo.title}<br>
-		내용<br>
-		<textarea rows="5" cols="20" readonly="readonly">${vo.content}</textarea>
-		<br>
-	<hr>
-		<c:if test="${empno==rvo.empno}"><button onclick="javascript:jumpPage('rp')">답장하기</button></c:if>
-		<button onclick="javascript:jumpPage('${ad}')">목록보기</button>
-		<c:if test="${empno==rvo.empno}"><button onclick="javascript:del()">쪽지삭제</button></c:if>
+	<div class="w3-container">
+		<div class="w3-card-4 w3-white">
+			<header class="w3-container w3-dark-grey">
+				<table class="w3-table">
+					<tr>
+						<td><h3><span title="${vo.title}"><a>${vo.title}</a></span></h3></td>
+					</tr>
+					<tr>
+						<td><div class="w3-right w3-tiny"><fmt:formatDate value="${vo.senddate}" pattern="yy-MM-dd / a-hh:mm:ss"/></div></td>
+					</tr>
+				</table>
+			</header>
+			<div class="w3-container">
+					<table class="w3-table">
+						<tr>
+							<td style="width: 90px;">
+								<b>보낸사람 :</b>
+							</td>
+							<td>
+								<span title="${svo.name}">${svo.name}(${svo.team}-${svo.auth})</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b>받은사람 :</b>
+							</td>
+							<td>
+								<span title="${rvo.name}">${rvo.name}(${rvo.team}-${rvo.auth})</span>
+							</td>
+						</tr>
+					</table>
+				<hr>
+				<p>
+					<textarea class="w3-input" name="content" style="width: 100%; min-height: 200px; resize: none;"	readonly>${vo.content}</textarea>
+				</p><br>
+			</div>
+			<footer class="w3-container w3-dark-grey">
+				<c:if test="${empno==rvo.empno}"><button onclick="javascript:jumpPage('rp')">답장하기</button></c:if>
+				<button onclick="javascript:jumpPage('${ad}')">목록보기</button>
+				<c:if test="${empno==rvo.empno}"><button onclick="javascript:del()">쪽지삭제</button></c:if>
+			</footer>
+		</div>
+	</div>
 	</body>
 </html>

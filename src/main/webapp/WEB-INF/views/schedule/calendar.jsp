@@ -145,18 +145,12 @@
 					</table>
 					<div style="height:150px; overflow: auto;">
 					<table class="w3-table w3-small w3-bordered">
-					<tr>
-						<th style="width: 70px"></th>
-						<th></th>
-						<th style="width: 80px;"></th>
-						<th style="width: 50px;"></th>
-					</tr>
 					<c:forEach var="vo" items="${vo}">
 						<tr>
-							<td>${vo.title}</td>
+							<td style="width: 70px">${vo.title}</td>
 							<td style="text-align: left;"><span title="${vo.contents}">${vo.contents}</span></td>
-							<td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></td>
-							<td>
+							<td style="width: 80px;"><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></td>
+							<td style="width: 50px;">
 								<form action="/erp/schedule/delete" method="post">
 									<div class="tooltip-demo">
 										<input type="hidden" name="contents" value="${vo.contents}">

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -24,7 +26,7 @@
 						id="myTable">
 						<tr class="w3-indigo">
 							<th>상품명</th>
-							<th>재고</th>
+							<th style="width: 50px;">재고</th>
 							<th>원가</th>
 						</tr>
 

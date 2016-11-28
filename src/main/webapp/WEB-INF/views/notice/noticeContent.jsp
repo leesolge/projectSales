@@ -8,7 +8,6 @@
 <body><br>
 <div class="w3-container">
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding"><br>
-		
 		<!-- Info -->
 		<table class="w3-table w3-border-top w3-bordered">
 			<tr>
@@ -22,7 +21,6 @@
 				<td style="text-align: left;"><span>${noticeVo.name}</span></td>
 				<td class="w3-text-gray" style="text-align: left; width: 80px;">댓글　 | </td>
 				<td style="width: 80px; text-align: left;">${count}</td>
-				
 			</tr>
 		</table>
 		<br>

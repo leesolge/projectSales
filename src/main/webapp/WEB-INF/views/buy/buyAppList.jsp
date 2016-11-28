@@ -82,7 +82,7 @@
 							<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER')">
 							<td style="width: 130px">${list.empno}</td>
 							</sec:authorize>
-							<td>${list.title}</td>
+							<td><span title="${list.title}">${list.title}</span></td>
 							<td><fmt:formatDate value="${list.regdate}"
 									pattern="yyyy-MM-dd" /></td>
 							<td><fmt:formatDate value="${list.appdate}"

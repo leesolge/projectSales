@@ -20,10 +20,10 @@
 		<div class="w3-row">
 			<table class="w3-table w3-small w3-hoverable w3-bordered">
 				<tr class="w3-indigo">
-					<th style="width: 70px">번호</th>
+					<th style="width: 70px;">번호</th>
 					<th>제목</th>
-					<th style="width: 70px">글쓴이</th>
-					<th style="width: 80px">날짜</th>
+					<th style="width: 70px;">글쓴이</th>
+					<th style="width: 80px;">날짜</th>
 				</tr>
 				<c:forEach var="notice" items="${list}">
 				<tr onclick="location.href='/erp/notice/noticeContent?num=${notice.num}&pg=${pg}'" style="cursor:pointer;">

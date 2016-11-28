@@ -2,127 +2,152 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
 <html>
-	<head>
-		<script type="text/javascript">
-			function jumpPage(wh){
-				var name=wh;
-				document.forms[name].submit();
-			}
-			function writePage(receive){
-				var writes = document.write;
-				writes.rec.value=receive;
-				writes.submit();
-			}
-			function content(vl){
-				var cont = document.cont;
-				cont.notenum.value=vl;
-				cont.submit();
-			}
-		</script>
-		<title>쪽지</title>
-<!-- 		<style type="text/css">
-			h4 {
-				text-align: center;
-			}
-			table {
-				margin: auto;
-			}
-			td {
-				text-align: center;
-			}
-			.center{
-				margin: auto;
-				text-align: center;
-			}
-			.paging{
-				width: 40px;
-			}
-			.wrapper{
-				border: 1px solid black;
-				width: 30%;
-				height: 200px;
-				overflow-y: scroll;
-				margin: auto;
-				box-shadow: 3px 3px 6px #adadad;
-				padding: 10px;
-				text-align: center;
-			}
-		</style> -->
-	</head>
-	
-	<body>
+<head>
+	<title>쪽지</title>
+</head>
+<body><br>
+	<s:authorize access="hasRole('ROLE_ADMIN')">
+		<a href="#" onclick="jumpPage('adm')" class="w3-right"><i class="fa fa-cogs"></i>  쪽지관리　</a><br><br>
+	</s:authorize>
 	<form action="/erp/admin/note" name="adm"></form>
 	<form action="/erp/note/write" name="write" method="post">
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="rec" value="0">
 	</form>
-	<form action="/erp/note/sdetail" name="sd" method="post">
-	</form>
-	<form action="/erp/note/rdetail" name="rd" method="post">
-	</form>
+	<form action="/erp/note/sdetail" name="sd" method="post"></form>
+	<form action="/erp/note/rdetail" name="rd" method="post"></form>
 	<form action="/erp/note/view" name="cont" method="post">
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="notenum" value="0">
 	</form>
 	
-	<s:authorize access="hasRole('ROLE_ADMIN')">
-	<button onclick="jumpPage('adm')">쪽지 관리</button>
-	<br><br>
-	</s:authorize>
-	
-	<h4>최근 받은 쪽지</h4>
-	<div class="wrapper">
-		<table>
-			<c:forEach var="receive" items="${receiveList}">
-				<tr>
-					<td colspan="2"><c:out value="${receive.change}" /></td>
-				</tr>
-				<tr>
-					<td><a href="javascript:writePage('${receive.sender}')"><c:out value="${receive.sender} ${receive.sname}" /></a></td>
-					<td><c:out value="${receive.receiver} ${receive.rname}" /></td>
-				</tr>
-				<tr><td colspan="2">
-				<c:if test="${receive.checks==0}"><b></c:if>
-					<a href="javascript:content('${receive.notenum}')"><c:out value="${receive.title}" /></a>
-				<c:if test="${receive.checks==0}"></b></c:if></td>
-				</tr>
-				<tr><td colspan="2">&nbsp;</td></tr>
-			</c:forEach>
-		</table>
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 300px;">
+			<h4>- 받은 쪽지함<a href="#" onclick="location.reload()"> <i class="fa fa-refresh"></i></a></h4>
+			<div class="w3-row">
+				<a href="#" onclick="jumpPage('rd')" class="w3-text-grey w3-right">
+					<i class="fa fa-caret-right"></i>  더보기
+				</a>
+				<table class="w3-table w3-small">
+					<tr class="w3-light-grey">
+						<td style="width: 50px;"></td>
+						<td style="width: 70px;">발신자</td>
+						<td>제목</td>
+						<td style="width: 100px;">날짜　</td>
+					</tr>
+				</table>
+				<div style="height:250px; overflow: auto;">
+				<table class="w3-table w3-small">
+					<c:forEach var="receive" items="${receiveList}">
+					<tr>
+						<td style="width: 50px;">
+							<c:if test="${receive.checks!=0}">
+								<i class="fa fa-envelope-open-o"></i>
+							</c:if>
+							<c:if test="${receive.checks==0}">
+								<i class="fa fa-envelope"></i>
+							</c:if>
+						</td>
+						<td style="width: 70px;">
+							<a href="javascript:writePage('${receive.sender}')">
+								<span title="${receive.sender} ${receive.sname}">${receive.sname}</span>	
+							</a>
+						</td>
+						<td style="text-align: left;">
+							<a href="javascript:content('${receive.notenum}')">
+							<c:if test="${receive.checks==0}">
+								<b><span title="${receive.title}" style="text-decoration: underline;">${receive.title}</span></b>
+							</c:if>
+							<c:if test="${receive.checks!=0}">
+								<span title="${receive.title}">${receive.title}</span>
+							</c:if>
+							</a>
+						</td>
+						<td class="w3-tiny w3-center" style="width: 100px;">
+							<fmt:formatDate value="${receive.senddate}" pattern="yy-MM-dd"/><br>
+							<fmt:formatDate value="${receive.senddate}" pattern="a hh:mm"/>
+						</td>
+					</tr>
+					</c:forEach>
+				</table>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 300px;">
+			<h4>- 보낸 쪽지함<a href="#" onclick="location.reload()"> <i class="fa fa-refresh"></i></a></h4>
+			<div class="w3-row">
+				<a href="#" onclick="jumpPage('sd')" class="w3-text-grey w3-right">
+					<i class="fa fa-caret-right"></i>  더보기
+				</a>
+				<table class="w3-table w3-small">
+					<tr class="w3-light-grey">
+						<td style="width: 50px;"></td>
+						<td style="width: 70px;">발신자</td>
+						<td>제목</td>
+						<td style="width: 100px;">날짜　</td>
+					</tr>
+				</table>
+				<div style="height:250px; overflow: auto;">
+				<table class="w3-table w3-small">
+					<c:forEach var="send" items="${sendList}">
+					<tr>
+						<td style="width: 50px;">
+							<c:if test="${send.checks!=0}">
+								<i class="fa fa-envelope-open-o"></i>
+							</c:if>
+							<c:if test="${send.checks==0}">
+								<i class="fa fa-envelope"></i>
+							</c:if>
+						</td>
+						<td style="width: 70px;">
+							<a href="javascript:writePage('${send.receiver}')">
+								<span title="${send.receiver} ${send.rname}">${send.rname}</span>	
+							</a>
+						</td>
+						<td style="text-align: left;">
+						<a href="javascript:content('${send.notenum}')">
+							<c:if test="${send.checks==0}">
+								<b><span title="${send.title}" style="text-decoration: underline;">${send.title}</span></b>
+							</c:if>
+							<c:if test="${send.checks!=0}">
+								<span title="${send.title}">${send.title}</span>
+							</c:if>
+						</a>
+						</td>
+						<td class="w3-tiny w3-center" style="width: 100px;">
+							<fmt:formatDate value="${send.senddate}" pattern="yy-MM-dd"/><br>
+							<fmt:formatDate value="${send.senddate}" pattern="a hh:mm"/>
+						</td>
+					</tr>
+					</c:forEach>
+				</table>
+				</div>
+				<br>
+			</div>
+		</div>
 	</div>
-	<div class="center">
-		<button onclick="location.reload()">새로 고침</button>
-		<button onclick="jumpPage('rd')">목록 보기</button>
-	</div>
-	
 	<br>
-	<br>
-	<h4>최근 보낸 쪽지</h4>
-	<div class="wrapper">
-		<table>
-			<c:forEach var="send" items="${sendList}">
-				<tr>
-					<td colspan="2"><c:out value="${send.change}" /></td>
-				</tr>
-				<tr>
-					<td><c:out value="${send.sender} ${send.sname}" /></td>
-					<td><a href="javascript:writePage('${send.receiver}')"><c:out value="${send.receiver} ${send.rname}" /></a></td>
-				</tr>
-				<tr><td colspan="2">
-				<c:if test="${send.checks==0}"><b></c:if>
-					<a href="javascript:content('${send.notenum}')"><c:out value="${send.title}" /></a>
-				<c:if test="${send.checks==0}"></b></c:if></td>
-				</tr>
-				<tr><td colspan="2">&nbsp;</td></tr>
-			</c:forEach>
-		</table>
-	</div>
-	<div class="center">
-		<button onclick="location.reload()">새로 고침</button>
-		<button onclick="jumpPage('sd')">목록 보기</button>
-	</div>
-	</body>
+</body>
+	
+<script type="text/javascript">
+		function jumpPage(wh){
+			var name=wh;
+			document.forms[name].submit();
+		}
+		function writePage(receive){
+			var writes = document.write;
+			writes.rec.value=receive;
+			writes.submit();
+		}
+		function content(vl){
+			var cont = document.cont;
+			cont.notenum.value=vl;
+			cont.submit();
+		}
+	</script>
 </html>
