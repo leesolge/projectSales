@@ -41,6 +41,8 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/note/**"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/ledger/**"
+			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" />
 		<security:intercept-url pattern="/**" access="permitAll" />
 	</security:http>
 

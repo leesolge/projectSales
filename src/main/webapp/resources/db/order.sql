@@ -1,60 +1,3 @@
-
-select * from orders
-select * from smember
-update orders set checks=0
-select p.proamount from orders o, product p where o.procode=p.procode and id='300322o26'
-SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
-			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
-			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
-			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
-			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
-			O.DELETED AS DELETED
-			FROM ORDERS O, 
-			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
-			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
-			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=0 AND DELETED=0 AND O.ID='300301o32'
-SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE,
-SENDER, sname, RECEIVER, rname, TITLE, CONTENT, CHECKS, DELETED FROM
-(select n.notenum as notenum, n.senddate as senddate,
-n.sender as sender, m.name as sname, n.receiver as receiver,
-l.name as rname, n.title as title, n.content as content,
-n.checks as checks, n.deleted as deleted from notedb n,
-(select * from smember) m, (select * from smember) l
-where n.sender = m.empno and n.receiver = l.empno and RECEIVER=100
-ORDER BY SENDDATE DESC) WHERE DELETED=0)
-WHERE R>=1 AND R<=10
-
-SELECT * FROM (SELECT ROWNUM R, NOTENUM, SENDDATE,
-SENDER, RECEIVER, TITLE, CONTENT, CHECKS, DELETED
-FROM (SELECT N.NOTENUM AS NOTENUM, N.SENDDATE AS SENDDATE,
-N.SENDER AS SENDER, M.NAME AS SNAME, N.RECEIVER AS RECEIVER,
-L.NAME AS RNAME, N.TITLE AS TITLE, N.CONTENT AS CONTENT,
-N.CHECKS AS CHECKS, N.DELETED AS DELETED FROM NOTEDB N,
-(SELECT * FROM SMEMBER) M, (SELECT * FROM SMEMBER) L
-WHERE N.SENDER = M.EMPNO AND N.RECEIVER = L.EMPNO AND RECEIVER=#{empno}
-ORDER BY SENDDATE DESC) WHERE ${field} LIKE #{keyword}
-AND DELETED=0 ORDER BY R DESC)
-WHERE R>=#{start} AND R<=#{end}
-
-select n.notenum as notenum, n.senddate as senddate, n.sender as sender,
-m.name as sname, n.receiver as receiver, l.name as rname, n.title as title,
-n.content as content, n.checks as checks, n.deleted as deleted from
-notedb n, (select * from smember) m, (select * from smember) l
-where n.sender = m.empno and n.receiver = l.empno
-			select * from orders
-			select * from product
-update product set proamount=proamount-1 where procode=1004
-SELECT TEAM FROM SMEMBER WHERE TEAM='영업1팀'
-SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.REGDATE AS REGDATE,
-			S.NAME AS NAME, S.TEAM AS TEAM, S.AUTH AS AUTH,
-			O.PROCODE AS PROCODE, P.PRONAME AS PRONAME, O.PROAMOUNT AS PROAMOUNT,
-			((P.SELLPRICE-P.ORIGINPRICE)*O.PROAMOUNT) AS PROFIT,
-			O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS,
-			O.DELETED AS DELETED
-			FROM ORDERS O, 
-			(SELECT EMPNO, NAME, TEAM, AUTH FROM SMEMBER) S,
-			(SELECT PROCODE, PRONAME, PROAMOUNT, ORIGINPRICE, SELLPRICE FROM PRODUCT) P
-			WHERE O.EMPNO=S.EMPNO AND O.PROCODE=P.PROCODE AND CHECKS=0 AND DELETED=0 AND O.ID='300322o26'
 CREATE TABLE ORDERS(
 	ID VARCHAR2(50) PRIMARY KEY,
 	EMPNO VARCHAR2(20),
@@ -66,7 +9,6 @@ CREATE TABLE ORDERS(
 	CHECKS NUMBER,
 	DELETED NUMBER	
 );
-
 
 SELECT * FROM ORDERS;
 

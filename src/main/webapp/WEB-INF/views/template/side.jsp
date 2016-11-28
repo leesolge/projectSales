@@ -93,6 +93,7 @@
 				<a href="/erp/transact/transactlist_default">- 거래내역</a> 
 				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a>
 				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
+				<a href="/erp/ledger/list">- 회계장부</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
