@@ -43,9 +43,9 @@ public class BuyDAO {
 		return mapper.getMember(mvoParam);
 	}
 
-	public ArrayList<BuyListVO> buyListAppWaitTeam(MemberVO mvo) {
+	public ArrayList<BuyListVO> buyListAppWaitTeam(BuyPagingVO paging) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListAppWaitTeam(mvo);
+		return mapper.buyListAppWaitTeam(paging);
 	}
 
 	public ArrayList<BuyListVO> buyListWaitAll() {

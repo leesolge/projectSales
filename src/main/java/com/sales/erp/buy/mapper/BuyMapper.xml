@@ -103,7 +103,7 @@ SELECT count(*)
 	</select>
 
 	<!-- 팀장급 승인대기목록 불러오기 -->
-	<select id="buyListAppWaitTeam" parameterType="com.sales.erp.member.vo.MemberVO"
+	<select id="buyListAppWaitTeam" parameterType="com.sales.erp.buy.vo.BuyPagingVO"
 		resultType="com.sales.erp.buy.vo.BuyListVO">
 		<![CDATA[
 		SELECT BUYNUM, MAX(REGDATE) AS REGDATE, COUNT(*) AS CNT, MAX(EMPNO) AS EMPNO, MAX(PROCODE) AS PROCODE, MAX(TEAM) AS TEAM, MAX(BUYSTEP) AS BUYSTEP FROM 

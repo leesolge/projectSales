@@ -124,8 +124,6 @@ public class BuyService {
 		BuyPagingVO paging = new BuyPagingVO();
 		paging.setPage(1);
 		String page = request.getParameter("page");
-		paging.setStart_date(request.getParameter("start_date"));
-		paging.setEnd_date(request.getParameter("end_date"));
 		
 		if (page != null && page != "") {
 			paging.setPage(Integer.parseInt(request.getParameter("page")));
@@ -149,6 +147,44 @@ public class BuyService {
 		}
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
+		return mav;
+	}
+	
+	public ModelAndView buyListAppWait(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		BuyPagingVO paging = new BuyPagingVO();
+		paging.setPage(1);
+		String page = request.getParameter("page");
+		if (page != null && page != "") {
+			paging.setPage(Integer.parseInt(request.getParameter("page")));
+		}
+		paging.setRowSize(10, paging.getPage());
+		paging.setBlock(5, paging.getPage());
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberVO mvoParam = new MemberVO();
+		mvoParam.setEmpno(auth.getName());
+		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
+		ArrayList<BuyListVO> list = null;
+		if (mvo.getAuth().equals("ROLE_MANAGER")) {
+			paging.setTeam(mvo.getTeam());
+			
+			list = dao.buyListAppWaitTeam(paging);
+			for (int i = 0; i < list.size(); i++) {
+				ProductVO name = pdao.selectOne(list.get(i).getProcode());
+				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
+			}
+		}
+
+		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
+			list = dao.buyListWaitAll();
+			for (int i = 0; i < list.size(); i++) {
+				ProductVO name = pdao.selectOne(list.get(i).getProcode());
+				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
+			}
+		}
+		mav.addObject("list", list);
+		mav.addObject("count", list.size());
 		return mav;
 	}
 
@@ -205,32 +241,4 @@ public class BuyService {
 		mav.addObject("paging", paging);
 		return mav;
 	}
-
-	public ModelAndView buyListAppWait() {
-		ModelAndView mav = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		MemberVO mvoParam = new MemberVO();
-		mvoParam.setEmpno(auth.getName());
-		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
-		ArrayList<BuyListVO> list = null;
-		if (mvo.getAuth().equals("ROLE_MANAGER")) {
-			list = dao.buyListAppWaitTeam(mvo);
-			for (int i = 0; i < list.size(); i++) {
-				ProductVO name = pdao.selectOne(list.get(i).getProcode());
-				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
-			}
-		}
-
-		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
-			list = dao.buyListWaitAll();
-			for (int i = 0; i < list.size(); i++) {
-				ProductVO name = pdao.selectOne(list.get(i).getProcode());
-				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
-			}
-		}
-		mav.addObject("list", list);
-		mav.addObject("count", list.size());
-		return mav;
-	}
-
 }

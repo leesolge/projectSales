@@ -72,7 +72,7 @@ public class BuyController {
 	// Product 충원 승인 대기 리스트
 	@RequestMapping("/buy/buyListAppWait")
 	public ModelAndView buyListAppWait(HttpServletRequest request) {
-		ModelAndView mav = bs.buyListAppWait();
+		ModelAndView mav = bs.buyListAppWait(request);
 		mav.setViewName("buy/buyListAppWait");
 		return mav;
 	}
