@@ -38,6 +38,11 @@
 		var jumping = document.write;
 		jumping.submit();
 	}
+	function jumpPage(pages){
+		var paging = document.search;
+		paging.pageNum.value = pages;
+		paging.submit();
+	}
 	</script>
 	<head>
 		<title>Title</title>
@@ -67,10 +72,11 @@
 		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
 	
-		<form action="/erp/order/list" method="post">
+		<form action="/erp/order/list" name="search" method="get">
+			<input name="pageNum" type="hidden" value="1">
 			<input name="authpage" type="hidden" value="${authpage}">
-			<input name="firstdate" type="date">&nbsp;
-			<input name="seconddate" type="date">&nbsp;
+			<input name="firstdate" id="start" type="date">&nbsp;
+			<input name="seconddate" id="end" type="date">&nbsp;
 			<select name="product">
 				<option value="" disabled selected>제품선택</option>
 				<c:forEach var="plist" items="${plist}">
@@ -132,5 +138,26 @@
 			</c:forEach>
 		</table>
 		<button onclick="javascript:worders()">등록</button>
+		
+		<table><tr>
+			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">이전</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">${pageNum-2}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">${pageNum-1}</a></c:if>&nbsp;</td>
+			<td class="paging">${pageNum}</td>
+			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">${pageNum+1}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('${pageNum+2}')">${pageNum+2}</a></c:if>&nbsp;</td>
+			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">다음</a></c:if>&nbsp;</td>
+		</tr></table>
+		
+		<script src="/erp/resources/js/moment-min.js"></script>
+		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+			$(function() {
+				var s_date = moment("${sdate}").format("YYYY-MM-DD");
+				var e_date = moment("${edate}").format("YYYY-MM-DD");
+				$("#start").val(s_date);
+				$("#end").val(e_date);
+			}); 
+		</script>
 	</body>
 </html>

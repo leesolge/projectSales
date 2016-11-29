@@ -232,7 +232,11 @@ public class OrderService {
 	/*Order List*/
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		
+		String tempPageNum = request.getParameter("pageNum");
+		if(tempPageNum==null||tempPageNum.equals("")){
+			tempPageNum = "1";
+		}
+		int pageNum = Integer.parseInt(tempPageNum);
 		/*권한 정보 받아오기*/
 		String authpage = request.getParameter("authpage");
 		
@@ -304,8 +308,10 @@ public class OrderService {
 		
 		/*부터 날짜*/
 		String firstdate = request.getParameter("firstdate");
+		mav.addObject("sdate", firstdate);
 		/*까지 날짜*/
 		String seconddate = request.getParameter("seconddate");
+		mav.addObject("edate", seconddate);
 		/*제품*/
 		String product = request.getParameter("product");
 		/*팀 / 팀원*/
@@ -374,6 +380,20 @@ public class OrderService {
 		/*DB에 접근할 객체 생성 및 내용 입력*/
 		TestVO vo = new TestVO();
 		vo.setTests(firstdate+seconddate+product+emp+checks);
+		
+		/*페이징 처리*/
+		int count = dao.ordersCount(vo);
+		int pageSize = 10;
+		int max = count/pageSize;
+		if(count%pageSize!=0){
+			max = max+1;
+		}
+		int start = pageSize*pageNum-(pageSize-1);
+		int end = pageSize*pageNum;
+		mav.addObject("max", max);
+		mav.addObject("pageNum", pageNum);
+		vo.setStart(start);
+		vo.setEnd(end);
 		
 		/*객체를 매개변수로 주문 목록을 가져와서 Join DB에 싣기*/
 		ArrayList<OrderJoinVO> list = dao.adminSelectOrders(vo);

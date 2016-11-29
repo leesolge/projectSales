@@ -11,6 +11,7 @@ import com.sales.erp.order.vo.TestVO;
 import com.sales.erp.product.vo.ProductVO;
 
 public interface OrderMapper extends Serializable{
+	int ordersCount(TestVO vo);
 	OrderJoinVO adminSelectO(TestVO vo);
 	ArrayList<TeamVO> selectATeam(TestVO vo);
 	MemberVO selectAMember(TestVO vo);
