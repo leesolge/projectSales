@@ -1,6 +1,7 @@
 package com.sales.erp.buy.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import com.sales.erp.buy.dao.BuyDAO;
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyPagingVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.ledger.dao.LedgerDAO;
+import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;
@@ -27,6 +30,9 @@ public class BuyService {
 
 	@Autowired
 	private ProductDAO pdao;
+	
+	@Autowired
+	private LedgerDAO ldao;
 
 	public ModelAndView buyWriteForm() {
 		ModelAndView mav = new ModelAndView();
@@ -72,8 +78,20 @@ public class BuyService {
 				bvo.setBuystep(2); // 팀장급 이상일 경우 승인단계 2로 지정
 				mav.setViewName("redirect:/buy/buyAppList");
 				dao.addProduct(bvo);
-			}
-
+				
+				ProductVO pvo = new  ProductVO();
+				pvo = dao.getProductContent(bvo);
+				LedgerJoinVO ledger = new LedgerJoinVO();
+				ledger.setEmpno(bvo.getEmpno());
+				ledger.setEnable("0");
+				ledger.setSort("지출");
+				ledger.setContent(pvo.getProname());
+				ledger.setAmount(Integer.parseInt(bvo.getAmount()) * Integer.parseInt(pvo.getSellprice()));
+				ledger.setSortamount(Integer.parseInt(bvo.getAmount()) * Integer.parseInt(pvo.getSellprice()) * (-1));				
+				ledger.setEtc(""); // 나중에 구매목록번호 입력				
+				ldao.registLedger(ledger);
+			}			
+			
 			if (i == 1)
 				dao.buyWrite(bvo); // 구매요청 번호생성 및 등록
 			else
@@ -106,8 +124,30 @@ public class BuyService {
 
 		if (mvo.getAuth().equals("ROLE_MANAGER")) {
 			dao.buyApproveManager(request.getParameter("buynum"));
-		} else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
+		} 
+		
+		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
 			dao.buyApproveAdmin(request.getParameter("buynum"));
+			
+			BuyVO voParam = new BuyVO();
+			voParam.setBuynum(Integer.parseInt(request.getParameter("buynum")));
+			ArrayList<BuyVO> list = dao.buyContent(voParam);
+			for (int i = 0; i < list.size(); i++) {
+				dao.addProduct(list.get(i));
+				
+				ProductVO pvo = new  ProductVO();
+				pvo = dao.getProductContent(list.get(i));
+				LedgerJoinVO ledger = new LedgerJoinVO();
+				ledger.setEmpno(list.get(i).getEmpno());
+				ledger.setEnable("0");
+				ledger.setSort("지출");
+				ledger.setContent(pvo.getProname());
+				ledger.setAmount(Integer.parseInt(list.get(i).getAmount()) * Integer.parseInt(pvo.getSellprice()));
+				ledger.setSortamount(Integer.parseInt(list.get(i).getAmount()) * Integer.parseInt(pvo.getSellprice()) * (-1));				
+				ledger.setEtc(""); // 나중에 구매목록번호 입력				
+				ldao.registLedger(ledger);
+			}
+
 		}
 	}
 
@@ -118,7 +158,6 @@ public class BuyService {
 		return mav;
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////////////
 	public ModelAndView buyListWait(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		BuyPagingVO paging = new BuyPagingVO();

@@ -7,6 +7,10 @@
 	<select id="selectProductAll" resultType="com.sales.erp.product.vo.ProductVO">
 		SELECT * FROM PRODUCT
 	</select>
+	
+	<select id="getProductContent" parameterType="com.sales.erp.buy.vo.BuyVO" resultType="com.sales.erp.product.vo.ProductVO">
+		SELECT * FROM PRODUCT WHERE PROCODE = #{procode}
+	</select>
 
 	<!-- 구매요청 등록(새로운 구매번호 생성) -->
 	<insert id="buyWrite" parameterType="com.sales.erp.buy.vo.BuyVO">
@@ -35,7 +39,6 @@
 		UPDATE PRODUCT SET
 		PROAMOUNT=PROAMOUNT+#{amount} WHERE PROCODE=#{procode}
 	</update>
-
 
 	<select id="buyListWait" parameterType="com.sales.erp.buy.vo.BuyPagingVO"
 		resultType="com.sales.erp.buy.vo.BuyListVO">

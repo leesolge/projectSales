@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.buy.vo.BuyPagingVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
@@ -97,10 +98,9 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.getbuyAppWaitCount(paging);
 	}
-	
-/*	public ArrayList<BuyListVO> buyListAppWaitTeam(BuyPagingVO paging) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListAppWaitTeam(paging);
-	}*/
 
+	public ProductVO getProductContent(BuyVO bvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.getProductContent(bvo);
+	}
 }

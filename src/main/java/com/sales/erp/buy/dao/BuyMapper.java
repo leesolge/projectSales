@@ -43,4 +43,6 @@ public interface BuyMapper extends Serializable {
 
 	int getbuyAppWaitCount(BuyPagingVO paging);
 
+	ProductVO getProductContent(BuyVO bvo);
+
 }
