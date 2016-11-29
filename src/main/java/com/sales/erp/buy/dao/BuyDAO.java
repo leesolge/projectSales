@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.erp.buy.vo.BuyListVO;
 import com.sales.erp.buy.vo.BuyVO;
+import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.buy.vo.BuyPagingVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.vo.ProductVO;
@@ -33,24 +34,14 @@ public class BuyDAO {
 		mapper.buyWriteSameBuynum(bvo);
 	}
 
-	public ArrayList<BuyListVO> buyListWait(BuyPagingVO paging) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListWait(paging);
-	}
-
 	public MemberVO getMember(MemberVO mvoParam) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.getMember(mvoParam);
 	}
 
-	public ArrayList<BuyListVO> buyListAppWaitTeam(BuyPagingVO paging) {
+	public ArrayList<BuyListVO> buyListWait(BuyPagingVO paging) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListAppWaitTeam(paging);
-	}
-
-	public ArrayList<BuyListVO> buyListWaitAll() {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		return mapper.buyListWaitAll();
+		return mapper.buyListWait(paging);
 	}
 
 	public ArrayList<BuyVO> buyContent(BuyVO voParam) {
@@ -62,7 +53,7 @@ public class BuyDAO {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.buyApproveManager(buynum);
 	}
-	
+
 	public void buyCancel(String buynum) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.buyCancel(buynum);
@@ -80,7 +71,7 @@ public class BuyDAO {
 
 	public void addProduct(BuyVO bvo) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		mapper.addProduct(bvo);		
+		mapper.addProduct(bvo);
 	}
 
 	public int getbuyAppListCountAll(BuyPagingVO paging) {
@@ -98,5 +89,18 @@ public class BuyDAO {
 		return mapper.buyListWaitCount(paging);
 	}
 
+	public ArrayList<BuyListVO> buyListAppWait(BuyPagingVO paging) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.buyListAppWait(paging);
+	}
 
+	public int getbuyAppWaitCount(BuyPagingVO paging) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.getbuyAppWaitCount(paging);
+	}
+
+	public ProductVO getProductContent(BuyVO bvo) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		return mapper.getProductContent(bvo);
+	}
 }

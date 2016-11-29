@@ -23,10 +23,6 @@ public interface BuyMapper extends Serializable {
 
 	MemberVO getMember(MemberVO mvoParam);
 
-	ArrayList<BuyListVO> buyListAppWaitTeam(BuyPagingVO paging);
-
-	ArrayList<BuyListVO> buyListWaitAll();
-
 	ArrayList<BuyVO> buyContent(BuyVO voParam);
 
 	void buyApproveManager(String buynum);
@@ -42,5 +38,11 @@ public interface BuyMapper extends Serializable {
 	void buyCancel(String buynum);
 
 	ArrayList<String> get_team();
+
+	ArrayList<BuyListVO> buyListAppWait(BuyPagingVO paging);
+
+	int getbuyAppWaitCount(BuyPagingVO paging);
+
+	ProductVO getProductContent(BuyVO bvo);
 
 }
