@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sales.erp.buy.dao.BuyDAO;
 import com.sales.erp.buy.vo.BuyListVO;
-import com.sales.erp.buy.vo.BuyVO;
 import com.sales.erp.buy.vo.BuyPagingVO;
+import com.sales.erp.buy.vo.BuyVO;
 import com.sales.erp.member.vo.MemberVO;
 import com.sales.erp.product.dao.ProductDAO;
 import com.sales.erp.product.vo.ProductVO;
@@ -124,20 +124,20 @@ public class BuyService {
 		BuyPagingVO paging = new BuyPagingVO();
 		paging.setPage(1);
 		String page = request.getParameter("page");
-		
+
 		if (page != null && page != "") {
 			paging.setPage(Integer.parseInt(request.getParameter("page")));
 		}
 		paging.setRowSize(10, paging.getPage());
 		paging.setBlock(5, paging.getPage());
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
 		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
 
 		paging.setEmpno(mvo.getEmpno());
-		
+
 		paging.setTotal(dao.buyListWaitCount(paging), (double) paging.getRowSize());
 		ArrayList<BuyListVO> list = dao.buyListWait(paging);
 
@@ -149,7 +149,7 @@ public class BuyService {
 		mav.addObject("paging", paging);
 		return mav;
 	}
-	
+
 	public ModelAndView buyListAppWait(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		BuyPagingVO paging = new BuyPagingVO();
@@ -160,7 +160,7 @@ public class BuyService {
 		}
 		paging.setRowSize(10, paging.getPage());
 		paging.setBlock(5, paging.getPage());
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(auth.getName());
@@ -168,8 +168,8 @@ public class BuyService {
 		ArrayList<BuyListVO> list = null;
 		if (mvo.getAuth().equals("ROLE_MANAGER")) {
 			paging.setTeam(mvo.getTeam());
-			
-			list = dao.buyListAppWaitTeam(paging);
+			paging.setTotal(dao.getbuyAppWaitCount(paging), (double) paging.getRowSize());
+			list = dao.buyListAppWait(paging);
 			for (int i = 0; i < list.size(); i++) {
 				ProductVO name = pdao.selectOne(list.get(i).getProcode());
 				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
@@ -177,14 +177,15 @@ public class BuyService {
 		}
 
 		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
-			list = dao.buyListWaitAll();
+			paging.setTotal(dao.getbuyAppWaitCount(paging), (double) paging.getRowSize());
+			list = dao.buyListAppWait(paging);
 			for (int i = 0; i < list.size(); i++) {
 				ProductVO name = pdao.selectOne(list.get(i).getProcode());
 				list.get(i).setTitle(name.getProname() + " 외 " + (list.get(i).getCnt() - 1) + "건");
 			}
 		}
 		mav.addObject("list", list);
-		mav.addObject("count", list.size());
+		mav.addObject("paging", paging);
 		return mav;
 	}
 
