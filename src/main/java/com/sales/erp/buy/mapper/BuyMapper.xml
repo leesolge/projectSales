@@ -24,7 +24,7 @@
 	<insert id="buyWriteSameBuynum" parameterType="com.sales.erp.buy.vo.BuyVO">
 		INSERT INTO
 		BUY
-		(BUYNUM, EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, APPDATE BUYSTEP,
+		(BUYNUM, EMPNO, PROCODE, AMOUNT, BUYCOMMENT, REGDATE, APPDATE, BUYSTEP,
 		DELETED)
 		VALUES((SELECT MAX(BUYNUM) FROM BUY), #{empno}, #{procode},
 		#{amount}, #{buycomment}, SYSDATE, SYSDATE, #{buystep}, 0)
