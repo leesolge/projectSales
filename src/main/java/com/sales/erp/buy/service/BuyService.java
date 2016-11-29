@@ -1,7 +1,6 @@
 package com.sales.erp.buy.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -151,9 +150,25 @@ public class BuyService {
 		}
 	}
 
-	public ModelAndView buyCancel(HttpServletRequest request) {
+	public ModelAndView buyCancel(HttpServletRequest request) {		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberVO mvoParam = new MemberVO();
+		mvoParam.setEmpno(auth.getName());
+		MemberVO mvo = dao.getMember(mvoParam); // 사용자 정보 받아오기
+
+		if (mvo.getAuth().equals("ROLE_MANAGER")) {
+			dao.buyCancelManager(request.getParameter("buynum"));
+		} 
+		
+		else if (mvo.getAuth().equals("ROLE_EMPLOYEE")) {
+			dao.buyCancel(request.getParameter("buynum"));
+		} 
+		
+		else if (mvo.getAuth().equals("ROLE_BUDGET") || mvo.getAuth().equals("ROLE_ADMIN")) {
+			dao.buyCancelAdmin(request.getParameter("buynum"));
+		}
+		
 		ModelAndView mav = new ModelAndView();
-		dao.buyCancel(request.getParameter("buynum"));
 		mav.setViewName("redirect:/buy/buyListWait");
 		return mav;
 	}

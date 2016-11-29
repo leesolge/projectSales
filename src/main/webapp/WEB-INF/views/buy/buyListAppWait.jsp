@@ -13,6 +13,15 @@
 		method="post">
 		<input type="hidden" name="buynum" value="0">
 	</form>
+	<form action="/erp/buy/buyCancel" name="buyCancel" method="post">
+		<input type="hidden" name="buynum" value="0">
+	</form>
+		<form action="/erp/buy/buyAppList" name="buyAppList" method="post">
+		<input type="hidden" name="page" value="0">
+		<input type="hidden" name="team" value="0">
+		<input type="hidden" name="start_date" value="0">
+		<input type="hidden" name="end_date" value="0">					
+	</form>	
 
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -123,6 +132,18 @@
 		var buyApprove = document.buyApprove;
 		buyApprove.buynum.value = num;
 		buyApprove.submit();
+	}
+	
+	function cancel(num) {
+		var buyCancel = document.buyCancel;
+		buyCancel.buynum.value = num;
+		buyCancel.submit();
+	}
+	
+	function jumppage(page) {
+		var buyListWait = document.buyListWait;
+		buyListWait.page.value = page;
+		buyListWait.submit();
 	}
 </script>
 </html>

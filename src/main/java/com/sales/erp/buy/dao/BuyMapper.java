@@ -45,4 +45,8 @@ public interface BuyMapper extends Serializable {
 
 	ProductVO getProductContent(BuyVO bvo);
 
+	void buyCancelManager(String buynum);
+
+	void buyCancelAdmin(String buynum);
+
 }

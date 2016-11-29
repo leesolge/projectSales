@@ -54,11 +54,6 @@ public class BuyDAO {
 		mapper.buyApproveManager(buynum);
 	}
 
-	public void buyCancel(String buynum) {
-		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
-		mapper.buyCancel(buynum);
-	}
-
 	public void buyApproveAdmin(String buynum) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		mapper.buyApproveAdmin(buynum);
@@ -102,5 +97,20 @@ public class BuyDAO {
 	public ProductVO getProductContent(BuyVO bvo) {
 		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
 		return mapper.getProductContent(bvo);
+	}
+
+	public void buyCancel(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyCancel(buynum);
+	}
+
+	public void buyCancelManager(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyCancelManager(buynum);
+	}
+
+	public void buyCancelAdmin(String buynum) {
+		BuyMapper mapper = sqlSession.getMapper(BuyMapper.class);
+		mapper.buyCancelAdmin(buynum);
 	}
 }

@@ -179,6 +179,18 @@ SELECT count(*)
 		UPDATE BUY SET BUYSTEP = 0,
 		APPDATE=SYSDATE, DELETED=1 WHERE BUYNUM=#{buynum}
 	</update>
+	
+	<update id="buyCancelManager" parameterType="java.lang.String">
+		UPDATE BUY SET BUYSTEP = 1,
+		APPDATE=SYSDATE, DELETED=1 WHERE BUYNUM=#{buynum}
+	</update>
+	
+	<update id="buyCancelAdmin" parameterType="java.lang.String">
+		UPDATE BUY SET BUYSTEP = 1,
+		APPDATE=SYSDATE, DELETED=1 WHERE BUYNUM=#{buynum}
+	</update>
+	
+	
 
 	<!-- 자재팀 / 관리자 승인목록 불러오기 -->
 	<select id="buyAppListAll" parameterType="com.sales.erp.buy.vo.BuyPagingVO"

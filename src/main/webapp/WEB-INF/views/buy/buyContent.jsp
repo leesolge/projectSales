@@ -70,8 +70,10 @@
 										type="button" value="목록"	onclick="javascript:history.back()">
 					<sec:authorize
 						access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
-						<input type="button" value="Approve" class="w3-btn w3-round-large"
+						<c:if test="${list1.buystep != 2}">
+						<input type="button" value="승인" class="w3-btn w3-border w3-border-grey w3-round-large w3-small w3-white"
 							onclick="javascript:approve('${buynum}')">
+						</c:if>						
 					</sec:authorize>
 				</div>
 				 
