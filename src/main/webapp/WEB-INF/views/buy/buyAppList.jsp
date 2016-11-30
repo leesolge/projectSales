@@ -10,6 +10,7 @@
 <body>
 	<form action="/erp/buy/buyContent" name="buyContent" method="post">
 		<input type="hidden" name="buynum" value="0">
+		<input type="hidden" name="history" value="buyAppList">
 	</form>
 	<form action="/erp/buy/buyAppList" name="buyAppList" method="post">
 		<input type="hidden" name="page" value="0">

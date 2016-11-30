@@ -37,6 +37,7 @@ public class BuyService {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<ProductVO> list = dao.selectProductAll();
 		mav.addObject("list", list);
+		mav.addObject("history", "구매메뉴 > 구매요청");
 		return mav;
 	}
 
@@ -96,6 +97,7 @@ public class BuyService {
 			else
 				dao.buyWriteSameBuynum(bvo); // 동일한 구매요청번호 등록
 		}
+		mav.addObject("history", "구매메뉴 > 구매요청");
 		return mav;
 	}
 
@@ -112,6 +114,18 @@ public class BuyService {
 		mvoParam.setEmpno(list.get(0).getEmpno());
 		MemberVO writer = dao.getMember(mvoParam);
 		mav.addObject("writer", writer);
+		
+		String history = request.getParameter("history");
+		if(history.equals("buyAppList")){
+			mav.addObject("history", "구매메뉴 > 구매목록 > 상세보기");
+		}
+		else if(history.equals("buyListAppWait")){
+			mav.addObject("history", "구매메뉴 > 승인대기목록 > 상세보기");
+		}
+		else if(history.equals("buyListWait")){
+			mav.addObject("history", "구매메뉴 > 구매대기목록 > 상세보기");
+		}
+		
 		return mav;
 	}
 
@@ -201,6 +215,7 @@ public class BuyService {
 		}
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
+		mav.addObject("history", "구매메뉴 > 구매대기목록");
 		return mav;
 	}
 
@@ -240,6 +255,7 @@ public class BuyService {
 		}
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
+		mav.addObject("history", "구매메뉴 > 승인대기목록");
 		return mav;
 	}
 
@@ -295,6 +311,7 @@ public class BuyService {
 		mav.addObject("list", list);
 		mav.addObject("team_list", team_list);
 		mav.addObject("paging", paging);
+		mav.addObject("history", "구매메뉴 > 구매목록");
 		return mav;
 	}
 }

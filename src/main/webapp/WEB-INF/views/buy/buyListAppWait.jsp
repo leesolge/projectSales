@@ -8,6 +8,7 @@
 <body><br>
 	<form action="/erp/buy/buyContent" name="buyContent" method="post">
 		<input type="hidden" name="buynum" value="0">
+		<input type="hidden" name="history" value="buyListAppWait">
 	</form>
 	<form action="/erp/buy/buyApprove" name="buyApprove"
 		method="post">

@@ -17,4 +17,6 @@
 		</a>
 	</span>
 	
+${history }
+	
 </div>
