@@ -43,7 +43,10 @@
 	<div class="w3-container">
 		<div class="w3-row">
 			<div class="w3-container w3-grey">
-				<h4 class="w3-text-white"><i class="fa fa-envelope-open"></i>  쪽지 쓰기</h4>
+				<h4 class="w3-text-white"><i class="fa fa-envelope-open"></i>  
+				<c:if test="${rec=='0'}">쪽지쓰기</c:if>
+				<c:if test="${rec!='0'}">답장하기</c:if>
+				</h4>
 			</div>
 			<form class="w3-container w3-white w3-card-4" action="/erp/note/writes" method="post">
 				<br>

@@ -38,7 +38,7 @@ public class NoteController {
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = nos.reply(request);
 		mav.setViewName("/note/reply");
-		mav.addObject("history", "개인메뉴 > 쪽지 > 답장하기");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지 > 쪽지보기 > 답장하기");
 		return mav;
 	}
 	
@@ -66,7 +66,6 @@ public class NoteController {
 	public ModelAndView writeForm(@RequestParam("pageCheck") String pageCheck, @RequestParam("rec") String rec){
 		ModelAndView mav = nos.receiverCheck(pageCheck, rec);
 		mav.setViewName("/note/write");
-		mav.addObject("history", "개인메뉴 > 쪽지 > 쪽지쓰기");
 		return mav;
 	}
 	

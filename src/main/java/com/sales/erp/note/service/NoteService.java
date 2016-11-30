@@ -294,7 +294,16 @@ public class NoteService {
 		String empno = auth.getName();
 		ModelAndView mav = new ModelAndView();
 		MemberVO senderVo = dao.getNameTeamAuth(empno);
+		String history = "개인메뉴 > 쪽지 > ";
+		if(pageCheck.equals("etc")){
+			history = history+"메인 > ";
+		}else if(pageCheck.equals("receive")){
+			history = history+"받은쪽지 > ";
+		}else if(pageCheck.equals("send")){
+			history = history+"보낸쪽지 > ";
+		}
 		if(rec.equals("0")){
+			history = history+"쪽지쓰기";
 		}else{
 			MemberVO receiverVo = dao.getNameTeamAuth(rec);
 			if(receiverVo.getAuth().equals("ROLE_EMPLOYEE")){
@@ -306,6 +315,7 @@ public class NoteService {
 			if(receiverVo.getAuth().equals("ROLE_ADMIN")){
 				receiverVo.setAuth("관리자");
 			}
+			history = history+"답장하기";
 		mav.addObject("receiverVo", receiverVo);
 		}
 		
@@ -321,6 +331,8 @@ public class NoteService {
 				svo.setAuth("관리자");
 			}
 		}
+		mav.addObject("rec", rec);
+		mav.addObject("history", history);
 		mav.addObject("list", receiverList);
 		mav.addObject("pageCheck", pageCheck);
 		mav.addObject("rec", rec);
