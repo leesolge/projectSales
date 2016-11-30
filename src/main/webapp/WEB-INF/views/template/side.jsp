@@ -35,15 +35,7 @@
 		</div>
 	</div>
 	<hr>
-	<div class="w3-container">
-		<h5>Menu</h5>
-	</div>
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
-			<div class="w3-accordion w3-padding">
-				<a href="/erp/main" class="w3-padding w3-hover-blue">
-					<i class="fa fa-home"></i>  홈
-				</a>
-			</div>
 			<div class="w3-accordion w3-padding">
 				<a href="/erp/notice/noticeList" class="w3-padding w3-hover-blue">
 					<i class="fa fa-bullhorn"></i>  공지사항
