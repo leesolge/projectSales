@@ -20,7 +20,7 @@
 		}
 	}
 	function corders(pn){
-		if (confirm("해당 판매 요청을 정말 확정하시겠습니까?") == true){
+		if (confirm("해당 판매 요청을 정말 승인하시겠습니까?") == true){
 			var jumping = document.cord;
 			jumping.orderid.value=pn;
 			jumping.submit();
@@ -92,7 +92,7 @@
 		</table>
 			<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:morders('${ovo.id}')">수정</button></c:if>
 			<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')">취소</button></c:if>
-			<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button onclick="javascript:corders('${ovo.id}')">판매 확정</button></c:if>
+			<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button onclick="javascript:corders('${ovo.id}')">판매승인</button></c:if>
 			<button onclick="javascript:jump('${ovo.checks}')">목록</button>
 	</body>
 </html>
