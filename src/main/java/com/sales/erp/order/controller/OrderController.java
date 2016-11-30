@@ -20,6 +20,7 @@ public class OrderController {
 	public ModelAndView orderFail(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/order/fail");
+		mav.addObject("history", "영업팀메뉴 > 판매목록 > 판매확정 > 실패");
 		return mav;
 	}
 	
@@ -40,6 +41,7 @@ public class OrderController {
 		ModelAndView mav = os.adminRegistForm(request);
 		mav.addObject("mo", os.selectOneOrder(request.getParameter("orderid")));
 		mav.setViewName("order/modifyone");
+		mav.addObject("history", "영업팀메뉴 > 판매목록 > 수정");
 		return mav;
 	}
 	
@@ -59,6 +61,7 @@ public class OrderController {
 	public ModelAndView adminRegistForm(HttpServletRequest request){
 		ModelAndView mav = os.adminRegistForm(request);
 		mav.setViewName("order/adminregist");
+		mav.addObject("history", "영업팀메뉴 > 판매등록");
 		return mav;
 	}
 	
@@ -66,6 +69,7 @@ public class OrderController {
 	public ModelAndView orderContents(@RequestParam("authpage") String authpage, @RequestParam("orderid") String id, @RequestParam("checks") String checks){
 		ModelAndView mav = os.orderContents(authpage, id, checks);
 		mav.setViewName("order/orderdetail");
+		mav.addObject("history", "영업팀메뉴 > 판매목록 > 상세보기");
 		return mav;
 	}
 	
@@ -73,6 +77,7 @@ public class OrderController {
 	public ModelAndView adminOrder(HttpServletRequest request){
 		ModelAndView mav = os.adminOrder(request);
 		mav.setViewName("order/adminlist");
+		mav.addObject("history", "영업팀메뉴 > 판매목록");
 		return mav;
 	}
 	

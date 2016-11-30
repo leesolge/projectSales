@@ -337,7 +337,13 @@ public class NoteService {
 		
 		String pageCheck = request.getParameter("pageCheck");
 		int notenum = Integer.parseInt(request.getParameter("notenum"));
-		
+		if(pageCheck.equals("etc")){
+			mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 쪽지보기");
+		}else if(pageCheck.equals("receive")){
+			mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지 > 쪽지보기");
+		}else if(pageCheck.equals("send")){
+			mav.addObject("history", "개인메뉴 > 쪽지 > 보낸쪽지 > 쪽지보기");
+		}
 		if(pageCheck.equals("receive")||pageCheck.equals("send")){
 			String pageNum = request.getParameter("pageNum");
 			mav.addObject("pageNum", pageNum);

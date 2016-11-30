@@ -22,6 +22,7 @@ public class SalaryController {
 	public ModelAndView adminSalary(HttpServletRequest request){
 		ModelAndView mav = ss.adminSalary(request);
 		mav.setViewName("salary/adminlist");
+		mav.addObject("history", "관리자메뉴 > 월급조회");
 		return mav;
 	}
 	
@@ -29,6 +30,7 @@ public class SalaryController {
 	public ModelAndView testSalary(HttpServletRequest request){
 		ModelAndView mav = ss.viewSalary(request);
 		mav.setViewName("salary/list");
+		mav.addObject("history", "개인메뉴 > 월급조회");
 		return mav;
 	}
 }

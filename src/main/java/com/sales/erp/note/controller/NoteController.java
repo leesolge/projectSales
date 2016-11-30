@@ -24,6 +24,7 @@ public class NoteController {
 	public ModelAndView adminNoteSelect(HttpServletRequest request){
 		ModelAndView mav = nos.adminSelectAll(request);
 		mav.setViewName("/note/adminnote");
+		mav.addObject("history", "관리자메뉴 > 쪽지복구");
 		return mav;
 	}
 	
@@ -37,6 +38,7 @@ public class NoteController {
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = nos.reply(request);
 		mav.setViewName("/note/reply");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 답장하기");
 		return mav;
 	}
 	
@@ -56,6 +58,7 @@ public class NoteController {
 	public ModelAndView selectNotes(){
 		ModelAndView mav = nos.sendRecieve();
 		mav.setViewName("/note/notelist");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 메인");
 		return mav;
 	}
 	
@@ -63,6 +66,7 @@ public class NoteController {
 	public ModelAndView writeForm(@RequestParam("pageCheck") String pageCheck, @RequestParam("rec") String rec){
 		ModelAndView mav = nos.receiverCheck(pageCheck, rec);
 		mav.setViewName("/note/write");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 쪽지쓰기");
 		return mav;
 	}
 	
@@ -77,6 +81,7 @@ public class NoteController {
 	public ModelAndView viewRdetail(HttpServletRequest request){
 		ModelAndView mav = nos.receiveLists(request);
 		mav.setViewName("/note/receivedetail");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지");
 		return mav;
 	}
 	
@@ -84,6 +89,7 @@ public class NoteController {
 	public ModelAndView viewSdetail(HttpServletRequest request){
 		ModelAndView mav = nos.sendLists(request);
 		mav.setViewName("/note/senddetail");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 보낸쪽지");
 		return mav;
 	}
 	

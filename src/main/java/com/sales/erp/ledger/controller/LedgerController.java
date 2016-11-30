@@ -35,6 +35,7 @@ public class LedgerController {
 	public ModelAndView modifyForm(HttpServletRequest request){
 		ModelAndView mav = ls.modifyForm(request);
 		mav.setViewName("/ledger/modifyform");
+		mav.addObject("history", "자재팀메뉴 > 회계장부 > 수정");
 		return mav;
 	}
 	
@@ -50,6 +51,7 @@ public class LedgerController {
 	public ModelAndView ledgerList(HttpServletRequest request){
 		ModelAndView mav = ls.ledgerList(request);
 		mav.setViewName("/ledger/list");
+		mav.addObject("history", "자재팀메뉴 > 회계장부 > 목록");
 		return mav;
 	}
 	
@@ -57,6 +59,7 @@ public class LedgerController {
 	public ModelAndView ledgerRegistForm(){
 		ModelAndView mav = ls.ledgerRegistForm();
 		mav.setViewName("/ledger/registform");
+		mav.addObject("history", "자재팀메뉴 > 회계장부 > 등록");
 		return mav;
 	}
 	
