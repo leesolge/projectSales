@@ -121,9 +121,4 @@ public class HomeController {
 
 		return "loginfail";
 	}
-	
-	@RequestMapping("/sell/sellList")
-	public String sellList(Locale locale, Model model) {
-		return "/sell/sellList";
-	}
 }
