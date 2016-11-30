@@ -109,13 +109,15 @@
 				<hr>
 				<p>
 					<textarea class="w3-input" name="content" style="width: 100%; min-height: 200px; resize: none;"	readonly>${vo.content}</textarea>
-				</p><br>
+				</p>
+				<div class="w3-right">
+					<c:if test="${empno==rvo.empno}"><button class="w3-btn w3-border w3-text-grey w3-border-grey w3-round-large w3-small w3-white" onclick="javascript:jumpPage('rp')">답장</button></c:if>
+						<button class="w3-btn w3-border w3-text-grey w3-border-grey w3-round-large w3-small w3-white" onclick="javascript:jumpPage('${ad}')">목록</button>
+					<c:if test="${empno==rvo.empno}"><button class="w3-btn w3-border w3-text-grey w3-border-grey w3-round-large w3-small w3-white" onclick="javascript:del()">삭제</button></c:if>
+				</div>
 			</div>
-			<footer class="w3-container w3-dark-grey">
-				<c:if test="${empno==rvo.empno}"><button onclick="javascript:jumpPage('rp')">답장하기</button></c:if>
-				<button onclick="javascript:jumpPage('${ad}')">목록보기</button>
-				<c:if test="${empno==rvo.empno}"><button onclick="javascript:del()">쪽지삭제</button></c:if>
-			</footer>
+			<br>
+			<footer class="w3-container w3-dark-grey"><br></footer>
 		</div>
 	</div>
 	</body>

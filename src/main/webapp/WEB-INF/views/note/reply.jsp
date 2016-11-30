@@ -24,20 +24,19 @@
 		<title>Title</title>
 	</head>
 	
-	<body>
-		<form action="/erp/note/view" name="cont" method="post">
-		<input type="hidden" name="pageCheck" value="${pageCheck}">
-		<input type="hidden" name="notenum" value="${pageCheck}">
+<body>
+	<form action="/erp/note/view" name="cont" method="post">
+	<input type="hidden" name="pageCheck" value="${pageCheck}">
+	<input type="hidden" name="notenum" value="${pageCheck}">
 	<c:if test="${pageCheck!='etc'}">
-		<input type="hidden" name="pageNum" value="${pageNum}">
-		<input type="hidden" name="field" value="${field}">
-		<input type="hidden" name="keyword" value="${keyword}">
+	<input type="hidden" name="pageNum" value="${pageNum}">
+	<input type="hidden" name="field" value="${field}">
+	<input type="hidden" name="keyword" value="${keyword}">
 	</c:if>
 	</form>
 	<c:if test="${pageCheck=='receive'}"><c:set var="ad" value="rd"/></c:if>
 	<c:if test="${pageCheck=='send'}"><c:set var="ad" value="sd"/></c:if>
 	<c:if test="${pageCheck=='etc'}"><c:set var="ad" value="li"/></c:if>
-	${ad}
 	<form action="/erp/note/sdetail" name="sd" method="post">
 		<input type="hidden" name="pageNum" value="${pageNum}">
 		<input type="hidden" name="field" value="${field}">
@@ -49,41 +48,40 @@
 		<input type="hidden" name="keyword" value="${keyword}">
 	</form>
 	<form action="/erp/note/list" name="li" method="post">
-	</form>
-	
-		<div style="margin: auto;">
-			<form action="/erp/note/replys" method="post">
+	</form><br>
+	<div class="w3-container">
+		<div class="w3-row">
+			<div class="w3-container w3-grey">
+				<h4 class="w3-text-white"><i class="fa fa-envelope-open"></i>  
+					답장하기
+				</h4>
+			</div>
+			<form action="/erp/note/replys" method="post" class="w3-container w3-white w3-card-4">
+				<br>
 				<input type="hidden" name="pageCheck" value="${pageCheck}">
 				<input type="hidden" name="notenum" value="${notenum}">
-			<c:if test="${pageCheck!='etc'}">
-				<input type="hidden" name="pageNum" value="${pageNum}">
-				<input type="hidden" name="field" value="${field}">
-				<input type="hidden" name="keyword" value="${keyword}">
-			</c:if>
-			${pageCheck}
-				<table>
-					<tr>
-						<td>발신인 : ${svo.name}<input type="hidden" name="sender" value="${svo.empno}"></td>
-						<td>수신인 : ${rvo.name}<input type="hidden" name="receiver" value="${rvo.empno}"></td>
-					</tr>
-					<tr>
-						<td colspan="2">제목&nbsp;<input type="text" name="title" size="30" required="required"></td>
-					</tr>
-					<tr>
-						<td colspan="2">내용</td>
-					</tr>
-					<tr>
-						<td colspan="2"><textarea cols="35" rows="6" name="content" required="required"></textarea></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="전송"></td>
-						<td><button onclick="javascript:jumpPage('${ad}')">목록 보기</button></td>
-					</tr>
-				</table>
+				<c:if test="${pageCheck!='etc'}">
+					<input type="hidden" name="pageNum" value="${pageNum}">
+					<input type="hidden" name="field" value="${field}">
+					<input type="hidden" name="keyword" value="${keyword}">
+				</c:if>
+				<label class="w3-text-grey"><b>수신인</b></label>
+				<input class="w3-input w3-border w3-border-grey w3-round" type="text" readonly value="${rvo.team} - ${rvo.auth} - ${rvo.name}(${rvo.empno})">
+				<input type="hidden" name="sender" value="${svo.empno}">
+				<input type="hidden" name="receiver" value="${rvo.empno}"><br>
+				<label class="w3-text-grey"><b>제목</b></label>
+				<input class="w3-input w3-border w3-border-grey w3-round" type="text" name="title" size="30" required="required"><br>
+				<label class="w3-text-grey"><b>내용</b></label>
+				<textarea class="w3-input w3-border w3-border-grey w3-round" name="content" placeholder="내용을 입력하세요."
+				style="min-height: 300px; resize: none;" required></textarea>
+				<div class="w3-row w3-center"><br>
+					<input class="w3-btn w3-grey w3-text-white" type="submit" value="전송">
+					<button class="w3-btn w3-grey w3-text-white" onclick="javascript:jumpPage('${ad}')">목록</button>
+					<button class="w3-btn w3-grey w3-text-white" onclick="javascript:content('${notenum}')">뒤로</button>
+				</div><br>
 			</form>
-			<button onclick="javascript:content('${notenum}')">원래 쪽지</button>
 		</div>
-		
-		
-	</body>
+	</div>
+	<br>
+</body>
 </html>

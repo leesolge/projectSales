@@ -11,12 +11,16 @@
 			<img src="/erp/resources/image/logowhite.png" height="27">
 		</a>
 	</span>
-	<span class="w3-left w3-hide-small w3-hide-middle">
-		<a href="/erp/main">
-			<img src="/erp/resources/image/logowhite.png" height="27">
-		</a>
-	</span>
+	<table class="w3-center w3-hide-small w3-hide-medium">
+		<tr>
+			<td onClick="location.href='/erp/main'" style="cursor:pointer;">
+				<div style="width: 220px;">
+					<img src="/erp/resources/image/logowhite.png" height="27">
+				</div>
+			</td>
+			<td class="w3-small">　　${history }</td>
+		</tr>
+	</table>
 	
-${history }
-	
+
 </div>

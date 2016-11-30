@@ -6,7 +6,8 @@
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <head>
-<title>Home</title>
+<link rel="shortcut icon" href="/erp/resources/image/favicon.ico">
+<title>nodazi ERP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="w3-dark-grey">

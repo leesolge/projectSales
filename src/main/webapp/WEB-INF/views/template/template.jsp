@@ -6,6 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<link rel="shortcut icon" href="/erp/resources/image/favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><tiles:getAsString name="title" /></title>
 </head>
