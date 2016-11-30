@@ -21,13 +21,17 @@ public class NoticeController {
 	public ModelAndView noticeList(HttpServletRequest request) {
 		ModelAndView mav = ns.getNoticeList(request);
 		mav.setViewName("/notice/noticeList");
+		mav.addObject("history", "공지사항 > 목록");
 		return mav;
 	}
 
 	// 공지사항 글쓰기양식(관리자만 사용가능)
 	@RequestMapping("/notice/admin/noticeWriteForm")
-	public String noticeWriteForm(HttpServletRequest request) {
-		return "/notice/noticeWriteForm";
+	public ModelAndView noticeWriteForm(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/notice/noticeWriteForm");
+		mav.addObject("history", "공지사항 > 목록 > 글쓰기");
+		return mav;
 	}
 
 	// 공지사항 글쓰기 등록(관리자만 사용가능)
@@ -42,6 +46,7 @@ public class NoticeController {
 	public ModelAndView noticeContent(HttpServletRequest request) {
 		ModelAndView mav = ns.noticeContent(request);
 		mav.setViewName("/notice/noticeContent");
+		mav.addObject("history", "공지사항 > 목록 > 상세보기");
 		return mav;
 	}
 
@@ -50,6 +55,7 @@ public class NoticeController {
 	public ModelAndView noticeUpdateForm(HttpServletRequest request) {
 		ModelAndView mav = ns.noticeUpdateForm(request);
 		mav.setViewName("/notice/noticeUpdateForm");
+		mav.addObject("history", "공지사항 > 목록 > 상세보기 > 수정");
 		return mav;
 	}
 
@@ -81,6 +87,7 @@ public class NoticeController {
 	public ModelAndView replyUpdateForm(HttpServletRequest request) {
 		ModelAndView mav = ns.replyUpdateForm(request);
 		mav.setViewName("/notice/replyUpdateForm");
+		mav.addObject("history", "공지사항 > 목록 > 상세보기 > 댓글수정");
 		return mav;
 	}
 
