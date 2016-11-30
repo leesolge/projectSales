@@ -5,59 +5,75 @@
 <head>
 </head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<body>
-	<form action="/erp/product/update" method="post">
-		<input type="hidden" value="${proList.procode}" name="procode">
-		<div class="w3-container w3-center">
-			<h1>상품 세부 정보</h1>
-			<hr>
-			<table class="w3-table w3-centered" style="border: 1px solid #ddd">
-				<tr>
-					<td rowspan="6"><img
-						src="/erp/resources/proportraits/${proList.proimage}" width="100%"></td>
-
-					<th>PROCODE</th>
-					<td>${proList.procode}</td>
-					<th>PRONAME</th>
-					<td><input type="text" value="${proList.proname}" name="proname"></td>
-				</tr>
-
-				<tr>
-					<th>ORIGIN PRICE</th>
-					<td><input type="text" value="${proList.originprice}" name="originprice"></td>
-					<th>SELL PRICE</th>
-					<td><input type="text" value="${proList.sellprice}" name="sellprice"></td>
-				</tr>
-
-				<tr>
-					<th>PROAMOUNT</th>
-					<td><input type="text" value="${proList.proamount}" name="proamount"></td>
-					<th>PROEXPLA</th>
-					<td><input type="text" value="${proList.proexpla}" name="proexpla"></td>
-				</tr>
-			</table>
-
-			<div>
-				<p></p>
+<body><br>
+<div class="w3-container">
+<form action="/erp/product/update" method="post">
+	<input type="hidden" value="${proList.procode}" name="procode">
+	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+		<h3><i class="fa fa-pencil-square-o"></i>  상품수정</h3>
+		<div class="w3-row">
+			<div class="w3-half">
+				<img src="/erp/resources/proportraits/${proList.proimage}" width="100%">
+			</div>
+			<div class="w3-half">
+				<table>
+					<tr>
+						<td>
+							<input class="w3-input w3-xxlarge" type="text" value="${proList.proname}" name="proname">
+						</td>
+						<td>
+							<div class="w3-border w3-border-indigo w3-small w3-center" style="width: 50px;">
+								<span>${proList.procode}</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<table>
+					<tr>
+						<td style="text-align: right; width: 70px;">
+							<b>원가 : </b> 
+						</td>
+						<td style="text-align: left;">
+							<input type="text" value="${proList.originprice}" name="originprice">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">
+							<b>판매가 : </b> 
+						</td>
+						<td style="text-align: left;">
+							 <input type="text" value="${proList.sellprice}" name="sellprice">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">
+							<b>잔고 :  </b> 
+						</td>
+						<td style="text-align: left;">
+							<input type="number" value="${proList.proamount}" name="proamount">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right; vertical-align: top;">
+							<b>제품설명 :  </b> 
+						</td>
+						<td style="text-align: left;">
+							<textarea class="w3-round-large" name="proexpla" style="width: 100%; height: 200px; resize: none;">${proList.proexpla}</textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="w3-right">
+				<input type="submit" name="confirm"
+					class="w3-btn w3-round-large" value="수정">
+				<input type="button" value="취소"
+					class="w3-btn w3-round-large"
+					onclick="window.location='/erp/product/list'">
 			</div>
 		</div>
-		<div align="center">
-			<table class="w3-table w3-centered " style="width: 20%;">
-				<tr>
-					<td><input type="submit" name="confirm"
-						class="w3-btn w3-round-large" value="정보수정완료"></td>
-					<td><input type="button" value="취소"
-						class="w3-btn w3-round-large"
-						onclick="window.location='/erp/admin/product/productInfo?procode=${proList.procode}'">
-					</td>
-				</tr>
-			</table>
-
-		</div>
-
-		<div>
-			<p></p>
-		</div>
-	</form>
+	</div>
+</form>
+</div>
 </body>
 </html>

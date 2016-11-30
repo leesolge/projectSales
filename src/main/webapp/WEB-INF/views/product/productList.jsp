@@ -6,51 +6,38 @@
 <head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 </head>
-<body>
-	<div class="w3-container w3-center">
-		<h2>PRODUCT INFO</h2>
-		<div class="w3-row ">
-			<div class="w3-col w3-right" style="width: 20%">
-				<button class="w3-btn w3-round-large"
-					onclick="location='/erp/product/insert'">추가</button>
-			</div>
-			<div class="w3-col w3-left" style="width: 30%">
-				<input class="w3-input w3-border w3-padding" type="text"
-					placeholder="Search for Code.." id="myInput"
-					onkeyup="myFunction()">
-			</div>
-			<table class="w3-table w3-centered" id="myTable">
-				<tr>
-					<th>CODE</th>
+<body><br>
+<div class="w3-container">
+	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+		<h3><i class="fa fa-inbox"></i>  상품정보</h3>
+		<div class="w3-container" style="height: 40px;">
+			물품코드 : 
+			<input class="w3-border w3-border-indigo" type="text" placeholder="Search for Code.." id="myInput" onkeyup="myFunction()">
+						<button class="w3-btn-floating w3-indigo w3-border-indigo w3-border w3-right" onclick="location='/erp/product/insert'">+</button>
+		</div>
+		<div class="w3-row"><br>
+			<table class="w3-table w3-small w3-hoverable w3-bordered" id="myTable">
+				<tr class="w3-indigo">
+				 	<th style="width: 100px;">CODE</th>
 					<th>NAME</th>
-					<th>AMOUNT</th>
-					<th>SELLPRICE</th>
-					<th>ORIGINPRICE</th>
-					<th>EXPLA</th>
-					<th>CONTENT</th>
+					<th style="width: 80px;">AMOUNT</th>
+					<th style="width: 100px;">SELLPRICE</th>
+					<th style="width: 100px;">ORIGINPRICE</th>
 				</tr>
-
 				<c:forEach items="${proList}" var="list">
-					<tr>
-						<td>${list.procode}</td>
-						<td>${list.proname}</td>
-						<td>${list.proamount}</td>
-						<td>${list.sellprice}</td>
-						<td>${list.originprice}</td>
-						<td>${list.proexpla}</td>
-						<td><input type="button" value="Content"
-							class="w3-btn w3-round-large"
-							
-							onclick="window.location='/erp/product/productInfo?procode=${list.procode}'"> <!-- 멤버콘텐츠 보는 경로 -->
-						</td>
-					</tr>
+				<tr onclick="window.location='/erp/product/productInfo?procode=${list.procode}'">
+					<td>${list.procode}</td>
+					<td>${list.proname}</td>
+					<td>${list.proamount}</td>
+					<td>${list.sellprice}</td>
+					<td>${list.originprice}</td>
+				</tr>
 				</c:forEach>
-			</table>
-			<hr>
+			</table><br>
 		</div>
-		</div>
+	</div>
+</div><br>
 </body>
-
 <script>
 	function myFunction() {
 		var input, filter, table, tr, td, i;
