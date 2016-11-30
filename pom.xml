@@ -223,6 +223,19 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		
+		<!-- BootStrap link -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery</artifactId>
+			<version>2.1.3</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>

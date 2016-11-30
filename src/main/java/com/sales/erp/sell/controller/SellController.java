@@ -40,7 +40,7 @@ public class SellController {
 	}
 
 	// 판매 대기 리스트
-	@RequestMapping("/sell/sellList")
+	@RequestMapping("/sell/sellListTest")
 	public ModelAndView sellList(HttpServletRequest request) {
 		ModelAndView mav = ss.sellList();
 		mav.setViewName("sell/sellList");
