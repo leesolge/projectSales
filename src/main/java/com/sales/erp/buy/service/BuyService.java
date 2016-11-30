@@ -273,6 +273,7 @@ public class BuyService {
 			paging.setTeam(request.getParameter("team"));
 			paging.setTotal(dao.getbuyAppListCountAll(paging), (double) paging.getRowSize());
 			list = dao.buyAppListAll(paging);
+			mav.addObject("address", "관리자메뉴");
 		}
 
 		else if (mvo.getAuth().equals("ROLE_MANAGER")) {

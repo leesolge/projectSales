@@ -43,35 +43,40 @@
 			</div>
 	</sec:authorize>
 	
-	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
 		<div class="w3-accordion w3-padding">
 		    <a onclick="myAccFunc1()" class="w3-padding w3-hover-blue">
-				<i class="fa fa-balance-scale"></i>  거래메뉴  
+				<i class="fa fa-balance-scale"></i>  구매메뉴  
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc1" class="w3-accordion-content w3-padding">
-				<a href="/erp/buy/buyWriteForm">- 구매요청</a>
-				<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE')">
-				<a href="/erp/buy/buyListWait">- 구매대기목록</a>
+				<a href="/erp/buy/buyWriteForm">- 구매요청</a>				
+				<sec:authorize access="hasAnyAuthority('ROLE_EMPLOYEE')">
+				<a href="/erp/buy/buyListWait">- 구매대기목록</a>					
+				</sec:authorize>
+				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_BUDGET')">				
+				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a> 
 				</sec:authorize>				
-				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
-				<a href="/erp/order/registForm">- 판매등록</a>
-				<a href="/erp/order/list">- 판매대기목록</a>
-				<a href="javascript:tolist()">- 판매목록</a>
+				<a href="/erp/buy/buyAppList">- 구매목록</a>
+				
+				
 		    </div>
 	  	</div>
 	</sec:authorize>
 	
-	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
 		<div class="w3-accordion w3-padding">
 		    <a onclick="myAccFunc2()" class="w3-padding w3-hover-blue">
 				<i class="fa fa-users"></i>  영업팀메뉴  
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc2" class="w3-accordion-content w3-padding">
-				<a href="/erp/member/memberList">- 팀원 명부</a> 
-				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a> 
-				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
+			    <sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
+				<a href="/erp/member/memberList">- 사원 명부</a> 
+				</sec:authorize>
+				<a href="/erp/order/registForm">- 판매등록</a>
+				<a href="/erp/order/list">- 판매대기목록</a>
+				<a href="javascript:tolist()">- 판매목록</a>
 		    </div>
 	  	</div>
 	</sec:authorize>
@@ -82,9 +87,7 @@
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc3" class="w3-accordion-content w3-padding">
-				<a href="/erp/transact/transactlist_default">- 거래내역</a> 
-				<a href="/erp/buy/buyListAppWait">- 승인대기목록</a>
-				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
+				<a href="/erp/product/list">- 상품 관리</a>
 				<a href="/erp/ledger/list">- 회계장부</a>
 		    </div>
 	  	</div>
@@ -97,12 +100,7 @@
 				<i class="fa fa-angle-down"></i>
 		    </a>
 		    <div id="demoAcc4" class="w3-accordion-content w3-padding">
-		    	<a href="/erp/admin/memberListWait">- 가입 승인</a> 
-				<a href="/erp/member/memberList">- 사원 명부</a>
-				<a href="/erp/transact/transactlist_default">- 거래내역</a>
-				<a href="/erp/buy/buyAppList">- 구매승인목록</a>
-				<a href="/erp/product/list">- 상품 관리</a>
-				<a href="/erp/order/list">- 수주 관리</a>
+		    	<a href="/erp/admin/memberListWait">- 가입 승인</a> 				
 		    </div>
 	  	</div>
 	</sec:authorize>
