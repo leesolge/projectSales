@@ -9,44 +9,42 @@
 </head>
 <body>
 	
-	<div class="w3-container w3-center">
-		<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-			<h2>사원명부 [${count }건]</h2>
-		</sec:authorize>
-		<sec:authorize access="hasAnyAuthority('ROLE_MANAGER')">
-			<h2>팀원명부 [${count }건]</h2>
-		</sec:authorize>
-	</div>
-
+	<br>
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+			<!-- Title -->
+			<div class="w3-row">
+				<h3><i class="fa fa-bullhorn" aria-hidden="true"></i> 사원명부</h3>
+			</div>
+			
+			<div class="w3-row w3-right">
+				<h5><i class="fa fa-bar-chart"></i><c:out value="${count}" /></h5>
+			</div>
 
 	<div class="w3-container" align="center">
-
 		<!-- List -->
-		<table class="w3-table w3-centered">
-			<tr>
+		<table class="w3-table w3-small w3-hoverable w3-bordered">
+			<tr class="w3-indigo">	
 				<th>EMPNO</th>
 				<th>NAME</th>
 				<th>AUTH</th>
 				<th>TEAM</th>
-				<th>CONTENT</th>
 			</tr>
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td>${member.empno}</td>
-					<td>${member.name}</td>
-					<td>${member.auth}</td>
-					<td>${member.team}</td>
-					<td><input type="button" value="Content"
-						class="w3-btn w3-round-large"
-						onclick="window.location='/erp/member/memberContent?empno=${member.empno}'">
+					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.empno}</td>
+					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.name}</td>
+					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.auth}</td>
+					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.team}</td>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
+		<br>
 
 		<!-- Page -->
-		<div class="w3-container w3-center">
+		<div class="w3-container w3-center w3-small">
 			<ul class="w3-pagination">
 				<c:if test="${pg > block}">
 					<li><a
@@ -64,7 +62,7 @@
 
 				<c:forEach begin="${fromPage}" end="${toPage}" var="i">
 					<c:if test="${i == pg}">
-						<li><a href="#" class="w3-hover-red">${i}</a></li>
+						<li><a href="#" class="w3-hover-red w3-text-red">${i}</a></li>
 					</c:if>
 
 					<c:if test="${i != pg}">
@@ -110,5 +108,9 @@
 				<input type="submit" name="submit" value="검색">
 			</form>
 		</div>
+		</div>
+		</div>
+		</div>
+<br>
 </body>
 </html>

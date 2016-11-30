@@ -134,6 +134,7 @@ public class MemberService {
 		mav.addObject("block", block);
 		mav.addObject("fromPage", fromPage);
 		mav.addObject("toPage", toPage);
+		mav.addObject("history", "영업팀메뉴 > 사원명부");
 
 		return mav;
 	}
@@ -206,6 +207,7 @@ public class MemberService {
 		mav.addObject("block", block);
 		mav.addObject("fromPage", fromPage);
 		mav.addObject("toPage", toPage);
+		mav.addObject("history", "관리자메뉴 > 가입승인");
 
 		return mav;
 	}
