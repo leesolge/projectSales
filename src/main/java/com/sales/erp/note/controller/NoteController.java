@@ -38,7 +38,6 @@ public class NoteController {
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = nos.reply(request);
 		mav.setViewName("/note/reply");
-		mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지 > 쪽지보기 > 답장하기");
 		return mav;
 	}
 	
@@ -80,7 +79,7 @@ public class NoteController {
 	public ModelAndView viewRdetail(HttpServletRequest request){
 		ModelAndView mav = nos.receiveLists(request);
 		mav.setViewName("/note/receivedetail");
-		mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 받은쪽지");
 		return mav;
 	}
 	
@@ -88,7 +87,7 @@ public class NoteController {
 	public ModelAndView viewSdetail(HttpServletRequest request){
 		ModelAndView mav = nos.sendLists(request);
 		mav.setViewName("/note/senddetail");
-		mav.addObject("history", "개인메뉴 > 쪽지 > 보낸쪽지");
+		mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 보낸쪽지");
 		return mav;
 	}
 	

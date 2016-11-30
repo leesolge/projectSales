@@ -220,6 +220,13 @@ public class NoteService {
 	public ModelAndView reply(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		String pageCheck = request.getParameter("pageCheck");
+		String history = "개인메뉴 > 쪽지 > 메인 ";
+		if(pageCheck.equals("etc")){
+			history = history + "> 쪽지보기 > 답장하기";
+		}else if(pageCheck.equals("receive")){
+			history = history + "> 받은쪽지 > 쪽지보기 > 답장하기";
+		}
+		mav.addObject("history", history);
 		mav.addObject("pageCheck", pageCheck);
 		int notenum = Integer.parseInt(request.getParameter("notenum"));
 		mav.addObject("notenum", notenum);
@@ -298,9 +305,9 @@ public class NoteService {
 		if(pageCheck.equals("etc")){
 			history = history+"메인 > ";
 		}else if(pageCheck.equals("receive")){
-			history = history+"받은쪽지 > ";
+			history = history+"메인 > 받은쪽지 > ";
 		}else if(pageCheck.equals("send")){
-			history = history+"보낸쪽지 > ";
+			history = history+"메인 > 보낸쪽지 > ";
 		}
 		if(rec.equals("0")){
 			history = history+"쪽지쓰기";
@@ -352,9 +359,9 @@ public class NoteService {
 		if(pageCheck.equals("etc")){
 			mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 쪽지보기");
 		}else if(pageCheck.equals("receive")){
-			mav.addObject("history", "개인메뉴 > 쪽지 > 받은쪽지 > 쪽지보기");
+			mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 받은쪽지 > 쪽지보기");
 		}else if(pageCheck.equals("send")){
-			mav.addObject("history", "개인메뉴 > 쪽지 > 보낸쪽지 > 쪽지보기");
+			mav.addObject("history", "개인메뉴 > 쪽지 > 메인 > 보낸쪽지 > 쪽지보기");
 		}
 		if(pageCheck.equals("receive")||pageCheck.equals("send")){
 			String pageNum = request.getParameter("pageNum");
