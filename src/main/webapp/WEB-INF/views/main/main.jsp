@@ -11,66 +11,36 @@
 
 <body><br>
 <div class="w3-container">
-	<!-- Top Button(Large) -->
+	<!-- Top -->
 	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
-		<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-				<div class="w3-right">
-					<h3>52</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Messages</h4>
+		<div class="w3-threequarter">
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
+				<h1>그래프</h1>
 			</div>
 		</div>
 		<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-			<div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-			<div class="w3-right">
-				<h3>99</h3>
-			</div>
-			<div class="w3-clear"></div>
-			<h4>Views</h4>
-			</div>
-		</div>
-		<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
-				<div class="w3-right">
-					<h3>23</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Shares</h4>
-			</div>
-		</div>
-		<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-				
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
 				<c:forEach items="${weather}" var="weather">
-					<h3>${weather.temp}℃</h3>
-					<h4>${weather.wfEn}</h4>
+					<c:if test="${weather.wfEn == 'Clear'}">
+						<img src="/erp/resources/image/clear.png" class="w3-image w3-circle w3-card-4">
+					</c:if>
+					<c:if test="${weather.wfEn == 'Partly Cloudy'}">
+						<img src="/erp/resources/image/partly.png" class="w3-image w3-circle w3-card-4">
+					</c:if>
+					<c:if test="${weather.wfEn == 'Mostly Cloudy'}">
+						<img src="/erp/resources/image/mostly.png" class="w3-image w3-circle w3-card-4">
+					</c:if>
+					<c:if test="${weather.wfEn == 'Rain'}">
+						<img src="/erp/resources/image/rain.png" class="w3-image w3-circle w3-card-4">
+					</c:if><br>
+					<h3 class="w3-opacity">맑음, ${weather.temp}℃</h3>
 				</c:forEach>
 			</div>
+			<div class="w3-hide-large w3-hide-medium"><br></div>
 		</div>
 	</div>
-	 
-	 <!-- Top Button(Small) -->
-	<div class="w3-row-padding w3-margin-bottom w3-hide-large w3-hide-medium">
-		<div class="w3-col s3 w3-center w3-text-red">
-			<i class="fa fa-comment w3-xxlarge"></i>
-		</div>
-		<div class="w3-col s3 w3-center w3-text-blue">
-			<i class="fa fa-eye w3-xxlarge"></i>
-		</div>
-		<div class="w3-col s3 w3-center w3-text-teal">
-	 	<i class="fa fa-share-alt w3-xxlarge"></i>
-		</div>
-		<div class="w3-col s3 w3-center w3-text-orange">
-			<i class="fa fa-users w3-xxlarge"></i>
-		</div>
-	</div>
-	  
+	
+	<!-- Middle -->
 	<div class="w3-row-padding w3-margin-bottom">
 		<!-- Notice -->
 		<div class="w3-half">
@@ -122,7 +92,7 @@
 		</div>
 	</div>
 	
-	<!-- Slider -->
+	<!-- Bottom -->
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 			<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">

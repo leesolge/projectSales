@@ -89,7 +89,7 @@
 
 			<!-- Search -->
 			<form action="/erp/member/memberList" name="search" method="post">
-				<select name="field">
+				<select name="field" class="w3-border w3-border-indigo" style="width: 70px; height: 30px;">
 					<c:if test="${field == 'name'}">
 						<option value="name" selected="selected">이름</option>
 					</c:if>
@@ -104,8 +104,8 @@
 						<option value="team">소속</option>
 					</c:if>
 					</sec:authorize>
-				</select> <input type="text" name="word" placeholder="검색어" value="${word}" />
-				<input type="submit" name="submit" value="검색">
+				</select> <input type="text" class="w3-border w3-border-indigo" name="word" placeholder="검색어" value="${word}" style="width: 120px; height: 30px;"/>
+				<button class="w3-border w3-border-indigo w3-indigo" type="submit" name="submit" style="height: 30px;"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 		</div>

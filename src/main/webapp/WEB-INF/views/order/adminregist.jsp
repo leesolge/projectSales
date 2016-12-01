@@ -28,7 +28,7 @@
 </head>
 <body><br>
 	<div class="w3-container">
-		<div class="w3-row" style="width: 60%;">
+		<div class="w3-row">
 			<div class="w3-container w3-indigo">
 				<h4 class="w3-text-white"><i class="fa fa-envelope-open"></i>  판매 등록</h4>
 			</div>
@@ -37,9 +37,9 @@
 			<form name="regist" action="/erp/order/regist" method="post">
 				<br>
 				<input type="hidden" name="id" value="0">
-				<table>
+				<table class="w3-table">
 					<tr>
-						<td>
+						<td colspan="2">
 							<label class="w3-text-indigo"><b>등록자</b></label>
 							<select name="empno" required="required" class="w3-input w3-border w3-border-indigo w3-round">
 									<c:forEach var="mlist" items="${mlist}">
@@ -47,7 +47,6 @@
 									</c:forEach>
 							</select>
 						</td>
-						<td></td>
 					</tr>
 					<tr>
 						<td>
@@ -68,26 +67,16 @@
 							<label class="w3-text-indigo"><b>고객명</b></label>
 							<input type="text" name="customer" class="w3-input w3-border w3-border-indigo w3-round" required="required">
 						</td>
-					</tr>
-					<tr>
 						<td>
-							<label class="w3-text-indigo"><b>고객주소</b></label>
-							<input type="text" id="sample6_address" name="address" class="w3-input w3-border w3-border-indigo w3-round" required="required">
-							<input type="hidden" name="checks" value="0">
-							<input type="hidden" name="deleted" value="0">
-						</td>
-						<td>
-							<br>
-							<input type="button" class="w3-btn w3-white w3-text-indigo w3-border w3-border-indigo w3-round" onclick="sample6_execDaumPostcode()" value="주소 찾기">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
+							<a onclick="sample6_execDaumPostcode()" style="cursor: pointer;">
+								<label class="w3-text-indigo"><b>고객주소&nbsp;<i class="fa fa-search"></i></b></label>
+								<input type="text" id="sample6_address" name="address" class="w3-input w3-border w3-border-indigo w3-round" required="required">
+							</a>
 							<input type="hidden" name="checks" value="0">
 							<input type="hidden" name="deleted" value="0">
 						</td>
 					</tr>
-				</table>
+				</table><br>
 				<div class="w3-center">
 				<button class="w3-btn w3-indigo w3-text-white" onclick="javascript:registOrder()">등록</button>
 				<button class="w3-btn w3-indigo w3-text-white" onclick="javascript:toList()">목록</button>
