@@ -102,6 +102,7 @@
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+	getCount();
 	setInterval("getCount()", 1000);
 	function getCount(){
 		$.getJSON("/erp/count/countNote", function(data){
@@ -110,7 +111,9 @@
 		   $(data).each(function(){
 		      str += this.empno;
 		   });
-		   
+		   if(str=="0"){
+			   str="";
+		   }
 		   $("#note_count").html(str);
 		}); 
 	}
