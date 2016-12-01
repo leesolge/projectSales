@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -44,11 +45,11 @@
 		paging.submit();
 	}
 	</script>
-	<head>
-		<title>Title</title>
-	</head>
+<head>
+	<title>Title</title>
+</head>
 	
-	<body>
+<body><br>
 	<form name="detail" action="/erp/order/detail" method="post">
 		<input name="orderid" type="hidden" value="0">
 		<input name="authpage" type="hidden" value="${authpage}">
@@ -71,84 +72,97 @@
 	<form name="write" action="/erp/order/registForm" method="post">
 		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
-	
-		<form action="/erp/order/list" name="search" method="get">
-			<input name="pageNum" type="hidden" value="1">
-			<input name="authpage" type="hidden" value="${authpage}">
-			<input name="firstdate" id="start" type="date">&nbsp;
-			<input name="seconddate" id="end" type="date">&nbsp;
-			<select name="product">
-				<option value="" disabled selected>제품선택</option>
-				<c:forEach var="plist" items="${plist}">
-					<option value="${plist.procode}">${plist.procode}&nbsp;${plist.proname}</option>
-				</c:forEach>
-			</select>
-			&nbsp;
-			<c:if test="${mlist!=null}">
-			<select name="emp">
-				<option value="" disabled selected>팀/사원 선택</option>
-				<c:forEach var="mlist" items="${mlist}">
-					<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
-				</c:forEach>
-			</select>
-			</c:if>
-			&nbsp;
-			<select name="checks">
-				<c:if test="${checks==0}">
-					<option value="0" selected="selected">승인 대기</option>
-				</c:if>
-				<c:if test="${checks!=0}">
-					<option value="0">승인 대기</option>
-				</c:if>
-				<c:if test="${checks==1}">
-					<option value="1" selected="selected">승인 목록</option>
-				</c:if>
-				<c:if test="${checks!=1}">
-					<option value="1">승인 목록</option>
-				</c:if>
-			</select>
-			&nbsp;
-			<input type="submit" value="열람">
-		</form>
-		
-		<table border="1">
-			<tr>
-				<td>사번</td>
-				<td>이름</td>
-				<td>등록날짜</td>
-				<td>제품코드</td>
-				<td>제품명</td>
-				<td>수량</td>
-				<td>수익</td>
-				<td>판매 수당</td>
-				<td>매니저 수당</td>
-			</tr>
-			<c:forEach var="alist" items="${alist}">
-				<tr onclick="javascript:details('${alist.id}', '${alist.checks}')">
-					<td>${alist.empno}</td>
-					<td>${alist.name}</td>
-					<td>${alist.changes}</td>
-					<td>${alist.procode}</td>
-					<td>${alist.proname}</td>
-					<td>${alist.proamount}</td>
-					<td>${alist.profit}원</td>
-					<td>${alist.allowance}원</td>
-					<td><c:if test="${alist.manage!=null||alist.manage!='0'}">${alist.manage}원</c:if></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<button onclick="javascript:worders()">등록</button>
-		
-		<table><tr>
-			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">이전</a></c:if>&nbsp;</td>
-			<td class="paging"><c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">${pageNum-2}</a></c:if>&nbsp;</td>
-			<td class="paging"><c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">${pageNum-1}</a></c:if>&nbsp;</td>
-			<td class="paging">${pageNum}</td>
-			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">${pageNum+1}</a></c:if>&nbsp;</td>
-			<td class="paging"><c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('${pageNum+2}')">${pageNum+2}</a></c:if>&nbsp;</td>
-			<td class="paging"><c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">다음</a></c:if>&nbsp;</td>
-		</tr></table>
-		
+		<div class="w3-container">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+				<div class="w3-row">
+					<h3><i class="fa fa-bullhorn" aria-hidden="true"></i> 판매목록</h3>
+				</div>
+				<div class="w3-container w3-center">
+				<form action="/erp/order/list" name="search" method="get">
+					<input name="pageNum" type="hidden" value="1">
+					<input name="authpage" type="hidden" value="${authpage}">
+					<table>
+						<tr>
+							<th>
+							<c:if test="${mlist!=null}">
+								<select class="w3-round-large" name="emp">
+									<option value="" disabled selected>팀/사원 선택</option>
+									<c:forEach var="mlist" items="${mlist}">
+										<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
+									</c:forEach>
+								</select>
+							</c:if>
+								<select class="w3-round-large" name="product">				
+									<option value="" disabled selected>제품선택</option>
+									<c:forEach var="plist" items="${plist}">
+										<option value="${plist.procode}">${plist.procode}&nbsp;${plist.proname}</option>
+									</c:forEach>
+								</select>
+								<select class="w3-round-large" name="checks">				
+									<c:if test="${checks==0}">
+										<option value="0" selected="selected">승인 대기</option>
+									</c:if>
+									<c:if test="${checks!=0}">
+										<option value="0">승인 대기</option>
+									</c:if>
+									<c:if test="${checks==1}">
+										<option value="1" selected="selected">승인 목록</option>
+									</c:if>
+									<c:if test="${checks!=1}">
+										<option value="1">승인 목록</option>
+									</c:if>
+								</select>
+							</th>
+						</tr>
+						<tr>
+							<th style="text-align: left;"><br>
+								기간 : 
+								<input class="w3-round-large" type="date" id="start" name="firstdate" value=${paging.start_date }> ~ 
+								<input class="w3-round-large" type="date" id="end" name="seconddate"  value=${paging.end_date } >
+								<button type="submit" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+							</th>
+						</tr>
+					</table><br>
+				</form>
+				</div>
+				<table class="w3-table w3-small w3-hoverable w3-bordered">
+					<tr class="w3-indigo">
+						<th style="width: 80px;">날짜</th>
+						<th style="width: 130px;">판매자</th>
+						<th>판매물품</th>
+						<th style="width: 100px;">수익</th>
+						<th style="width: 100px;">판매 수당</th>
+						<th style="width: 100px;">팀장 수당</th>
+					</tr>
+					<c:forEach var="alist" items="${alist}">
+						<tr onclick="javascript:details('${alist.id}', '${alist.checks}')">
+							<td><fmt:formatDate value="${alist.regdate}" pattern="yy-MM-dd" /></td>
+							<td>${alist.name}(${alist.empno})</td>
+							<td>${alist.proname}(${alist.procode}) x ${alist.proamount}</td>
+							<td><fmt:formatNumber value="${alist.profit}" pattern="#,###" /></td>
+							<td><fmt:formatNumber value="${alist.allowance}" pattern="#,###" /></td>
+							<td><c:if test="${alist.manage!=null||alist.manage!='0'}"><fmt:formatNumber value="${alist.manage}" pattern="#,###" /></c:if></td>
+						</tr>
+					</c:forEach>
+				</table><br>
+				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white w3-right" onclick="javascript:worders()">등록</button>
+				<div class="w3-centered">
+					<table class="w3-table w3-small">
+						<tr>
+							<td class="w3-centered">
+								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　&laquo;</a>　</c:if>
+								<c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">　${pageNum-2}</a>　</c:if>
+								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　${pageNum-1}</a>　</c:if>
+								<font color="red">　<b>${pageNum}</b>　</font>
+								<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">　${pageNum+1}</a>　</c:if>
+								<c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('${pageNum+2}')">　${pageNum+2}</a>　</c:if>
+								<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">　&raquo;</a>　</c:if>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 		<script src="/erp/resources/js/moment-min.js"></script>
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>

@@ -116,7 +116,7 @@
 				<div class="w3-centered">
 					<table class="w3-table w3-small">
 						<tr>
-							<td class="w3-centered" colspan="4">
+							<td class="w3-centered">
 								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　&laquo;</a>　</c:if>
 								<c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">　${pageNum-2}</a>　</c:if>
 								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　${pageNum-1}</a>　</c:if>

@@ -15,7 +15,7 @@
 		</div>
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
-			<table>
+			<table style="margin-left: 10px;">
 				<tr>
 					<td align="center">
 						<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
