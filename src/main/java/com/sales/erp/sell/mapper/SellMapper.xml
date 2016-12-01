@@ -3,46 +3,7 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sales.erp.sell.dao.SellMapper">
-	<!-- 상품정보 불러오는 부분 -->
-	<select id="selectProductAll" resultType="com.sales.erp.product.vo.ProductVO">
-		SELECT * FROM PRODUCT
-	</select>
-	<!-- 사용자 정보 불러오기 -->
-	<select id="getMember" parameterType="com.sales.erp.member.vo.MemberVO"
-		resultType="com.sales.erp.member.vo.MemberVO">
-		SELECT * FROM SMEMBER WHERE EMPNO=#{empno}
-	</select>
-
-	<!-- 판매 등록 -->
-	<insert id="sellWrite" parameterType="com.sales.erp.sell.vo.SellVO">
-		INSERT INTO
-		ORDERS
-		(ID,
-		EMPNO, PROCODE, PROAMOUNT, REGDATE, CUSTOMER, ADDRESS,
-		CHECKS, DELETED)
-		VALUES(TO_CHAR(ORDERID.NEXTVAL), #{empno}, #{procode},
-		#{proamount},
-		SYSDATE, #{customer},
-		#{address}, #{checks}, 0)
-	</insert>
-
-	<!-- 판매대기목록 불러오기 -->
-	<select id="sellListPayWaitAll" resultType="com.sales.erp.sell.vo.SellListVO">
-		<![CDATA[
-		SELECT * FROM 
-		(SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.PROCODE AS PROCODE, O.PROAMOUNT AS PROAMOUNT,
-					 O.REGDATE AS REGDATE, O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS , 
-					 O.DELETED AS DELETED, S.TEAM AS TEAM, S.NAME AS NAME FROM ORDERS O, SMEMBER S WHERE O.EMPNO = S.EMPNO)
-		WHERE CHECKS<1  AND DELETED=0 ORDER BY ID DESC
-		]]>
-	</select>
-
-	<!-- 판매목록 불러오기 -->
-	<select id="sellListAll" resultType="com.sales.erp.sell.vo.SellListVO">
-		SELECT * FROM 
-		(SELECT O.ID AS ID, O.EMPNO AS EMPNO, O.PROCODE AS PROCODE, O.PROAMOUNT AS PROAMOUNT,
-					 O.REGDATE AS REGDATE, O.CUSTOMER AS CUSTOMER, O.ADDRESS AS ADDRESS, O.CHECKS AS CHECKS , 
-					 O.DELETED AS DELETED, S.TEAM AS TEAM, S.NAME AS NAME FROM ORDERS O, SMEMBER S WHERE O.EMPNO = S.EMPNO)
-		WHERE CHECKS=1 AND DELETED=0 ORDER BY ID DESC
-	</select>
+	<select id="selectAll" resultType="com.sales.erp.sell.vo.SellVO" >
+  	 	SELECT PRONAME, PROAMOUNT FROM PRODUCT
+  	</select>
 </mapper>

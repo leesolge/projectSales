@@ -1,88 +1,53 @@
 package com.sales.erp.sell.vo;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SellVO {
-	private String id;
-	private String empno;
-	private String procode;
-	private String proamount;
-	private Date regdate;
-	private String customer;
-	private String address;
-	private String checks;
-	private String deleted;
 
-	public String getProamount() {
-		return proamount;
+	private static final List<KeyValue> pieDataList;
+
+	static {
+		pieDataList = new ArrayList<SellVO.KeyValue>();
+		pieDataList.add(new KeyValue("Russia", "17098242"));
+		pieDataList.add(new KeyValue("Canada", "9984670"));
+		pieDataList.add(new KeyValue("USA", "9826675"));
+		pieDataList.add(new KeyValue("China", "9596961"));
+		pieDataList.add(new KeyValue("Brazil", "8514877"));
+		pieDataList.add(new KeyValue("Australia", "7741220"));
+		pieDataList.add(new KeyValue("India", "3287263"));
 	}
 
-	public void setProamount(String proamount) {
-		this.proamount = proamount;
+	public static List<KeyValue> getPieDataList() {
+		return pieDataList;
 	}
 
-	public String getId() {
-		return id;
-	}
+	public static class KeyValue {
+		String key;
+		String value;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+		public KeyValue(String key, String value) {
+			super();
+			this.key = key;
+			this.value = value;
+		}
 
-	public String getEmpno() {
-		return empno;
-	}
+		public String getKey() {
+			return key;
+		}
 
-	public void setEmpno(String empno) {
-		this.empno = empno;
-	}
+		public void setKey(String key) {
+			this.key = key;
+		}
 
-	public String getProcode() {
-		return procode;
-	}
+		public String getValue() {
+			return value;
+		}
 
-	public void setProcode(String procode) {
-		this.procode = procode;
-	}
+		public void setValue(String value) {
+			this.value = value;
+		}
 
-	public Date getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getChecks() {
-		return checks;
-	}
-
-	public void setChecks(String checks) {
-		this.checks = checks;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
 	}
 
 }
