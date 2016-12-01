@@ -27,39 +27,39 @@
 			<div class="w3-row">
 				<h3><i class="fa fa-bullhorn" aria-hidden="true"></i> 구매목록</h3>
 			</div>
-			
-			<div class="w3-row w3-right">
-				<h5><i class="fa fa-bar-chart"></i><c:out value="${paging.total}" /></h5>
-			</div>
-			
-					<div class="w3-container w3-center">
-			<table class="w3-table w3-centered">
-				<tr>
+			<div class="w3-container w3-center">
+				<table>
+					<tr>
 						<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
-							<th style="width: 130px">팀</th>
+						<th style="width: 130px">
+						팀 : 
+						<select class="w3-round-large" name="team" id="team">				
+								<option value="${paging.team}" disabled selected>${paging.team}</option>
+								<c:forEach items="${team_list}" var="team_list">
+									<option value="${team_list}">${team_list}</option>
+								</c:forEach>
+						</select>
+						</th>
 						</sec:authorize>
 						<sec:authorize access="hasAnyAuthority('ROLE_MANAGER', 'ROLE_EMPLOYEE')">
 							<input type="hidden" name="team" value="${paging.team}" id="team">
 						</sec:authorize>
-					<th colspan="2">검색기간(시작/종료)</th>
-				</tr>
-				<tr>
-				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
-						<td><select class="w3-select" name="team" id="team">					
-							<option value="${paging.team}" disabled selected>${paging.team}</option>
-							<c:forEach items="${team_list}" var="team_list">
-								<option value="${team_list}">${team_list}</option>
-							</c:forEach>
-					</select></td>
-						</sec:authorize>				
-					<td><input type="date" id="start_date" name="start_date" value=${paging.start_date }></td>
-					<td><input type="date" id="end_date" name="end_date"  value=${paging.end_date } ></td>
-					<td rowspan="2"><button onclick="javascript:jumppage('1')" class="w3-btn" >조회</button></td>
-				</tr>
-			</table>
-	</div>
+						<th>
+							기간 : 
+							<input class="w3-round-large" type="date" id="start_date" name="start_date" value=${paging.start_date }> ~ 
+							<input class="w3-round-large" type="date" id="end_date" name="end_date"  value=${paging.end_date } >
+						</th>
+						<th>
+							<button onclick="javascript:jumppage('1')" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+						</th>
+					</tr>
+				</table>
+			</div>
 
 			<div class="w3-row">
+				<div class="w3-row w3-right">
+					<h5><i class="fa fa-bar-chart"></i>  <c:out value="${paging.total}" /></h5>
+				</div>
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
 					<tr class="w3-indigo">						
 						<th style="width: 70px">등록번호</th>
