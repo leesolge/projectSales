@@ -106,6 +106,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/erp/resources/css/default.css">
+<link href="/erp/resources/css/bootstrap-theme.css">
 <style>
 	html,body,h1,h2,h3,h4,h5 {font-family: "Jeju Gothic", sans-serif}
 	body {background-color: #eeeeee; min-height: 100%;}

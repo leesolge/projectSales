@@ -15,16 +15,39 @@
 		</div>
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
-			<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
-			<a href="/erp/salary/view" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
-			</sec:authorize>
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-			<a href="/erp/admin/salary" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
-			</sec:authorize>
-			<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope-o"></i><i class="w3-text-red" id="note_count"></i></a><br>
-			<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
-			<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
-			<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
+			<table>
+				<tr>
+					<td align="center">
+						<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
+						<a href="/erp/salary/view" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
+						</sec:authorize>
+						<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+						<a href="/erp/admin/salary" class="w3-hover-none w3-hover-text-yellow w3-show-inline-block"><i class="fa fa-money"></i></a>
+						</sec:authorize>
+					</td>
+					<td>
+						<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block">
+							<i class="fa fa-envelope-o"></i>
+						</a>
+					</td>
+					<td>
+						<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
+					</td>
+					<td>
+						<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
+					</td>
+					<td>
+						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>&nbsp;&nbsp; <b class="w3-badge w3-red" id="note_count"></b></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<hr>
@@ -117,7 +140,7 @@
 			   jQuery("#note_count").show();
 		   }
 		   
-		   $("#note_count").html("("+str+")");
+		   $("#note_count").html(str);
 		}); 
 	}
 </script>

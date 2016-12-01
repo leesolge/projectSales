@@ -93,7 +93,7 @@
 				</table>
 			</div>
 			<br>
-					<!-- Page -->
+		<!-- Page -->
 		<div class="w3-row w3-center w3-small">
 			<ul class="w3-pagination">
 				<c:if test="${paging.page>paging.block}">
