@@ -20,20 +20,20 @@ public class OrderJoinVO {
 		private int deleted;
 		private String changes;
 		private String sales;
-		private long manager;
 		private long sellprice;
+		private long manager;
 		
+		public long getManager() {
+			return manager;
+		}
+		public void setManager(long manager) {
+			this.manager = manager;
+		}
 		public long getSellprice() {
 			return sellprice;
 		}
 		public void setSellprice(long sellprice) {
 			this.sellprice = sellprice;
-		}
-		public long getManager() {
-			return manager;
-		}
-		public void setManager(long manage) {
-			this.manager = manage;
 		}
 		public String getSales() {
 			return sales;
