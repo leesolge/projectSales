@@ -32,7 +32,7 @@
 						<span title="${notice.title}">${notice.title}</span>
 					</td>
 					<td>${notice.name}</td>
-					<td><fmt:formatDate value="${notice.regDate}" pattern="yyyy-MM-dd" /></td>
+					<td><fmt:formatDate value="${notice.regDate}" pattern="yy-MM-dd" /></td>
 				</tr>
 				</c:forEach>
 			</table>

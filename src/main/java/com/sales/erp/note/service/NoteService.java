@@ -148,7 +148,7 @@ public class NoteService {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
 				String change = sdf.format(date);
 				nvo.setChange(change);
-				if(nvo.getRauth().equals("ROLE_EMPLOYEE")){
+				if(nvo.getRauth().equals("ROLE_EMPLOYEE")||nvo.getRauth().equals("ROLE_BUDGET")){
 					nvo.setRauth("사원");
 				}
 				if(nvo.getRauth().equals("ROLE_MANAGER")){
@@ -157,7 +157,7 @@ public class NoteService {
 				if(nvo.getRauth().equals("ROLE_ADMIN")){
 					nvo.setRauth("관리자");
 				}
-				if(nvo.getSauth().equals("ROLE_EMPLOYEE")){
+				if(nvo.getSauth().equals("ROLE_EMPLOYEE")||nvo.getSauth().equals("ROLE_BUDGET")){
 					nvo.setSauth("사원");
 				}
 				if(nvo.getSauth().equals("ROLE_MANAGER")){
@@ -247,7 +247,7 @@ public class NoteService {
 		MemberVO sendervo = dao.getNameTeamAuth(empno);
 		MemberVO receivervo = dao.getNameTeamAuth(receiver);
 		
-		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
+		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")||sendervo.getAuth().equals("ROLE_BUDGET")){
 			sendervo.setAuth("사원");
 		}
 		if(sendervo.getAuth().equals("ROLE_MANAGER")){
@@ -257,7 +257,7 @@ public class NoteService {
 			sendervo.setAuth("관리자");
 		}
 		
-		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")){
+		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")||receivervo.getAuth().equals("ROLE_BUDGET")){
 			receivervo.setAuth("사원");
 		}
 		if(receivervo.getAuth().equals("ROLE_MANAGER")){
@@ -313,7 +313,7 @@ public class NoteService {
 			history = history+"쪽지쓰기";
 		}else{
 			MemberVO receiverVo = dao.getNameTeamAuth(rec);
-			if(receiverVo.getAuth().equals("ROLE_EMPLOYEE")){
+			if(receiverVo.getAuth().equals("ROLE_EMPLOYEE")||receiverVo.getAuth().equals("ROLE_BUDGET")){
 				receiverVo.setAuth("사원");
 			}
 			if(receiverVo.getAuth().equals("ROLE_MANAGER")){
@@ -328,7 +328,7 @@ public class NoteService {
 		
 		ArrayList<MemberVO> receiverList = dao.receiverCheck(empno);
 		for(MemberVO svo:receiverList){
-			if(svo.getAuth().equals("ROLE_EMPLOYEE")){
+			if(svo.getAuth().equals("ROLE_EMPLOYEE")||svo.getAuth().equals("ROLE_BUDGET")){
 				svo.setAuth("사원");
 			}
 			if(svo.getAuth().equals("ROLE_MANAGER")){
@@ -379,7 +379,7 @@ public class NoteService {
 		MemberVO sendervo = dao.getNameTeamAuth(vo.getSender());
 		MemberVO receivervo = dao.getNameTeamAuth(vo.getReceiver());
 		
-		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")){
+		if(sendervo.getAuth().equals("ROLE_EMPLOYEE")||sendervo.getAuth().equals("ROLE_BUDGET")){
 			sendervo.setAuth("사원");
 		}
 		if(sendervo.getAuth().equals("ROLE_MANAGER")){
@@ -389,7 +389,7 @@ public class NoteService {
 			sendervo.setAuth("관리자");
 		}
 		
-		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")){
+		if(receivervo.getAuth().equals("ROLE_EMPLOYEE")||receivervo.getAuth().equals("ROLE_BUDGET")){
 			receivervo.setAuth("사원");
 		}
 		if(receivervo.getAuth().equals("ROLE_MANAGER")){

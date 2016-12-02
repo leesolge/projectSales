@@ -35,6 +35,8 @@
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" />
 		<security:intercept-url pattern="/main"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/order/**"
+			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')" />
 		<security:intercept-url pattern="/notice/admin/**"
 			access="hasAnyAuthority('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/notice/**"
