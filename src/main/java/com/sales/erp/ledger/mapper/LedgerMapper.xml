@@ -39,8 +39,8 @@
 	
 	<select id="selectLedger" parameterType="com.sales.erp.ledger.vo.SqlVO" resultType="com.sales.erp.ledger.vo.LedgerJoinVO">
 		<![CDATA[
-			SELECT * FROM (SELECT ROWNUM R, L.*, S.NAME FROM LEDGER L, SMEMBER S WHERE L.EMPNO=S.EMPNO ${query}
-			ORDER BY REGDATE DESC) WHERE R>=#{start} AND R<=#{end}
+			SELECT * FROM (SELECT ROWNUM R, D.* FROM (SELECT L.*, S.NAME FROM LEDGER L, SMEMBER S WHERE L.EMPNO=S.EMPNO ${query}
+			ORDER BY TO_NUMBER(ID) DESC) D) WHERE R>=#{start} AND R<=#{end}
 		]]>
 	</select>
 	

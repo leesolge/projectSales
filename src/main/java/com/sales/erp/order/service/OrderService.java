@@ -219,7 +219,7 @@ public class OrderService {
 		long allowance = Long.parseLong(ovo.getProfit());
 		if(ovo.getAuth().equals("사원")){
 			allowance = (long) (allowance*0.4);
-			ovo.setManage(allowance/4);
+			ovo.setManager(allowance/4);
 		}else if(ovo.getAuth().equals("팀장")){
 			allowance = (long) (allowance*0.5);
 		}
@@ -416,7 +416,7 @@ public class OrderService {
 			long allowance = Long.parseLong(ovo.getProfit());
 			if(ovo.getAuth().equals("사원")){
 				allowance = (long) (allowance*0.4);
-				ovo.setManage(allowance/4);
+				ovo.setManager(allowance/4);
 			}else if(ovo.getAuth().equals("팀장")){
 				allowance = (long) (allowance*0.5);
 			}
