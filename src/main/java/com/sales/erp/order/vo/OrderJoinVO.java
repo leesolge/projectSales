@@ -3,6 +3,7 @@ package com.sales.erp.order.vo;
 import java.util.Date;
 
 public class OrderJoinVO {
+		private long manager;
 		private Date regdate;
 		private String id;
 		private String empno;
@@ -21,7 +22,6 @@ public class OrderJoinVO {
 		private String changes;
 		private String sales;
 		private long sellprice;
-		private long manager;
 		
 		public long getManager() {
 			return manager;

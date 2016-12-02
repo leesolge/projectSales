@@ -41,7 +41,6 @@
 	<head>
 		<title>Title</title>
 	</head>
-	
 	<body>
 	<form name="mord" action="/erp/order/modifyForm" method="post">
 		<input name="orderid" type="hidden" value="0">
@@ -51,7 +50,6 @@
 		<input name="orderid" type="hidden" value="0">
 		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
-	
 	<form name="cord" action="/erp/order/cancle" method="post">
 		<input name="orderid" type="hidden" value="0">
 		<input name="authpage" type="hidden" value="${authpage}">
@@ -63,33 +61,32 @@
 		<input name="authpage" type="hidden" value="${authpage}">
 		<input name="checks" type="hidden" value="0">
 	</form>
-		
-		<table border="1">
-			<tr>
-				<td>판매등록자 정보</td>
-			</tr>
-			<tr>
-				<td>${ovo.id}&nbsp;${ovo.name}&nbsp;${ovo.team}&nbsp;${ovo.auth}</td>
-			</tr>
-			<tr>
-				<td>판매 제품 정보</td>
-			</tr>
-			<tr>
-				<td>${ovo.procode}&nbsp;${ovo.proname}&nbsp;${ovo.proamount}개</td>
-			</tr>
-			<tr>
-				<td>가격 정보</td>
-			</tr>
-			<tr>
-				<td>수익 : ${ovo.profit}&nbsp;판매 수당 : ${ovo.allowance}</td>
-			</tr>
-			<tr>
-				<td>구매자 정보</td>
-			</tr>
-			<tr>
-				<td>고객명 : ${ovo.customer}&nbsp;고객 주소 : ${ovo.address}</td>
-			</tr>
-		</table>
+	<table border="1">
+		<tr>
+			<td>판매등록자 정보</td>
+		</tr>
+		<tr>
+			<td>${ovo.id}&nbsp;${ovo.name}&nbsp;${ovo.team}&nbsp;${ovo.auth}</td>
+		</tr>
+		<tr>
+			<td>판매 제품 정보</td>
+		</tr>
+		<tr>
+			<td>${ovo.procode}&nbsp;${ovo.proname}&nbsp;${ovo.proamount}개</td>
+		</tr>
+		<tr>
+			<td>가격 정보</td>
+		</tr>
+		<tr>
+			<td>수익 : ${ovo.profit}&nbsp;판매 수당 : ${ovo.allowance}</td>
+		</tr>
+		<tr>
+			<td>구매자 정보</td>
+		</tr>
+		<tr>
+			<td>고객명 : ${ovo.customer}&nbsp;고객 주소 : ${ovo.address}</td>
+		</tr>
+	</table>
 			<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:morders('${ovo.id}')">수정</button></c:if>
 			<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')">취소</button></c:if>
 			<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button onclick="javascript:corders('${ovo.id}')">판매승인</button></c:if>

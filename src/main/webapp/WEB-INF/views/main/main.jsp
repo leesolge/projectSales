@@ -78,7 +78,7 @@
 					<tr>
 						<th>제목</th>
 						<th style="width: 70px">발신자</th>
-						<th style="width: 80px;">날짜</th>
+						<th style="width: 85px;">날짜</th>
 					</tr>
 					<c:forEach var="c" items="${note}" begin="0" end="4">
 						<tr>

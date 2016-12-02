@@ -88,7 +88,7 @@
 								<select class="w3-round-large" name="emp">
 									<option value="" disabled selected>팀/사원 선택</option>
 									<c:forEach var="mlist" items="${mlist}">
-										<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
+										<option value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
 									</c:forEach>
 								</select>
 							</c:if>
@@ -141,7 +141,7 @@
 							<td>${alist.proname}(${alist.procode}) x ${alist.proamount}</td>
 							<td><fmt:formatNumber value="${alist.profit}" pattern="#,###" /></td>
 							<td><fmt:formatNumber value="${alist.allowance}" pattern="#,###" /></td>
-							<td><c:if test="${alist.manage!=null||alist.manage!='0'}"><fmt:formatNumber value="${alist.manage}" pattern="#,###" /></c:if></td>
+							<td><c:if test="${alist.manager!=null||alist.manager!='0'}"><fmt:formatNumber value="${alist.manager}" pattern="#,###" /></c:if></td>
 						</tr>
 					</c:forEach>
 				</table><br>

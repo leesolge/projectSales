@@ -61,9 +61,11 @@
 					<tr>
 						<td>
 						<select name="team">
+							<option value="관리팀">관리팀</option>
+							<option value="자재팀">자재팀</option>
 							<option value="영업1팀">영업1팀</option>
 							<option value="영업2팀">영업2팀</option>
-							<option value="자재팀">자재팀</option>
+							<option value="영업3팀">영업3팀</option>
 						</select>
 						</td>
 					</tr>
