@@ -135,6 +135,10 @@ public class SalaryService {
 		enddate = enddate + "01000000";
 		
 		String emp = request.getParameter("emp");
+		if(emp==null||emp.equals("")){
+			emp = "";
+		}
+		mav.addObject("emp", emp);
 		
 		if(emp==null||emp.equals("")){
 			emp = "";

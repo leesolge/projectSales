@@ -34,9 +34,14 @@
 								</th>
 								<th>
 									<select name="emp" class="w3-round-large">
-										<option value="" disabled selected>팀/사원 선택</option>
+										<option value="">팀/사원 전체</option>
 										<c:forEach var="mlist" items="${mlist}">
-										<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
+										<c:if test="${emp==mlist.empno}">
+											<option selected="selected" value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
+										</c:if>
+										<c:if test="${emp!=mlist.empno}">
+											<option value="${mlist.empno}">${mlist.empno}&nbsp;${mlist.name}&nbsp;${mlist.auth}&nbsp;${mlist.team}&nbsp;</option>
+										</c:if>
 										</c:forEach>
 									</select>
 								</th>
