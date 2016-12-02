@@ -50,7 +50,7 @@
 							<input class="w3-round-large" type="date" id="end_date" name="end_date"  value=${paging.end_date } >
 						</th>
 						<th>
-							<button onclick="javascript:jumppage('1')" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+							<button onclick="javascript:jumppage('1')" class="w3-round-large w3-light-blue w3-border w3-border-light-blue"><i class="fa fa-search"></i></button>
 						</th>
 					</tr>
 				</table>
@@ -61,7 +61,7 @@
 					<h5><i class="fa fa-bar-chart"></i>  <c:out value="${paging.total}" /></h5>
 				</div>
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">						
+					<tr class="w3-light-blue">						
 						<th style="width: 70px">등록번호</th>
 						<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
 							<th style="width: 130px">팀</th>

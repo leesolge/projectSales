@@ -30,7 +30,7 @@
 
 			<div class="w3-row" >
 				<table class="w3-table w3-small w3-hoverable w3-bordered" >
-					<tr class="w3-indigo">
+					<tr class="w3-light-blue">
 						<th style="width: 70px">등록번호</th>
 						<th>요청건</th>
 						<th style="width: 130px">등록날짜</th>

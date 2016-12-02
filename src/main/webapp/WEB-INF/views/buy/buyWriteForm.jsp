@@ -18,13 +18,13 @@
 				<h3><i class="fa fa-inbox"></i>  상품정보</h3>
 				<div class="w3-container" style="height: 40px;">
 					물품명 : 
-					<input class="w3-border w3-border-indigo" type="text" placeholder="검색어" id="myInput" onkeyup="myFunction()">
+					<input class="w3-border w3-border-light-blue" type="text" placeholder="검색어" id="myInput" onkeyup="myFunction()">
 				</div>
 				<br>
 				<div class=" w3-row" style="height: 450px; overflow: auto;">
 					<table class="w3-table w3-small w3-hoverable w3-bordered"
 						id="myTable">
-						<tr class="w3-indigo">
+						<tr class="w3-light-blue">
 							<th>상품명</th>
 							<th style="width: 50px;">재고</th>
 							<th>원가</th>
@@ -48,13 +48,13 @@
 			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" >
 				<h3><i class="fa fa-share-square-o"></i>  구매요청</h3>
 				<div class="w3-container" style="height: 40px;">
-					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="submit" value="요청" />
-					<input class="w3-btn-floating w3-indigo w3-border-indigo w3-border w3-right" type="button" id="btn_AddO" value="+">
+					<input class="w3-btn w3-border w3-text-light-blue w3-border-light-blue w3-round-large w3-small w3-white" type="submit" value="요청" />
+					<input class="w3-btn-floating w3-light-blue w3-border-light-blue w3-border w3-right" type="button" id="btn_AddO" value="+">
 				</div>
 				<br>
 				<div class=" w3-row" style="height: 450px; overflow: auto;">
 					<table class="order_list w3-table w3-small w3-hoverable w3-bordered">
-						<tr class="w3-indigo">
+						<tr class="w3-light-blue">
 							<th style="width: 100px">상품명</th>
 							<th style="width: 70px">수량</th>
 							<th>사유</th>

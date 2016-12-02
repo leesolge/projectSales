@@ -13,7 +13,7 @@
 <div class="w3-container">
 	<!-- Input Form -->
 	<div class="w3-container w3-margin-bottom">
-		<div class="w3-container w3-indigo">
+		<div class="w3-container w3-teal">
 			<h4><i class="fa fa-calendar-plus-o"></i>  일정등록</h4>
 		</div>
 		<div class="w3-card-2 w3-white w3-centered w3-padding"><br>
@@ -47,7 +47,7 @@
 					<textarea class="w3-round-large" name="contents" rows="5" style="width: 100%; resize: none;" placeholder="일정입력" required></textarea>
 					</td>
 					<td style="width: 50px; vertical-align: middle;">
-						<button class="w3-btn-floating w3-indigo w3-border-indigo w3-border" type="submit">+</button>
+						<button class="w3-btn-floating w3-teal w3-border-teal w3-border" type="submit">+</button>
 					</td>
 				</tr>
 			</table>

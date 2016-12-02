@@ -75,7 +75,7 @@ public class HomeController {
 			String hour2 = "", temp = "", wfEn = "", change = "";
 			RssVO rvo = new RssVO();
 
-			for (int i = 4; i < 10; i++) {
+			for (int i = 3; i < 10; i++) {
 				Node xmlNode1 = root.getElementsByTagName("data").item(i);
 
 				Node xmlNode21 = ((Element) xmlNode1).getElementsByTagName("temp").item(0);

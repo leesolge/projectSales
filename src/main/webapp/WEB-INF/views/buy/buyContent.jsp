@@ -60,7 +60,7 @@
 							<td>${list.procode }</td>
 							<td>${list.proname }</td>
 							<td>${list.amount }</td>
-							<td><span title="${list.buycomment }">${list.buycomment }<span></td>
+							<td><span title="${list.buycomment}">${list.buycomment}</span></td>
 						</tr>
 					</c:forEach>
 				</table>

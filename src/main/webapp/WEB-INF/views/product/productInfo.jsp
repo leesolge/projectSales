@@ -69,6 +69,9 @@
 				<input type="button" value="정보삭제"
 				class="w3-btn w3-round-large"
 				onclick="window.location='/erp/product/delete?procode=${proList.procode}'">
+				<input type="button" value="목록"
+				class="w3-btn w3-round-large"
+				onclick="window.location='/erp/product/list'">
 			</div>
 		</div>
 	</div>

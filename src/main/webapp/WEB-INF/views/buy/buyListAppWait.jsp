@@ -37,7 +37,7 @@
 
 			<div class="w3-row">
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">
+					<tr class="w3-light-blue">
 						<th>등록번호</th>
 						<sec:authorize
 							access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
