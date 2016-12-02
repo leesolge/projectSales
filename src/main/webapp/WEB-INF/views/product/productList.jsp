@@ -12,8 +12,8 @@
 		<h3><i class="fa fa-inbox"></i>  상품정보</h3>
 		<div class="w3-container" style="height: 40px;">
 			물품코드 : 
-			<input class="w3-border w3-border-indigo" type="text" placeholder="Search for Code.." id="myInput" onkeyup="myFunction()">
-						<button class="w3-btn-floating w3-indigo w3-border-indigo w3-border w3-right" onclick="location='/erp/product/insert'">+</button>
+			<input class="w3-border w3-border-deep-purple" type="text" placeholder="Search for Code.." id="myInput" onkeyup="myFunction()">
+						<button class="w3-btn-floating w3-deep-purple w3-border-deep-purple w3-border w3-right" onclick="location='/erp/product/insert'">+</button>
 		</div>
 		<div class="w3-row"><br>
 			<table class="w3-table w3-small w3-hoverable w3-bordered" id="myTable">

@@ -101,21 +101,31 @@
 						<c:if test="${(br%7) == 0}">
 							<tr height=40>
 						</c:if>
+										
 						<td>
 							<c:if test="${br==6 || br==13 || br==20 || br==27 || br==34}">
 								<a href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}" class="w3-text-blue">
 								${a}</a>
 							</c:if> 
+							
 							<c:if test="${br==0 || br==7 || br==14 || br==21 || br==28 || br==35}">
 								<a href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}" class="w3-text-red">
 								${a}</a>
 							</c:if> 
+							
 							<c:if test="${br!=0 && br!=7 && br!=14 && br!=21 && br!=28 && br!=35 && br!=6 && br!=13 && br!=20 && br!=27 && br!=34}">
 								<a href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}">
 								${a}</a>
 							</c:if> 
-							<c:set var="br" value="${br+1}" />
-						</td>
+														
+							<c:forEach var="check" items="${check}">
+			                    <c:if test="${year == check.year && (month+1) == check.month && a == check.day}">
+			           					<a href="/erp/schedule/chooseday?year=${year}&month=${month}&day=${a}" class="w3-text-teal">♥</a>
+  					            	</c:if>
+			                </c:forEach>
+			                
+			                <c:set var="br" value="${br+1}" />       
+			             </td>
 					</c:forEach>
 				</table>
 			</div>

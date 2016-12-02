@@ -96,11 +96,16 @@ public class ScheduleController {
 	    int end=cal.getActualMaximum(Calendar.DAY_OF_MONTH); //이 달의 끝나는 날
 	    int br = 0; //7일마다 줄 바꾸기
 	    int count = 0;
-	   
+	 
+	    
 	     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 String empno = auth.getName();
+		 
+		 ArrayList<ScheduleVO> check = new ArrayList<>();
+		 check = sdao.getschedule(empno);
 
-	
+		 
+	     
 		  request.setAttribute("year", new Integer(year));
 		  request.setAttribute("month", new Integer(month));
 		  request.setAttribute("currentYear", new Integer(currentYear));
@@ -111,6 +116,7 @@ public class ScheduleController {
 		  request.setAttribute("br", br);
 		  request.setAttribute("empno", empno);
 		  request.setAttribute("count", count);
+		  request.setAttribute("check", check);
 		  return "/schedule/calendar";
 		}
 		
@@ -158,6 +164,8 @@ public class ScheduleController {
 		    list = sdao.selectOne(vo);
 		    int count = sdao.countSchedule(vo);
 			
+		    ArrayList<ScheduleVO> check = new ArrayList<>();
+			check = sdao.getschedule(empno);
 		      
 		      request.setAttribute("month1", month1+1);
 			  request.setAttribute("year", new Integer(year));
@@ -172,6 +180,8 @@ public class ScheduleController {
 			  request.setAttribute("empno", empno);
 			  request.setAttribute("vo", list);
 			  request.setAttribute("count", count);
+			  request.setAttribute("check", check);
+			  
 			  
 			  return "/schedule/calendar";
 		}
