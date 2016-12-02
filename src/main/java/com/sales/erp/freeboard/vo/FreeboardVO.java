@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class FreeboardVO {
 	private int num;
-	private String name, title, content;
+	private String team, name, title, content;
 	private Date regDate;
 	
 	public int getNum() {
@@ -12,6 +12,12 @@ public class FreeboardVO {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
 	}
 	public String getName() {
 		return name;

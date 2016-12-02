@@ -9,6 +9,7 @@ drop sequence freeboardReReply_seq;
 
 create table freeboard(
 	num number primary key,
+	team varchar2(30) not null,
 	name varchar2(50) not null,
 	title varchar2(500) not null,
 	content varchar2(3000) not null,

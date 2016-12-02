@@ -1,9 +1,15 @@
 package com.sales.erp.freeboard.vo;
 
 public class FreeboardSearchVO {
-	private String field, word;
+	private String team, field, word;
 	private int start, end;
 	
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
 	public String getField() {
 		return field;
 	}

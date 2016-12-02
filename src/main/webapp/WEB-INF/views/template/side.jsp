@@ -37,6 +37,9 @@
 						<a href="/erp/schedule/calendarForm" class="w3-hover-none w3-hover-text-orange w3-show-inline-block"><i class="fa fa-calendar"></i></a>
 					</td>
 					<td>
+						<a href="/erp/freeboard/freeboardList" class=""><i class="material-icons">&#xe8ee;</i></a> <!-- 요거 자유게시판 -->
+					</td>
+					<td>
 						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
 					</td>
 				</tr>

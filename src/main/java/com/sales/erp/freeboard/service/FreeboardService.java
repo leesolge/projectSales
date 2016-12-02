@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +15,7 @@ import com.sales.erp.freeboard.vo.FreeboardPagingVO;
 import com.sales.erp.freeboard.vo.FreeboardReplyVO;
 import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
+import com.sales.erp.member.vo.MemberVO;
 
 @Service
 public class FreeboardService {
@@ -23,6 +26,13 @@ public class FreeboardService {
 	public ModelAndView getFreeboardList(HttpServletRequest request){
 		
 		ModelAndView mav = new ModelAndView();
+		FreeboardVO vo = new FreeboardVO();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName(); //empno 값 가져오기
+		
+		String team = dao.getTeamTeamAuth(empno); //empno 값을 이용해서 team 값 가져오기
+		vo.setTeam(team); //FreeboardVO의 team 필드에 가져온 team 값을 넣어줌.
 		
 		int pg=1;
 		
@@ -38,6 +48,7 @@ public class FreeboardService {
 		
 		FreeboardSearchVO search = new FreeboardSearchVO();
 	    search.setWord("%" + word + "%");
+	    search.setTeam(team); // 자유게시판에 들어갔을 때 같은 팀원들만 게시글 볼 수 있게 해줌.
 	    
 		int rowSize=10; // 한 페이지에 출력되는 글 수
 		
@@ -64,8 +75,11 @@ public class FreeboardService {
 		paging.setToPage(toPage);
 		search.setEnd(end);
 		search.setStart(start);
+		search.setTeam(team);
 		
 		ArrayList<FreeboardVO> list = dao.getFreeboardList(search);
+		
+		mav.addObject("team", team);
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
 		mav.addObject("pg", pg);
@@ -77,6 +91,15 @@ public class FreeboardService {
 	//글 쓰기
 	public void freeboardWrite(HttpServletRequest request){
 		FreeboardVO vo = new FreeboardVO();
+		MemberVO mvo = new MemberVO();
+		vo.setTeam(mvo.getTeam());
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String empno = auth.getName();
+		
+		String team = dao.getTeamTeamAuth(empno);
+		vo.setTeam(team);
+		
 		vo.setName(request.getParameter("name"));
 		vo.setTitle(request.getParameter("title"));
 		vo.setContent(request.getParameter("content"));
@@ -122,8 +145,8 @@ public class FreeboardService {
 	public void replyWrite(HttpServletRequest request){
 		FreeboardReplyVO vo = new FreeboardReplyVO();
 		vo.setNum(Integer.parseInt(request.getParameter("num")));//글 번호
-		vo.setEmpno(request.getParameter("empno"));
-		vo.setReply(request.getParameter("reply"));
+		vo.setEmpno(request.getParameter("empno"));//로그인 한 
+		vo.setReply(request.getParameter("reply"));//댓글 내용
 		
 		dao.replyWrite(vo);
 	}  

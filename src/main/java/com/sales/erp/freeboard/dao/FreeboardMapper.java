@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import com.sales.erp.freeboard.vo.FreeboardReplyVO;
 import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
+import com.sales.erp.member.vo.MemberVO;
 
 public interface FreeboardMapper extends Serializable {
 
 	ArrayList<FreeboardVO> getFreeboardList(FreeboardSearchVO search);
+	
+	String getTeamTeamAuth(String empno);
 	
 	public int getFreeboardCount(FreeboardSearchVO search); //글의 수
 	

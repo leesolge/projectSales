@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="js/jquery-3.1.1.min.js"></script>
+
 <script>
 /* function writeFormSubmit(){
 	if ( $.trim($("#name1").val()) == "") {
@@ -60,7 +60,7 @@
 					<div class="w3-col w3-left" style="width:10%"><p></p></div>
 					<div class="w3-col w3-right" style="width:10%">
 						<button class="w3-btn w3-round-large"
-							onclick="location='/erp/freeboard/freeboardList'">목록으로</button>
+							onclick="history.back()">목록으로</button>
 					</div>
 					<div class="w3-rest w3-center">
 						<!-- <a href="#" onclick="writeFormSubmit()" class="w3-btn w3-round-large">쓰기</a> -->

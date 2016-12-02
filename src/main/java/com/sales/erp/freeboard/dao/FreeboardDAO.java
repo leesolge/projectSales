@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sales.erp.freeboard.vo.FreeboardReplyVO;
 import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
+import com.sales.erp.member.vo.MemberVO;
 
 @Repository
 public class FreeboardDAO {
@@ -19,6 +20,11 @@ public class FreeboardDAO {
 	public ArrayList<FreeboardVO> getFreeboardList(FreeboardSearchVO search){
 		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
 		return mapper.getFreeboardList(search);
+	}
+	
+	public String getTeamTeamAuth(String empno) {
+		FreeboardMapper freeboardMapper = sqlSession.getMapper(FreeboardMapper.class);
+		return freeboardMapper.getTeamTeamAuth(empno);
 	}
 	
 	public int getFreeboardCount(FreeboardSearchVO search){

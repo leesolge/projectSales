@@ -3,71 +3,90 @@
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
      
 <mapper namespace="com.sales.erp.freeboard.dao.FreeboardMapper">
+
 	<!-- 글 가져오기 -->
-	<select resultType="com.sales.erp.freeboard.vo.FreeboardVO"
-		parameterType="com.sales.erp.freeboard.vo.FreeboardSearchVO" id="getFreeboardList">
+	<select id="getFreeboardList" resultType="com.sales.erp.freeboard.vo.FreeboardVO"
+		parameterType="com.sales.erp.freeboard.vo.FreeboardSearchVO">
 		<!-- freeboard.vo 패키지에 있는 FreeboardSearch 클래스 참고 -->
 		select * from (select rownum r, d.* from (select * from freeboard
 		where title like #{word} order by regDate desc) d) 
-		where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} order by r asc
+		where r <![CDATA[>=]]> #{start} and r <![CDATA[<=]]> #{end} and team=#{team} order by num desc
 		<!-- rownum r, d.* ??? -->
 	</select>
+	
+	<select id="getTeamTeamAuth" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT TEAM FROM SMEMBER WHERE EMPNO=#{empno}
+	</select>
+	
 	<!-- 작성한 글 수 -->
-	<select resultType="java.lang.Integer"
-		parameterType="com.sales.erp.freeboard.vo.FreeboardSearchVO" id="getFreeboardCount">
-		select count(*) from freeboard where title like #{word} </select>
+	<select id="getFreeboardCount" resultType="java.lang.Integer"
+		parameterType="com.sales.erp.freeboard.vo.FreeboardSearchVO">
+		select count(*) from freeboard where title like #{word} and team=#{team}
+	</select>
+	
 	<!-- 글 쓰기 -->
-	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardVO" id="freeboardWrite"> 
-		insert into freeboard(num, name, title, content, regdate)
-		values(freeboard_seq.nextval, #{name}, #{title}, #{content}, sysdate)
+	<insert id="freeboardWrite" parameterType="com.sales.erp.freeboard.vo.FreeboardVO"> 
+		insert into freeboard(num, team, name, title, content, regdate)
+		values(freeboard_seq.nextval, #{team}, #{name}, #{title}, #{content}, sysdate)
 	</insert>
+	
 	<!-- 글 하나 보기 -->
-	<select resultType="com.sales.erp.freeboard.vo.FreeboardVO"
-		parameterType="java.lang.String" id="freeboardContent"> 
+	<select id="freeboardContent" resultType="com.sales.erp.freeboard.vo.FreeboardVO"
+		parameterType="java.lang.String"> 
 		SELECT * FROM FREEBOARD WHERE NUM = #{num} 
 	</select>
+	
 	<!-- 글 수정 -->
-	<update parameterType="com.sales.erp.freeboard.vo.FreeboardVO" id="freeboardUpdate"> 
+	<update id="freeboardUpdate" parameterType="com.sales.erp.freeboard.vo.FreeboardVO"> 
 		update freeboard set name=#{name}, title=#{title}, content=#{content}, regDate=sysdate 
 		where num = #{num} 
 	</update>
+	
 	<!-- 글 삭제 -->
-	<delete parameterType="java.lang.String" id="freeboardDelete"> 
-		delete from freeboard where num = #{num} 
+	<delete id="freeboardDelete" parameterType="java.lang.String"> 
+		delete from freeboard where num = #{num}
 	</delete>
+	
 	<!-- ////////////////댓글 부분///////////////// -->
+	
 	<!-- 댓글 입력 -->
-	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyWrite"> 
+	<insert id="replyWrite" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO"> 
 		insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child) 
 		values(freeboardReply_seq.nextval, #{num}, #{empno}, #{reply}, sysdate, 0, #{num}, 0) 
 	</insert>
+	
 	<!-- 대댓글 입력 -->
-	<insert parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="reReplyWrite"> 
+	<insert id="reReplyWrite" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO"> 
 		insert into freeboardReply(replynum, num, empno, reply, regDate, sort, parent, child) 
 		values(#{replynum}, #{num}, #{empno}, #{reply}, sysdate, 1, #{replynum}, freeboardReReply_seq.nextval) 
 	</insert>
+	
 	<!-- 댓글 조회 -->
-	<select resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
-		parameterType="java.lang.String" id="replyList"> 
+	<select id="replyList" resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
+		parameterType="java.lang.String"> 
 		select f.replynum, f.num, f.empno, f.reply, f.regDate, f.child, s.name 
 		from freeboardReply f, smember s 
 		where f.empno = s.empno and f.num = #{num} 
 		order by f.replynum asc, f.child asc 
 	</select>
+	
 	<!-- 댓글 수정 양식 -->
-	<select resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
-	parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyUpdateForm"> 
+	<select id="replyUpdateForm" resultType="com.sales.erp.freeboard.vo.FreeboardReplyVO"
+		parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO"> 
 		select * from freeboardReply where replynum=#{replynum} and child=#{child}
 	</select>
+	
 	<!-- 댓글 수정 -->
-	<update parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyUpdate"> 
+	<update id="replyUpdate" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO"> 
 		update freeboardReply set reply=#{reply} where replynum=#{replynum} and child=#{child} 
 	</update>
+	
 	<!-- 댓글 삭제 -->
-	<delete parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="replyDelete">
+	<delete id="replyDelete" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO">
 		delete from freeboardReply where replynum=#{replynum}
 	</delete>
-	<delete parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO" id="reReplyDelete"> 
+	
+	<delete id="reReplyDelete" parameterType="com.sales.erp.freeboard.vo.FreeboardReplyVO"> 
 		delete from freeboardReply where replynum=#{replynum} and child=#{child} 
 	</delete>
 </mapper>

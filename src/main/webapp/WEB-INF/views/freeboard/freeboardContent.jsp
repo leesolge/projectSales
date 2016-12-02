@@ -5,9 +5,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <% String cp = request.getContextPath(); %>
 
+<!DOCTYPE html>
 <html>
-<head>
-<script src="js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <script type="text/javascript">
 	function Update(replynum, child){
 		var replyUpdate = document.replyUpdate;
@@ -28,54 +30,8 @@
 		reReplyWrite.replynum.value = replynum;
 		reReplyWrite.submit();
 	}
-	
-	<%-- $(document).ready(function(){
-	    $('#cmt').click(function(){
-	        $.post('<%=cp%>/freeboard/freeboardContent',
-	        {
-	          name: "Donald Duck",
-	          city: "Duckburg"
-	        },
-	        function(data,status){
-	            alert("Data: " + data + "\nStatus: " + status);
-	        });
-	    });
-	});
- 	function doCreateCmt() {
-	      // 한줄댓글 내용이 필수이므로 검사
-	      if($('#cmt').val() == '') {
-	            alert("한줄 댓글의 내용은 필수 입력입니다.");
-	            $('#cmt').focus(); return;
-	      }
-	      // 버튼 중복 클릭 방지
-	      $('#createbt').attr('disabled', 'disabled');
-	      $.post('<%=cp%>/freeboard/freeboardContent',
-	                  {cwriter:$('#cwriter').val(),
-	                   cmt:$('#cmt').val()},
-	                  function(data){
-	                         $('#cmt').val(''); // 내용 비우기
-	                         // 다시 클릭이 가능하게끔
-	                         $('#createbt').attr("disabled", false);
-	                         // 입력이 완료가 됐으므로 다시 리스트 불러오기
-	                         cmtList();
-	                  });
-	}
-	
-	function cmtList() {
-	      $('#cmtTarget').load("<%=cp%>/freeboard/freeboardContent?num=${freeboardVO.num}");
-	}
-	
-	$(function(){
-	      // id가 cmt인 텍스트에서 엔터를 쳤을 경우
-	      // 바로 데이터 입력이 되도록 작성
-	      $('#cmt').keyup(function(e){
-	            if(e.keyCode == 13) doCreateCmt();
-	      });
-	      // 처음 읽기 화면 들어왔을때 바로 리스트를 가져와서 보여줌
-	      cmtList();
-	}); --%>
 </script>
-</head>
+
 <body>
 	<div class="w3-container w3-center">
 		<h2>글 읽기</h2>
@@ -131,7 +87,7 @@
 	<!-- 댓글 작성 부분 -->
 	<div class="w3-row">
 		<div class="w3-col w3-left" style="width: 15%"><p></p></div>
-		<div class="w3-col w3-right" style="width: 15%"><p></p>	</div>
+		<div class="w3-col w3-right" style="width: 15%"><p></p></div>
 		<div class="w3-rest w3-row-padding">
 			<form action="/erp/freeboard/replyWrite" method="post">
 			
@@ -145,7 +101,7 @@
 				</div>
 				
 				<div class="w3-col s8 w3-center">
-					<label class="w3-wide">댓글</label>
+					<label>댓글</label>
 					<input class="w3-input w3-border w3-round-large" type="text" name="reply">
 				</div>
 				<div class="w3-col s1 w3-center"><p></p></div>
@@ -163,6 +119,7 @@
 		<div class="w3-col w3-left" style="width:15%"><p></p></div>
 		<div class="w3-col w3-right" style="width:15%"><p></p></div>
 		<div class="w3-rest w3-row-padding">
+		
 			<form action="/erp/freeboard/replyDelete" name="replyDelete" method="post">
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
 				<input type="hidden" name="child" value="${freeboardReplyVO.child}">
@@ -180,13 +137,14 @@
 			</form>
 			
 			<table class="w3-table w3-striped w3-border w3-centered">
+			
 				<tr>
 					<th style="width: 10%">작성자</th>
 					<th style="width: 55%">내용</th>
 					<th style="width: 20%">작성일</th>
-					<th style="width: 5%">수정</th>
-					<th style="width: 5%">삭제</th>
-					<th style="width: 5%">댓글</th>
+					<th style="width: 5%"></th>
+					<th style="width: 5%"></th>
+					<th style="width: 5%"></th>
 				</tr>
 				<c:forEach var="replyList" items="${replyList}">
 					<tr>
@@ -203,10 +161,10 @@
 									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
 							</c:if>
 							<td>
-								<input type="button" value="댓글"
-									onclick="ReReply('${replyList.replynum}')"/>	
+								<input type="button" onclick="ReReply('${replyList.replynum}')" value="댓글">	
 							</td>
 						</c:if>
+						<!-- 대댓글 보기 -->
 						<c:if test="${replyList.child!='0'}">
 							<td>${replyList.name}</td>
 							<td style="text-align: left;"><i class="fa fa-hand-o-right"></i>${replyList.reply}</td>
@@ -219,10 +177,6 @@
 								<td><input type="button" value="삭제"
 									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
 							</c:if>
-							<%-- <td>
-								<input type="button" value="댓글"
-									onclick="ReReply('${replyList.replynum}')"/>	
-							</td> --%>
 						</c:if>
 					</tr>
 				</c:forEach>
