@@ -29,7 +29,7 @@
 						</sec:authorize>
 					</td>
 					<td>
-						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
+						<a href="/erp/freeboard/freeboardList" class="w3-hover-none w3-hover-text-purple w3-show-inline-block"><i class="fa fa-users"></i></a>
 					</td>
 				</tr>
 				<tr>
@@ -40,7 +40,7 @@
 						<a href="/erp/note/list" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-envelope-o"></i></a>
 					</td>
 					<td>
-						<a href="/erp/freeboard/freeboardList" class="w3-hover-none w3-hover-text-purple w3-show-inline-block"><i class="fa fa-users"></i></a>
+						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-sign-out"></i></a>
 					</td>
 
 				</tr>
