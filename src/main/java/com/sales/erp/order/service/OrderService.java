@@ -196,6 +196,7 @@ public class OrderService {
 	
 	public ModelAndView orderContents(String authpage, String orderid, String checks){
 		ModelAndView mav = new ModelAndView();
+		ArrayList<ProductVO> productlist = dao.selectProductAll();
 		TestVO vo = new TestVO();
 		if(checks.equals("1")){
 			vo.setTests("'"+orderid+"' "+"AND CHECKS=1");
@@ -225,6 +226,7 @@ public class OrderService {
 		}
 		ovo.setAllowance(allowance);
 		mav.addObject("ovo", ovo);
+		mav.addObject("productlist", productlist);
 		mav.addObject("authpage", authpage);
 		return mav;
 	}

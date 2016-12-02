@@ -53,12 +53,28 @@
 		</div>
 	</div>
 	<hr>
+	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET')">
 			<div class="w3-accordion w3-padding">
 				<a href="/erp/notice/noticeList" class="w3-padding w3-hover-blue">
 					<i class="fa fa-bullhorn"></i>  공지사항
 				</a>
 			</div>
+	</sec:authorize>
+	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
+		<div class="w3-accordion w3-padding">
+		    <a onclick="myAccFunc2()" class="w3-padding w3-hover-blue">
+				<i class="fa fa-users"></i>  영업팀메뉴  
+				<i class="fa fa-angle-down"></i>
+		    </a>
+		    <div id="demoAcc2" class="w3-accordion-content w3-padding">
+				<a href="/erp/order/registForm">- 판매등록</a>
+				<a href="/erp/order/list">- 판매목록</a>
+				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
+				<a href="/erp/member/memberList">- 사원 명부</a> 
+				</sec:authorize>
+		    </div>
+	  	</div>
 	</sec:authorize>
 	
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET', 'ROLE_MANAGER','ROLE_EMPLOYEE')">
@@ -80,21 +96,6 @@
 	  	</div>
 	</sec:authorize>
 	
-	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')">
-		<div class="w3-accordion w3-padding">
-		    <a onclick="myAccFunc2()" class="w3-padding w3-hover-blue">
-				<i class="fa fa-users"></i>  영업팀메뉴  
-				<i class="fa fa-angle-down"></i>
-		    </a>
-		    <div id="demoAcc2" class="w3-accordion-content w3-padding">
-			    <sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')">
-				<a href="/erp/member/memberList">- 사원 명부</a> 
-				</sec:authorize>
-				<a href="/erp/order/registForm">- 판매등록</a>
-				<a href="/erp/order/list">- 판매목록</a>
-		    </div>
-	  	</div>
-	</sec:authorize>
 	<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')">
 		<div class="w3-accordion w3-padding">
 		    <a onclick="myAccFunc3()" class="w3-padding w3-hover-blue">
