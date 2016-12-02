@@ -19,7 +19,7 @@
 		<!-- Table -->
 		<div class="w3-row">
 			<table class="w3-table w3-small w3-hoverable w3-bordered">
-				<tr class="w3-blue">
+				<tr class="w3-brown">
 					<th style="width: 70px">번호</th>
 					<th>제목</th>
 					<th style="width: 70px">글쓴이</th>
@@ -32,7 +32,7 @@
 						<span>${freeboard.title}</span>
 					</td>
 					<td>${freeboard.name}</td>
-					<td><fmt:formatDate value="${freeboard.regDate}" pattern="yyyy-MM-dd" /></td>
+					<td><fmt:formatDate value="${freeboard.regDate}" pattern="yy-MM-dd" /></td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -41,7 +41,7 @@
 	
 		<!-- Write Button -->
 		<div align="right">
-				<button class="w3-btn w3-border w3-border-blue w3-round-large w3-small w3-white" onclick="location='/erp/freeboard/freeboardWriteForm'">글쓰기</button>
+				<button class="w3-btn w3-border w3-border-brown w3-round-large w3-small w3-white" onclick="location='/erp/freeboard/freeboardWriteForm'">글쓰기</button>
 		</div>
 		
 		<!-- Page -->
@@ -79,8 +79,8 @@
 		<!-- Search -->
 		<div class="w3-row w3-center">
 			<form action="/erp/freeboard/freeboardList" name="search" method="post">
-				<input class="w3-border w3-border-blue" type="text" name="word" placeholder="검색어" value="${word}" />
-				<button class="w3-border w3-border-blue w3-blue" type="submit"><i class="fa fa-search"></i></button>
+				<input class="w3-border w3-border-brown" type="text" name="word" placeholder="검색어" value="${word}" />
+				<button class="w3-border w3-border-brown w3-brown" type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div><br>
 		
