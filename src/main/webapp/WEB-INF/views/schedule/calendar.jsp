@@ -149,7 +149,7 @@
 						<tr>
 							<td style="width: 70px">${vo.title}</td>
 							<td style="text-align: left;"><span title="${vo.contents}">${vo.contents}</span></td>
-							<td style="width: 80px;"><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" /></td>
+							<td style="width: 80px;"><fmt:formatDate value="${vo.regDate}" pattern="yy-MM-dd" /></td>
 							<td style="width: 50px;">
 								<form action="/erp/schedule/delete" method="post">
 									<div class="tooltip-demo">

@@ -1,0 +1,34 @@
+-- 회계장부
+
+-- 회계장부 테이블 삭제
+DROP TABLE LEDGER;
+-- 회계장부 시퀀스 삭제
+DROP SEQUENCE LEDGERSEQ;
+-- 회계장부 테이블 생성
+CREATE TABLE LEDGER(
+	-- 고유번호
+	ID VARCHAR2(20) PRIMARY KEY,
+	-- 등록자
+	EMPNO VARCHAR2(20),
+	-- 등록날짜
+	REGDATE DATE,
+	-- 수정가능 : 1일 경우 수정 가능
+	ENABLE VARCHAR2(10),
+	-- 수입/지출 여부 : 수입 / 지출 로 표기
+	SORT VARCHAR2(10),
+	-- 내역
+	CONTENT VARCHAR2(200),
+	-- 금액
+	AMOUNT NUMBER,
+	-- 자산
+	MONEY NUMBER,
+	-- 비고
+	ETC VARCHAR2(200)
+);
+-- 고유번호 시퀀스 생성
+CREATE SEQUENCE LEDGERSEQ
+START WITH 1
+NOCACHE;
+-- 50억 수입(수정/삭제 불가)
+INSERT INTO LEDGER (ID, EMPNO, REGDATE, ENABLE, SORT, CONTENT, AMOUNT, MONEY, ETC)
+VALUES(TO_CHAR(LEDGERSEQ.NEXTVAL), 100, SYSDATE, 0, '수입', '사업 시작 자금 50억', 5000000000, 5000000000, '');

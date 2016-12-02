@@ -41,7 +41,7 @@
 					<tr>
 						<td colspan="2">
 							<label class="w3-text-indigo"><b>비고</b></label>
-							<input type="text" name="etc" class="w3-input w3-border w3-border-indigo w3-round" required>
+							<input type="text" name="etc" class="w3-input w3-border w3-border-indigo w3-round">
 						</td>
 					</tr>
 				</table><br>
