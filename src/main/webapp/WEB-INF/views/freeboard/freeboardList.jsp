@@ -41,9 +41,7 @@
 	
 		<!-- Write Button -->
 		<div align="right">
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
 				<button class="w3-btn w3-border w3-border-blue w3-round-large w3-small w3-white" onclick="location='/erp/freeboard/freeboardWriteForm'">글쓰기</button>
-			</sec:authorize>
 		</div>
 		
 		<!-- Page -->
