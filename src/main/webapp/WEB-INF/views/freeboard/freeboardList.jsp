@@ -9,7 +9,7 @@
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 		<!-- Title -->
 		<div class="w3-row">
-			<h3><i class="fa fa-bullhorn" aria-hidden="true"></i>자유게시판</h3>
+			<h3><i class="fa fa-bullhorn" aria-hidden="true"></i>${team} 게시판</h3>
 		</div>
 		<!-- Count -->
 		<div class="w3-row w3-right">
