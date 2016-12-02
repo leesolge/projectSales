@@ -187,6 +187,7 @@ public class SalaryService {
 				ovo.setManager(allowance/4);
 			}else if(ovo.getAuth().equals("팀장")){
 				allowance = (long) (allowance*0.5);
+				ovo.setManager(0);
 			}
 			ovo.setAllowance(allowance);
 		}
