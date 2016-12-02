@@ -112,7 +112,7 @@
 					<c:forEach var="teamlist" items="${teamlist}">
 					<tr>
 						<td>${teamlist.empno}</td>
-						<td>${teamlist.regdate}</td>
+						<td><fmt:formatDate value="${teamlist.regdate}" pattern="yy-MM-dd" /></td>
 						<td>${teamlist.procode}</td>
 						<td>${teamlist.proname}</td>
 						<td>${teamlist.proamount}</td>

@@ -33,8 +33,6 @@
 			<div class="w3-row w3-right">
 				<h5><i class="fa fa-bar-chart"></i>  <c:out value="${paging.total}" /></h5>
 			</div>
-
-
 			<div class="w3-row">
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
 					<tr class="w3-light-blue">
@@ -76,9 +74,8 @@
 							<td onclick="javascript:content('${list.buynum}')" style="cursor: pointer;"><c:if
 									test="${list.buystep == 0 && list.deleted==0}">팀장승인대기</c:if> <c:if
 									test="${list.buystep == 1 && list.deleted==0}">자재팀승인대기</c:if></td>
-							<sec:authorize
-								access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_BUDGET')">
-								<td onclick="javascript:approve('${list.buynum}')" style="cursor: pointer;"><i class="fa fa-times w3-large"></i></a></td>
+							<sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_BUDGET')">
+								<td><a onclick="javascript:approve('${list.buynum}')" style="cursor: pointer;" class="w3-hover-text-blue"><i class="fa fa-circle-o w3-large"></i></a></td>
 							</sec:authorize>
 							<td><a onclick="javascript:cancel('${list.buynum}')" class="w3-hover-text-red"><i class="fa fa-times w3-large"></i></a></td>
 						</tr>
