@@ -52,9 +52,15 @@
 							</c:if>
 						</td>
 						<td style="width: 70px;">
+							<c:if test="${receive.sender!=receive.receiver}">
 							<a href="javascript:writePage('${receive.sender}')">
+							
 								<span title="${receive.sender} ${receive.sname}">${receive.sname}</span>	
 							</a>
+							</c:if>
+							<c:if test="${receive.sender==receive.receiver}">
+								<span title="${receive.sender} ${receive.sname}">${receive.sname}</span>	
+							</c:if>
 						</td>
 						<td style="text-align: left;">
 							<a href="javascript:content('${receive.notenum}')">
@@ -87,7 +93,7 @@
 				<table class="w3-table w3-small">
 					<tr class="w3-light-grey">
 						<td style="width: 50px;"></td>
-						<td style="width: 70px;">발신자</td>
+						<td style="width: 70px;">수신자</td>
 						<td>제목</td>
 						<td style="width: 100px;">날짜　</td>
 					</tr>
@@ -105,9 +111,14 @@
 							</c:if>
 						</td>
 						<td style="width: 70px;">
-							<a href="javascript:writePage('${send.receiver}')">
-								<span title="${send.receiver} ${send.rname}">${send.rname}</span>	
-							</a>
+							<c:if test="${send.sender!=send.receiver}">
+								<a href="javascript:writePage('${send.receiver}')">
+									<span title="${send.receiver} ${send.rname}">${send.rname}</span>	
+								</a>
+							</c:if>
+							<c:if test="${send.sender==send.receiver}">
+									<span title="${send.receiver} ${send.rname}">${send.rname}</span>	
+							</c:if>
 						</td>
 						<td style="text-align: left;">
 						<a href="javascript:content('${send.notenum}')">

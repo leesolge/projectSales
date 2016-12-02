@@ -65,9 +65,15 @@
 							</c:if>
 						</td>
 						<td style="width: 70px;">
+							<c:if test="${list.sender!=list.receiver}">
 							<a href="javascript:writePage('${list.sender}')">
+							
 								<span title="${list.sender} ${list.sname}">${list.sname}</span>	
 							</a>
+							</c:if>
+							<c:if test="${list.sender==list.receiver}">
+								<span title="${list.sender} ${list.sname}">${list.sname}</span>	
+							</c:if>
 						</td>
 						<td style="text-align: left;">
 						<a href="javascript:content('${list.notenum}')">
