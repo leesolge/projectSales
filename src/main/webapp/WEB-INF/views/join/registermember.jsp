@@ -66,7 +66,7 @@
 					</tr>
 					<tr>
 						<td colspan="2"><br>
-							<label class="w3-text-dark-grey"><b>생년월일</b></label>
+							<label class="w3-text-dark-grey"><b>전화번호</b></label>
 							<input type="text" name="phone" placeholder="Phone" class="w3-input w3-border w3-border-dark-grey w3-round">
 						</td>
 					</tr>
