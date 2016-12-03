@@ -86,16 +86,26 @@
 							<th>
 							<c:if test="${mlist!=null}">
 								<select class="w3-round-large" name="emp">
-									<option value="" disabled selected>팀/사원 선택</option>
+									<option value="">팀/사원 선택</option>
 									<c:forEach var="mlist" items="${mlist}">
-										<option value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
+										<c:if test="${emp==mlist.empno}">
+											<option selected="selected" value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
+										</c:if>
+										<c:if test="${emp!=mlist.empno}">
+											<option value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
+										</c:if>
 									</c:forEach>
 								</select>
 							</c:if>
 								<select class="w3-round-large" name="product">				
-									<option value="" disabled selected>제품선택</option>
+									<option value="">제품선택</option>
 									<c:forEach var="plist" items="${plist}">
-										<option value="${plist.procode}">${plist.procode}&nbsp;${plist.proname}</option>
+										<c:if test="${product==plist.procode}">
+											<option value="${plist.procode}" selected="selected">${plist.procode}&nbsp;${plist.proname}</option>
+										</c:if>
+										<c:if test="${product!=plist.procode}">
+											<option value="${plist.procode}">${plist.procode}&nbsp;${plist.proname}</option>
+										</c:if>
 									</c:forEach>
 								</select>
 								<select class="w3-round-large" name="checks">				

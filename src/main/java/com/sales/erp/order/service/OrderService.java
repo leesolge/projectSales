@@ -316,8 +316,16 @@ public class OrderService {
 		mav.addObject("edate", seconddate);
 		/*제품*/
 		String product = request.getParameter("product");
+		if(product==null||product.equals("")){
+			product = "";
+		}
+		mav.addObject("product", product);
 		/*팀 / 팀원*/
 		String emp = request.getParameter("emp");
+		if(emp==null||emp.equals("")){
+			emp = "";
+		}
+		mav.addObject("emp", emp);
 		/*대기 중인지 승인된 목록인지 선택*/
 		String checks = request.getParameter("checks");
 		
