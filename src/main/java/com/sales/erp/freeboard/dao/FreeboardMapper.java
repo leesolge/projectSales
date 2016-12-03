@@ -45,4 +45,6 @@ public interface FreeboardMapper extends Serializable {
 	
 	void reReplyDelete(FreeboardReplyVO vo);
 
+	int getReplyCount(String num);
+
 }

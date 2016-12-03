@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<% String cp = request.getContextPath(); %>
 
-<!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -32,94 +30,65 @@
 	}
 </script>
 
-<body>
-	<div class="w3-container w3-center">
-		<h2>글 읽기</h2>
-	</div>
-
-	<div class="w3-row"> 
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-container ">
-			<p>
-				<label class="w3-wide">Name</label> 
-				<input
-					class="w3-input w3-border w3-round-large"
-					style="width: 20%; border-radius: 6px;" name="name" readonly
-					value="${freeboardVO.name}">
-				<label class="w3-wide">Title</label> 
-				<input 
-					class="w3-input w3-border w3-round-large"
-					style="width: 50%; border-radius: 6px;" type="text" name="title"
-					readonly value="${freeboardVO.title}">
-				<label class="w3-wide">Date</label> 
-				<input class="w3-input w3-border w3-round-large"
-					style="width: 50%; border-radius: 6px;" type="text" name="regDate"
-					readonly 
-					value='<fmt:formatDate value="${freeboardVO.regDate}" pattern="yy-MM-dd_hh:mm:ss"/>'>
-			</p>
-
-			<p>
-				<label class="w3-wide">Content</label>
-				<textarea class="w3-input w3-border w3-round-large" name="content"
-					style="width: 100%; height: 300px; resize: none; border-radius: 6px;"
-					readonly>${freeboardVO.content}</textarea>
-			</p>
+<body><br>
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding"><br>
+			<!-- 게시판 글 -->
+			<table class="w3-table w3-border-top w3-bordered">
+				<tr>
+					<td class="w3-text-gray" style="text-align: left; width: 80px;">제목　 | </td>
+					<td style="text-align: left;"><span>${freeboardVO.title}</span></td>
+					<td class="w3-text-gray" style="text-align: left; width: 80px;">작성일 | </td>
+					<td style="width: 80px; text-align: left;"><fmt:formatDate value="${freeboardVO.regDate}" pattern="yy-MM-dd"/></td>
+				</tr>
+				<tr style="text-align: left;">
+					<td class="w3-text-gray" style="text-align: left; width: 80px;">작성자 | </td>
+					<td style="text-align: left;"><span>${freeboardVO.name}</span></td>
+					<td class="w3-text-gray" style="text-align: left; width: 80px;">댓글　 | </td>
+					<td style="width: 80px; text-align: left;">${count}</td>
+				</tr>
+			</table>
+			<br>
+			<textarea class="w3-input" name="content" style="width: 100%; min-height: 300px; resize: none;"	readonly>${freeboardVO.content}</textarea>
+			<br>
+	
+		<!-- 수정,삭제,목록 기능 버튼 -->
+		<div class="w3-row">
+			<div class="w3-right">
+				<c:if test="${memberInfo.name==freeboardVO.name}">
+					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="수정"
+						onclick="location='/erp/freeboard/freeboardUpdateForm?num=${freeboardVO.num}'" />
+					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="삭제"
+						onclick="location='/erp/freeboard/freeboardDelete?num=${freeboardVO.num}'" />
+				</c:if>
+				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+					onclick="location='/erp/freeboard/freeboardList'">목록</button>
+			</div>
 		</div>
-	</div>
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width: 15%"><p></p></div>		
-		<div class="w3-col w3-right" style="width: 15%"><p></p></div>		
-		<div class="w3-rest w3-center">
-			<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-				<input class="w3-btn w3-round-large"  type="button" value="수정" 
-					onclick="location='/erp/freeboard/freeboardUpdateForm?num=${freeboardVO.num}'"/>
-				<input class="w3-btn w3-round-large"  type="button" value="삭제" 
-					onclick="location='/erp/freeboard/freeboardDelete?num=${freeboardVO.num}'"/>
-			</sec:authorize>
-			<button class="w3-btn w3-round-large"
-				onclick="location='/erp/freeboard/freeboardList'">목록으로</button>
-		</div>
-	</div>
-
-	<br>
-
-	<!-- 댓글 작성 부분 -->
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width: 15%"><p></p></div>
-		<div class="w3-col w3-right" style="width: 15%"><p></p></div>
-		<div class="w3-rest w3-row-padding">
+		<br>
+	
+		<!-- 댓글 작성 부분 -->
+		<div class="w3-row">
 			<form action="/erp/freeboard/replyWrite" method="post">
-			
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
 				<input type="hidden" name="empno" value="${memberInfo.empno}">
-				
-				<div class="w3-col s2 w3-center">
-					<label>작성자</label> 
-					<input class="w3-input w3-border w3-round-large"
-						readonly value="${memberInfo.name}">
-				</div>
-				
-				<div class="w3-col s8 w3-center">
-					<label>댓글</label>
-					<input class="w3-input w3-border w3-round-large" type="text" name="reply">
-				</div>
-				<div class="w3-col s1 w3-center"><p></p></div>
-				<div class="w3-col s1 w3-center">
-					<label>&nbsp;</label>
-					<input class="w3-btn w3-input page_button w3-round-large w3-right"
-						type="submit" value="등록">
-				</div>
+				<table style="width: 100%">
+					<tr>
+						<td class="w3-text-gray" style="width: 80px;"><span>${memberInfo.name}</span></td>
+						<td><input class="w3-input w3-border" type="text" name="reply"></td>
+						<td style="width: 50px;">
+						<button class="w3-btn w3-input page_button w3-round-large" type="submit">
+						<i class="fa fa-pencil"></i>
+						</button>
+						</td>
+					</tr>
+				</table>
 			</form>
 		</div>
-	</div>
-			
-	<!-- 달려있는 댓글 보기 -->
-	<div class="w3-row">
-		<div class="w3-col w3-left" style="width:15%"><p></p></div>
-		<div class="w3-col w3-right" style="width:15%"><p></p></div>
-		<div class="w3-rest w3-row-padding">
-		
+				
+		<!-- 달려있는 댓글 보기 -->
+		<div class="w3-row w3-hoverable">
+			<br>
 			<form action="/erp/freeboard/replyDelete" name="replyDelete" method="post">
 				<input type="hidden" name="num" value="${freeboardVO.num}"> 
 				<input type="hidden" name="child" value="${freeboardReplyVO.child}">
@@ -136,52 +105,65 @@
 				<input type="hidden" name="empno" value="${memberInfo.empno}">
 			</form>
 			
-			<table class="w3-table w3-striped w3-border w3-centered">
-			
-				<tr>
-					<th style="width: 10%">작성자</th>
-					<th style="width: 55%">내용</th>
-					<th style="width: 20%">작성일</th>
-					<th style="width: 5%"></th>
-					<th style="width: 5%"></th>
-					<th style="width: 5%"></th>
-				</tr>
+			<table class="w3-table w3-bordered w3-striped w3-border-top w3-small" style="width: 100%">
 				<c:forEach var="replyList" items="${replyList}">
-					<tr>
-						<c:if test="${replyList.child=='0'}">
-							<td>${replyList.name}</td>
-							<td style="text-align: left;">${replyList.reply}</td>
-							<td>
-								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
+				<tr>
+					<c:if test="${replyList.child=='0'}">
+						<td class="w3-text-gray" style="width: 80px;">${replyList.name}</td>
+						<td style="text-align: left;">${replyList.reply}</td>
+						<c:if test="${memberInfo.empno!=replyList.empno}">
+							<td class="w3-small" style="width:120px;">
+								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd. hh:mm"/>
 							</td>
-							<c:if test="${memberInfo.empno==replyList.empno}">
-								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}', '${replyList.child}')" /></td>
-								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
-							</c:if>
-							<td>
-								<input type="button" onclick="ReReply('${replyList.replynum}')" value="댓글">	
+							<td class="w3-large" style="width: 40px;"></td>
+							<td class="w3-large" style="width: 40px;"></td>
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-red" onclick="ReReply('${replyList.replynum}')"><i class="fa fa-commenting"></i></a>
 							</td>
 						</c:if>
-						<!-- 대댓글 보기 -->
-						<c:if test="${replyList.child!='0'}">
-							<td>${replyList.name}</td>
-							<td style="text-align: left;"><i class="fa fa-hand-o-right"></i>${replyList.reply}</td>
-							<td>
-								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd_hh:mm:ss"/>
+						<c:if test="${memberInfo.empno==replyList.empno}">
+							<td class="w3-small" style="width:120px;">
+								<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd. hh:mm"/>
 							</td>
-							<c:if test="${memberInfo.empno==replyList.empno}">
-								<td><input type="button" value="수정"
-									onclick="Update('${replyList.replynum}', '${replyList.child}')" /></td>
-								<td><input type="button" value="삭제"
-									onclick="Delete('${replyList.replynum}', '${replyList.child}')" /></td>
-							</c:if>
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-blue" onclick="Update('${replyList.replynum}', '${replyList.child}')"><i class="fa fa-pencil-square"></i></a>
+							</td>
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-red" onclick="Delete('${replyList.replynum}', '${replyList.child}')"><i class="fa fa-window-close"></i></a>
+							</td>
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-red" onclick="ReReply('${replyList.replynum}')"><i class="fa fa-commenting"></i></a>
+							</td>
 						</c:if>
-					</tr>
+					</c:if>
+					
+					<!-- 대댓글 보기 -->
+					<c:if test="${replyList.child!='0'}">
+						<td class="w3-text-gray" style="width: 80px;">${replyList.name}</td>
+						<td style="text-align: left;"><i class="fa fa-hand-o-right"></i>${replyList.reply}</td>
+						<td class="w3-small" style="width:120px;">
+							<fmt:formatDate value="${replyList.regDate}" pattern="yy.MM.dd. hh:mm"/>
+						</td>
+						<c:if test="${memberInfo.empno!=replyList.empno}">
+							<td class="w3-large" style="width: 40px;"></td>
+							<td class="w3-large" style="width: 40px;"></td>
+							<td class="w3-large" style="width: 40px;"></td>
+						</c:if>
+						<c:if test="${memberInfo.empno==replyList.empno}">
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-blue" onclick="Update('${replyList.replynum}', '${replyList.child}')"><i class="fa fa-pencil-square"></i></a>
+							</td>
+							<td class="w3-large" style="width: 40px;">
+								<a class="w3-hover-text-red" onclick="Delete('${replyList.replynum}', '${replyList.child}')"><i class="fa fa-window-close"></i></a>
+							</td>
+							<td class="w3-large" style="width: 40px;"></td>
+						</c:if>
+					</c:if>
+				</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
+</div>
 </body>
 </html>

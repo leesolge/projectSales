@@ -111,8 +111,12 @@ public class FreeboardService {
 		String num = request.getParameter("num");
 		FreeboardVO freeboardVO = dao.freeboardContent(num);
 		ArrayList<FreeboardReplyVO> replyList = dao.replyList(num);
+		
+		int count = dao.getReplyCount(num);
+		
 		mav.addObject("freeboardVO", freeboardVO);
 		mav.addObject("replyList", replyList);
+		mav.addObject("count", count);
 		return mav;
 	}
 	

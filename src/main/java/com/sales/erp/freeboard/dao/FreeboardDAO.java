@@ -10,6 +10,7 @@ import com.sales.erp.freeboard.vo.FreeboardReplyVO;
 import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
 import com.sales.erp.member.vo.MemberVO;
+import com.sales.erp.notice.dao.NoticeMapper;
 
 @Repository
 public class FreeboardDAO {
@@ -80,6 +81,11 @@ public class FreeboardDAO {
 	public FreeboardReplyVO replyUpdateForm(FreeboardReplyVO voParam){
 		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
 		return mapper.replyUpdateForm(voParam);
+	}
+	
+	public int getReplyCount(String num) {
+		FreeboardMapper mapper = sqlSession.getMapper(FreeboardMapper.class);
+		return mapper.getReplyCount(num);
 	}
 	
 	public void replyUpdate(FreeboardReplyVO vo){
