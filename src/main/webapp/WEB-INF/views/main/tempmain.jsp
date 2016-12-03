@@ -15,10 +15,7 @@
 	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
 		<div class="w3-threequarter">
 			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
-				<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">
-					<img class="mySlides" src="/erp/resources/image/banner01.png" style="width:100%; max-height: 180px;">
-					<img class="mySlides" src="/erp/resources/image/banner02.png" style="width:100%; max-height: 180px;">
-				</div>
+				<h1>그래프</h1>
 			</div>
 		</div>
 		<div class="w3-quarter">
@@ -111,6 +108,16 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Bottom -->
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+			<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">
+				<img class="mySlides" src="/erp/resources/image/banner01.png" style="width:100%; max-height: 180px;">
+				<img class="mySlides" src="/erp/resources/image/banner02.png" style="width:100%; max-height: 180px;">
 			</div>
 		</div>
 	</div>
