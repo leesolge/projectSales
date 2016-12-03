@@ -4,7 +4,33 @@
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <body>
-<div id="imagePreview"></div>
+<div class="w3-container">
+	<br>
+	<div class="w3-row" style="width: 500px; margin: auto;">
+		<div class="w3-container w3-indigo">
+			<h4 class="w3-text-white"><i class="fa fa-user-plus"></i>  회원 등록</h4>
+		</div>
+		<div class="w3-container w3-white w3-card-4">
+			<form method="post" action="JoinMember" enctype="multipart/form-data">
+				<table border="1">
+					<tr>
+						<td style="width: 120px; height: 162px;"><div id="imagePreview"></div></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="width: 150px;"><input id="image" type="file" name="file" onchange="InputImage();" required></td>
+					</tr>
+				</table>
+				<label class="w3-text-indigo"><b>등록자</b></label>
+					
+				<div class="w3-center">
+				<button class="w3-btn w3-indigo w3-text-white" onclick="javascript:registOrder()">등록</button>
+				<button class="w3-btn w3-indigo w3-text-white" onclick="javascript:toList()">목록</button>
+				</div>
+			</form><br>
+		</div>
+	</div>
+</div>
 	<div class="w3-row ">
 		<div class="w3-col w3-left" style="width:30%"><p></p></div>
 		<div class="w3-col w3-right" style="width:30%"><p></p></div>

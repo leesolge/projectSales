@@ -33,7 +33,21 @@
 					<c:if test="${weather.wfEn == 'Rain'}">
 						<img src="/erp/resources/image/rain.png" class="w3-image w3-circle w3-card-4">
 					</c:if><br>
-					<h3 class="w3-opacity">맑음, ${weather.temp}℃</h3>
+					<h3 class="w3-opacity">
+					<c:if test="${weather.wfEn == 'Clear'}">
+					맑음, 
+					</c:if>
+					<c:if test="${weather.wfEn == 'Partly Cloudy'}">
+					다소 흐림, 
+					</c:if>
+					<c:if test="${weather.wfEn == 'Mostly Cloudy'}">
+					흐림, 
+					</c:if>
+					<c:if test="${weather.wfEn == 'Rain'}">
+					비, 
+					</c:if>
+					${weather.temp}℃
+					</h3>
 				</c:forEach>
 			</div>
 			<div class="w3-hide-large w3-hide-medium"><br></div>
