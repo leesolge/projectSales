@@ -132,7 +132,7 @@
 								style="cursor: pointer;">
 								<td>${list.proname}</td>
 								<td>${list.proamount}</td>
-								<td>${list.originprice}</td>
+								<td style="text-align: right;"><fmt:formatNumber value="${list.originprice}" pattern="#,###" /></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -242,10 +242,10 @@
 	</div>
 </div>
 <div class="w3-center">
-	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:morders('${ovo.id}')">수정</button></c:if>
-	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')">취소</button></c:if>
-	<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button onclick="javascript:corders('${ovo.id}')">판매승인</button></c:if>
-	<button onclick="javascript:jump('${ovo.checks}')">목록</button>
+	<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button class="w3-btn w3-indigo w3-text-white" onclick="javascript:corders('${ovo.id}')">판매승인</button></c:if>
+	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">판매취소</button></c:if>
+	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:morders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">수정</button></c:if>
+	<button onclick="javascript:jump('${ovo.checks}')" class="w3-btn w3-indigo w3-text-white">목록</button>
 </div>
 
 </body>

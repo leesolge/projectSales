@@ -30,7 +30,7 @@
 	<div class="w3-container">
 		<div class="w3-row">
 			<div class="w3-container w3-indigo">
-				<h4 class="w3-text-white"><i class="fa fa-envelope-open"></i>  판매 등록</h4>
+				<h4 class="w3-text-white"><i class="fa fa-balance-scale"></i>  판매 등록</h4>
 			</div>
 			<form name="list" action="/erp/order/list" method="post"></form>
 			<div class="w3-container w3-white w3-card-4">
