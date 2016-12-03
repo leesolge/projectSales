@@ -39,7 +39,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         User user=(User)sc.loadUserByUsername(id);
         
         if(!pw.equals(user.getPassword())){
-            throw new BadCredentialsException("틀렸어!!패스워드가 일치하지 않습니다.");
+            throw new BadCredentialsException("패스워드가 일치하지 않습니다.");
         }
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         MemberVO memberInfo = dao.getMemberEmpno(id);

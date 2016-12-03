@@ -72,7 +72,7 @@
 					<c:forEach var="list" items="${list}" begin="0" end="4">
 					<tr style="cursor:pointer;" onclick="location.href='/erp/notice/noticeContent?num=${list.num}'">
 						<td style="text-align: left;"><span title="${list.title}">${list.title}</span></td>
-						<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
+						<td><fmt:formatDate value="${list.regDate}" pattern="yy-MM-dd"/></td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -98,7 +98,7 @@
 						<tr>
 							<td style="text-align: left;"><span title="${c.title}">${c.title}</span></td>
 							<td>${c.sender}</td>
-							<td><fmt:formatDate value="${c.senddate}" pattern="yyyy-MM-dd"/></td>
+							<td><fmt:formatDate value="${c.senddate}" pattern="yy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
 				</table>

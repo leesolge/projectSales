@@ -25,27 +25,27 @@
 			authentication-failure-url="/loginfail" />
 		<security:logout logout-success-url="/" />
 
+		<security:intercept-url pattern="/**" access="permitAll" />
+		<security:intercept-url pattern="/main"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/notice/admin/**"
+			access="hasAnyAuthority('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/notice/**"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/manager/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" />
 		<security:intercept-url pattern="/employee/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')" />
-		<security:intercept-url pattern="/transact/**"
-			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" />
-		<security:intercept-url pattern="/main"
-			access="isAuthenticated()" />
 		<security:intercept-url pattern="/order/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_EMPLOYEE')" />
-		<security:intercept-url pattern="/notice/admin/**"
-			access="hasAnyAuthority('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/notice/**"
-			access="isAuthenticated()" />
 		<security:intercept-url pattern="/note/**"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/ledger/**"
 			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" />
-		<security:intercept-url pattern="/**" access="permitAll" />
+		<!-- <security:intercept-url pattern="/transact/**"
+			access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_BUDGET')" /> -->
 	</security:http>
 
 	<bean id="passwordEncoder"

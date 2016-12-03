@@ -67,7 +67,7 @@
 						<td>실지급액</td>
 					</tr>
 				</table>
-				<div style="height:400px; overflow: auto;">
+				<div style="height:280px; overflow: auto;">
 					<table class="w3-table w3-small w3-hoverable w3-bordered">
 						<c:forEach var="slist" items="${salarylist}">
 							<tr>
