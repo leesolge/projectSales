@@ -30,20 +30,14 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
 				<input type="hidden" name="child" value="${vo.child}">
 				<table class="w3-table w3-striped w3-border w3-centered">
 					<tr>
-						<th style="width: 10%">작성자</th>
-						<th style="width: 60%">내용</th>
-						<th style="width: 20%">작성일</th>
-						<th style="width: 10%">수정</th>
-
-
+						<th style="width: 84%">수정할 내용</th>
+						<th style="width: 7%"></th>
+						<th style="width: 9%"></th>
 					</tr>
 					<tr>
-
-						<td>${vo.empno}</td>
 						<td><input class="w3-input w3-border w3-round-large" type="text" name="reply" value="${vo.reply}" /></td>
-						<td><fmt:formatDate value="${vo.regDate}"
-								pattern="yy.MM.dd-hh:mm:ss" /></td>
 						<td><input type="submit" value="수정" /></td>
+						<td><button onclick="history.back()">취소</button></td>
 					</tr>
 				</table>
 			</form>

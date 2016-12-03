@@ -3,27 +3,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<script>
-/* function writeFormSubmit(){
-	if ( $.trim($("#name1").val()) == "") {
-		alert("작성자를 입력해주세요.");
-		$("#name1").focus();
-		return;
-	}
-	if ($.trim($("#title1").val()) == "") {
-		alert("글 제목을 입력해주세요.");
-		$("#title1").focus();
-		return;
-	}
-	if ($.trim($("#content1").val()) == "") {
-		alert("글 내용을 입력해주세요.");
-		$("#content1").focus();
-		return;
-	}
-	$("#form1").submit();
-} */
-</script>
 </head>
 <body>
 	<div class="w3-container w3-center">
@@ -63,7 +42,6 @@
 							onclick="history.back()">목록으로</button>
 					</div>
 					<div class="w3-rest w3-center">
-						<!-- <a href="#" onclick="writeFormSubmit()" class="w3-btn w3-round-large">쓰기</a> -->
 						<input class="w3-btn w3-round-large" type="submit" value="쓰기" />
 						<input class="w3-btn w3-round-large" type="reset" value="취소" />
 					</div>

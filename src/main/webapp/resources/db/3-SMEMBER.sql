@@ -1,5 +1,5 @@
 -- 회원
-
+select * from smember;
 -- 회원 테이블 삭제
 DROP TABLE SMEMBER;
 -- 사번 시퀀스 삭제
