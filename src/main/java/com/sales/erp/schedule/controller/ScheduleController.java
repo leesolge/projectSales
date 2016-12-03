@@ -117,6 +117,7 @@ public class ScheduleController {
 		  request.setAttribute("empno", empno);
 		  request.setAttribute("count", count);
 		  request.setAttribute("check", check);
+		  request.setAttribute("history", "개인메뉴 > 일정관리");
 		  return "/schedule/calendar";
 		}
 		
@@ -181,7 +182,7 @@ public class ScheduleController {
 			  request.setAttribute("vo", list);
 			  request.setAttribute("count", count);
 			  request.setAttribute("check", check);
-			  
+			  request.setAttribute("history", "개인메뉴 > 일정관리");
 			  
 			  return "/schedule/calendar";
 		}

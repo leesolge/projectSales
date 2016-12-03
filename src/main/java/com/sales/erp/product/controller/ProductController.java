@@ -21,12 +21,14 @@ public class ProductController {
 	public ModelAndView selectProduct(){
 		ModelAndView mav = proservice.selectAll();
 		mav.setViewName("/product/productList");
+		mav.addObject("history", "자재팀메뉴 > 상품 관리");
 		return mav;
 	}
 	
 	@RequestMapping( value="/product/list" , method = RequestMethod.POST )
 	public ModelAndView selectOneProduct(@RequestParam("procode") String procode){
 		ModelAndView mav = proservice.selectOne(procode);
+		mav.addObject("history", "자재팀메뉴 > 상품 관리");
 		mav.setViewName("/product/productList");
 		return mav;
 	}
@@ -36,6 +38,7 @@ public class ProductController {
 		String procode = request.getParameter("procode");
 		ModelAndView mav = proservice.selectOne(procode);
 		mav.setViewName("/product/productInfo");
+		mav.addObject("history", "자재팀메뉴 > 상품 관리 > 상품 세부정보");
 		return mav;
 	}
 	
@@ -43,6 +46,7 @@ public class ProductController {
 	public ModelAndView insertPro(){
 		ModelAndView  mav = new ModelAndView();
 		mav.setViewName("/product/insertForm");
+		mav.addObject("history", "자재팀메뉴 > 상품 관리 > 상품 등록");
 		return mav;
 	}
 	
@@ -63,6 +67,7 @@ public class ProductController {
 		String procode = request.getParameter("procode");
 		ModelAndView mav = proservice.selectOne(procode);
 		mav.setViewName("/product/productUpdate");
+		mav.addObject("history", "자재팀메뉴 > 상품 관리 > 상품 세부 정보 > 상품수정");
 		return mav;
 	}
 	

@@ -9,7 +9,7 @@
 <body><br>
 <div class="w3-container">
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
-		<h3><i class="fa fa-inbox"></i>  상품정보</h3>
+		<h3><i class="fa fa-inbox"></i>  상품 관리</h3>
 		<div class="w3-container" style="height: 40px;">
 			물품코드 : 
 			<input class="w3-border w3-border-deep-purple" type="text" placeholder="Search for Code.." id="myInput" onkeyup="myFunction()">

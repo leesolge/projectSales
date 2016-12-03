@@ -22,7 +22,7 @@
 			<p>
 			<div class="w3-row w3-center">
 				<input class="w3-btn w3-indigo" type="submit" value="작성" />
-				<input class="w3-btn w3-indigo" type="reset" value="취소" />		
+				<button class="w3-btn w3-indigo" onclick="history.go(-1)">취소</button>		
 			</div><br>
 		</form>
 	</div>
