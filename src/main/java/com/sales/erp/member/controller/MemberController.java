@@ -20,7 +20,7 @@ public class MemberController {
 
 	@RequestMapping("/join")
 	public String Join() {
-		return "/join/join";
+		return "/join/registermember";
 	}
 
 	// 회원가입
@@ -66,12 +66,6 @@ public class MemberController {
 		return mav;
 	}
 
-	// 비밀번호 확인페이지
-	@RequestMapping("/confirmPWD")
-	public String confirmPWD() {
-		return "/join/confirmPWD";
-	}
-	
 	// 아이디 확인(메일전송)
 	@RequestMapping(value="/ConfirmPWD_Member", method=RequestMethod.POST)	
 	public ModelAndView ConfirmPWD_Member(HttpServletRequest request) {		
