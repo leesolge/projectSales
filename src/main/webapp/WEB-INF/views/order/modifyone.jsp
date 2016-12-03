@@ -34,7 +34,7 @@
 			<div class="w3-container w3-white w3-card-4">
 			<form name="regist" action="/erp/order/modify" method="post">
 				<br>
-				<input type="hidden" name="id" value="0">
+				<input type="hidden" name="id" value="${mo.id}">
 				<input type="hidden" name="regdate" value="${mo.regdate}">
 				<table class="w3-table">
 					<tr>
