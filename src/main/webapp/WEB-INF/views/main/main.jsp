@@ -27,6 +27,9 @@
 					<c:if test="${weather.wfEn == 'Partly Cloudy'}">
 						<img src="/erp/resources/image/partly.png" class="w3-image w3-circle w3-card-4">
 					</c:if>
+					<c:if test="${weather.wfEn == 'Cloudy'}">
+						<img src="/erp/resources/image/mostly.png" class="w3-image w3-circle w3-card-4">
+					</c:if>
 					<c:if test="${weather.wfEn == 'Mostly Cloudy'}">
 						<img src="/erp/resources/image/mostly.png" class="w3-image w3-circle w3-card-4">
 					</c:if>
@@ -39,6 +42,9 @@
 					</c:if>
 					<c:if test="${weather.wfEn == 'Partly Cloudy'}">
 					다소 흐림, 
+					</c:if>
+					<c:if test="${weather.wfEn == 'Cloudy'}">
+					흐림, 
 					</c:if>
 					<c:if test="${weather.wfEn == 'Mostly Cloudy'}">
 					흐림, 

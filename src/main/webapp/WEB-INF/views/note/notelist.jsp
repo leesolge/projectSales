@@ -9,10 +9,7 @@
 	<title>쪽지</title>
 </head>
 <body><br>
-	<s:authorize access="hasRole('ROLE_ADMIN')">
-		<a href="#" onclick="jumpPage('adm')" class="w3-right"><i class="fa fa-cogs"></i>  쪽지관리　</a><br><br>
-	</s:authorize>
-	<form action="/erp/admin/note" name="adm"></form>
+<form action="/erp/admin/note" name="adm"></form>
 	<form action="/erp/note/write" name="write" method="post">
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="rec" value="0">
@@ -23,10 +20,13 @@
 		<input type="hidden" name="pageCheck" value="etc">
 		<input type="hidden" name="notenum" value="0">
 	</form>
-	
-	<div class="w3-container">
-		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 300px;">
-			<h4>- 받은 쪽지함<a href="#" onclick="location.reload()"> <i class="fa fa-refresh"></i></a></h4>
+	<s:authorize access="hasRole('ROLE_ADMIN')">
+		<a href="#" onclick="jumpPage('adm')" class="w3-right"><i class="fa fa-cogs"></i>  쪽지관리　</a><br><br>
+	</s:authorize>
+	<div class="w3-row-padding w3-margin-bottom">
+		<div class="w3-half">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 400px;">
+				<h4>- 받은 쪽지함<a href="#" onclick="location.reload()"> <i class="fa fa-refresh"></i></a></h4>
 			<div class="w3-row">
 				<a href="#" onclick="jumpPage('rd')" class="w3-text-grey w3-right">
 					<i class="fa fa-caret-right"></i>  더보기
@@ -39,7 +39,7 @@
 						<td style="width: 100px;">날짜　</td>
 					</tr>
 				</table>
-				<div style="height:250px; overflow: auto;">
+				<div style="height:350px; overflow: auto;">
 				<table class="w3-table w3-small">
 					<c:forEach var="receive" items="${receiveList}">
 					<tr>
@@ -83,8 +83,10 @@
 				<br>
 			</div>
 		</div>
-		<br>
-		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 300px;">
+		<div class="w3-hide-large w3-hide-medium"><br></div>
+		</div>
+		<div class="w3-half">
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding" style="min-height: 400px;">
 			<h4>- 보낸 쪽지함<a href="#" onclick="location.reload()"> <i class="fa fa-refresh"></i></a></h4>
 			<div class="w3-row">
 				<a href="#" onclick="jumpPage('sd')" class="w3-text-grey w3-right">
@@ -98,7 +100,7 @@
 						<td style="width: 100px;">날짜　</td>
 					</tr>
 				</table>
-				<div style="height:250px; overflow: auto;">
+				<div style="height:350px; overflow: auto;">
 				<table class="w3-table w3-small">
 					<c:forEach var="send" items="${sendList}">
 					<tr>
@@ -140,6 +142,7 @@
 				</div>
 				<br>
 			</div>
+		</div>
 		</div>
 	</div>
 	<br>
