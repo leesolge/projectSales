@@ -10,7 +10,7 @@
 <title>nodazi ERP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body class="w3-dark-grey">
+<body class="w3-dark-grey w3-animate-opacity">
 	<c:url value="/login" var="loginURL"></c:url>
 	<div class="w3-display-middle w3-center">
 		<img src="/erp/resources/image/logowhite.png" class="w3-image" style="max-height: 200px;"><br>

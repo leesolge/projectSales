@@ -3,12 +3,12 @@
 
 <html>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<body>
+<body class="w3-dark-grey">
 <div class="w3-container">
 	<br>
 	<div class="w3-row" style="width: 50%; min-width: 500px; margin: auto;">
-		<div class="w3-container w3-dark-grey">
-			<h4 class="w3-text-white"><i class="fa fa-user-plus"></i>  회원 등록</h4>
+		<div class="w3-container w3-light-grey">
+			<h4 class="w3-text-dark-grey"><i class="fa fa-user-plus"></i>  회원 등록</h4>
 		</div>
 		<div class="w3-container w3-white w3-card-4"><br>
 			<form method="post" action="JoinMember" enctype="multipart/form-data">
@@ -97,7 +97,7 @@
 				</table>
 				<div class="w3-center">
 					<input class="w3-btn w3-dark-grey w3-text-white" type="submit" name="confirm" value="가입">
-					<input class="w3-btn w3-dark-grey w3-text-white" type="button" value="취소" onclick="redirect:home"> 
+					<input class="w3-btn w3-dark-grey w3-text-white" type="button" value="취소" onclick="location.href='home';"> 
 				</div>
 			</form><br>
 		</div>
