@@ -361,7 +361,11 @@ public class OrderService {
 		}
 		
 		if(emp==null||emp.equals("")){
-			emp = "";
+			if(authpage.equals("ROLE_MANAGER")){
+				emp = "AND S.TEAM='"+mvo.getTeam()+"' ";
+			}else{
+				emp = "";
+			}
 		}else{
 			boolean check = true;
 			if(teams==null){

@@ -243,8 +243,8 @@
 </div>
 <div class="w3-center">
 	<c:if test="${ovo.checks!='1'&&authpage!='ROLE_EMPLOYEE'}"><button class="w3-btn w3-indigo w3-text-white" onclick="javascript:corders('${ovo.id}')">판매승인</button></c:if>
-	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">판매취소</button></c:if>
-	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:morders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">수정</button></c:if>
+	<c:if test="${ovo.checks!='1'&&(ovo.empno==memberInfo.empno||authpage!='ROLE_EMPLOYEE')}"><button onclick="javascript:dorders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">등록취소</button></c:if>
+	<c:if test="${ovo.checks!='1'&&ovo.empno==memberInfo.empno}"><button onclick="javascript:morders('${ovo.id}')" class="w3-btn w3-indigo w3-text-white">수정</button></c:if>
 	<button onclick="javascript:jump('${ovo.checks}')" class="w3-btn w3-indigo w3-text-white">목록</button>
 </div>
 
