@@ -13,23 +13,9 @@
 <div class="w3-container">
 	<!-- Top -->
 	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
-		<div class="w3-threequarter">
-			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
-				<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">
-					<img class="mySlides" src="/erp/resources/image/banner01.png" style="width:100%; max-height: 180px;">
-					<img class="mySlides" src="/erp/resources/image/banner02.png" style="width:100%; max-height: 180px;">
-				</div>
-			</div>
-		</div>
-		
-		
-		<!-- 차트 -->
-		<div id="chart_div" style="width: 900px; height: 300px;"></div>
-		
-		
-		
 		<div class="w3-quarter">
-			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 270px;">
+				<br><br>
 				<c:forEach items="${weather}" var="weather">
 					<c:if test="${weather.wfEn == 'Clear'}">
 						<img src="/erp/resources/image/clear.png" class="w3-image w3-circle w3-card-4">
@@ -66,7 +52,14 @@
 					</h3>
 				</c:forEach>
 			</div>
-			<div class="w3-hide-large w3-hide-medium"><br></div>
+		</div>
+		<div class="w3-threequarter">
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 270px;">
+				<h5 class="w3-left">
+				<i class="fa fa-thumbs-o-up"></i> 이 달의 영업왕<br>
+				</h5><br><br>
+				<div id="chart_div" style="width: 100%;"></div>
+			</div>
 		</div>
 	</div>
 	
@@ -118,6 +111,15 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Bottom -->
+	<div class="w3-container">
+		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+			<div class="w3-content w3-section w3-display-container" style="min-width:100px; max-height: 200px">
+				<img class="mySlides" src="/erp/resources/image/banner01.png" style="width:100%; max-height: 180px;">
+				<img class="mySlides" src="/erp/resources/image/banner02.png" style="width:100%; max-height: 180px;">
 			</div>
 		</div>
 	</div>

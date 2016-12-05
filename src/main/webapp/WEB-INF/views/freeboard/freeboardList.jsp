@@ -9,7 +9,7 @@
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 		<!-- Title -->
 		<div class="w3-row">
-			<h3><i class="fa fa-bullhorn" aria-hidden="true"></i>${team} 게시판</h3>
+			<h3><i class="fa fa-users"></i>  ${team}  게시판</h3>
 		</div>
 		<!-- Count -->
 		<div class="w3-row w3-right">
@@ -45,7 +45,7 @@
 		</div>
 		
 		<!-- Page -->
-		<div class="w3-row w3-center">
+		<div class="w3-row w3-center w3-small">
 			<ul class="w3-pagination">
 				<c:if test="${paging.page>paging.block}">
 					<li><a href="/erp/freeboard/freeboardList?pg=1" class="w3-hover-black">&laquo;&laquo;</a></li>
@@ -58,7 +58,7 @@
 				<!-- 블록 범위 찍기 -->
 				<c:forEach begin="${paging.fromPage}" end="${paging.toPage}" var="i">
 					<c:if test="${i == paging.page}">
-						<li><a href="#" class="w3-hover-red">${i}</a></li>
+						<li><a href="#" class="w3-hover-red w3-text-red"><b>${i}</b></a></li>
 					</c:if>
 					<c:if test="${i != paging.page}">
 						<li><a href="/erp/freeboard/freeboardList?pg=${i}" class="w3-hover-black">${i}</a></li>
