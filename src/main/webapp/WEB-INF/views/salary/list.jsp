@@ -63,6 +63,7 @@
 				</c:forEach>
 			</table>
 		<br>
+		<s:authorize access="hasAnyAuthority('ROLE_EMPLOYEE', 'ROLE_MANAGER')">
 			당월 개인 실적
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
 					<tr class="w3-indigo">
@@ -92,6 +93,7 @@
 					</c:forEach>
 				</table>
 				</div>
+				</s:authorize>
 				<s:authorize access="hasRole('ROLE_MANAGER')">
 				<br>
 				당월 팀 실적
