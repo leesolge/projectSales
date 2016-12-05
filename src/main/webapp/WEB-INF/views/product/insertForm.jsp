@@ -57,8 +57,8 @@
 				if (!ImagePre) {
 					var newPreview = document.getElementById("imagePreview");
 					ImagePre = new Image();
-					ImagePre.style.width = "300px";
-					ImagePre.style.height = "150px";
+					ImagePre.style.width = "285px";
+					ImagePre.style.height = "227px";
 					newPreview.appendChild(ImagePre);
 				}
 				ImagePre.src = Event.target.result;
