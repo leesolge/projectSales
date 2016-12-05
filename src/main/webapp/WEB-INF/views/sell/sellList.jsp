@@ -9,24 +9,17 @@
 <script type="text/javascript">
 	google.charts.load("visualization", "1.1", {packages: ["bar"]});
 	google.charts.setOnLoadCallback(drawChart);
-	// Set a callback to run when the Google Visualization API is loaded.
 
-	// Callback that creates and populates a data table,
-	// instantiates the pie chart, passes in the data and
-	// draws it.
 	function drawChart() {    	
 		var data = google.visualization.arrayToDataTable([
-          	['Country', 'Area(square km)'],
+          	['사원별 판매실적', '판매건수'],
           	<c:forEach items="${pieDataList}" var="entry">
-					[ '${entry.key}', ${entry.value} ],
+					[ '${entry.key}', ${entry.value}],
 				</c:forEach>
         ]);
     
         var options = {
-            chart: {
-                title: 'Company Performance',
-                
-            }
+
         };
 
         var chart = new google.charts.Bar(document.getElementById('chart_div'));

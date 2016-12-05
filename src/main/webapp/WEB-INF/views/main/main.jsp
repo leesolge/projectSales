@@ -21,6 +21,13 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		<!-- 차트 -->
+		<div id="chart_div" style="width: 900px; height: 300px;"></div>
+		
+		
+		
 		<div class="w3-quarter">
 			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 210px;">
 				<c:forEach items="${weather}" var="weather">
@@ -132,6 +139,31 @@ function carousel() {
     x[myIndex-1].style.display = "block";
     setTimeout(carousel, 3000); 
 }
+
+</script>
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load("visualization", "1.1", {packages: ["bar"]});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {    	
+		var data = google.visualization.arrayToDataTable([
+          	['사원별 판매실적', '판매건수'],
+          	<c:forEach items="${DataList}" var="entry">
+					[ '${entry.key}', ${entry.value}],
+				</c:forEach>
+        ]);
+    
+        var options = {
+
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    }
 
 </script>
 </body>

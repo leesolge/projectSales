@@ -2,6 +2,7 @@ package com.sales.erp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -24,6 +25,8 @@ import com.sales.erp.note.vo.NoteVO;
 import com.sales.erp.notice.service.NoticeService;
 import com.sales.erp.notice.vo.NoticeVO;
 import com.sales.erp.schedule.vo.RssVO;
+import com.sales.erp.sell.service.SellService;
+import com.sales.erp.sell.vo.SellVO.KeyValue;
 
 @Controller
 public class HomeController {
@@ -33,6 +36,9 @@ public class HomeController {
 
 	@Autowired
 	private NoteService noteService;
+	
+	@Autowired
+	private SellService ss;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -107,6 +113,14 @@ public class HomeController {
 		}
 		mav.addObject("weather", list);
 		mav.setViewName("main/main");
+		
+		
+		List<KeyValue> DataList = ss.getChart();
+		mav.addObject("DataList", DataList);
+		
+		
+		
+		
 		return mav;
 	}
 
