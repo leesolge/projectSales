@@ -12,7 +12,7 @@
 <div class="w3-container">
 	<br>
 	<div class="w3-row" style="width: 50%; min-width: 500px; margin: auto;">
-		<div class="w3-container w3-indigo">
+		<div class="w3-container w3-deep-purple">
 			<h4><i class="fa fa-expeditedssl"></i>  권한 수정</h4>
 		</div>
 		<div class="w3-container w3-white w3-card-4"><br>
@@ -20,15 +20,15 @@
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 4cm;">
-							<img src="/erp/resources/portraits/${vo.portrait}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo" style="
+							<img src="/erp/resources/portraits/${vo.portrait}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-deep-purple" style="
 							width: 3.85cm; height: 4.95cm;">
 						</td>
 						<td class="w3-padding">
 							<input type="hidden" name="empno" value="${vo.empno}">
-							<label class="w3-text-indigo"><b>이름</b></label>
+							<label class="w3-text-deep-purple"><b>이름</b></label>
 								<input type="text" name="name" placeholder="Name" class="w3-input" value="${vo.name}" readonly><br>
-							<label class="w3-text-indigo"><b>직급</b></label>
-							<select name="auth" class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-deep-purple"><b>직급</b></label>
+							<select name="auth" class="w3-input w3-border w3-border-deep-purple w3-round">
 								<option class="w3-text-red" value="${vo.auth}" selected>
 									<c:if test="${vo.auth == 'ROLE_ADMIN'}">
 										관리자
@@ -52,8 +52,8 @@
 								<option value="ROLE_EMPLOYEE">영업사원</option>
 								<option value="ROLE_EE">승인대기자</option>
 							</select><br>
-							<label class="w3-text-indigo"><b>소속</b></label>
-							<select  name="team" class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-deep-purple"><b>소속</b></label>
+							<select  name="team" class="w3-input w3-border w3-border-deep-purple w3-round">
 								<option class="w3-text-red"  value="${vo.team}" selected>${vo.team}</option>
 								<option value="관리팀">관리팀</option>
 								<option value="영업1팀">영업1팀</option>
@@ -65,8 +65,8 @@
 					</tr>
 				</table><br>
 				<div class="w3-center">
-				<input type="submit" name="confirm" class="w3-btn w3-indigo w3-text-white" value="수정">
-				<input type="button" value="취소" class="w3-btn w3-indigo w3-text-white" onclick="window.location='/erp/member/memberContent?empno=${vo.empno}'">
+				<input type="submit" name="confirm" class="w3-btn w3-deep-purple w3-text-white" value="수정">
+				<input type="button" value="취소" class="w3-btn w3-deep-purple w3-text-white" onclick="window.location='/erp/member/memberContent?empno=${vo.empno}'">
 				</div>
 			</form><br>
 		</div>

@@ -31,29 +31,29 @@
 			</div>
 			<div class="w3-row">
 				<div class="w3-third w3-center">
-					<img src="/erp/resources/portraits/${vo.portrait}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo" style="
+					<img src="/erp/resources/portraits/${vo.portrait}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-deep-purple" style="
 					width: 3.85cm; height: 4.95cm;">
 				</div>
 				<div class="w3-third w3-padding">
-					<label class="w3-text-indigo"><b>성별</b></label>
+					<label class="w3-text-deep-purple"><b>성별</b></label>
 						<input type="text" class="w3-input" value="${vo.gender}" readonly><br>
-					<label class="w3-text-indigo"><b>이름</b></label>
+					<label class="w3-text-deep-purple"><b>이름</b></label>
 						<input type="text" class="w3-input" value="${vo.name}" readonly><br>
-					<label class="w3-text-indigo"><b>주소</b></label>
+					<label class="w3-text-deep-purple"><b>주소</b></label>
 						<input type="text" class="w3-input" value="${vo.address}" readonly><br>
-					<label class="w3-text-indigo"><b>이메일</b></label>
+					<label class="w3-text-deep-purple"><b>이메일</b></label>
 						<input type="text" class="w3-input" value="${vo.email}" readonly><br>
-					<label class="w3-text-indigo"><b>생년월일</b></label>
+					<label class="w3-text-deep-purple"><b>생년월일</b></label>
 						<input type="text" class="w3-input" value="<fmt:formatDate value="${vo.birth}" pattern="yyyy년 MM월 dd일"/>" readonly><br>
-					<label class="w3-text-indigo"><b>전화번호</b></label>
+					<label class="w3-text-deep-purple"><b>전화번호</b></label>
 						<input type="text" class="w3-input" value="${vo.phone}" readonly><br>
 				</div>
 				<div class="w3-third w3-padding">
-					<label class="w3-text-indigo"><b>사번</b></label>
+					<label class="w3-text-deep-purple"><b>사번</b></label>
 						<input type="text" class="w3-input" value="${vo.empno}" readonly><br>
-					<label class="w3-text-indigo"><b>소속</b></label>
+					<label class="w3-text-deep-purple"><b>소속</b></label>
 						<input type="text" class="w3-input" value="${vo.team}" readonly><br>
-					<label class="w3-text-indigo"><b>직급</b></label>
+					<label class="w3-text-deep-purple"><b>직급</b></label>
 						<c:if test="${vo.auth == 'ROLE_ADMIN'}">
 							<input type="text" class="w3-input" value="관리자" readonly><br>
 						</c:if>
@@ -69,15 +69,15 @@
 						<c:if test="${vo.auth == 'ROLE_EE'}">
 							<input type="text" class="w3-input" value="-" readonly><br>
 						</c:if>
-					<label class="w3-text-indigo"><b>입사일</b></label>
+					<label class="w3-text-deep-purple"><b>입사일</b></label>
 						<input type="text" class="w3-input" value="<fmt:formatDate value="${vo.join}" pattern="yyyy년 MM월 dd일"/>" readonly><br>
-					<label class="w3-text-indigo"><b>계좌번호</b></label>
+					<label class="w3-text-deep-purple"><b>계좌번호</b></label>
 						<input type="text" class="w3-input" value="${vo.account}" readonly><br>
 				</div>
 			</div>
 			<c:if test="${memberInfo.empno==vo.empno}">
 				<div class="w3-row w3-center">
-					<input type="button" value="수정" onclick="Update('UpdateFormE')" class="w3-round-large w3-indigo w3-border w3-border-indigo"/>
+					<input type="button" value="수정" onclick="Update('UpdateFormE')" class="w3-round-large w3-deep-purple w3-border w3-border-deep-purple"/>
 				</div>
 			</c:if>
 		</div>

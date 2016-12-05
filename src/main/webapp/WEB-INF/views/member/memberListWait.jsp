@@ -22,12 +22,12 @@
 		<div class="w3-container w3-center">
 		<!-- List -->
 		<table class="w3-table w3-small w3-hoverable w3-bordered">
-			<tr class="w3-indigo">	
-				<th>EMPNO</th>
-				<th>NAME</th>								
-				<th>TEAM</th>
-				<th>APPROVE</th>
-				<th>CANCEL</th>
+			<tr class="w3-deep-purple">	
+				<th>사번</th>
+				<th>이름</th>								
+				<th>소속</th>
+				<th>승인</th>
+				<th>취소</th>
 			</tr>
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 			<c:forEach items="${list}" var="member">

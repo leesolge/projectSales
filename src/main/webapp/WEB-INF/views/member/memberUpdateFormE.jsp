@@ -12,7 +12,7 @@
 <div class="w3-container">
 	<br>
 	<div class="w3-row" style="width: 50%; min-width: 500px; margin: auto;">
-		<div class="w3-container w3-indigo">
+		<div class="w3-container w3-deep-purple">
 			<h4><i class="fa fa-user-circle"></i>  내 정보 수정</h4>
 		</div>
 		<div class="w3-container w3-white w3-card-4"><br>
@@ -20,15 +20,15 @@
 			<form method="post" action="/erp/member/memberUpdateE" enctype="multipart/form-data">
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 132px; height: 174px;" class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo">
+						<td style="width: 132px; height: 174px;" class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-deep-purple">
 							<div id="imagePreview"></div>
 						</td>
 						<td class="w3-padding">
 							<input type="hidden" name="empno" value="${vo.empno}">
-							<label class="w3-text-indigo"><b>이름</b></label>
-								<input type="text" name="name" placeholder="Name" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.name}"><br>
-							<label class="w3-text-indigo"><b>비밀번호</b></label>
-								<input type="text" name="pwd" placeholder="Pwd" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.pwd}">
+							<label class="w3-text-deep-purple"><b>이름</b></label>
+								<input type="text" name="name" placeholder="Name" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.name}"><br>
+							<label class="w3-text-deep-purple"><b>비밀번호</b></label>
+								<input type="text" name="pwd" placeholder="Pwd" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.pwd}">
 						</td>
 					</tr>
 					<tr>
@@ -38,44 +38,44 @@
 				<table style="width: 100%;">
 					<tr>
 						<td><br>
-							<label class="w3-text-indigo"><b>성별</b></label><br>
+							<label class="w3-text-deep-purple"><b>성별</b></label><br>
 							&nbsp;&nbsp;&nbsp;&nbsp;${vo.gender}자
 						</td>
 						<td><br>
-							<label class="w3-text-indigo"><b>생년월일</b></label>
+							<label class="w3-text-deep-purple"><b>생년월일</b></label>
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${vo.birth}" pattern="yyyy년 MM월 dd일"/>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><br>
 						<a onclick="sample6_execDaumPostcode()" style="cursor: pointer;">
-							<label class="w3-text-indigo"><b>주소&nbsp;<i class="fa fa-search"></i></b></label>
-							<input type="text" id="sample6_address" name="address" placeholder="Address" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.address}">
+							<label class="w3-text-deep-purple"><b>주소&nbsp;<i class="fa fa-search"></i></b></label>
+							<input type="text" id="sample6_address" name="address" placeholder="Address" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.address}">
 						</a>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><br>
-							<label class="w3-text-indigo"><b>전화번호</b></label>
-							<input type="text" name="phone" placeholder="Phone" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.phone}">
+							<label class="w3-text-deep-purple"><b>전화번호</b></label>
+							<input type="text" name="phone" placeholder="Phone" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.phone}">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><br>
-							<label class="w3-text-indigo"><b>이메일</b></label>
-							<input type="email" name="email" placeholder="E-mail" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.email}">
+							<label class="w3-text-deep-purple"><b>이메일</b></label>
+							<input type="email" name="email" placeholder="E-mail" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.email}">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><br>
-							<label class="w3-text-indigo"><b>계좌번호</b></label>
-							<input type="text" name="account" placeholder="Account" class="w3-input w3-border w3-border-indigo w3-round" value="${vo.account}">
+							<label class="w3-text-deep-purple"><b>계좌번호</b></label>
+							<input type="text" name="account" placeholder="Account" class="w3-input w3-border w3-border-deep-purple w3-round" value="${vo.account}">
 						</td>
 					</tr>
 				</table><br>
 				<div class="w3-center">
-				<input type="submit" name="confirm" class="w3-btn w3-indigo w3-text-white" value="수정">
-				<input type="button" value="취소" class="w3-btn w3-indigo w3-text-white" onclick="window.location='/erp/member/memberContent?empno=${vo.empno}'">
+				<input type="submit" name="confirm" class="w3-btn w3-deep-purple w3-text-white" value="수정">
+				<input type="button" value="취소" class="w3-btn w3-deep-purple w3-text-white" onclick="window.location='/erp/member/memberContent?empno=${vo.empno}'">
 				</div>
 			</form><br>
 		</div>

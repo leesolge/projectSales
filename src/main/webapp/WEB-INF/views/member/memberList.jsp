@@ -24,7 +24,7 @@
 	<div class="w3-container" align="center">
 		<!-- List -->
 		<table class="w3-table w3-small w3-hoverable w3-bordered">
-			<tr class="w3-indigo">	
+			<tr class="w3-deep-purple">	
 				<th>EMPNO</th>
 				<th>NAME</th>
 				<th>AUTH</th>
@@ -89,7 +89,7 @@
 
 			<!-- Search -->
 			<form action="/erp/member/memberList" name="search" method="post">
-				<select name="field" class="w3-border w3-border-indigo" style="width: 70px; height: 30px;">
+				<select name="field" class="w3-border w3-border-deep-purple" style="width: 70px; height: 30px;">
 					<c:if test="${field == 'name'}">
 						<option value="name" selected="selected">이름</option>
 					</c:if>
@@ -104,8 +104,8 @@
 						<option value="team">소속</option>
 					</c:if>
 					</sec:authorize>
-				</select> <input type="text" class="w3-border w3-border-indigo" name="word" placeholder="검색어" value="${word}" style="width: 120px; height: 30px;"/>
-				<button class="w3-border w3-border-indigo w3-indigo" type="submit" name="submit" style="height: 30px;"><i class="fa fa-search"></i></button>
+				</select> <input type="text" class="w3-border w3-border-deep-purple" name="word" placeholder="검색어" value="${word}" style="width: 120px; height: 30px;"/>
+				<button class="w3-border w3-border-deep-purple w3-deep-purple" type="submit" name="submit" style="height: 30px;"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 		</div>
