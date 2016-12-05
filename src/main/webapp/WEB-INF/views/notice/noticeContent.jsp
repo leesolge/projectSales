@@ -31,12 +31,12 @@
 		<div class="w3-row">
 			<div class="w3-right">
 				<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="수정"
+					<input class="w3-btn w3-border w3-text-blue-grey w3-border-blue-grey w3-round-large w3-small w3-white" type="button" value="수정"
 						onclick="location='/erp/notice/admin/noticeUpdateForm?num=${noticeVo.num}'" />
-					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="삭제"
+					<input class="w3-btn w3-border w3-text-blue-grey w3-border-blue-grey w3-round-large w3-small w3-white" type="button" value="삭제"
 						onclick="location='/erp/notice/admin/noticeDelete?num=${noticeVo.num}'" />
 				</sec:authorize>
-				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+				<button class="w3-btn w3-border w3-text-blue-grey w3-border-blue-grey w3-round-large w3-small w3-white"
 					onclick="location='/erp/notice/noticeList'">목록</button>
 			</div>
 		</div>

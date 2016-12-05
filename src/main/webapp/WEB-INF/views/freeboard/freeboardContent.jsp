@@ -75,7 +75,7 @@
 				<table style="width: 100%">
 					<tr>
 						<td class="w3-text-gray" style="width: 80px;"><span>${memberInfo.name}</span></td>
-						<td><input class="w3-input w3-border" type="text" name="reply"></td>
+						<td><input class="w3-input w3-border" type="text" name="reply" required></td>
 						<td style="width: 50px;">
 						<button class="w3-btn w3-input page_button w3-round-large" type="submit">
 						<i class="fa fa-pencil"></i>

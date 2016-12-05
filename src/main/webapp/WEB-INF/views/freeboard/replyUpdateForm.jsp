@@ -21,7 +21,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
 			<input type="hidden" name="replynum" value="${vo.replynum}">
 			<input type="hidden" name="child" value="${vo.child}">
 			
-			<input class="w3-input w3-border w3-round-large" type="text" name="reply" value="${vo.reply}" /><br>
+			<input class="w3-input w3-border w3-round-large" type="text" name="reply" value="${vo.reply}" required/><br>
 			<div class="w3-row w3-center">
 				<input class="w3-btn w3-brown" type="submit" value="수정" />
 				<button class="w3-btn w3-brown" onclick="history.back()">취소</button>

@@ -11,7 +11,7 @@
 			<br>
 			<input type="hidden" name="name" value="${memberInfo.name}">
 			<label class="w3-text-brown"><b>제목</b></label>
-			<input class="w3-input w3-border w3-border-brown w3-round" name="title" type="text" placeholder="제목을 입력하세요.">
+			<input class="w3-input w3-border w3-border-brown w3-round" name="title" type="text" placeholder="제목을 입력하세요." required>
 				<p>
 				<label class="w3-text-brown"><b>내용</b></label>
 				<textarea class="w3-input w3-border w3-border-brown w3-round" id="content1" name="content" placeholder="내용을 입력하세요."
