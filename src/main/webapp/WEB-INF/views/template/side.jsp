@@ -62,7 +62,6 @@
 					<td>
 						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block" title="로그아웃"><i class="fa fa-sign-out fa-lg"></i></a>
 					</td>
-
 				</tr>
 			</table>
 		</div>
@@ -150,9 +149,11 @@
 		      str += this.empno;
 		   });
 		   if(str=="0"){
-			   jQuery("#note_count").hide();
+			   jQuery("#note_count1").hide();
+			   jQuery("#note_count2").hide();
 		   }else{
-			   jQuery("#note_count").show();
+			   jQuery("#note_count1").show();
+			   jQuery("#note_count2").show();
 		   }
 		   
 		   $("#note_count1").html(str);
