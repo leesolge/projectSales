@@ -93,6 +93,7 @@ public class MemberController {
 	public ModelAndView memberUpdateFormE(HttpServletRequest request) {
 		ModelAndView mav = ms.memberUpdateFormE(request);
 		mav.setViewName("member/memberUpdateFormE");
+		mav.addObject("history", "내정보 > 내정보수정");
 		return mav;
 	}
 
@@ -130,6 +131,7 @@ public class MemberController {
 	public ModelAndView memberUpdateFormA(HttpServletRequest request) {
 		ModelAndView mav = ms.memberUpdateFormA(request);
 		mav.setViewName("member/memberUpdateFormA");
+		mav.addObject("history", "영업팀메뉴 > 사원정보 > 권한수정");
 		return mav;
 	}
 
