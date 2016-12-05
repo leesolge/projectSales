@@ -9,7 +9,7 @@
 	<br>
 	<div class="w3-row" style="width: 100%; margin: auto;">
 		<div class="w3-container w3-indigo w3-center">
-			<h4><i class="fa fa-user-plus"></i>  회원 등록</h4>
+			<h4><i class="fa fa-plus-square"></i>  상품 등록</h4>
 		</div>
 		<div class="w3-container w3-white w3-card-4"><br>
 			<form action="/erp/product/insert" method="post" enctype="multipart/form-data">
