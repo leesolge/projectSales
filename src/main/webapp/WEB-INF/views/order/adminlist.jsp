@@ -72,7 +72,8 @@
 	<form name="write" action="/erp/order/registForm" method="post">
 		<input name="authpage" type="hidden" value="${authpage}">
 	</form>
-		<div class="w3-container">
+		<!-- Big -->
+		<div class="w3-container w3-hide-small">
 			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 				<div class="w3-row">
 					<h3><i class="fa fa-balance-scale"></i> 판매목록</h3>
@@ -139,7 +140,7 @@
 					<tr class="w3-indigo">
 						<th style="width: 80px;">날짜</th>
 						<th style="width: 130px;">판매자</th>
-						<th>판매물품</th>
+						<th><span>판매물품</span></th>
 						<th style="width: 100px;">수익</th>
 						<th style="width: 100px;">판매 수당</th>
 						<th style="width: 100px;">팀장 수당</th>
@@ -148,7 +149,7 @@
 						<tr onclick="javascript:details('${alist.id}', '${alist.checks}')">
 							<td><fmt:formatDate value="${alist.regdate}" pattern="yy-MM-dd" /></td>
 							<td>${alist.name}(${alist.empno})</td>
-							<td>${alist.proname}(${alist.procode}) x ${alist.proamount}</td>
+							<td><span>${alist.proname}(${alist.procode}) x ${alist.proamount}</span></td>
 							<td><fmt:formatNumber value="${alist.profit}" pattern="#,###" /></td>
 							<td><fmt:formatNumber value="${alist.allowance}" pattern="#,###" /></td>
 							<td><c:if test="${alist.manager!=null||alist.manager!='0'}"><fmt:formatNumber value="${alist.manager}" pattern="#,###" /></c:if></td>
@@ -173,6 +174,105 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Small -->
+		<div class="w3-container w3-hide-large w3-hide-medium">작아요
+			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
+				<div class="w3-row">
+					<h3><i class="fa fa-balance-scale"></i> 판매목록</h3>
+				</div>
+				<div class="w3-container w3-center">
+					<form action="/erp/order/list" name="search" method="get">
+						<input name="pageNum" type="hidden" value="1">
+						<input name="authpage" type="hidden" value="${authpage}">
+							<b class="w3-left">구분</b><br>
+							<c:if test="${mlist!=null}">
+								<select class="w3-round-large w3-left" style="width: 150px;" name="emp">
+									<option value="">팀/사원 선택</option>
+									<c:forEach var="mlist" items="${mlist}">
+										<c:if test="${emp==mlist.empno}">
+											<option selected="selected" value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
+										</c:if>
+										<c:if test="${emp!=mlist.empno}">
+											<option value="${mlist.empno}">${mlist.team}${mlist.auth} - ${mlist.name}(${mlist.empno})</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</c:if><br>
+							<select class="w3-round-large w3-left" style="width: 150px;" name="product">				
+								<option value="">제품선택</option>
+								<c:forEach var="plist" items="${plist}">
+									<c:if test="${product==plist.procode}">
+										<option value="${plist.procode}" selected="selected">${plist.procode}&nbsp;${plist.proname}</option>
+									</c:if>
+									<c:if test="${product!=plist.procode}">
+										<option value="${plist.procode}">${plist.procode}&nbsp;${plist.proname}</option>
+									</c:if>
+								</c:forEach>
+							</select><br>
+							<select class="w3-round-large w3-left" style="width: 150px;" name="checks">				
+								<c:if test="${checks==0}">
+									<option value="0" selected="selected">승인 대기</option>
+								</c:if>
+								<c:if test="${checks!=0}">
+									<option value="0">승인 대기</option>
+								</c:if>
+								<c:if test="${checks==1}">
+									<option value="1" selected="selected">승인 목록</option>
+								</c:if>
+								<c:if test="${checks!=1}">
+									<option value="1">승인 목록</option>
+								</c:if>
+							</select><br><br>
+							<b class="w3-left">기간</b><br>
+							<table>
+								<tr>
+									<td>
+										<input class="w3-round-large w3-left" type="date" id="start" name="firstdate" value=${paging.start_date }>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input class="w3-round-large w3-left" type="date" id="end" name="seconddate"  value=${paging.end_date }>
+									</td>
+								</tr>
+								<tr>
+									<td><button type="submit" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i>  조회</button></td>
+								</tr>
+							</table>
+					</form>
+				</div>
+				<hr>
+				<table class="w3-table w3-tiny w3-hoverable w3-bordered">
+					<c:forEach var="alist" items="${alist}">
+						<div class="w3-border w3-tiny w3-hoverable" onclick="javascript:details('${alist.id}', '${alist.checks}')">
+						<b>등록일:</b><fmt:formatDate value="${alist.regdate}" pattern="yy-MM-dd" /><br>
+								<b>판매정보:</b>${alist.proname}(${alist.procode}) x ${alist.proamount}<br>
+								<b>판매자:</b>${alist.name}(${alist.empno})<br>
+								<b>수익:</b><fmt:formatNumber value="${alist.profit}" pattern="#,###" />
+						</div><br>
+					</c:forEach>
+				</table>
+				<hr>
+				<button class="w3-btn-floating w3-indigo w3-border-deep-purple w3-border w3-right" onclick="javascript:worders()">+</button>
+				<div class="w3-centered">
+					<table class="w3-table w3-small">
+						<tr>
+							<td class="w3-centered">
+								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　&laquo;</a>　</c:if>
+								<c:if test="${pageNum>=3}"><a href="javascript:jumpPage('${pageNum-2}')">　${pageNum-2}</a>　</c:if>
+								<c:if test="${pageNum>=2}"><a href="javascript:jumpPage('${pageNum-1}')">　${pageNum-1}</a>　</c:if>
+								<font color="red">　<b>${pageNum}</b>　</font>
+								<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">　${pageNum+1}</a>　</c:if>
+								<c:if test="${max>=pageNum+2}"><a href="javascript:jumpPage('${pageNum+2}')">　${pageNum+2}</a>　</c:if>
+								<c:if test="${max>=pageNum+1}"><a href="javascript:jumpPage('${pageNum+1}')">　&raquo;</a>　</c:if>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
 		<script src="/erp/resources/js/moment-min.js"></script>
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>
