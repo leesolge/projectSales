@@ -60,10 +60,12 @@ public class MemberService {
 			MemberVO mvoParam = new MemberVO();
 			mvoParam.setEmpno(auth.getName());
 			vo = dao.getMember(mvoParam);
+			mav.addObject("history", "내정보");
 		} else { // empno 파라미터가 있을 경우 요청받은 empno 정보 불러오기
 			MemberVO mvoParam = new MemberVO();
 			mvoParam.setEmpno(empno);
 			vo = dao.getMember(mvoParam);
+			mav.addObject("history", "영업팀메뉴 > 사원정보");
 		}
 		mav.addObject("vo", vo);
 		return mav;
@@ -218,7 +220,7 @@ public class MemberService {
 		mvoParam.setEmpno(empno);
 		MemberVO vo = dao.getMember(mvoParam);		
 		dao.Approve(vo);
-		String subject = "[회원가입승인]감사합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 승인되었습니다.";
+		String subject = "[회원가입승인]감사합니다." + vo.getName() + "님의 (주)노다지 회원가입이 승인되었습니다.";
 		String text = "회원님의 아이디는 [ " + empno + " ] 입니다.";
 		mail.sendMail(vo, subject, text);
 	}
@@ -228,7 +230,7 @@ public class MemberService {
 		MemberVO mvoParam = new MemberVO();
 		mvoParam.setEmpno(empno);
 		MemberVO vo = dao.getMember(mvoParam);				
-		String subject = "[승인거부]죄송합니다." + vo.getName() + "님의 Kosta125상사 회원가입이 거부되었습니다.";
+		String subject = "[승인거부]죄송합니다." + vo.getName() + "님의 (주)노다지 회원가입이 거부되었습니다.";
 		String text = "다음 기회에 도전해 주십시요";
 		mail.sendMail(vo, subject, text);
 		dao.Cancel(vo);
