@@ -35,7 +35,7 @@
 						<input type="text" class="w3-input" value="${proList.originprice}" readonly><br>
 					<label class="w3-text-indigo"><b>판매가</b></label>
 						<input type="text" class="w3-input" value="${proList.sellprice}" readonly><br>
-					<label class="w3-text-indigo"><b>전화번호</b></label>
+					<label class="w3-text-indigo"><b>상품설명</b></label>
 						<textarea class="w3-input" style="width: 100%; resize: none;" readonly>${proList.proexpla}</textarea>
 				</div>
 				<div class="w3-right">

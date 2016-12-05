@@ -32,7 +32,7 @@
 					<input type="text" class="w3-input w3-border" name="originprice" value="${proList.originprice}"><br>
 				<label class="w3-text-indigo"><b>판매가</b></label>
 					<input type="text" class="w3-input w3-border" name="sellprice" value="${proList.sellprice}"><br>
-				<label class="w3-text-indigo"><b>제품설명</b></label>
+				<label class="w3-text-indigo"><b>상품설명</b></label>
 					<textarea class="w3-input w3-border" name="proexpla" style="width: 100%; resize: none;">${proList.proexpla}</textarea>
 			</div>
 			<div class="w3-right">
