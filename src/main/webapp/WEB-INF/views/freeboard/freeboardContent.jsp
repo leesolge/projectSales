@@ -56,12 +56,12 @@
 		<div class="w3-row">
 			<div class="w3-right">
 				<c:if test="${memberInfo.name==freeboardVO.name}">
-					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="수정"
+					<input class="w3-btn w3-border w3-text-brown w3-border-brown w3-round-large w3-small w3-white" type="button" value="수정"
 						onclick="location='/erp/freeboard/freeboardUpdateForm?num=${freeboardVO.num}'" />
-					<input class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white" type="button" value="삭제"
+					<input class="w3-btn w3-border w3-text-brown w3-border-brown w3-round-large w3-small w3-white" type="button" value="삭제"
 						onclick="location='/erp/freeboard/freeboardDelete?num=${freeboardVO.num}'" />
 				</c:if>
-				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+				<button class="w3-btn w3-border w3-text-brown w3-border-brown w3-round-large w3-small w3-white"
 					onclick="location='/erp/freeboard/freeboardList'">목록</button>
 			</div>
 		</div>
