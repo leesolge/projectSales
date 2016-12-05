@@ -38,6 +38,17 @@
 					<label class="w3-text-indigo"><b>전화번호</b></label>
 						<textarea class="w3-input" style="width: 100%; resize: none;" readonly>${proList.proexpla}</textarea>
 				</div>
+				<div class="w3-right">
+				<input type="button" value="수정"
+				class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+				onclick="window.location='/erp/product/updateForm?procode=${proList.procode}'">
+				<input type="button" value="삭제"
+				class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+				onclick="window.location='/erp/product/delete?procode=${proList.procode}'">
+				<input type="button" value="목록"
+				class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white"
+				onclick="window.location='/erp/product/list'">
+			</div>
 			</div>
 		</div>
 	</div><br>
