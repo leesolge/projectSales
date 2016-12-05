@@ -22,7 +22,7 @@
 				</div>
 				<br>
 				<div class=" w3-row" style="height: 450px; overflow: auto;">
-					<table class="w3-table w3-small w3-hoverable w3-bordered"
+					<table class="w3-table w3-small w3-bordered"
 						id="myTable">
 						<tr class="w3-light-blue">
 							<th>상품명</th>
@@ -31,9 +31,7 @@
 						</tr>
 
 						<c:forEach items="${list}" var="list">
-							<tr
-								onclick="location.href='/erp/product/productInfo?procode=${list.procode}'"
-								style="cursor: pointer;">
+							<tr>
 								<td>${list.proname}</td>
 								<td>${list.proamount}</td>
 								<td>${list.originprice}</td>

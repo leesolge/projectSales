@@ -119,7 +119,7 @@
 				</div>
 				<br>
 				<div class=" w3-row" style="height: 450px; overflow: auto;">
-					<table class="w3-table w3-small w3-hoverable w3-bordered" id="myTable">
+					<table class="w3-table w3-small w3-bordered" id="myTable">
 						<tr class="w3-indigo">
 							<th>상품명</th>
 							<th style="width: 50px;">재고</th>
@@ -127,9 +127,7 @@
 						</tr>
 
 						<c:forEach items="${productlist}" var="list">
-							<tr
-								onclick="location.href='/erp/product/productInfo?procode=${list.procode}'"
-								style="cursor: pointer;">
+							<tr>
 								<td>${list.proname}</td>
 								<td>${list.proamount}</td>
 								<td style="text-align: right;"><fmt:formatNumber value="${list.originprice}" pattern="#,###" /></td>
