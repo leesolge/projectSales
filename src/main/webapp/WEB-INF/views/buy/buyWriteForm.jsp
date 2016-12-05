@@ -34,7 +34,7 @@
 							<tr>
 								<td>${list.proname}</td>
 								<td>${list.proamount}</td>
-								<td>${list.originprice}</td>
+								<td><fmt:formatNumber value="${list.originprice}" pattern="#,###"></fmt:formatNumber></td>
 							</tr>
 						</c:forEach>
 					</table>

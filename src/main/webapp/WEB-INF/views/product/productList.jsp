@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
 		<h3><i class="fa fa-inbox"></i>  상품 관리</h3>
 		<div class="w3-container" style="height: 40px;">
 			물품코드 : 
+			
 			<input class="w3-border-highway-green" type="text" placeholder="Search for Code.." id="myInput" onkeyup="myFunction()">
 			<button class="w3-btn-floating w3-highway-green w3-border-highway-green w3-border w3-right" onclick="location='/erp/product/insert'">+</button>
 		</div>
@@ -30,8 +32,8 @@
 					<td>${list.procode}</td>
 					<td>${list.proname}</td>
 					<td>${list.proamount}</td>
-					<td>${list.sellprice}</td>
-					<td>${list.originprice}</td>
+					<td><fmt:formatNumber value="${list.sellprice}" pattern="#,###"></fmt:formatNumber></td>
+					<td><fmt:formatNumber value="${list.originprice}" pattern="#,###"/></td>
 				</tr>
 				</c:forEach>
 			</table><br>

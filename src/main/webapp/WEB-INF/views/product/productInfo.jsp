@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +34,9 @@
 					<label class="w3-text-indigo"><b>재고</b></label>
 						<input type="text" class="w3-input" value=" ${proList.proamount}" readonly><br>
 					<label class="w3-text-indigo"><b>원가</b></label>
-						<input type="text" class="w3-input" value="${proList.originprice}" readonly><br>
+						<textarea class="w3-input" style="width: 100%; resize: none;" rows="1" readonly><fmt:formatNumber value="${proList.originprice}" pattern="#,###"/></textarea><br>
 					<label class="w3-text-indigo"><b>판매가</b></label>
-						<input type="text" class="w3-input" value="${proList.sellprice}" readonly><br>
+						<textarea class="w3-input" style="width: 100%; resize: none;" rows="1" readonly><fmt:formatNumber value="${proList.sellprice}" pattern="#,###"/></textarea><br>
 					<label class="w3-text-indigo"><b>상품설명</b></label>
 						<textarea class="w3-input" style="width: 100%; resize: none;" readonly>${proList.proexpla}</textarea>
 				</div>

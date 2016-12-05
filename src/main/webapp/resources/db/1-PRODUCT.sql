@@ -1,5 +1,5 @@
 -- 제품
-
+select * from product;
 -- 제품 테이블 삭제
 DROP TABLE PRODUCT;
 -- 제품 테이블 생성
