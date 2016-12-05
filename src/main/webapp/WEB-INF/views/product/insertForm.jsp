@@ -2,46 +2,47 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-highway.css">
 <body>
 <div class="w3-container">
 	<br>
 	<div class="w3-row" style="width: 100%; margin: auto;">
-		<div class="w3-container w3-indigo w3-center">
+		<div class="w3-container w3-highway-green">
 			<h4><i class="fa fa-plus-square"></i>  상품 등록</h4>
 		</div>
 		<div class="w3-container w3-white w3-card-4"><br>
 			<form action="/erp/product/insert" method="post" enctype="multipart/form-data">
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 300px; height: 200px;" class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo">
+						<td style="width: 300px; height: 200px;" class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-dark-grey">
 							<div id="imagePreview"></div>
 						</td>
 						<td class="w3-padding">
-							<label class="w3-text-indigo"><b>물품코드</b></label>
-								<input type="text" name="procode" class="w3-input w3-border w3-border-indigo w3-round"><br>
-							<label class="w3-text-indigo"><b>물품명</b></label>
-								<input type="text" name="proname" class="w3-input w3-border w3-border-indigo w3-round"><br>
-							<label class="w3-text-indigo"><b>물품설명</b></label>
-								<input type="text" name="proexpla" class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-dark-grey"><b>물품코드</b></label>
+								<input type="text" name="procode" class="w3-input w3-border-dark-grey w3-border w3-round"><br>
+							<label class="w3-text-dark-grey"><b>물품명</b></label>
+								<input type="text" name="proname" class="w3-input w3-border-dark-grey w3-border w3-round"><br>
+							<label class="w3-text-dark-grey"><b>물품설명</b></label>
+								<input type="text" name="proexpla" class="w3-input w3-border-dark-grey w3-border w3-round">
 						</td>
 						<td class="w3-padding">
-							<label class="w3-text-indigo"><b>수량</b></label>
-								<input type="number" name="proamount" class="w3-input w3-border w3-border-indigo w3-round"><br>
-							<label class="w3-text-indigo"><b>입고가</b></label>
-								<input type="number" name="originprice" class="w3-input w3-border w3-border-indigo w3-round"><br>
-							<label class="w3-text-indigo"><b>출고가</b></label>
-								<input type="number" name="sellprice" class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-dark-grey"><b>수량</b></label>
+								<input type="number" name="proamount" class="w3-input w3-border-dark-grey w3-border w3-round"><br>
+							<label class="w3-text-dark-grey"><b>입고가</b></label>
+								<input type="number" name="originprice" class="w3-input w3-border-dark-grey w3-border w3-round"><br>
+							<label class="w3-text-dark-grey"><b>출고가</b></label>
+								<input type="number" name="sellprice" class="w3-input w3-border-dark-grey w3-border w3-round">
 						</td>
 					</tr>
+					
 					<tr>
 						<td colspan="3"><input id="image" type="file" name="file" onchange="InputImage();" required></td>
 					</tr>
 				</table>
 				<div class="w3-center">
-					<input class="w3-btn w3-indigo w3-text-white" type="submit" name="confirm" value="추가">
-					<input class="w3-btn w3-indigo w3-text-white" type="button" value="취소" onclick="location.href='/erp/product/list'">  
+					<input class="w3-btn w3-highway-green w3-text-white" type="submit" name="confirm" value="추가">
+					<input class="w3-btn w3-highway-green w3-text-white" type="button" value="취소" onclick="location.href='/erp/product/list'">  
 				</div>
 			</form><br>
 		</div>

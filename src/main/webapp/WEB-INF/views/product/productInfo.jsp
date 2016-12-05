@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-</head>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-highway.css">
+</head>
 <body><br>
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -13,7 +14,7 @@
 			</div>
 			<div class="w3-row">
 				<div class="w3-half w3-center">
-					<img src="/erp/resources/proportraits/${proList.proimage}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo" 
+					<img src="/erp/resources/proportraits/${proList.proimage}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-dark-grey" 
 					style="width: 10cm; height: 9cm;">
 				</div>
 				<table>

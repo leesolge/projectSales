@@ -31,6 +31,8 @@
 		}
 		</script>
 	</head>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
 	<body><br>
 		<form name="deleteOne" action="/erp/ledger/delete" method="post">
 			<input name="id" type="hidden" value="0">
@@ -73,14 +75,14 @@
 									<input class="w3-round-large" type="date" id="end" name="enddate"  value=${paging.end_date } >
 								</th>
 								<th>
-									<button type="submit" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+									<button type="submit" class="w3-round-large w3-food-plum w3-border w3-border-food-plum"><i class="fa fa-search"></i></button>
 								</th>
 							</tr>
 						</table>
 					</div>
 				</form><br>
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">
+					<tr class="w3-food-plum">
 						<th style="width: 80px;">등록일</th>
 						<th style="width: 130px;">등록자</th>
 						<th style="width: 130px;">내용</th>
@@ -112,7 +114,7 @@
 					</tr>
 					</c:forEach>
 				</table><br>
-				<button class="w3-btn w3-border w3-text-indigo w3-border-indigo w3-round-large w3-small w3-white w3-right" onclick="location.href='/erp/ledger/registForm'">등록</button>
+				<button class="w3-btn w3-text-white w3-border w3-round-large w3-small w3-food-egg w3-right" onclick="location.href='/erp/ledger/registForm'">등록</button>
 				<div class="w3-centered">
 					<table class="w3-table w3-small">
 						<tr>

@@ -7,10 +7,13 @@
 <head>
 	<title>Title</title>
 </head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
+
 <body><br>
 	<div class="w3-container">
 		<div class="w3-row">
-			<div class="w3-container w3-indigo">
+			<div class="w3-container w3-food-plum">
 				<h4 class="w3-text-white"><i class="fa fa-pencil-square-o"></i>  판매 등록</h4>
 			</div>
 			<div class="w3-container w3-white w3-card-4">
@@ -46,9 +49,9 @@
 					</tr>
 				</table><br>
 				<div class="w3-center">
-					<input class="w3-btn w3-indigo w3-text-white" type="submit" value="등록">
-					<input class="w3-btn w3-indigo w3-text-white" type="reset" value="취소">
-					<button class="w3-btn w3-indigo w3-text-white" onclick="location.href='/erp/ledger/list'">목록</button>
+					<input class="w3-btn w3-food-plum w3-text-white" type="submit" value="등록">
+					<input class="w3-btn w3-food-plum w3-text-white" type="reset" value="취소">
+					<button class="w3-btn w3-food-plum w3-text-white" onclick="location.href='/erp/ledger/list'">목록</button>
 				</div>
 			</form>
 			<br>

@@ -15,7 +15,7 @@
 		</div>
 		<div class="w3-row">
 			<div class="w3-half w3-center">
-				<img src="/erp/resources/proportraits/${proList.proimage}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-indigo" 
+				<img src="/erp/resources/proportraits/${proList.proimage}" class="w3-image w3-topbar w3-bottombar w3-leftbar w3-rightbar" 
 				style="width: 10cm; height: 9cm;">
 			</div>
 			<table>

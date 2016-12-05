@@ -8,6 +8,8 @@
 <head>
 	<title>Title</title>
 </head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
 <body><br>
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -46,7 +48,7 @@
 									</select>
 								</th>
 								<th>
-									<button type="submit" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+									<button type="submit" class="w3-round-large w3-food-olive w3-border w3-border-food-olive"><i class="fa fa-search"></i></button>
 								</th>
 							</tr>
 						</table>
@@ -54,7 +56,7 @@
 				</form><br>
 				${dateview}<c:if test="${equal=='1'}">&nbsp;예정&nbsp;</c:if>월급
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">
+					<tr class="w3-food-olive">
 						<td style="width: 70px;">사번</td>
 						<td style="width: 100px;">이름</td>
 						<td>팀</td>
@@ -114,7 +116,7 @@
 					당월 실적
 					<div style="height:200px; overflow: auto;">
 						<table class="w3-table w3-small w3-hoverable w3-bordered">
-							<tr class="w3-indigo">
+							<tr class="w3-food-olive">
 								<td>사번</td>
 								<td>이름</td>
 								<td>소속</td>

@@ -7,6 +7,8 @@
 	<head>
 		<title>Title</title>
 	</head>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
 	
 	<body>${modify.id}
 		<form method="post" action="/erp/ledger/modify">

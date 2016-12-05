@@ -9,6 +9,8 @@
 <head>
 	<title>Title</title>
 </head>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
 <body><br>
 <div class="w3-container">
 	<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -33,7 +35,7 @@
 						</select>
 						</th>
 						<th>
-							<button type="submit" class="w3-round-large w3-indigo w3-border w3-border-indigo"><i class="fa fa-search"></i></button>
+							<button type="submit" class="w3-round-large w3-food-olive w3-border w3-border-food-olive"><i class="fa fa-search"></i></button>
 						</th>
 					</tr>
 				</table>
@@ -41,7 +43,7 @@
 		</form><br>
 		${dateview}<c:if test="${equal=='1'}">&nbsp;예정&nbsp;</c:if>월급
 			<table class="w3-table w3-small w3-hoverable w3-bordered">
-				<tr class="w3-indigo">
+				<tr class="w3-food-olive">
 					<td>지급액</td>
 					<td>판매수당</td>
 					<td>관리수당</td>
@@ -66,7 +68,7 @@
 		<s:authorize access="hasAnyAuthority('ROLE_EMPLOYEE', 'ROLE_MANAGER')">
 			당월 개인 실적
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">
+					<tr class="w3-food-olive">
 						<td>판매일</td>
 						<td>사번</td>
 						<td>제품코드</td>
@@ -98,7 +100,7 @@
 				<br>
 				당월 팀 실적
 				<table class="w3-table w3-small w3-hoverable w3-bordered">
-					<tr class="w3-indigo">
+					<tr class="w3-food-olive">
 						<td>사번</td>
 						<td>판매일</td>
 						<td>제품코드</td>
