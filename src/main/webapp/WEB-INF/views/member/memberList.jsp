@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 </head>
 <body>
-	
 	<br>
 	<div class="w3-container">
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
@@ -25,19 +24,29 @@
 		<!-- List -->
 		<table class="w3-table w3-small w3-hoverable w3-bordered">
 			<tr class="w3-deep-purple">	
-				<th>EMPNO</th>
-				<th>NAME</th>
-				<th>AUTH</th>
-				<th>TEAM</th>
+				<th>사번</th>
+				<th>이름</th>
+				<th>직급</th>
+				<th>소속</th>
 			</tr>
 			<!-- result는 contoller의 addObject로 부터 가져온다. -->
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.empno}</td>
-					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.name}</td>
-					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.auth}</td>
-					<td  style="vertical-align: middle;" onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer;">${member.team}</td>
-					</td>
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">${member.empno}</td>
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">${member.name}</td>
+					<c:if test="${member.auth == 'ROLE_ADMIN'}">
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">관리자</td>					
+					</c:if>
+					<c:if test="${member.auth == 'ROLE_MANAGER'}">
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">팀장</td>
+					</c:if>
+					<c:if test="${member.auth == 'ROLE_EMPLOYEE'}">
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">사원</td>
+					</c:if>
+					<c:if test="${member.auth == 'ROLE_BUDGET'}">
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">사원(자재팀)</td>
+					</c:if>
+					<td onclick="window.location='/erp/member/memberContent?empno=${member.empno}'" style="cursor:pointer; vertical-align: middle;">${member.team}</td>
 				</tr>
 			</c:forEach>
 		</table>

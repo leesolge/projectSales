@@ -12,7 +12,7 @@
 		<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 			<!-- Title -->
 			<div class="w3-row">
-				<h3><i class="fa fa-bullhorn" aria-hidden="true"></i> 가입승인</h3>
+				<h3><i class="fa fa-user-plus"></i> 가입승인</h3>
 			</div>
 			
 			<div class="w3-row w3-right">
@@ -63,7 +63,7 @@
 
 				<c:forEach begin="${fromPage}" end="${toPage}" var="i">
 					<c:if test="${i == pg}">
-						<li><a href="#" class="w3-hover-red w3-text-red">${i}</a></li>
+						<li><a href="#" class="w3-hover-red w3-text-red"><b>${i}</b></a></li>
 					</c:if>
 
 					<c:if test="${i != pg}">
@@ -87,7 +87,7 @@
 		</div>
 		</div>
 	</div>
+</div>
 <br>
-
 </body>
 </html>
