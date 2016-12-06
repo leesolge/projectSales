@@ -111,6 +111,7 @@
 <link href="/erp/resources/css/bootstrap-theme.css">
 <style>
 	html,body,h1,h2,h3,h4,h5 {font-family: "Jeju Gothic", sans-serif}
+	#pwfont {font-family: 'Nanum Pen Script', serif}
 	 {font-family: 'Nanum Pen Script', serif};
 	body {background-color: #eeeeee; min-height: 100%;}
 	::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }

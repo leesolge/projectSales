@@ -19,9 +19,9 @@
 						</td>
 						<td class="w3-padding">
 							<label class="w3-text-dark-grey"><b>이름</b></label>
-								<input type="text" name="name" placeholder="Name" class="w3-input w3-border w3-border-dark-grey w3-round"><br>
+								<input type="text" name="name" class="w3-input w3-border w3-border-dark-grey w3-round"><br>
 							<label class="w3-text-dark-grey"><b>비밀번호</b></label>
-								<input type="password" name="pwd" placeholder="Pwd" class="w3-input w3-border w3-border-dark-grey w3-round">
+								<input type="password" id="pwfont" name="pwd" class="w3-input w3-border w3-border-dark-grey w3-round">
 						</td>
 					</tr>
 					<tr>

@@ -1,16 +1,12 @@
 package com.sales.erp.freeboard.dao;
 
 import java.util.ArrayList;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.sales.erp.freeboard.vo.FreeboardReplyVO;
 import com.sales.erp.freeboard.vo.FreeboardSearchVO;
 import com.sales.erp.freeboard.vo.FreeboardVO;
-import com.sales.erp.member.vo.MemberVO;
-import com.sales.erp.notice.dao.NoticeMapper;
 
 @Repository
 public class FreeboardDAO {
