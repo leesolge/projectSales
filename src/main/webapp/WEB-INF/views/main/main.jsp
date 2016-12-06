@@ -14,7 +14,7 @@
 	<!-- Top -->
 	<div class="w3-row-padding w3-margin-bottom w3-hide-small">
 		<div class="w3-quarter">
-			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 270px;">
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 300px;">
 				<br><br>
 				<c:forEach items="${weather}" var="weather">
 					<c:if test="${weather.wfEn == 'Clear'}">
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<div class="w3-threequarter">
-			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 270px;">
+			<div class="w3-card-2 w3-white w3-round-large w3-center w3-padding" style="min-height: 300px;">
 				<h5 class="w3-left">
 				<i class="fa fa-thumbs-o-up"></i> 이 달의 영업왕<br>
 				</h5><br><br>
