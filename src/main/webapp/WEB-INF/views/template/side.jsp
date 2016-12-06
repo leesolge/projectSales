@@ -36,6 +36,20 @@
 		<div class="w3-col s12 w3-center">
 			<span>Welcome, <strong>${memberInfo.name }</strong></span><br>
 			<table class="w3-center" style="margin-left: 35px;">
+				<sec:authorize access="hasAnyAuthority('ROLE_EE')">
+				<tr>
+					<td>　</td>
+					<td>
+						<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block" title="내 정보"><i class="fa fa-user fa-lg"></i></a>
+					</td>
+					<td>　</td>
+					<td>
+						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block" title="로그아웃"><i class="fa fa-sign-out fa-lg"></i></a>
+					</td>
+				</tr>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET', 'ROLE_ADMIN')">
 				<tr>
 					<td>
 						<a href="/erp/member/memberContent" class="w3-hover-none w3-hover-text-green w3-show-inline-block" title="내 정보"><i class="fa fa-user fa-lg"></i></a>
@@ -63,6 +77,7 @@
 						<a href="<c:url value='/j_spring_security_logout' />" class="w3-hover-none w3-hover-text-red w3-show-inline-block" title="로그아웃"><i class="fa fa-sign-out fa-lg"></i></a>
 					</td>
 				</tr>
+				</sec:authorize>
 			</table>
 		</div>
 	</div>

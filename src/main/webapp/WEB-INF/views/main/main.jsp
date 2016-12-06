@@ -73,6 +73,7 @@
 							<i class="fa fa-bullhorn" aria-hidden="true"></i> 공지사항
 						</a></h5>
 				</div>
+				<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET', 'ROLE_ADMIN')">
 				<table class="w3-table w3-bordered w3-small">
 					<tr>
 						<th>제목</th>
@@ -85,6 +86,7 @@
 					</tr>
 					</c:forEach>
 				</table>
+				</sec:authorize>
 			</div>
 			<div class="w3-hide-large w3-hide-medium"><br></div>
 		</div>
@@ -97,6 +99,7 @@
 						<i class="fa fa-envelope-o" aria-hidden="true"></i> 새로운 쪽지<br>
 					</a></h5>
 				</div>
+				<sec:authorize access="hasAnyAuthority('ROLE_MANAGER','ROLE_EMPLOYEE', 'ROLE_BUDGET', 'ROLE_ADMIN')">
 				<table class="w3-table w3-bordered w3-small" style="cursor:pointer;" onclick="location.href='/erp/note/list'">
 					<tr>
 						<th>제목</th>
@@ -111,6 +114,7 @@
 						</tr>
 					</c:forEach>
 				</table>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
