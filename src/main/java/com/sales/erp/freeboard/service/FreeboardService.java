@@ -68,7 +68,6 @@ public class FreeboardService {
 		paging.setPage(pg);
 		paging.setStart(start);
 		paging.setEnd(end);
-		paging.setTotal(total);
 		paging.setAllPage(allPage);
 		paging.setBlock(block);
 		paging.setFromPage(fromPage);
@@ -76,7 +75,8 @@ public class FreeboardService {
 		search.setEnd(end);
 		search.setStart(start);
 		search.setTeam(team);
-		
+		total = dao.getFreeboardCount(search);
+		paging.setTotal(total);
 		ArrayList<FreeboardVO> list = dao.getFreeboardList(search);
 		
 		mav.addObject("team", team);
