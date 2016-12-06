@@ -176,7 +176,7 @@
 		</div>
 		
 		<!-- Small -->
-		<div class="w3-container w3-hide-large w3-hide-medium">작아요
+		<div class="w3-container w3-hide-large w3-hide-medium">
 			<div class="w3-card-2 w3-white w3-round-large w3-centered w3-padding">
 				<div class="w3-row">
 					<h3><i class="fa fa-balance-scale"></i> 판매목록</h3>
