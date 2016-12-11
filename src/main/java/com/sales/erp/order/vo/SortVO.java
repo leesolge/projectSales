@@ -1,7 +1,5 @@
 package com.sales.erp.order.vo;
 
-import java.util.Date;
-
 public class SortVO {
 	private String firstdate;
 	private String seconddate;

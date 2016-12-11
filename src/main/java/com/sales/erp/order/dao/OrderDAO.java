@@ -13,6 +13,7 @@ import com.sales.erp.order.vo.TeamVO;
 import com.sales.erp.order.vo.TestVO;
 import com.sales.erp.product.vo.ProductVO;
 
+@SuppressWarnings("serial")
 @Repository
 public class OrderDAO implements OrderMapper{
 

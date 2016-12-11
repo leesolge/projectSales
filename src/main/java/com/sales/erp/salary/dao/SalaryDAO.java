@@ -14,6 +14,7 @@ import com.sales.erp.salary.vo.SalaryVO;
 import com.sales.erp.salary.vo.TempVO;
 import com.sales.erp.salary.vo.VOforSQL;
 
+@SuppressWarnings("serial")
 @Repository
 public class SalaryDAO implements SalaryMapper {
 

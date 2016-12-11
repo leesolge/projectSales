@@ -11,6 +11,7 @@ import com.sales.erp.note.vo.JoinVO;
 import com.sales.erp.note.vo.NoteSearchVO;
 import com.sales.erp.note.vo.NoteVO;
 
+@SuppressWarnings("serial")
 @Repository
 public class NoteDAO implements NoteMapper{
 

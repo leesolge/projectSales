@@ -89,7 +89,6 @@ public class NoteService {
 		rv = new RedirectView("/erp/admin/note");
 		rv.setExposeModelAttributes(false);
 		ModelAndView mav = new ModelAndView(rv);
-		String pageCheck = request.getParameter("pageCheck");
 		String pageNum = request.getParameter("pageNum");
 		String notenum = request.getParameter("notenum");
 		String field = request.getParameter("field");

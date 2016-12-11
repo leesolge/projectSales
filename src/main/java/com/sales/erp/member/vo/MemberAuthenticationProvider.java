@@ -31,7 +31,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
 
 		String id=(String)authentication.getPrincipal();
         String pw=(String)authentication.getCredentials();

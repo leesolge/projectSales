@@ -53,7 +53,7 @@ public class BuyService {
 		ArrayList<String> list = new ArrayList<String>(); // Parameter값 저장하기 위한
 															// list
 
-		Enumeration var = request.getParameterNames();
+		Enumeration<?> var = request.getParameterNames();
 		String var_name;
 		String var_value;
 		while (var.hasMoreElements()) {

@@ -10,6 +10,7 @@ import com.sales.erp.ledger.vo.LedgerJoinVO;
 import com.sales.erp.ledger.vo.SqlVO;
 import com.sales.erp.member.vo.MemberVO;
 
+@SuppressWarnings("serial")
 @Repository
 public class LedgerDAO implements LedgerMapper {
 	
