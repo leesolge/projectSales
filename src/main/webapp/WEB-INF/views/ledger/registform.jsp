@@ -7,14 +7,11 @@
 <head>
 	<title>Title</title>
 </head>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
-
 <body><br>
 	<div class="w3-container">
 		<div class="w3-row">
 			<div class="w3-container w3-food-plum">
-				<h4 class="w3-text-white"><i class="fa fa-pencil-square-o"></i>  판매 등록</h4>
+				<h4 class="w3-text-white"><i class="fa fa-pencil-square-o"></i>  장부 등록</h4>
 			</div>
 			<div class="w3-container w3-white w3-card-4">
 			<form method="post" action="/erp/ledger/regist">
@@ -24,27 +21,27 @@
 				<table class="w3-table">
 					<tr>
 						<td>
-							<label class="w3-text-indigo"><b>구분</b></label>
-							<select name="sort" class="w3-input w3-border w3-border-indigo w3-round" required>
+							<label class="w3-text-dark-grey"><b>구분</b></label>
+							<select name="sort" class="w3-input w3-border w3-border-dark-grey w3-round" required>
 								<option value="수입">수입</option>
 								<option value="지출">지출</option>
 							</select>
 						</td>
 						<td>
-							<label class="w3-text-indigo"><b>금액</b></label>
-							<input type="number" name="amount" required class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-dark-grey"><b>금액</b></label>
+							<input type="number" name="amount" required class="w3-input w3-border w3-border-dark-grey w3-round">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<label class="w3-text-indigo"><b>내용</b></label>
-							<input type="text" name="content" class="w3-input w3-border w3-border-indigo w3-round" required>
+							<label class="w3-text-dark-grey"><b>내용</b></label>
+							<input type="text" name="content" class="w3-input w3-border w3-border-dark-grey w3-round" required>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<label class="w3-text-indigo"><b>비고</b></label>
-							<input type="text" name="etc" class="w3-input w3-border w3-border-indigo w3-round">
+							<label class="w3-text-dark-grey"><b>비고</b></label>
+							<input type="text" name="etc" class="w3-input w3-border w3-border-dark-grey w3-round">
 						</td>
 					</tr>
 				</table><br>
@@ -58,6 +55,5 @@
 			</div>
 		</div>
 	</div>
-		
 	</body>
 </html>

@@ -31,8 +31,6 @@
 		}
 		</script>
 	</head>
-	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-colors-food.css">
 	<body><br>
 		<form name="deleteOne" action="/erp/ledger/delete" method="post">
 			<input name="id" type="hidden" value="0">
@@ -95,7 +93,7 @@
 					<tr>
 						<td><fmt:formatDate value="${list.regdate}" pattern="yy-MM-dd"/></td>
 						<td class="w3-left"><span title="${list.name}(${list.empno})">${list.name}(${list.empno})</span></td>
-						<td style="text-align: left;">${list.content}</td>
+						<td style="text-align: left;"><span title="${list.content}">${list.content}</span></td>
 						<td class="w3-text-blue" style="text-align: right;">
 							<c:if test="${list.sort=='수입'}"><fmt:formatNumber value="${list.amount}" pattern="#,###" /></c:if>
 							<c:if test="${list.sort!='수입'}">-</c:if>
@@ -114,7 +112,7 @@
 					</tr>
 					</c:forEach>
 				</table><br>
-				<button class="w3-btn w3-text-white w3-border w3-round-large w3-small w3-food-egg w3-right" onclick="location.href='/erp/ledger/registForm'">등록</button>
+				<button class="w3-btn w3-text-white w3-border w3-round-large w3-small w3-food-plum w3-right" onclick="location.href='/erp/ledger/registForm'">등록</button>
 				<div class="w3-centered">
 					<table class="w3-table w3-small">
 						<tr>
